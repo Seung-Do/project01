@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Gesture Name = "Slash">
+	<Stroke>
+		<Point X = "2277.398" Y = "1273.058" T = "0" Pressure = "0" />
+		<Point X = "1836.153" Y = "1172.238" T = "0" Pressure = "0" />
+		<Point X = "1560.684" Y = "1082.665" T = "0" Pressure = "0" />
+		<Point X = "1370.723" Y = "1007.098" T = "0" Pressure = "0" />
+		<Point X = "1245.759" Y = "949.2128" T = "0" Pressure = "0" />
+		<Point X = "1147.172" Y = "887.4575" T = "0" Pressure = "0" />
+		<Point X = "1073.553" Y = "824.1303" T = "0" Pressure = "0" />
+		<Point X = "1014.041" Y = "760.0488" T = "0" Pressure = "0" />
+		<Point X = "973.4261" Y = "693.0417" T = "0" Pressure = "0" />
+		<Point X = "944.9028" Y = "632.1317" T = "0" Pressure = "0" />
+		<Point X = "918.8278" Y = "552.0023" T = "0" Pressure = "0" />
+		<Point X = "902.4353" Y = "474.0464" T = "0" Pressure = "0" />
+	</Stroke>
+</Gesture>
