@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightningDamage : MonoBehaviour
 {
     private bool isDamage;
+    private WaitForSeconds waitTime = new WaitForSeconds(0.7f);
     void Start()
     {
 
@@ -19,16 +20,17 @@ public class LightningDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MONSTER") && !isDamage)
         {
+            isDamage = true;
             Animator animator = other.GetComponent<Animator>();
             animator.SetTrigger("damage");
             StartCoroutine(AnimatorSlow(animator));
-            isDamage = true;
+            
         }
     }
     IEnumerator AnimatorSlow(Animator animator)
     {
         animator.speed = 0.2f;
-        yield return new WaitForSeconds(0.6f);
+        yield return waitTime;
         animator.speed = 1f;
         isDamage = false;
     }

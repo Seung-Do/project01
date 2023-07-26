@@ -146,6 +146,7 @@ public class ControllManager : MonoBehaviour
                 //GameObject magic = Instantiate(magicPrefabs[index - 1], spawnPosition, Quaternion.Euler(90f, 0, 0));
                 // Destroy(magic, 4f);
                 Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f;
+                spawnPosition.y = 1f;   
                 GameObject magic = Instantiate(magicPrefabs[index - 1], spawnPosition, Quaternion.identity);
                 Destroy(magic, 4f);
             }
