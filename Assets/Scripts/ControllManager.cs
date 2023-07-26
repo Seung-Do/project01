@@ -103,7 +103,7 @@ public class ControllManager : MonoBehaviour
                     index = 0;
 
                 SelectSpell(index);
-               // Debug.Log("버튼X");
+                // Debug.Log("버튼X");
             }
         }
 
