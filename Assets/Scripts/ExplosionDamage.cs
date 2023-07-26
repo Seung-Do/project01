@@ -19,7 +19,7 @@ public class ExplosionDamage : MonoBehaviour
     void OnEnable()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRadius);
-        Debug.Log(transform.position.ToString());
+        //Debug.Log(transform.position.ToString());
         foreach (Collider collider in colliders)
         {
             if(collider.CompareTag("MONSTER"))
