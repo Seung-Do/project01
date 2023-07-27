@@ -15,7 +15,9 @@ public class ControllManager : MonoBehaviour
     float rightGripValue;
     bool isOpen;
     bool isButton;
+    bool IsPosible;
     private WaitForSeconds buttonWait = new WaitForSeconds(0.5f);
+    private WaitForSeconds lightningWait = new WaitForSeconds(0.6f);
 
     public Transform cameraTr;
     public Transform rightControllerTr;
@@ -36,6 +38,7 @@ public class ControllManager : MonoBehaviour
         spellBook.SetActive(false);
         isOpen = false;
         isButton = false;
+        IsPosible = true;
         SelectSpell(0);
     }
 
@@ -117,20 +120,24 @@ public class ControllManager : MonoBehaviour
     }
     public void MotionMagic(string rec)
     {
-        if (rec == "O")
+        if (rec == "O" && IsPosible)
         {
+            IsPosible = false;
             Vector3 shieldTransform = Camera.main.transform.position + Camera.main.transform.forward * 0.4f;
             GameObject shelid = Instantiate(sheild, shieldTransform, Camera.main.transform.rotation);
             Destroy(shelid, 3f);
+            StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
         }
-        else if (rec == "Slash")
+        else if (rec == "Slash" && IsPosible)
         {
+            IsPosible = false;
             if (index == 0)
             {
                 Vector3 newPosition = rightControllerTr.position + cameraTr.forward * 0.1f;
                 // 마법 생성 
                 GameObject magic = Instantiate(magicPrefabs[index], newPosition, Camera.main.transform.rotation);
-                Destroy(magic, 1.5f);
+                Destroy(magic, 1.2f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.4f)));
             }
             else if (index == 1)
             {
@@ -139,6 +146,7 @@ public class ControllManager : MonoBehaviour
                 spell.Direction = playerDirection;
                 spell.SpellStart.transform.position = rightControllerTr.position + cameraTr.forward * 0.1f;
                 StartCoroutine(LightningSpell());
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(0.9f)));
             }
             else if (index == 2)
             {
@@ -148,7 +156,8 @@ public class ControllManager : MonoBehaviour
                 Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f;
                 spawnPosition.y = 1f;   
                 GameObject magic = Instantiate(magicPrefabs[index - 1], spawnPosition, Quaternion.identity);
-                Destroy(magic, 4f);
+                Destroy(magic, 2f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(2.3f)));
             }
         }
         else
@@ -157,9 +166,15 @@ public class ControllManager : MonoBehaviour
     IEnumerator LightningSpell()
     {
         spell.CastSpell();
-        yield return new WaitForSeconds(0.6f);
+        yield return lightningWait;
         spell.StopSpell();
     }
+    IEnumerator MagicIsPosible(WaitForSeconds wait)
+    {
+        yield return wait;
+        IsPosible = true;
+    }
+
     void SelectSpell(int index)
     {
         for (int i = 0; i < 3; i++)

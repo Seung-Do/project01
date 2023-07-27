@@ -23,16 +23,18 @@ public class ExplosionDamage : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             if(collider.CompareTag("MONSTER"))
-            {             
-               Animator animator = collider.GetComponent<Animator>();             
-               StartCoroutine(AnimatorSlow(animator));           
+            {
+                
+                Animator animator = collider.GetComponent<Animator>();             
+               StartCoroutine(AnimatorSlow(animator, collider));           
             }
         }
     }
-    IEnumerator AnimatorSlow(Animator animator)
+    IEnumerator AnimatorSlow(Animator animator, Collider collider)
     {
         yield return waitTime;
         animator.SetTrigger("damage");
+        collider.GetComponent<MonsterDamage>().hitNumber++;
         animator.speed = 0.5f;
         yield return waitTime;
         animator.speed = 1f;

@@ -22,6 +22,7 @@ public class LightningDamage : MonoBehaviour
         {
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
+            other.GetComponent<MonsterDamage>().hitNumber++;
             animator.SetTrigger("damage");
             StartCoroutine(AnimatorSlow(animator));
             

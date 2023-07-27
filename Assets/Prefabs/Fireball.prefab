@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisonEffect: {fileID: 4043764039358695018}
+  fireEffect: {fileID: 7079739292009869601}
 --- !u!1001 &5306405073965593247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,6 +325,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8336275602659357518, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
+--- !u!198 &7079739292009869601 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1206498299807332549, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
+  m_PrefabInstance: {fileID: 8286094105482578404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7079739292009869602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1206498299807332550, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}

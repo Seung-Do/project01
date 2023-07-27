@@ -6,14 +6,15 @@ public class Fireball : MonoBehaviour
 {
     float damage = 20f;
     float speed = 1000f;
-    //float destroyDistance = 20f;
+    float destroyDistance = 20f;
 
     Rigidbody rb;
     Transform tr;
-    ParticleSystem fireEffect;
+    Transform rightControllerTr;
     public ParticleSystem collisonEffect;
-  
-    
+    public ParticleSystem fireEffect;
+
+
 
 
     // Start is called before the first frame update
@@ -21,8 +22,7 @@ public class Fireball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tr = GetComponent<Transform>();
-        fireEffect = GetComponentInChildren<ParticleSystem>();
-        
+        rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();         
     }
 
     private void OnEnable()
@@ -48,11 +48,13 @@ public class Fireball : MonoBehaviour
     }
     void Update()
     {
-        /*float distance = Vector3.Distance(startPosition, transform.position);
+       
+        Vector3 startPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
+        float distance = Vector3.Distance(startPosition, transform.position);
         if (distance >= destroyDistance)
         {
             Destroy(gameObject);
-        }*/
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -60,5 +62,12 @@ public class Fireball : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         fireEffect.Stop();
         collisonEffect.Play();
+        if (collision.gameObject.CompareTag("MONSTER"))
+        {
+           collision.gameObject.GetComponent<MonsterDamage>().hitNumber++;
+            Animator animator = collision.gameObject.GetComponent<Animator>();
+            animator.SetTrigger("damage");
+        }
+        Destroy(gameObject,1f);
     }
 }
