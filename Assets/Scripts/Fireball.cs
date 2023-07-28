@@ -9,10 +9,11 @@ public class Fireball : MonoBehaviour
     float destroyDistance = 20f;
 
     Rigidbody rb;
-    //Transform tr;
     Transform rightControllerTr;
     public ParticleSystem collisonEffect;
     public ParticleSystem fireEffect;
+    public AudioSource fire;
+    public AudioSource explosion;
 
 
 
@@ -21,7 +22,6 @@ public class Fireball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //tr = GetComponent<Transform>();
         rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();         
     }
 
@@ -35,10 +35,11 @@ public class Fireball : MonoBehaviour
         // 정규화하여 방향 벡터로 변환
         playerDirection.Normalize();
 
-        rb.AddForce(transform.forward * speed);
-        //rb.AddForce(playerDirection * speed);
+        //rb.AddForce(transform.forward * speed);
+        rb.AddForce(playerDirection * speed);
         collisonEffect.Stop();
         fireEffect.Play();
+        //fire.Play();
       
 
     }
@@ -58,10 +59,12 @@ public class Fireball : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        explosion.Play();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         fireEffect.Stop();
         collisonEffect.Play();
+        
         if (collision.gameObject.CompareTag("MONSTER"))
         {
            collision.gameObject.GetComponent<MonsterDamage>().hitNumber++;

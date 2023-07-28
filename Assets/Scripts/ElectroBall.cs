@@ -5,7 +5,6 @@ using UnityEngine;
 public class ElectroBall : MonoBehaviour
 {
     Rigidbody rb;
-    //Transform tr;
 
     float damage = 20f;
     float speed = 1000f;
@@ -16,7 +15,6 @@ public class ElectroBall : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //tr = GetComponent<Transform>();
     }
     private void OnEnable()
     {

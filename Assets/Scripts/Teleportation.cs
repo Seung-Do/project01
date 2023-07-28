@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
+using Debug = UnityEngine.Debug;
 
 public class Teleportation : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class Teleportation : MonoBehaviour
     [SerializeField] private XRInteractorLineVisual lineVisual;
     private InputAction _thumbstick;
     private bool _isActive;
-    private List<IXRInteractable> interactables = new List<IXRInteractable>();  
+    private List<IXRInteractable> interactables = new List<IXRInteractable>();
+
+    //private InputAction _thumbstickR;
 
     void Start()
     {
@@ -32,11 +35,15 @@ public class Teleportation : MonoBehaviour
 
         _thumbstick = actionAsset.FindActionMap("XRI LeftHand Locomotion").FindAction("Move");
         _thumbstick.Enable();
+
+        //_thumbstickR = actionAsset.FindActionMap("XRI RightHand Locomotion").FindAction("Move");
+        //_thumbstickR.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(_thumbstickR.ReadValue<Vector2>());
         if (!_isActive)
             return;
         if (_thumbstick.ReadValue<Vector2>() != Vector2.zero)

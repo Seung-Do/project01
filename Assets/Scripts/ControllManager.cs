@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class ControllManager : MonoBehaviour
 {
     public GameObject spellBook;
@@ -26,6 +27,7 @@ public class ControllManager : MonoBehaviour
     public GameObject[] magicPrefabs;
     public GameObject[] magicSpell;
     int index;
+
 
     private void Awake()
     {
