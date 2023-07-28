@@ -5,7 +5,7 @@ using UnityEngine;
 public class ElectroBall : MonoBehaviour
 {
     Rigidbody rb;
-    Transform tr;
+    //Transform tr;
 
     float damage = 20f;
     float speed = 1000f;
@@ -16,7 +16,7 @@ public class ElectroBall : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        tr = GetComponent<Transform>();
+        //tr = GetComponent<Transform>();
     }
     private void OnEnable()
     {
@@ -26,8 +26,8 @@ public class ElectroBall : MonoBehaviour
     }
     private void OnDisable()
     {
-        tr.position = Vector3.zero;
-        tr.rotation = Quaternion.identity;
+        //tr.position = Vector3.zero;
+        //tr.rotation = Quaternion.identity;
         rb.Sleep();
     }
     private void OnCollisionEnter(Collision collision)

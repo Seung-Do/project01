@@ -9,7 +9,7 @@ public class Fireball : MonoBehaviour
     float destroyDistance = 20f;
 
     Rigidbody rb;
-    Transform tr;
+    //Transform tr;
     Transform rightControllerTr;
     public ParticleSystem collisonEffect;
     public ParticleSystem fireEffect;
@@ -21,7 +21,7 @@ public class Fireball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        tr = GetComponent<Transform>();
+        //tr = GetComponent<Transform>();
         rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();         
     }
 
@@ -35,8 +35,8 @@ public class Fireball : MonoBehaviour
         // 정규화하여 방향 벡터로 변환
         playerDirection.Normalize();
 
-       
-        rb.AddForce(playerDirection * speed);
+        rb.AddForce(transform.forward * speed);
+        //rb.AddForce(playerDirection * speed);
         collisonEffect.Stop();
         fireEffect.Play();
       
