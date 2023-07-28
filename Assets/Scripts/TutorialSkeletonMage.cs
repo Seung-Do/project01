@@ -5,11 +5,18 @@ using UnityEngine;
 public class TutorialSkeletonMage : MonoBehaviour
 {
     public Animator animator;
+    public GameObject electroMagic;
+    public Transform MagicSpawn;
+    Transform playerTr;
+    Transform monsterTr;
     private WaitForSeconds attackInterval = new WaitForSeconds(3f);
+    private WaitForSeconds aniDelay = new WaitForSeconds(0.5f);
     public int attackCount =0;
+    readonly float damping = 10f;
     void Start()
     {
-        
+        playerTr = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
+        monsterTr = GetComponent<Transform>();
     }
         
     void OnEnable()
@@ -21,17 +28,23 @@ public class TutorialSkeletonMage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(playerTr.position - monsterTr.position);
+        monsterTr.rotation = Quaternion.Slerp(monsterTr.rotation, rot, Time.deltaTime * damping);
+
         if (attackCount >= 3)
         {
             StopAllCoroutines();
             //Debug.Log("ÄÚ·çÆ¾½ºÅé");
         }
+
     }
     IEnumerator AttackCoroutine()
     {
         while (attackCount < 3) 
         {
             yield return attackInterval;
+            animator.SetTrigger("attack");
+            yield return aniDelay;
             Attack();
             yield return attackInterval;
             attackCount++;
@@ -40,6 +53,8 @@ public class TutorialSkeletonMage : MonoBehaviour
 
     private void Attack()
     {
-        animator.SetTrigger("attack");
+       
+        GameObject magic = Instantiate(electroMagic, MagicSpawn.position, MagicSpawn.rotation);
+        Destroy(magic, 1.5f);
     }
 }

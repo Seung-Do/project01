@@ -16,7 +16,7 @@ public class TutorialAttack : TutorialBase
         //GameObject skeletonMon = Instantiate(skeletonObject, new Vector3( -2.5f, 0.11f, 12.5f ), Quaternion.Euler(0, 180f, 0));
         damage = skeletonObject.GetComponent<MonsterDamage>();
         canvas.SetActive(true);
-        text.text = "<해골 병사를 5회 공격하세요!>";
+        text.text = "<해골 병사를 5번 공격하세요!>";
     }
 
     public override void Execute(TutorialController controller)

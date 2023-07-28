@@ -37,7 +37,7 @@ public class Fireball : MonoBehaviour
 
        
         rb.AddForce(playerDirection * speed);
-
+        collisonEffect.Stop();
         fireEffect.Play();
       
 
