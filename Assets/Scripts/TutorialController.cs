@@ -13,10 +13,14 @@ public class TutorialController : MonoBehaviour
     private TutorialBase currentTutorial = null;
     private int currentIndex = -1;
 
+    Transform playerTr;
+
 
     void Start()
     {
         SetNextTutorial();
+        playerTr = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
     }
 
     // Update is called once per frame
@@ -37,7 +41,7 @@ public class TutorialController : MonoBehaviour
 
         if (currentIndex >= tutorials.Count - 1)
         {
-            Debug.Log("튜토리얼 완료");
+            //Debug.Log("튜토리얼 완료");
             CompleteTutorials();
             return;
         }
@@ -53,6 +57,10 @@ public class TutorialController : MonoBehaviour
         currentTutorial = null;
 
         if (!nextScene.Equals(""))
+        {
             SceneManager.LoadScene(nextScene);
+            playerTr.position = new Vector3(22.5f, 25.6f, -2.5f);
+            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
+        }
     }
 }

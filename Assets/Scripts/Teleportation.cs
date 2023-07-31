@@ -40,7 +40,7 @@ public class Teleportation : MonoBehaviour
         //_thumbstickR.Enable();
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         //Debug.Log(_thumbstickR.ReadValue<Vector2>());
@@ -63,7 +63,7 @@ public class Teleportation : MonoBehaviour
         }
         //UnityEngine.Debug.Log(interactables[0].interactionLayers.value);      
         TeleportRequest request = new TeleportRequest();
-        if (interactables[0].interactionLayers ==8)
+        if (interactables[0].interactionLayers == 8)
         {
             request.destinationPosition = hit.point;
         }
