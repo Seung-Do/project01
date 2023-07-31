@@ -8,7 +8,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     private List<TutorialBase> tutorials;
     [SerializeField]
-    private string nextScene = "Stage1";
+    private string nextScene = "stage01";
 
     private TutorialBase currentTutorial = null;
     private int currentIndex = -1;
@@ -22,7 +22,7 @@ public class TutorialController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentTutorial != null)
+        if (currentTutorial != null)
         {
             currentTutorial.Execute(this);
         }
@@ -35,9 +35,10 @@ public class TutorialController : MonoBehaviour
             currentTutorial.Exit();
         }
 
-        if (currentIndex >= tutorials.Count - 1) 
+        if (currentIndex >= tutorials.Count - 1)
         {
-           // CompleteTutorials();
+            Debug.Log("튜토리얼 완료");
+            CompleteTutorials();
             return;
         }
 
@@ -51,7 +52,7 @@ public class TutorialController : MonoBehaviour
     {
         currentTutorial = null;
 
-        if(!nextScene.Equals(""))
+        if (!nextScene.Equals(""))
             SceneManager.LoadScene(nextScene);
     }
 }

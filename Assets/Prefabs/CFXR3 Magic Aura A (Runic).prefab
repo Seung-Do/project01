@@ -14600,6 +14600,7 @@ GameObject:
   - component: {fileID: 3280519133390621043}
   - component: {fileID: 3280519133390621004}
   - component: {fileID: 3280519133390621041}
+  - component: {fileID: -3740128667010850733}
   m_Layer: 0
   m_Name: CFXR3 Magic Aura A (Runic)
   m_TagString: Untagged
@@ -19393,7 +19394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 1
   cameraShake:
     enabled: 0
     useMainCamera: 1
@@ -19552,6 +19553,18 @@ MonoBehaviour:
     perlinColor: 0
     perlinColorSpeed: 1
   fadeOutReference: {fileID: 3280519133390621004}
+--- !u!114 &-3740128667010850733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3280519133390621005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c823f83d998374f8b0497666754253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3280519133430969738
 GameObject:
   m_ObjectHideFlags: 0
