@@ -9,6 +9,7 @@ public class TutorialAttack : TutorialBase
     public TMP_Text text;
  
     public GameObject skeletonObject;
+    public GameObject rightControllerImage;
     MonsterDamage damage;
     public override void Enter()
     {
@@ -28,6 +29,8 @@ public class TutorialAttack : TutorialBase
     public override void Exit()
     {
         StartCoroutine(SkeletonOut());
+        rightControllerImage.SetActive(false);
+        text.text = "";
     }
 
     IEnumerator SkeletonOut()
@@ -36,14 +39,5 @@ public class TutorialAttack : TutorialBase
         
         skeletonObject.SetActive(false);
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

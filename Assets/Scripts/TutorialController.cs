@@ -42,7 +42,7 @@ public class TutorialController : MonoBehaviour
         if (currentIndex >= tutorials.Count - 1)
         {
             //Debug.Log("튜토리얼 완료");
-            CompleteTutorials();
+            //CompleteTutorials();
             return;
         }
 

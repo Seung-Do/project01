@@ -36,6 +36,12 @@ public class ElectroBall : MonoBehaviour
         collisonEffect.Play();
         Destroy(gameObject, 0.6f);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("SHIELD"))
+            Destroy(gameObject);
+    }
     void Start()
     {
 

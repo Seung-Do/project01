@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DontDestroyObject : MonoBehaviour
 {
-    private static DontDestroyObject Instance = null;
-    private void OnEnable()
+    
+    private void Start()
     {
        
         DontDestroyOnLoad(gameObject);

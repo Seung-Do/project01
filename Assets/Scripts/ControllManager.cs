@@ -125,7 +125,7 @@ public class ControllManager : MonoBehaviour
         if (rec == "O" && IsPosible)
         {
             IsPosible = false;
-            Vector3 shieldTransform = Camera.main.transform.position + Camera.main.transform.forward * 0.4f;
+            Vector3 shieldTransform = Camera.main.transform.position + Camera.main.transform.forward * 0.4f - Camera.main.transform.up * 0.2f;
             GameObject shelid = Instantiate(sheild, shieldTransform, Camera.main.transform.rotation);
             Destroy(shelid, 3f);
             StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
