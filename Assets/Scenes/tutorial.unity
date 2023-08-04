@@ -107127,6 +107127,7 @@ MonoBehaviour:
   - {fileID: 377412601}
   - {fileID: 286531171}
   - {fileID: 825015814}
+  text: {fileID: 1667454725}
 --- !u!143 &2050033836
 CharacterController:
   m_ObjectHideFlags: 0

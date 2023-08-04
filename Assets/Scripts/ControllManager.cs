@@ -1,6 +1,7 @@
 using DigitalRuby.ThunderAndLightning;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,7 +29,7 @@ public class ControllManager : MonoBehaviour
     public GameObject[] magicSpell;
     int index;
 
-
+    //public TMP_Text text;
     private void Awake()
     {
 
@@ -197,6 +198,7 @@ public class ControllManager : MonoBehaviour
         if (data.similarity >= 0.4f)
         {
             Debug.Log(data.similarity + "+" + data.gestureName);
+            //text.text = data.similarity + "+" + data.gestureName;
         }
 
     }
