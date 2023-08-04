@@ -27,18 +27,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "1f0d99ea-f779-4cb2-8de7-ca88be5c0ef2",
-                    "path": "<OculusTouchController>{LeftHand}/triggerPressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftHandTrigger",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b4a89acc-e855-4f00-b722-c4bd5b55c5dc",
+                    "id": "ce6a44a4-93b7-4def-ada5-d1d2ab5bddc7",
                     "path": "<XRController>{LeftHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
@@ -49,18 +38,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f782c2a6-850b-4187-b8aa-4d28395f3679",
-                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightHandTrigger",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "46bb1102-8e52-4785-b7bf-d8546503845d",
+                    "id": "3c8507ba-c71b-48c1-a2d5-417c98b12c79",
                     "path": "<XRController>{RightHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
