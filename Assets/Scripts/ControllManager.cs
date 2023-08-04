@@ -42,6 +42,7 @@ public class ControllManager : MonoBehaviour
         isButton = false;
         IsPosible = true;
         SelectSpell(0);
+        GestureRecognition gr = new GestureRecognition();
     }
 
     // Update is called once per frame
@@ -183,5 +184,20 @@ public class ControllManager : MonoBehaviour
         {
             magicSpell[i].SetActive(i == index);
         }
+    }
+    public void OnGestureCompleted(GestureCompletionData data)
+    {
+        if (data.gestureID < 0)
+        {
+            string errorMessage = GestureRecognition.getErrorMessage(data.gestureID);
+            return;
+        }
+
+
+        if (data.similarity >= 0.4f)
+        {
+            Debug.Log(data.similarity + "+" + data.gestureName);
+        }
+
     }
 }

@@ -1,0 +1,76 @@
+{
+    "name": "MyInputAction",
+    "maps": [
+        {
+            "name": "gesture action map",
+            "id": "7704d3cf-ce6f-4f70-b929-e16071ba99de",
+            "actions": [
+                {
+                    "name": "LeftHandTrigger",
+                    "type": "Button",
+                    "id": "733b167a-a01d-4c4f-a255-b5c91cc9eabe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightHandTrigger",
+                    "type": "Button",
+                    "id": "6b5e46c5-c53c-4dcf-a147-833a7b3ec2f8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f0d99ea-f779-4cb2-8de7-ca88be5c0ef2",
+                    "path": "<OculusTouchController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftHandTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4a89acc-e855-4f00-b722-c4bd5b55c5dc",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftHandTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f782c2a6-850b-4187-b8aa-4d28395f3679",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightHandTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46bb1102-8e52-4785-b7bf-d8546503845d",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightHandTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
