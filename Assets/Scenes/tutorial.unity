@@ -107119,7 +107119,7 @@ MonoBehaviour:
   spell: {fileID: 1815906899}
   cameraTr: {fileID: 465122523}
   rightControllerTr: {fileID: 1081472063}
-  sheild: {fileID: 8874816654370083607, guid: d591a640da5ed4143a0c8b123371001c, type: 3}
+  sheild: {fileID: 3103183941474667490, guid: 1a7b2c50b226cc94c8c12162b3e5060c, type: 3}
   magicPrefabs:
   - {fileID: 6809349286494061655, guid: 9e64fb08d6f52334c893abebd7d9edc6, type: 3}
   - {fileID: 1535640691960112, guid: d79f03dd3c9b07c41a430faecdcdf500, type: 3}
@@ -132394,7 +132394,7 @@ MonoBehaviour:
   m_SmoothMovement: 0
   m_FollowTightness: 10
   m_SnapThresholdDistance: 10
-  m_Reticle: {fileID: 3280519133390621005, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
+  m_Reticle: {fileID: 8846737274113074935, guid: 056a1bef502c22c48a27fd15b6cc989d, type: 3}
   m_BlockedReticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
   m_StopLineAtSelection: 0
