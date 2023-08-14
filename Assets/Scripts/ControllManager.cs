@@ -124,7 +124,8 @@ public class ControllManager : MonoBehaviour
             }
             else if (index == 2)
             {
-                Vector3 newPosition = playerTr.position + Camera.main.transform.forward * 0.1f;
+                
+                Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 Quaternion rotationNoY = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
                 GameObject magic = Instantiate(magicPrefabs[index - 1], newPosition, rotationNoY);
                 Destroy(magic, 1.2f);
@@ -137,16 +138,16 @@ public class ControllManager : MonoBehaviour
             IsPosible = false;
             if (index == 0)
             {
-                Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
+                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 GameObject magic = Instantiate(magicPrefabs[index + 3], spawnPosition, Quaternion.identity);
                 Destroy(magic, 3f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
             }
             else if (index == 1)
             {
-                Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f - Vector3.up * Camera.main.transform.position.y * 2f;
-                Debug.Log("스폰 위치 y값" + spawnPosition.y);
-                Debug.Log("카메라높이" + Camera.main.transform.position.y);
+                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
+                //Debug.Log("스폰 위치 y값" + spawnPosition.y);
+                //Debug.Log("카메라높이" + Camera.main.transform.position.y);
                 GameObject magic = Instantiate(magicPrefabs[index + 1], spawnPosition, Quaternion.identity);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
@@ -157,11 +158,11 @@ public class ControllManager : MonoBehaviour
                 //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
                 //Destroy(magic, 3f);
                 //StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
-                Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f;
-                spawnPosition.y = 1f;
+                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 1f;
+                //spawnPosition.y = 1f;
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
-                Destroy(magic, 2f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(2.3f)));
+                Destroy(magic, 3f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
             }
         }
         else
