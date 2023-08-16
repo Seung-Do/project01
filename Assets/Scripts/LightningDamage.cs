@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightningDamage : MonoBehaviour
 {
-    private bool isDamage;
+    private bool isDamage = false;
     private WaitForSeconds waitTime = new WaitForSeconds(0.7f);
     void Start()
     {
