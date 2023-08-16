@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
+    public testPlayer testPlayer;
+
     private void Awake()
     {
         if (Instance == null)

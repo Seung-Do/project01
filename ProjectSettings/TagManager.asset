@@ -8,14 +8,15 @@ TagManager:
   - FxTemporaire
   - SHIELD
   - Fire
+  - PLAYER
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PLAYER
   - Water
   - UI
-  - 
+  - ENEMY
   - 
   - Awesome Glow
   - 
