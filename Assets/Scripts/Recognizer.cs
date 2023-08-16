@@ -21,7 +21,7 @@ public class Recognizer : MonoBehaviour
     public bool creationMode;
     public string newGestureName;
 
-    private float recognitionThreshold = 0.8f;
+    private float recognitionThreshold = 0.88f;
 
     [System.Serializable]
     public class UnityStringEvent : UnityEvent<string> { }
@@ -109,15 +109,15 @@ public class Recognizer : MonoBehaviour
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(positionsList[i]);
             pointArray[i] = new Point(screenPoint.x, screenPoint.y, 0);
         }
-        Gesture newGesture = new Gesture(pointArray);
-        if (creationMode)
+        Gesture newGesture = new Gesture(pointArray);      
+        if (creationMode) //제스쳐 생성
         {
             newGesture.Name = newGestureName;
             trainingSet.Add(newGesture);
             string fileName = Application.persistentDataPath + "/" + newGestureName + ".xml";
             GestureIO.WriteGesture(pointArray, newGestureName, fileName);
-        }
-        else
+        }      
+        else //제스쳐 인식
         {
             Result result = PointCloudRecognizer.Classify(newGesture, trainingSet.ToArray());
             //Debug.Log(result.GestureClass +  result.Score);

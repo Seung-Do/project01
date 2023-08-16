@@ -14,20 +14,19 @@ public class ControllManager : MonoBehaviour
     public InputActionProperty indexChange;
     public LightningSpellScript spell;
     float leftGripValue;
-    float rightGripValue;
     bool isOpen;
     bool isButton;
     bool IsPosible;
-    private WaitForSeconds buttonWait = new WaitForSeconds(0.5f);
+
     private WaitForSeconds lightningWait = new WaitForSeconds(0.6f);
 
-
     public Transform rightControllerTr;
+    public Transform leftControllerTr;
     public GameObject sheild;
-    //public ParticleSystem[] magicEffects;
+    public GameObject selectedSpell;
     public GameObject[] magicPrefabs;
-    public GameObject[] magicSpell;
-    int index;
+    public GameObject[] bookSpell;
+    public int index;
 
     //public TMP_Text text;
     private void Awake()
@@ -42,7 +41,7 @@ public class ControllManager : MonoBehaviour
         isOpen = false;
         isButton = false;
         IsPosible = true;
-        SelectSpell(0);
+        //SelectSpell(0);
         GestureRecognition gr = new GestureRecognition();
     }
 
@@ -50,8 +49,6 @@ public class ControllManager : MonoBehaviour
     void Update()
     {
         OpenBook();
-        IndexChange();
-
     }
     void OpenBook()
     {
@@ -68,9 +65,20 @@ public class ControllManager : MonoBehaviour
         }
     }
 
-    void IndexChange()
+    //왼쪽 제스쳐 인식
+    public void IndexChange(string rec)
     {
-        if (isOpen)
+        if (rec == "0")
+            index = 0;
+        else if(rec == "1")
+            index = 1;
+        else if(rec == "2")
+            index = 2;
+
+        Vector3 newPosition = leftControllerTr.position + Camera.main.transform.forward * 0.3f;
+        GameObject spell = Instantiate(selectedSpell, newPosition, Camera.main.transform.rotation);
+
+        /*if (isOpen)
         {
             float xbutton = indexChange.action.ReadValue<float>();
             if (xbutton > 0.9f && !isButton)
@@ -83,16 +91,16 @@ public class ControllManager : MonoBehaviour
                 SelectSpell(index);
                 // Debug.Log("버튼X");
             }
-        }
-
+        }*/
     }
-    IEnumerator XButton()
+    /*IEnumerator XButton()
     {
         isButton = true;
         yield return buttonWait;
         isButton = false;
+    }*/
 
-    }
+    //오른쪽 제스쳐 인식
     public void MotionMagic(string rec)
     {
         if (rec == "O" && IsPosible)
@@ -109,7 +117,7 @@ public class ControllManager : MonoBehaviour
             if (index == 0)
             {
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
-                GameObject magic = Instantiate(magicPrefabs[index], newPosition, Camera.main.transform.rotation);
+                GameObject magic = Instantiate(magicPrefabs[index], newPosition, Quaternion.identity);
                 Destroy(magic, 1.2f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
@@ -139,7 +147,7 @@ public class ControllManager : MonoBehaviour
             if (index == 0)
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
-                GameObject magic = Instantiate(magicPrefabs[index + 3], spawnPosition, Quaternion.identity);
+                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
@@ -148,7 +156,7 @@ public class ControllManager : MonoBehaviour
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
                 //Debug.Log("스폰 위치 y값" + spawnPosition.y);
                 //Debug.Log("카메라높이" + Camera.main.transform.position.y);
-                GameObject magic = Instantiate(magicPrefabs[index + 1], spawnPosition, Quaternion.identity);
+                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
@@ -185,7 +193,7 @@ public class ControllManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            magicSpell[i].SetActive(i == index);
+            bookSpell[i].SetActive(i == index);
         }
     }
     //3D 제스쳐 인식
