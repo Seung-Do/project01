@@ -95,7 +95,7 @@ Shader "KriptoFX/RFX4/Particle"
 		sampler2D _MainTex;
 	sampler2D _NoiseTex;
 	sampler2D _CutoutTex;
-	sampler2D _CameraDepthTexture;
+	UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
 	float4 _MainTex_ST;
 	float4 _NoiseTex_ST;
@@ -254,7 +254,7 @@ Shader "KriptoFX/RFX4/Particle"
 
 #ifdef _FADING_ON
 	#ifdef SOFTPARTICLES_ON
-		float z = tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)).r;
+		float z = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.projPos.xy / i.projPos.w).r;
 		float sceneZ = LinearEyeDepth(UNITY_SAMPLE_DEPTH(z));
 		float partZ = i.projPos.z;
 		float fade = saturate(_InvFade * (sceneZ - partZ));

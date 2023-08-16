@@ -1,43 +1,42 @@
-My email is "kripto289@gmail.com"
-You can contact me for any questions.
+version 1.3.0
 
-My English is not very good, and if there are any translation errors, you can let me know :)
+email is "kripto289@gmail.com" 
+Discord link https://discord.gg/GUUZ9D96Uq 
 
 
-Pack includes prefabs of main effects (projectiles, aoe effect, etc) + collision effects (decals, particles, etc) + hand effects (like a particles attached to hands)
-This simple tutorial only for Default Legacy rendering.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   FIRST STEPS  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Supported platforms:
+1) All effects are configured only for HDR rendering with bloom postprocessing!
 
-	All platforms (PC/Consoles/VR/Mobiles)
-	All effects tested on Oculus Rift CV1 with single/dual/instanced pass and works correcrly.
-	If you use URP rendering then you must import HDRP or URP patches "\Assets\KriptoFX\Realistic Effects Pack v4\HDRP and URP patches"
+2) Settings for STANDARD (non URP or HDRP) rendering:
+http://kripto289.com/Shared/Readme/DefaultRenderingSettings.jpg
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-For correct effects working you must:
+3) Settings for URP rendering:
+http://kripto289.com/Shared/Readme/URPRenderingSettings.jpg
+You should import the URP patch from the folder 
+(\Assets\KriptoFX\Realistic Effects Pack v4\HDRP and URP patches)
 
-1) Use included postprocessing profile "\Assets\KriptoFX\Realistic Effects Pack v4\PostProcess Profile.asset" (If you want effects which look like in the video example)
+4) Settings for HDRP rendering:
+HDRP rendering has correct settings out of the box and you only need to import the patch from the folder 
+(\Assets\KriptoFX\Realistic Effects Pack v4\HDRP and URP patches)
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Using effects:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Simple using (without characters):
 
-	1) Just drag and drop prefab of effect on scene and use that (for example, bufs or projectiles).
+-----------------------------------------      EFFECTS USING    ----------------------------------------------------------------------------------------------------------
+All effects work automatically, just like the standard particle system. 
+Its play automatically at startup, has a position/rotation/scale, or can use "Instantiate(prefab, position, rotation)"
 
 Using with characters and animations:
+Here is a video tutorial on how to use effects with characters  
+https://youtu.be/AKQCNGEeAaE
 
-	You can see this video tutorial https://youtu.be/AKQCNGEeAaE
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	1) You can use "animation events" for instantiating an effects in runtime using an animation. (I use this method in the demo scene)
-	https://docs.unity3d.com/Manual/animeditor-AnimationEvents.html
-	2) You need set the position and the rotation for an effects. I use hand bone position (or center position of arrow) and hand bone rotation.
 
-For using effects in runtime, use follow code:
 
-	"Instantiate(prefabEffect, position, rotation);"
 
+----------------------------------------     additional features    ------------------------------------------------------------------------------------------------------
 Using projectile collision detection:
 
 	Just add follow script on prefab of effect.
@@ -57,8 +56,7 @@ Using projectile collision detection:
         Debug.Log(e.HitCollider.name); //a collided collider :)
     }
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Effect modification:
+-------------------------------- Effects modification -------------------------------------------------------------------------------------------------------------------
 
 All prefabs of effect have "EffectSetting" script with follow settings:
 
@@ -68,9 +66,9 @@ Allow change particles count of effect prefab. For example, particleBudget = 0.5
 UseLightShadows (does not work when used mobile build target)
 Some effect can use shadows and you can disable this setting for optimisation. Disabled by default for mobiles.
 
-UseFastFlatDecalsForMobiles (works only when used mobile build target)
+UseFastFlatDecalsForMobiles
 If you use non-flat surfaces or  have z-fight problems you can use screen space decals instead of simple quad decals.
-Disabled parameter will use screen space decals but it required depth texture!
+Disabled parameter will use screen space decals but it required depth texture and slower!
 
 UseCustomColor
 You can override color of effect by HUE. (new color will used only in play mode)

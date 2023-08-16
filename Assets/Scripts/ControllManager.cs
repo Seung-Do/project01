@@ -111,7 +111,7 @@ public class ControllManager : MonoBehaviour
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 GameObject magic = Instantiate(magicPrefabs[index], newPosition, Camera.main.transform.rotation);
                 Destroy(magic, 1.2f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.4f)));
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
             else if (index == 1)
             {
@@ -120,7 +120,7 @@ public class ControllManager : MonoBehaviour
                 spell.Direction = playerDirection;
                 spell.SpellStart.transform.position = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 StartCoroutine(LightningSpell());
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(0.9f)));
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
             else if (index == 2)
             {
@@ -128,8 +128,8 @@ public class ControllManager : MonoBehaviour
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 Quaternion rotationNoY = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
                 GameObject magic = Instantiate(magicPrefabs[index - 1], newPosition, rotationNoY);
-                Destroy(magic, 1.2f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.4f)));
+                Destroy(magic, 1.5f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
 
             }
         }
@@ -140,8 +140,8 @@ public class ControllManager : MonoBehaviour
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 GameObject magic = Instantiate(magicPrefabs[index + 3], spawnPosition, Quaternion.identity);
-                Destroy(magic, 3f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
+                Destroy(magic, 4f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
             else if (index == 1)
             {
@@ -161,8 +161,8 @@ public class ControllManager : MonoBehaviour
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 1f;
                 //spawnPosition.y = 1f;
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
-                Destroy(magic, 3f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
+                Destroy(magic, 3.5f);
+                StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
         }
         else

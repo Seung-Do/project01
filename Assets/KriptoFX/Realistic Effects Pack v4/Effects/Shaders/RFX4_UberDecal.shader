@@ -81,7 +81,7 @@ Shader "KriptoFX/RFX4/Decal"
 	sampler2D _NoiseTex;
 	sampler2D _CutoutTex;
 	sampler2D _CutoutRamp;
-	sampler2D _CameraDepthTexture;
+	UNITY_DECLARE_DEPTH_TEXTURE (_CameraDepthTexture);
 
 
 	float4 _MainTex_ST;
@@ -177,15 +177,18 @@ Shader "KriptoFX/RFX4/Decal"
 
 		i.ray *= (_ProjectionParams.z / i.ray.z); // Far clip dist/viewspace distance
 
-		float depth = Linear01Depth(tex2Dproj(_CameraDepthTexture, i.screenUV));
+		float depth = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.screenUV.xy / i.screenUV.w));
+		
 		float3 wpos = mul(unity_CameraToWorld, float4(i.ray * depth, 1)).xyz;
 		//float3 opos = mul(unity_WorldToObject, float4(wpos, 1)).xyz;
 		float3 opos = mul(UNITY_ACCESS_INSTANCED_PROP(_InverseTransformMatrix_arr, _InverseTransformMatrix), float4(wpos, 1)).xyz;
 		//float3 opos = mul(_InverseTransformMatrix, float4(wpos, 1)).xyz;
 		float3 stepVal = saturate((0.5 - abs(opos.xyz)) * 10000);
 
+
 		float projClipFade = stepVal.x * stepVal.y * stepVal.z * (1 - abs(opos.y * 2));
 		projClipFade = pow(projClipFade, 0.2);
+
 
 #ifdef USE_WORLD_SPACE_UV
 		float2 uv = wpos.xz;

@@ -60,6 +60,7 @@ Shader "KriptoFX/RFX4/Portal/RockStencil"
 			float4 vertex : POSITION;
 			float4 normal : NORMAL;
 			float2 texcoord : TEXCOORD0;
+			UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
 		struct v2f {
@@ -70,7 +71,8 @@ Shader "KriptoFX/RFX4/Portal/RockStencil"
 			half3 color : COLOR;
 			UNITY_FOG_COORDS(3)
 
-			
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+				UNITY_VERTEX_OUTPUT_STEREO
 		};
 
 		half3 ShadeCustomLights(float4 vertex, float3 normal, int lightCount)
@@ -99,6 +101,9 @@ Shader "KriptoFX/RFX4/Portal/RockStencil"
 			v2f o;
 			
 
+			UNITY_SETUP_INSTANCE_ID(v);
+			UNITY_TRANSFER_INSTANCE_ID(v, o);
+			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 			o.vertex = UnityObjectToClipPos(v.vertex);
 			o.texcoord.xy = TRANSFORM_TEX(v.texcoord, _MainTex);
 			o.texcoord2.xy = TRANSFORM_TEX(v.texcoord, _EmissionTex);
@@ -117,6 +122,7 @@ Shader "KriptoFX/RFX4/Portal/RockStencil"
 
 		half4 frag(v2f i) : SV_Target
 		{
+			UNITY_SETUP_INSTANCE_ID(i);
 			half4 tex = tex2D(_MainTex, i.texcoord);
 			half4 emission = tex2D(_EmissionTex, i.texcoord2) * _EmissionColor;
 		

@@ -83,7 +83,7 @@ Material:
     - _DstBlend: 0
     - _EmissionDepth: 7
     - _Glossiness: 0.225
-    - _Height: 0.7
+    - _Height: 1
     - _InvFade: 1
     - _Metallic: 0.194
     - _Mode: 0

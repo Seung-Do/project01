@@ -86,7 +86,7 @@ Shader "KriptoFX/RFX4/Distortion"
 				#include "UnityCG.cginc"
 
 
-				sampler2D _GrabTexture;
+				UNITY_DECLARE_SCREENSPACE_TEXTURE( _GrabTexture);
 				sampler2D _MainTex;
 				sampler2D _NormalTex;
 				float4 _NormalTex_ST;
@@ -114,7 +114,7 @@ Shader "KriptoFX/RFX4/Distortion"
 				half _AlphaClip;
 				half _TintDistortion;
 
-				sampler2D _CameraDepthTexture;
+				UNITY_DECLARE_DEPTH_TEXTURE (_CameraDepthTexture);
 				float4x4 _InverseTransformMatrix;
 
 				UNITY_INSTANCING_BUFFER_START(MyProperties)
@@ -294,7 +294,7 @@ Shader "KriptoFX/RFX4/Distortion"
 				half fade = 1;
 #ifdef _FADING_ON
 	#ifdef SOFTPARTICLES_ON
-				float sceneZ = LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos))));
+				float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture,  i.projPos.xy / i.projPos.w));
 				float partZ = i.projPos.z;
 				fade = saturate(_InvFade * (sceneZ - partZ));
 				i.color.a *= fade;
@@ -346,11 +346,13 @@ Shader "KriptoFX/RFX4/Distortion"
 	#endif
 
 				i.uvgrab.xy = offset * i.color.a + i.uvgrab.xy;
-				half4 grabColor = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));;
+				//half4 grabColor = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));;
+				half4 grabColor = UNITY_SAMPLE_SCREENSPACE_TEXTURE(_GrabTexture, float4(i.uvgrab.xy / i.uvgrab.w, 0, 0));
+
 
 				half4 result;
 				half4 mainCol = UNITY_ACCESS_INSTANCED_PROP(_MainColor_arr, _MainColor);
-				result.rgb = grabColor * lerp(1, mainCol,  i.color.a) + fresnelCol * grabColor + cutoutCol.rgb;
+				result.rgb = grabColor * lerp(float3(1, 1, 1), mainCol.rgb,  i.color.a) + fresnelCol * grabColor + cutoutCol.rgb;
 
 	#ifdef _EMISSION
 				half4 tintCol = UNITY_ACCESS_INSTANCED_PROP(_TintColor_arr, _TintColor);

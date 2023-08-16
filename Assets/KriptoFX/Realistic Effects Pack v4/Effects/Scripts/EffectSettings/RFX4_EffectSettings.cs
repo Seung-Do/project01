@@ -47,7 +47,7 @@ public class RFX4_EffectSettings : MonoBehaviour
     {
         if(ParticlesBudget < 0.99f) ChangeParticlesBudget(ParticlesBudget);
         if(UseCustomColor) ChangeParticleColor();
-        if (UseFastFlatDecalsForMobiles && IsMobilePlatform()) SetFlatDecals();
+        if (UseFastFlatDecalsForMobiles) SetFlatDecals();
         if (!UseLightShadows || IsMobilePlatform()) DisableShadows();
     }
 

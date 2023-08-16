@@ -82,8 +82,8 @@ public class RFX4_RaycastCollision : MonoBehaviour
                     rayPS.GetComponent<ParticleSystemRenderer>().lengthScale = (transform.position - raycastHit.point).magnitude / rayPS.main.startSize.constantMax;
 
             }
-
-            if (CollidedInstances.Count==0)
+            //이 부분만 수정했음
+            if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.CompareTag("MONSTER"))
                 foreach (var effect in Effects) {
                     if (effect != null)
                     {

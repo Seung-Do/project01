@@ -31,11 +31,11 @@ public class RFX4_PerPlatformSettings : MonoBehaviour
         Legacy_Rendering_Check(cam);
     }
 
-    void Update()
-    {
-        var cam = Camera.main;
-        Legacy_Rendering_Check(cam);
-    }
+    //void Update()
+    //{
+    //    var cam = Camera.main;
+    //    Legacy_Rendering_Check(cam);
+    //}
 
     void Legacy_Rendering_Check(Camera cam)
     {

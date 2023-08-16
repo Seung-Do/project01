@@ -11,8 +11,9 @@ Shader "KriptoFX/RFX4/Lightning" {
 		Category{
 			Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
 			Blend SrcAlpha OneMinusSrcAlpha
-			Cull Off Lighting Off ZWrite Off
-			Offset -1, -1
+			Cull Off
+			ZWrite Off
+			//Offset -1, -1
 
 			SubShader {
 				Pass {
@@ -34,6 +35,7 @@ Shader "KriptoFX/RFX4/Lightning" {
 						float4 vertex : POSITION;
 						half4 color : COLOR;
 						float2 texcoord : TEXCOORD0;
+						UNITY_VERTEX_INPUT_INSTANCE_ID
 					};
 
 					struct v2f {
@@ -42,7 +44,7 @@ Shader "KriptoFX/RFX4/Lightning" {
 						float2 uvMain : TEXCOORD0;
 						float4 uvDistort : TEXCOORD1;
 						UNITY_FOG_COORDS(3)
-
+							UNITY_VERTEX_OUTPUT_STEREO
 					};
 
 					float4 _MainTex_ST;
@@ -52,11 +54,11 @@ Shader "KriptoFX/RFX4/Lightning" {
 					v2f vert(appdata_t v)
 					{
 						v2f o;
-		#if UNITY_VERSION >= 550
+						UNITY_SETUP_INSTANCE_ID(v); //Insert
+						UNITY_INITIALIZE_OUTPUT(v2f, o); //Insert
+						UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); //Insert
 						o.vertex = UnityObjectToClipPos(v.vertex);
-		#else
-						o.vertex = UnityObjectToClipPos(v.vertex);
-		#endif
+
 						o.color = v.color;
 						o.uvMain.xy = TRANSFORM_TEX(v.texcoord, _MainTex);
 						o.uvDistort.xy = TRANSFORM_TEX(v.texcoord, _DistortTex1);
@@ -65,11 +67,11 @@ Shader "KriptoFX/RFX4/Lightning" {
 						return o;
 					}
 
-					sampler2D_float _CameraDepthTexture;
-					half _InvFade;
+
 
 					half4 frag(v2f i) : SV_Target
 					{
+
 						half4 distort1 = tex2D(_DistortTex1, i.uvDistort.xy + _DistortSpeed.x * _Time.xx) * 2 - 1;
 						half4 distort2 = tex2D(_DistortTex1, i.uvDistort.xy - _DistortSpeed.x * _Time.xx * 1.4 + float2(0.4, 0.6)) * 2 - 1;
 						half4 distort3 = tex2D(_DistortTex2, i.uvDistort.zw + _DistortSpeed.z * _Time.xx) * 2 - 1;

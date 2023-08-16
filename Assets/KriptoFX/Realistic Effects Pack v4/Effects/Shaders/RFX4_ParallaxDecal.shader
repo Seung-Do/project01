@@ -43,6 +43,7 @@ Shader "KriptoFX/RFX4/Decal/ParallaxDecal" {
                     float2 uv : TEXCOORD0;
                     float3 normal : NORMAL;
                     float4 tangent : TANGENT;
+                    UNITY_VERTEX_INPUT_INSTANCE_ID
                 };
 
                 struct v2f
@@ -55,6 +56,7 @@ Shader "KriptoFX/RFX4/Decal/ParallaxDecal" {
                     float3 worldNormal  : TEXCOORD7;
                     float3 worldTangent  : TEXCOORD8;
                     float3 worldBitangent : TEXCOORD9;
+                    UNITY_VERTEX_OUTPUT_STEREO
                 };
 
                 float4 _Emission;
@@ -87,6 +89,9 @@ Shader "KriptoFX/RFX4/Decal/ParallaxDecal" {
                 v2f vert(appdata v)
                 {
                     v2f o;
+                    UNITY_SETUP_INSTANCE_ID(v); //Insert
+                    UNITY_INITIALIZE_OUTPUT(v2f, o); //Insert
+                    UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); //Insert
                     o.vertex = UnityObjectToClipPos(v.vertex);
                     o.uv = v.uv;
 
@@ -176,7 +181,7 @@ Shader "KriptoFX/RFX4/Decal/ParallaxDecal" {
                     col.rgb *= light;
     #endif
                     col.a = tex2D(_HeightTex, p.xy).a > 0.5 ? 1 : 0;
-                    col.a *= saturate(tex2D(_HeightTex, i.uv).r - 1 + _Cutout * 2);
+                    col.a *= saturate((tex2D(_HeightTex, i.uv).r - 1 + _Cutout * 2)* 100);
 
                     float2 noiseOffset = tex2D(_NoiseTex, p.xy * _NoiseTex_ST.xy + _NoiseTex_ST.zw + _Time.x * _NoiseSpeedScale.xy);
                     half3 emission = tex2D(_EmissionTex, p.xy * _EmissionTex_ST.xy + _EmissionTex_ST.zw + noiseOffset * pow(p.z, _EmissionDepth)).rgb;

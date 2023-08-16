@@ -32,7 +32,7 @@ public class RFX4_ReplaceModelOnCollision : MonoBehaviour
         isCollided = false;
         foreach (var physicsObj in PhysicsObjects)
         {
-            physicsObj.SetActive(false);
+            if (physicsObj != null) physicsObj.SetActive(false);
         }
         var mesh = GetComponent<MeshRenderer>();
         if (mesh!=null)

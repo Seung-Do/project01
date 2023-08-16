@@ -40,6 +40,7 @@ Category {
 				half4 color : COLOR;
 				float2 texcoord : TEXCOORD0;
 				float4 normal : NORMAL;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
 			struct v2f {
@@ -51,6 +52,7 @@ Category {
 				float4 projPos : TEXCOORD2;
 				#endif
 				float height : TEXCOORD3;
+				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
 			float4 _MainTex_ST;
@@ -59,7 +61,9 @@ Category {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-
+				UNITY_SETUP_INSTANCE_ID(v); //Insert
+				UNITY_INITIALIZE_OUTPUT(v2f, o); //Insert
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); //Insert
 				///////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//float3 wpos = mul(unity_ObjectToWorld, v.vertex).xyz;
 				float3 wpos = v.vertex.xyz;

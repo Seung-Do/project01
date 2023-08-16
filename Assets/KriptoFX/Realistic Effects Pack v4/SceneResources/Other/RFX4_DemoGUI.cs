@@ -19,7 +19,7 @@ public class RFX4_DemoGUI : MonoBehaviour
 	public GUIStyle guiStyleHeader = new GUIStyle();
     GUIStyle guiStyleHeaderMobile = new GUIStyle();
     float dpiScale;
-   
+
     private float colorHUE;
     private float startSunIntensity;
     private Quaternion startSunRotation;
@@ -37,7 +37,7 @@ public class RFX4_DemoGUI : MonoBehaviour
         guiStyleHeaderMobile.fontSize = (int)(17f * dpiScale);
 
         ChangeCurrent(0);
-     
+
         startSunIntensity = Sun.intensity;
 	    startSunRotation = Sun.transform.rotation;
 	    startAmbientLight = RenderSettings.ambientLight;
@@ -67,7 +67,7 @@ public class RFX4_DemoGUI : MonoBehaviour
             ChangeCurrent(+1);
         }
         var offset = 0f;
-      
+
         if (GUI.Button(new Rect(10*dpiScale, 63*dpiScale + offset, 285*dpiScale, 37*dpiScale), "Day / Night") || (!isButtonPressed && Input.GetKeyDown(KeyCode.DownArrow)))
         {
             ChangeDayNight();
@@ -77,10 +77,10 @@ public class RFX4_DemoGUI : MonoBehaviour
             "press left mouse button for the camera rotating and scroll wheel for zooming", guiStyleHeader);
         GUI.Label(new Rect(350*dpiScale, 35*dpiScale + offset / 2, 160*dpiScale, 20*dpiScale),
             "prefab name is: " + Prefabs[currentNomber].name, guiStyleHeader);
-        
+
 
        // GUI.DrawTexture(new Rect(12*dpiScale, 120*dpiScale + offset, 285*dpiScale, 15*dpiScale), HUETexture, ScaleMode.StretchToFill, false, 0);
-       
+
 
         //        float oldColorHUE = colorHUE;
         //colorHUE = GUI.HorizontalSlider(new Rect(12*dpiScale, 140*dpiScale + offset, 285*dpiScale, 15*dpiScale), colorHUE, 0, 360);
@@ -142,7 +142,7 @@ public class RFX4_DemoGUI : MonoBehaviour
         }
 
         currentInstance = Instantiate(Prefabs[currentNomber]);
-        
+
        // if (!UsePCVersion)
        // {
        //     currentInstance.transform.rotation = transform.rotation;
@@ -170,5 +170,5 @@ public class RFX4_DemoGUI : MonoBehaviour
         currentInstance.SetActive(false);
         currentInstance.SetActive(true);
     }
-   
+
 }
