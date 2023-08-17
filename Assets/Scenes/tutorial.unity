@@ -87108,7 +87108,7 @@ MonoBehaviour:
   - {fileID: 1861648849}
   - {fileID: 1147244175}
   - {fileID: 1003156900}
-  nextScene: stage01
+  nextScene: stage00
 --- !u!4 &1416400248
 Transform:
   m_ObjectHideFlags: 0

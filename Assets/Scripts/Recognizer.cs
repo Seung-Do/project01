@@ -21,7 +21,7 @@ public class Recognizer : MonoBehaviour
     public bool creationMode;
     public string newGestureName;
 
-    private float recognitionThreshold = 0.88f;
+    private float recognitionThreshold = 0.8f;
 
     [System.Serializable]
     public class UnityStringEvent : UnityEvent<string> { }

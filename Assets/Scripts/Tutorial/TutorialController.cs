@@ -8,7 +8,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     private List<TutorialBase> tutorials;
     [SerializeField]
-    private string nextScene = "stage01";
+    private string nextScene = "stage00";
 
     private TutorialBase currentTutorial = null;
     private int currentIndex = -1;
@@ -59,8 +59,9 @@ public class TutorialController : MonoBehaviour
         if (!nextScene.Equals(""))
         {
             SceneManager.LoadScene(nextScene);
-            playerTr.position = new Vector3(22.5f, 25.6f, -2.5f);
-            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
+            playerTr.position = new Vector3(5f, 2f, 5f);
+            //playerTr.position = new Vector3(22.5f, 25.6f, -2.5f);
+            //playerTr.rotation = Quaternion.Euler(0, 180f, 0);
         }
     }
 }
