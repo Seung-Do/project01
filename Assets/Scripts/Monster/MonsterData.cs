@@ -7,6 +7,12 @@ public class MonsterData : ScriptableObject
 {
     [Header("# Main Info")]
     public int MonsterType;  //스폰되는 몬스터 타입
+    //0 : Boar
+    //1 : Stag
+    //2 : Spider
+    //3 : KingCobra
+    //4 : Shield
+    //5 : Witch
 
     [Header("# Monster Data")]
     public float Health;    //체력
