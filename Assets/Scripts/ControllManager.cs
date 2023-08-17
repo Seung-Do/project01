@@ -166,10 +166,10 @@ public class ControllManager : MonoBehaviour
                 //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
                 //Destroy(magic, 3f);
                 //StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
-                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 1f;
+                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 //spawnPosition.y = 1f;
-                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
-                Destroy(magic, 3.5f);
+                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.Euler(90f, 0, 0));
+                Destroy(magic, 3.6f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
         }
