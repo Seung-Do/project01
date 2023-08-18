@@ -20,7 +20,7 @@ public class TutorialStart : TutorialBase
     {
         canvas.SetActive(true);
         //Locomotion.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-        teleportInteractor.SetActive(false);
+        //teleportInteractor.SetActive(false);
         leftControllerImage.SetActive(true);
         text.text = "플레이어 조작에 대해 알아보겠습니다\r\n왼쪽 썸스틱을 좌우로 입력하여 스냅턴이 가능합니다\r\n왼쪽 썸스틱을 오른쪽으로 세번 입력해서 오른쪽 방향을 봐주세요";
     }

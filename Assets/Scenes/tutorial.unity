@@ -87998,6 +87998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testPlayer: {fileID: 0}
+  poolManager: {fileID: 0}
 --- !u!1001 &1478509863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107274,7 +107275,7 @@ GameObject:
   - component: {fileID: 2050033836}
   - component: {fileID: 2050033837}
   - component: {fileID: 2050033838}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -139003,7 +139004,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -139184,7 +139185,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
     inside: 1
     outside: 0
@@ -139192,8 +139193,7 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives:
-    - {fileID: 2050033834}
+    primitives: []
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -154503,6 +154503,7 @@ GameObject:
   - component: {fileID: 3907679613206399122}
   - component: {fileID: 1117241509140740870}
   - component: {fileID: 6116939182522157338}
+  - component: {fileID: 6116939182522157339}
   m_Layer: 0
   m_Name: Portal green
   m_TagString: Untagged
@@ -157729,6 +157730,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6116939182522157339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3992058560690231591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de7220cbd4197f48a9d5eba2173060c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveNext: 0
 --- !u!1 &6275681471396236897
 GameObject:
   m_ObjectHideFlags: 0
