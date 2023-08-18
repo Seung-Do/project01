@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IDamage
 {
     public MonsterData data;
     WaitForSeconds wait;
@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
     float speed;
     float damage;
 
+    bool isHit;
     bool isChase;
     bool isDead;
     public bool isFindPlayer;
@@ -56,6 +57,7 @@ public class Monster : MonoBehaviour
     private void OnEnable()
     {
         isDead = false;
+        isHit = false;
         isChase = false;
         hp = data.Health;
         speed = data.Speed;
@@ -112,6 +114,11 @@ public class Monster : MonoBehaviour
         }
         //hp가 0이하가 되었을 때
         else if (hp <= 0)
+        {
+            state = State.DEAD;
+        }
+        //데미지 받았을 때
+        else if (isHit)
         {
             state = State.DEAD;
         }
@@ -303,32 +310,48 @@ public class Monster : MonoBehaviour
         if (Type == 4)
         {
             shield.ShieldAttack();
-            return;
         }
         else if (Type == 5 || Type == 6)
         {
             anim.SetTrigger("Attack");
-            return;
         }
         else
         {
-            int ran = Random.Range(0, 4);
+            randomAttackAnim();   
+        }
+    }
 
-            switch (ran)
-            {
-                case 0:
-                    anim.SetTrigger("Attack1");
-                    break;
-                case 1:
-                    anim.SetTrigger("Attack2");
-                    break;
-                case 2:
-                    anim.SetTrigger("Attack3");
-                    break;
-                case 3:
-                    anim.SetTrigger("Attack4");
-                    break;
-            }
+    //IDamage인터페이스 상속 메서드
+    public void getDamage()
+    {
+        isHit = true;
+        //데미지 받는 내용 작성
+    }
+    //애니메이션이벤트에서 hit애니메이션 끝날때 호출
+    public void Hit()
+    {
+        isHit = false;
+    }
+
+    void randomAttackAnim()
+    {
+        anim.SetTrigger("Idle");
+        int ran = Random.Range(0, 4);
+
+        switch (ran)
+        {
+            case 0:
+                anim.SetTrigger("Attack1");
+                break;
+            case 1:
+                anim.SetTrigger("Attack2");
+                break;
+            case 2:
+                anim.SetTrigger("Attack3");
+                break;
+            case 3:
+                anim.SetTrigger("Attack4");
+                break;
         }
     }
 }
