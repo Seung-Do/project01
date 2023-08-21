@@ -14,12 +14,13 @@ public class TutorialController : MonoBehaviour
     private int currentIndex = -1;
 
     Transform playerTr;
+    public Transform handsTr;
 
 
     void Start()
     {
         SetNextTutorial();
-        playerTr = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerTr = GameManager.Instance.playerTr;
 
     }
 
@@ -59,7 +60,8 @@ public class TutorialController : MonoBehaviour
         if (!nextScene.Equals(""))
         {
             SceneManager.LoadScene(nextScene);
-            playerTr.position = new Vector3(5f, 2f, 5f);
+            playerTr.position = new Vector3(193f, 7.2f, 71.5f);
+            handsTr.position = playerTr.position;
             //playerTr.position = new Vector3(22.5f, 25.6f, -2.5f);
             //playerTr.rotation = Quaternion.Euler(0, 180f, 0);
         }

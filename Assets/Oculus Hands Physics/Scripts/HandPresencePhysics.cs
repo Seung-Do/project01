@@ -18,7 +18,7 @@ public class HandPresencePhysics : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         _body.collisionDetectionMode = CollisionDetectionMode.Continuous;
         _body.interpolation = RigidbodyInterpolation.Interpolate;
-        _body.mass = 20f;
+        _body.mass = 5f;
 
         _body.position = _followTarget.position;
         _body.rotation = _followTarget.rotation;

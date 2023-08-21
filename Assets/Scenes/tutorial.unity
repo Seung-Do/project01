@@ -44004,6 +44004,11 @@ MonoBehaviour:
   teleportInteractor: {fileID: 4448471697456946852}
   rightControllerImage: {fileID: 569613550}
   leftControllerImage: {fileID: 537745980}
+--- !u!4 &793622038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6196117964748254972, guid: 7940fc9f8896897419e9e4a20cd7db20, type: 3}
+  m_PrefabInstance: {fileID: 6196117963319111767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &794544770
 GameObject:
   m_ObjectHideFlags: 0
@@ -87109,6 +87114,7 @@ MonoBehaviour:
   - {fileID: 1147244175}
   - {fileID: 1003156900}
   nextScene: stage00
+  handsTr: {fileID: 793622038}
 --- !u!4 &1416400248
 Transform:
   m_ObjectHideFlags: 0
