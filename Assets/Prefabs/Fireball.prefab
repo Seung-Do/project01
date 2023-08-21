@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5614454093698312295}
   - component: {fileID: -8797081752569964786}
   - component: {fileID: 6836378405240571744}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,9 +144,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 294364003325551378, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 758504873539901447, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3382749032140692839, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046332599650371379, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5069506776915014960, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
       propertyPath: m_Materials.Array.size
@@ -159,6 +171,14 @@ PrefabInstance:
     - target: {fileID: 6392491402937755025, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392491402937755027, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128788651337950566, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8194992990867289332, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
       propertyPath: m_Materials.Array.size
@@ -223,6 +243,10 @@ PrefabInstance:
     - target: {fileID: 8194992990867289339, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
       propertyPath: m_Name
       value: Fire Explosion B
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194992990867289339, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1347780276449787774, guid: aad3858f2f57cac4fb6a42d39e06b23f, type: 3}
@@ -414,12 +438,20 @@ PrefabInstance:
       value: CFXR4 Sun
       objectReference: {fileID: 0}
     - target: {fileID: 1206498299807332555, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1206498299807332555, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3405899300174267242, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
       propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747002053765534775, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8336275602659357518, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
       propertyPath: clearBehavior

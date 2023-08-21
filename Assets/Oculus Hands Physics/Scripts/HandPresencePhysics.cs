@@ -1,35 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HandPresencePhysics : MonoBehaviour
 {
-    public Transform target;
-    private Rigidbody rb;
-    //public Renderer nonPhysicalHand;
-   // public float showNonPhysicalHandDistance = 0.05f;
+    [SerializeField] private GameObject followObject;
+    [SerializeField] private float followSpeed = 30f;
+    [SerializeField] private float rotateSpeed = 100f;
+    [SerializeField] private Vector3 positionOffset;
+    [SerializeField] private Vector3 rotationOffset;
+    private Transform _followTarget;
+    private Rigidbody _body;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _followTarget = followObject.transform;
+        _body = GetComponent<Rigidbody>();
+        _body.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        _body.interpolation = RigidbodyInterpolation.Interpolate;
+        _body.mass = 20f;
+
+        _body.position = _followTarget.position;
+        _body.rotation = _followTarget.rotation;
     }
 
-   /* private void Update()
+    private void Update()
+     {
+         PhysicsMove();
+     }
+    private void PhysicsMove()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance < showNonPhysicalHandDistance)
-        {
-            nonPhysicalHand.enabled = true;
-        }
-        else
-            nonPhysicalHand.enabled = false;
-    }*/
-    void FixedUpdate()
-    {
-        rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime;
+        // Position
+        var positionWithOffset = _followTarget.TransformPoint(positionOffset);
+        var distance = Vector3.Distance(positionWithOffset, transform.position);
+        _body.velocity = (positionWithOffset - transform.position).normalized * (followSpeed * distance);
 
-        Quaternion rotationDifference = target.rotation * Quaternion.Inverse(transform.rotation);
-        rotationDifference.ToAngleAxis(out float angleInDegree, out Vector3 rotationAxis);
-        Vector3 rotationDifferenceInDegree = rotationDifference * rotationAxis; 
-        rb.angularVelocity = (rotationDifferenceInDegree * Mathf.Deg2Rad / Time.fixedDeltaTime);
+        // Rotation
+        var rotationWithOffset = _followTarget.rotation * Quaternion.Euler(rotationOffset);
+        var q = rotationWithOffset * Quaternion.Inverse(_body.rotation);
+        q.ToAngleAxis(out float angle, out Vector3 axis);
+        if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
+        {
+            if (angle > 180.0f) { angle -= 360.0f; }
+            _body.angularVelocity = axis * (angle * Mathf.Deg2Rad * rotateSpeed);
+        }
     }
 }
