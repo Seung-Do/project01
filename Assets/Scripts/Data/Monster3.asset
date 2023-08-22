@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterType: 2
   Health: 100
-  Speed: 6
+  Speed: 3
   Damage: 10
   AttackDistance: 3
   ViewRange: 5
