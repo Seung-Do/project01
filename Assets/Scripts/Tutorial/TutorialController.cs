@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 public class TutorialController : MonoBehaviour
 {
     [SerializeField]
-    private List<TutorialBase> tutorials;
-    [SerializeField]
-    private string nextScene = "stage00";
+    private List<TutorialBase> tutorials; 
 
     private TutorialBase currentTutorial = null;
     private int currentIndex = -1;
 
     Transform playerTr;
-    public Transform handsTr;
+    [SerializeField]
+    private GameObject hands;
+    
 
 
     void Start()
@@ -57,13 +57,6 @@ public class TutorialController : MonoBehaviour
     {
         currentTutorial = null;
 
-        if (!nextScene.Equals(""))
-        {
-            SceneManager.LoadScene(nextScene);
-            playerTr.position = new Vector3(193f, 7.2f, 71.5f);
-            handsTr.position = playerTr.position;
-            //playerTr.position = new Vector3(22.5f, 25.6f, -2.5f);
-            //playerTr.rotation = Quaternion.Euler(0, 180f, 0);
-        }
+        GameManager.Instance.Stage1Load();
     }
 }

@@ -22,7 +22,7 @@ public class TutorialAttack : TutorialBase
 
     public override void Execute(TutorialController controller)
     {
-        if(damage.hitNumber == 5)
+        if(damage.hitNumber == 1)
             controller.SetNextTutorial();
     }
 

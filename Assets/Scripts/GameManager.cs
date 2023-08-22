@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit; 
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -10,7 +10,14 @@ public class GameManager : MonoBehaviour
     public testPlayer testPlayer;
     public PoolManager poolManager;
     public Transform playerTr;
-
+    public Transform handsTr;
+    [SerializeField]
+    private string firstScene = "stage00";
+    [SerializeField]
+    private string secondScene = "stage01";
+    [SerializeField] private Animator fadeAnim;
+    private Vector3 stage0position = new Vector3(193f, 7.2f, 71.5f);
+    private Vector3 stage1position = new Vector3(-32.5f, 15.1f, 22.5f);
     private void Awake()
     {
         if (Instance == null)
@@ -25,13 +32,61 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        FadeIn();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-   
+    private IEnumerator FadeScreen0()
+    {      
+        if (!firstScene.Equals(""))
+        {
+            FadeOut();
+            yield return new WaitForSeconds(1f);
+
+            SceneManager.LoadScene(firstScene);
+            playerTr.position = stage0position;
+            handsTr.position = playerTr.position + Vector3.up;
+            playerTr.rotation = Quaternion.Euler(0, 270f, 0);
+
+            yield return new WaitForSeconds(1.5f);
+            FadeIn();
+        }       
+    }
+    private IEnumerator FadeScreen1()
+    {
+        if (!firstScene.Equals(""))
+        {
+            FadeOut();
+            yield return new WaitForSeconds(1f);
+
+            SceneManager.LoadScene(secondScene);
+            playerTr.position = stage1position;
+            handsTr.position = playerTr.position + Vector3.up;
+            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
+
+            yield return new WaitForSeconds(1.5f);
+            FadeIn();
+        }
+    }
+    private void FadeOut()
+    {
+        fadeAnim.SetBool("fadein", false);
+    }
+    private void FadeIn()
+    {
+        fadeAnim.SetBool("fadein", true);
+    }
+
+    public void Stage0Load()
+    {
+        StartCoroutine(FadeScreen0());
+    }
+    public void Stage1Load()
+    {
+        StartCoroutine(FadeScreen1());
+    }
 }

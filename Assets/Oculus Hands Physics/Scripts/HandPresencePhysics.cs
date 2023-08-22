@@ -6,8 +6,8 @@ using UnityEngine;
 public class HandPresencePhysics : MonoBehaviour
 {
     [SerializeField] private GameObject followObject;
-    [SerializeField] private float followSpeed = 30f;
-    [SerializeField] private float rotateSpeed = 100f;
+    [SerializeField] private float followSpeed = 50f;
+    [SerializeField] private float rotateSpeed = 150f;
     [SerializeField] private Vector3 positionOffset;
     [SerializeField] private Vector3 rotationOffset;
     private Transform _followTarget;
@@ -24,10 +24,11 @@ public class HandPresencePhysics : MonoBehaviour
         _body.rotation = _followTarget.rotation;
     }
 
-    private void Update()
+    private void FixedUpdate()
      {
          PhysicsMove();
      }
+
     private void PhysicsMove()
     {
         // Position
