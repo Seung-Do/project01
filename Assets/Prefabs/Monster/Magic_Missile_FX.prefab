@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3113768638907592074}
   - component: {fileID: 8289231357643770660}
   - component: {fileID: 8290319533056121802}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Magic_Missile_FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

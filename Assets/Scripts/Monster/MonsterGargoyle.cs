@@ -11,9 +11,8 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     Rigidbody rb;
     Animator anim;
     CapsuleCollider coll;
-    public ParticleSystem lightning;
-    public MonsterGargoyleBullet bullet;
     public GameObject firePos;
+    public ParticleSystem MetoerCircle;
 
     public float hp;
     float speed;
@@ -62,6 +61,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         playerLayer = LayerMask.NameToLayer("PLAYER");
         enemyLayer = LayerMask.NameToLayer("ENEMY");
         StartCoroutine(Action());
+        StartCoroutine(CheckState());
         originColl = coll.center;
     }
     private void OnEnable()
@@ -85,7 +85,6 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
     void Update()
     {
-        StartCoroutine(CheckState());
         chaseTime += Time.deltaTime;
         chase();
         StopTrace();
@@ -95,72 +94,75 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     //몬스터의 상태를 정하는 코루틴
     IEnumerator CheckState()
     {
-        if (isDead)
-            yield break;
-        float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+        while (!isDead)
+        {
+            yield return wait;
 
-        if (hp < data.Health / 2 && !isFly)
-        {
-            attackDist = data.AttackDistance + 5;
-            viewRange = data.ViewRange + 5;
-            anim.SetTrigger("DoFly");
-            yield return new WaitForSeconds(1);
-        }
+            float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
 
-        //hp가 0이하가 되었을 때
-        if (hp <= 0)
-        {
-            state = State.DEAD;
-            isDead = true;
-        }
-        //시야에 플레이어가 들어오지 않았거나
-        //주변에 플레이어를 공격하는 몬스터가 없을 때
-        else if (viewRange >= dist)
-        {
-            //시야에 플레이어가 들어왔을 때
-            if (isTracePlayer())
+            if (hp < data.Health / 2 && !isFly)
             {
-                //플레이어가 보이면
-                if (ViewPlayer())
+                attackDist = data.AttackDistance + 5;
+                viewRange = data.ViewRange + 5;
+                anim.SetTrigger("DoFly");
+                isFly = true;
+                yield return new WaitForSeconds(1);
+            }
+
+            //hp가 0이하가 되었을 때
+            if (hp <= 0)
+            {
+                state = State.DEAD;
+                isDead = true;
+            }
+            //시야에 플레이어가 들어오지 않았거나
+            //주변에 플레이어를 공격하는 몬스터가 없을 때
+            else if (viewRange >= dist)
+            {
+                //시야에 플레이어가 들어왔을 때
+                if (isTracePlayer())
                 {
-                    //플레이어가 공격거리 안에 들어왔을 때
-                    if (attackDist >= dist)
+                    //플레이어가 보이면
+                    if (ViewPlayer())
                     {
-                        if (3 >= dist)
+                        //플레이어가 공격거리 안에 들어왔을 때
+                        if (attackDist >= dist)
                         {
-                            state = State.ATTACK;
+                            if (3 >= dist)
+                            {
+                                state = State.ATTACK;
+                            }
+                            else
+                            {
+                                state = State.CAST;
+                                yield return new WaitForSeconds(6f);
+                            }
                         }
                         else
-                        {
-                            state = State.CAST;
-                            yield return new WaitForSeconds(6f);
-                        }
+                            state = State.TRACE;
                     }
+                    //플레이어가 안보이면
                     else
-                        state = State.TRACE;
+                        state = State.IDLE;
+
                 }
-                //플레이어가 안보이면
                 else
                     state = State.IDLE;
 
             }
+            //주변 몬스터가 플레이어를 발견했을 때
+            else if (isFindPlayer)
+            {
+                state = State.TRACE;
+            }
+            //데미지 받았을 때
+            else if (isHit)
+            {
+                state = State.HIT;
+            }
             else
                 state = State.IDLE;
         }
-        //주변 몬스터가 플레이어를 발견했을 때
-        else if (isFindPlayer)
-        {
-            state = State.TRACE;
-        }
-        //데미지 받았을 때
-        else if (isHit)
-        {
-            state = State.HIT;
-        }
-        else
-            state = State.IDLE;
-
-        yield return wait;
     }
 
     //상태에 따른 행동을 실행하는 코루틴
@@ -187,6 +189,8 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
                     AttackLook();
                     break;
                 case State.ATTACK:
+                    if (isFly)
+                        StartCoroutine(Back());
                     isFindPlayer = false;
                     chaseTime = 0f;
                     isChase = true;
@@ -204,6 +208,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
             }
         }
     }
+
 
     //시야각에 플레이어가 있나 없는 체크하는 메서드
     bool isTracePlayer()
@@ -398,7 +403,24 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
             yield return Time.deltaTime;
         }
     }
+    IEnumerator Back()
+    {
+        float dist = Vector3.Distance(transform.position, GameManager.Instance.testPlayer.transform.position);
 
+        if (dist < 5)
+        {
+            if (move <= -1)
+            {
+                move = -1;
+                yield break;
+            }
+            while (move >= -1)
+            {
+                move -= Time.deltaTime;
+                yield return Time.deltaTime;
+            }
+        }
+    }
     public void Fly()
     {
         anim.SetBool("Ground", false);
@@ -415,22 +437,23 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         coll.center = new Vector3(originColl.z, originColl.y + 1, originColl.x);
         isFly = true;
     }
-    public void Cast1()
+    public IEnumerator Cast1()
     {
-        //lightning.transform.localScale = Vector3.zero;
         GameObject light = GameManager.Instance.poolManager.Get(2);
         light.transform.position = firePos.transform.position;
-        lightning.Play();
-        lightningUp();
-    }
-    void lightningUp()
-    {
-        if(lightning.transform.localScale.z < 0.5f)
-            lightning.transform.localScale *= Time.deltaTime;
-    }
-    public void Shoot()
-    {
+        yield return new WaitForSeconds(1.3f);
+        MonsterGargoyleBullet bullet = light.GetComponent<MonsterGargoyleBullet>();
         bullet.lookPlayer();
         bullet.Throw = true;
+    }
+    public IEnumerator Cast2()
+    {
+        MetoerCircle.Play();
+        yield return new WaitForSeconds(1f);
+    }
+    public void meteor()
+    {
+        GameObject meteor = GameManager.Instance.poolManager.Get(3);
+        meteor.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x + Random.Range(-1f, 1f), GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z + Random.Range(-1f, 1f));
     }
 }
