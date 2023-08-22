@@ -1327,7 +1327,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b2aa144de3ab19043a53574bc160d83b, type: 2}
+  shield: {fileID: 0}
   isFindPlayer: 0
+  TraceTime: 0
   viewRange: 0
   viewAngle: 120
   state: 0

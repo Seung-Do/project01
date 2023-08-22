@@ -1919,7 +1919,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ce54b658dcd154945a300a5a6b6e9e0b, type: 2}
+  shield: {fileID: 0}
   isFindPlayer: 0
+  TraceTime: 0
   viewRange: 0
   viewAngle: 120
   state: 0

@@ -1992,8 +1992,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 04ad4e10b130da84da4523c73b82b63b, type: 2}
+  shield: {fileID: 0}
   isFindPlayer: 0
-  attackDist: 2.5
+  TraceTime: 0
   viewRange: 7
   viewAngle: 120
   state: 0

@@ -14,6 +14,8 @@ public class Monster : MonoBehaviour, IDamage
     float hp;
     float speed;
     float damage;
+    float move;
+    float moveSpeed;
 
     bool isHit;
     bool isChase;
@@ -45,7 +47,7 @@ public class Monster : MonoBehaviour, IDamage
     }
     public State state = State.IDLE;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -56,6 +58,7 @@ public class Monster : MonoBehaviour, IDamage
     }
     private void OnEnable()
     {
+        move = 0;
         isDead = false;
         isHit = false;
         isChase = false;
@@ -66,6 +69,7 @@ public class Monster : MonoBehaviour, IDamage
         viewRange = data.ViewRange;
         TraceTime = 0;
         Type = data.MonsterType;
+        anim.SetBool("Dead", false);
     }
 
     void Update()
@@ -74,6 +78,7 @@ public class Monster : MonoBehaviour, IDamage
         chaseTime += Time.deltaTime;
         chase();
         StopTrace();
+        moveSpeed = move * speed;
     }
 
     //몬스터의 상태를 정하는 코루틴
@@ -120,7 +125,7 @@ public class Monster : MonoBehaviour, IDamage
         //데미지 받았을 때
         else if (isHit)
         {
-            state = State.DEAD;
+            state = State.HIT;
         }
         else
             state = State.IDLE;
@@ -137,28 +142,25 @@ public class Monster : MonoBehaviour, IDamage
             switch (state)
             {
                 case State.IDLE:
-                    anim.SetBool("Run", false);
-                    anim.SetTrigger("Idle");
+                    StartCoroutine(Idle());
+                    anim.SetFloat("Move", move);
                     break;
                 case State.TRACE:
-                    anim.SetBool("Run", true);
+                    StartCoroutine(Move());
+                    anim.SetFloat("Move", move);
                     switch (Type)
                     {
                         case 4:
                             shield.ShieldDash();
-                            StartCoroutine(TracePlayer());
-                            break;
-                        default:
-                            StartCoroutine(TracePlayer());
                             break;
                     }
+                    StartCoroutine(TracePlayer());
                     FindPlayer();
                     break;
                 case State.ATTACK:
                     isFindPlayer = false;
                     chaseTime = 0f;
                     isChase = true;
-                    anim.SetBool("Run", false);
                     rb.velocity = Vector3.zero;
                     AttackLook();
                     AttackAnim();
@@ -227,7 +229,7 @@ public class Monster : MonoBehaviour, IDamage
             moveDirection.Normalize(); // 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-            rb.velocity = moveDirection * speed;
+            rb.velocity = moveDirection * moveSpeed;
 
             yield return Time.deltaTime;
         }
@@ -276,7 +278,7 @@ public class Monster : MonoBehaviour, IDamage
                 moveDirection.Normalize(); // 방향을 정규화
                 Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-                rb.velocity = moveDirection * speed;
+                rb.velocity = moveDirection * moveSpeed;
             }
             else
                 isChase = false;
@@ -317,7 +319,7 @@ public class Monster : MonoBehaviour, IDamage
         }
         else
         {
-            randomAttackAnim();   
+            randomAttackAnim();
         }
     }
 
@@ -335,7 +337,6 @@ public class Monster : MonoBehaviour, IDamage
 
     void randomAttackAnim()
     {
-        anim.SetTrigger("Idle");
         int ran = Random.Range(0, 4);
 
         switch (ran)
@@ -353,5 +354,25 @@ public class Monster : MonoBehaviour, IDamage
                 anim.SetTrigger("Attack4");
                 break;
         }
+    }
+    IEnumerator Move()
+    {
+        while (move <= 1)
+        {
+            move += Time.deltaTime;
+            yield return Time.deltaTime;
+        }
+        /*move += Time.deltaTime;
+        move = Mathf.Clamp(move, 0, 1);*/
+    }
+    IEnumerator Idle()
+    {
+        while (move >= 0)
+        {
+            move -= Time.deltaTime;
+            yield return Time.deltaTime;
+        }
+        /*move -= Time.deltaTime;
+        move = Mathf.Clamp(move, 0, 1);*/
     }
 }
