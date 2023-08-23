@@ -57,6 +57,6 @@ public class TutorialController : MonoBehaviour
     {
         currentTutorial = null;
 
-        GameManager.Instance.Stage1Load();
+        GameManager.Instance.Stage0Load();
     }
 }
