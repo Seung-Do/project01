@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Boss_Elemental : MonoBehaviour
 {
-    public MonsterData data;
+    public BossData data;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
-
-    public MonsterShield shield;
+    public GameObject pos;
 
     float hp;
     float speed;
@@ -24,14 +23,15 @@ public class Boss_Elemental : MonoBehaviour
     int Type;
 
     float attackTime;
-    float attackMaxTime = 3f;
+    float attackMaxTime = 1f;
     float mageTime;
-    float mageMaxTime = 7f;
+    float mageMaxTime = 4.5f;
 
-    bool canAttack;
-    bool canMage;
+    public bool canAttack;
+    public bool canMage;
     bool canSpell;
 
+    bool cool;
     bool isChanged;
     public enum State
     {
@@ -51,7 +51,11 @@ public class Boss_Elemental : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.5f);
+    }
+    private void Start()
+    {
         StartCoroutine(Action());
+        StartCoroutine(CheckState());
     }
     private void OnEnable()
     {
@@ -65,22 +69,23 @@ public class Boss_Elemental : MonoBehaviour
         speed = data.Speed;
         damage = data.Damage;
         attackDist = data.AttackDistance;
-        Type = data.MonsterType;
         anim.SetBool("Dead", false);
     }
 
     void Update()
     {
-        StartCoroutine(CheckState());
         moveSpeed = move * speed;
-        attackTime += Time.deltaTime;
-        mageTime += Time.deltaTime;
 
         AttackLook();
+    }
+    private void FixedUpdate()
+    {
+        attackTime += Time.fixedDeltaTime;
+        mageTime += Time.fixedDeltaTime;
 
         if (attackTime > attackMaxTime)
             canAttack = true;
-        if(mageTime > mageMaxTime)
+        if (mageTime > mageMaxTime)
             canMage = true;
     }
 
@@ -89,16 +94,26 @@ public class Boss_Elemental : MonoBehaviour
     {
         while(!isDead)
         {
-            float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
-
             //사망
             if (hp <= 0)
             {
                 state = State.DEAD;
                 isDead = true;
             }
+
+            if (cool)
+            {
+                state = State.IDLE;
+                print("쿨다운 시작");
+                yield return new WaitForSeconds(0.5f);
+                cool = false;
+                print("쿨다운 종료");
+            }
+
+            float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+
             //체력 절반 이하가 되면 변신
-            else if (hp < data.Health / 2 && !isChanged)
+            if (hp < data.Health / 2 && !isChanged)
             {
                 state = State.CHANGE;
                 isChanged = true;
@@ -109,21 +124,22 @@ public class Boss_Elemental : MonoBehaviour
                 || ((hp / data.Health * 100) <= 30 && (hp / data.Health * 100) >= 20) && canSpell)
             {
                 state = State.SPELL;
-            }
+            } 
             //원거리 공격
-            else if (dist > 5 && canAttack)
-            {
-                state = State.ATTACK;
-            }
-            //근거리 공격
-            else if (dist < 5 && canMage)
+            else if (dist > 5 && canMage)
             {
                 state = State.MAGE;
+                yield return new WaitForSeconds(5);
             }
             //접근
-            else if (dist < 5)
+            else if (dist > attackDist && !canMage)
             {
                 state = State.TRACE;
+            }
+            //근거리 공격
+            else if (dist <= attackDist && canAttack)
+            {
+                state = State.ATTACK;
             }
             else
                 state = State.IDLE;
@@ -150,24 +166,35 @@ public class Boss_Elemental : MonoBehaviour
                     StartCoroutine(TracePlayer());
                     break;
                 case State.ATTACK:
+                    move = 0;
                     rb.velocity = Vector3.zero;
                     randomAttackAnim();
+                    attackTime = 0f;
+                    canAttack = false;
                     break;
                 case State.MAGE:
+                    move = 0;
                     rb.velocity = Vector3.zero;
-                    anim.SetTrigger("Mage");
+                    anim.SetTrigger("Mage"); 
+                    yield return new WaitForSeconds(5);
+                    cooldown();
+                    useMage();
                     break;
                 case State.CHANGE:
+                    move = 0;
                     rb.velocity = Vector3.zero;
                     anim.SetTrigger("Roar");
                     break;
                 case State.HIT:
+                    move = 0;
                     anim.SetTrigger("Hit");
                     break;
                 case State.DEAD:
+                    move = 0;
                     anim.SetBool("Dead", true);
                     break;
                 case State.SPELL:
+                    move = 0;
                     anim.SetTrigger("Cast");
                     anim.SetBool("Spelling", true);
                     break;
@@ -196,7 +223,7 @@ public class Boss_Elemental : MonoBehaviour
     {
         float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
 
-        if (dist < attackDist + 0.5f)
+        if (dist < attackDist - 0.5f)
         {
             //플레이어가 데미지 받는 메서드
             print("플레이어 데미지" + damage);
@@ -234,6 +261,11 @@ public class Boss_Elemental : MonoBehaviour
     }
     IEnumerator Move()
     {
+        if (move >= 1)
+        {
+            move = 1;
+            yield break;
+        }
         while (move <= 1)
         {
             move += Time.deltaTime;
@@ -242,6 +274,11 @@ public class Boss_Elemental : MonoBehaviour
     }
     IEnumerator Idle()
     {
+        if (move <= 0)
+        {
+            move = 0;
+            yield break;
+        }
         while (move >= 0)
         {
             move -= Time.deltaTime;
@@ -254,5 +291,45 @@ public class Boss_Elemental : MonoBehaviour
         yield return new WaitForSeconds(10f);
         anim.SetBool("Spelling", false);
         canSpell = false;
+    }
+
+    public void cooldown()
+    {
+        cool = true;
+    }
+    public void useMage()
+    {
+        mageTime = 0f;
+        canMage = false;
+        anim.SetBool("Spelling", false);
+    }
+    public void useAttack()
+    {
+        canAttack = false;
+    }
+    public void Skill()
+    {
+        StartCoroutine(FireBall(10));
+        //StartCoroutine(TimeCast());
+    }
+
+    IEnumerator FireBall(int num)
+    {
+        GameObject skill = GameManager.Instance.poolManager.Get(num);
+        skill.transform.position = pos.transform.position;
+        anim.SetBool("Spelling", true);
+        BossBullet bullet = skill.GetComponent<BossBullet>();
+        yield return new WaitForSeconds(2.5f);
+        bullet.lookPlayer();
+        bullet.Throw = true;
+    }
+    IEnumerator TimeCast()
+    {
+        GameObject skill = GameManager.Instance.poolManager.Get(8);
+        skill.transform.position = transform.position;
+        anim.SetBool("Spelling", true);
+        yield return new WaitForSeconds(1.5f);
+        GameObject Time = GameManager.Instance.poolManager.Get(9);
+        Time.transform.position = GameManager.Instance.testPlayer.transform.position;
     }
 }

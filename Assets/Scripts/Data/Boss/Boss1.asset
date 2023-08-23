@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossType: 0
   Health: 2000
-  Speed: 1
+  Speed: 2
   Damage: 20
-  AttackDistance: 3
+  AttackDistance: 4
   Sound: 0

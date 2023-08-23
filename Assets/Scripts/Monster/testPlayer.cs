@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testPlayer : MonoBehaviour
+public class testPlayer : MonoBehaviour, IDamage
 {
+    public void getDamage()
+    {
+        throw new System.NotImplementedException();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

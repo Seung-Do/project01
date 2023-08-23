@@ -13,7 +13,7 @@ public class MonsterGuardianBullet : MonoBehaviour
     void Update()
     {
         Vector3 dir = GameManager.Instance.testPlayer.transform.position - transform.position;
-        transform.localRotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.LookRotation(dir);
         transform.Translate(Vector3.forward * 1f);
     }
 
