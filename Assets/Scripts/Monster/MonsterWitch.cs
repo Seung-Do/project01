@@ -30,7 +30,7 @@ public class MonsterWitch : MonoBehaviour
 
     public void fireballAttack()
     {
-        GameObject fireball = GameManager.Instance.poolManager.Get(0);
+        GameObject fireball = GameManager.Instance.poolManager[0].Get(0);
         //GameObject fireball = Instantiate(fireBall);
         fireball.transform.position = fire.transform.position;
         fireball.transform.rotation = fire.transform.rotation;

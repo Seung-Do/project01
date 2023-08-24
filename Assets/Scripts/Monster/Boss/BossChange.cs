@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BossChange : MonoBehaviour
 {
-    public Material mat;
+    public Material[] mat;
+    public Boss_Elemental boss;
+    int num;
 
-    void Start()
+    private void Start()
     {
+        num = boss.Type;
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = mat[num];
     }
-
     void Update()
     {
+        num = boss.Type;
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = mat;
+            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = mat[num];
         }
     }
 }

@@ -5,27 +5,29 @@ using UnityEngine;
 
 public class Boss_Elemental : MonoBehaviour
 {
-    public BossData data;
+    public BossData[] data;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
     public GameObject pos;
+    public Boss_Elemental_Skill bossSkill;
 
-    float hp;
+    public float hp;
     float speed;
     float damage;
-    float move;
-    float moveSpeed;
+    public float move;
+    public float moveSpeed;
     bool isDead;
 
     float attackDist;
 
-    int Type;
+    public int Type;
+    float dist;
 
     float attackTime;
-    float attackMaxTime = 1f;
+    float attackMaxTime;
     float mageTime;
-    float mageMaxTime = 4.5f;
+    float mageMaxTime;
 
     public bool canAttack;
     public bool canMage;
@@ -33,6 +35,8 @@ public class Boss_Elemental : MonoBehaviour
 
     bool cool;
     bool isChanged;
+
+    public float MaxHp;
     public enum State
     {
         IDLE,
@@ -51,6 +55,9 @@ public class Boss_Elemental : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.5f);
+
+        //Type = Random.Range(0, 5);
+        Type = 3;
     }
     private void Start()
     {
@@ -65,15 +72,18 @@ public class Boss_Elemental : MonoBehaviour
         isChanged = false;
         move = 0;
         isDead = false;
-        hp = data.Health;
-        speed = data.Speed;
-        damage = data.Damage;
-        attackDist = data.AttackDistance;
+        hp = MaxHp;
+        speed = data[Type].Speed;
+        damage = data[Type].Damage;
+        attackDist = data[Type].AttackDistance;
         anim.SetBool("Dead", false);
+        attackMaxTime = data[Type].AttackTime;
+        mageMaxTime = data[Type].CassTime;
     }
 
     void Update()
     {
+        dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
         moveSpeed = move * speed;
 
         AttackLook();
@@ -92,7 +102,7 @@ public class Boss_Elemental : MonoBehaviour
     //몬스터의 상태를 정하는 코루틴
     IEnumerator CheckState()
     {
-        while(!isDead)
+        while (!isDead)
         {
             //사망
             if (hp <= 0)
@@ -100,31 +110,32 @@ public class Boss_Elemental : MonoBehaviour
                 state = State.DEAD;
                 isDead = true;
             }
-
+            //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
             if (cool)
             {
                 state = State.IDLE;
-                print("쿨다운 시작");
                 yield return new WaitForSeconds(0.5f);
                 cool = false;
-                print("쿨다운 종료");
             }
 
-            float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
-
             //체력 절반 이하가 되면 변신
-            if (hp < data.Health / 2 && !isChanged)
+            if (hp < MaxHp / 2 && !isChanged)
             {
                 state = State.CHANGE;
                 isChanged = true;
                 canSpell = true;
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
-            else if(((hp / data.Health * 100) <= 70 && (hp / data.Health * 100) >= 60 && canSpell)
-                || ((hp / data.Health * 100) <= 30 && (hp / data.Health * 100) >= 20) && canSpell)
+            else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell)
+                || ((hp / MaxHp * 100) <= 30 && (hp / MaxHp * 100) >= 20) && canSpell)
             {
                 state = State.SPELL;
-            } 
+                if(Type == 3 || Type == 4)
+                {
+                    yield return new WaitForSeconds(16f);
+                }
+                yield return new WaitForSeconds(22f);
+            }
             //원거리 공격
             else if (dist > 5 && canMage)
             {
@@ -175,7 +186,7 @@ public class Boss_Elemental : MonoBehaviour
                 case State.MAGE:
                     move = 0;
                     rb.velocity = Vector3.zero;
-                    anim.SetTrigger("Mage"); 
+                    anim.SetTrigger("Mage");
                     yield return new WaitForSeconds(5);
                     cooldown();
                     useMage();
@@ -195,8 +206,11 @@ public class Boss_Elemental : MonoBehaviour
                     break;
                 case State.SPELL:
                     move = 0;
-                    anim.SetTrigger("Cast");
-                    anim.SetBool("Spelling", true);
+                    if (canSpell)
+                    {
+                        canSpell = false;
+                        anim.SetTrigger("Cast");
+                    }
                     break;
             }
         }
@@ -230,6 +244,7 @@ public class Boss_Elemental : MonoBehaviour
         }
     }
 
+    //시점을 플레이어한테 고정
     void AttackLook()
     {
         Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
@@ -242,9 +257,15 @@ public class Boss_Elemental : MonoBehaviour
     //IDamage인터페이스 상속 메서드
     public void getDamage()
     {
+        state = State.HIT;
+        //피격되면 속도 감소
+        speed -= 0.5f;
+        //속도 회복 코루틴
+        StartCoroutine(RecoverySpeed());
         //데미지 받는 내용 작성
     }
 
+    //랜덤하게 공격 모션 재생
     void randomAttackAnim()
     {
         int ran = Random.Range(0, 2);
@@ -259,6 +280,7 @@ public class Boss_Elemental : MonoBehaviour
                 break;
         }
     }
+    //이동시 속도 증가
     IEnumerator Move()
     {
         if (move >= 1)
@@ -272,6 +294,7 @@ public class Boss_Elemental : MonoBehaviour
             yield return Time.deltaTime;
         }
     }
+    //Idle 시 속도 감소
     IEnumerator Idle()
     {
         if (move <= 0)
@@ -288,11 +311,21 @@ public class Boss_Elemental : MonoBehaviour
 
     public IEnumerator casting()
     {
+        if (state == State.SPELL)
+        {
+            yield return new WaitForSeconds(10f);
+            anim.SetBool("Spelling", false);
+            canSpell = false;
+        }
+            
+    }
+    public IEnumerator Ready()
+    {
         yield return new WaitForSeconds(10f);
-        anim.SetBool("Spelling", false);
-        canSpell = false;
+        anim.SetBool("Spelling", true);
     }
 
+    //애니메이션 이벤트로 호출
     public void cooldown()
     {
         cool = true;
@@ -307,29 +340,86 @@ public class Boss_Elemental : MonoBehaviour
     {
         canAttack = false;
     }
+    //애니메이션 이벤트에서 호출
+    //각 타입에 맞는 스킬 시전
     public void Skill()
     {
-        StartCoroutine(FireBall(10));
-        //StartCoroutine(TimeCast());
+        int num = 0;
+
+        switch (Type)
+        {
+            case 0:
+                num = 0;
+                break;
+            case 1:
+                num = 1;
+                break;
+            case 2:
+                num = 2;
+                break;
+            case 3:
+                num = 3;
+                break;
+            case 4:
+                num = Random.Range(4, 6);
+                if (num == 4)
+                    StartCoroutine(TimeCast());
+                else
+                    num = 5;
+                break;
+        }
+
+        StartCoroutine(skill(num));
     }
 
-    IEnumerator FireBall(int num)
+    //스킬 시전 코루틴
+    IEnumerator skill(int num)
     {
-        GameObject skill = GameManager.Instance.poolManager.Get(num);
+        if (state == State.SPELL)
+            yield break;
+
+        GameObject skill = GameManager.Instance.poolManager[1].Get(num);
         skill.transform.position = pos.transform.position;
-        anim.SetBool("Spelling", true);
+        anim.SetBool("NormalSpell", true);
+
+        //땅, 마법 타입은 BossBullet스크립트를 가지고있지않아 Break
+        if (num <= 3)
+            yield break;
+
         BossBullet bullet = skill.GetComponent<BossBullet>();
         yield return new WaitForSeconds(2.5f);
         bullet.lookPlayer();
         bullet.Throw = true;
     }
+    //마법 타입만 사용
     IEnumerator TimeCast()
     {
-        GameObject skill = GameManager.Instance.poolManager.Get(8);
-        skill.transform.position = transform.position;
-        anim.SetBool("Spelling", true);
         yield return new WaitForSeconds(1.5f);
-        GameObject Time = GameManager.Instance.poolManager.Get(9);
+        GameObject Time = GameManager.Instance.poolManager[1].Get(5);
         Time.transform.position = GameManager.Instance.testPlayer.transform.position;
+    }
+
+    //속도 회복 메서드
+    IEnumerator RecoverySpeed()
+    {
+        yield return new WaitForSeconds(1f);
+        while (speed <= data[Type].Speed)
+        {
+            speed += Time.deltaTime * 0.5f;
+            yield return Time.deltaTime;
+        }
+        if (speed >= data[Type].Speed)
+            speed = data[Type].Speed;
+    }
+
+    public void useSkill()
+    {
+        if(state == State.SPELL)
+            bossSkill.TypeSkill(Type);
+    }
+    public IEnumerator normalCasting()
+    {
+        anim.SetBool("NormalSpell", false);
+        yield return null;
     }
 }

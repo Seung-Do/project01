@@ -25,7 +25,7 @@ public class MonsterGuardian : MonoBehaviour
 
     public void fireballAttack()
     {
-        GameObject fireball = GameManager.Instance.poolManager.Get(1);
+        GameObject fireball = GameManager.Instance.poolManager[0].Get(1);
         //GameObject fireball = Instantiate(fireBall);
         fireball.transform.position = firePos.transform.position;
         fireball.transform.rotation = firePos.transform.rotation;

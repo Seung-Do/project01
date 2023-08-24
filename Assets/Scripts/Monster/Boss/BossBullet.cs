@@ -8,7 +8,7 @@ public class BossBullet : MonoBehaviour
     public bool Throw;
     private void Start()
     {
-        StartCoroutine(Off());
+        StartCoroutine(Off(8));
     }
     private void OnEnable()
     {
@@ -21,16 +21,19 @@ public class BossBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        //gameObject.SetActive(false);
+        StartCoroutine(Off(1));
+        IDamage damage = other.GetComponent<IDamage>();
+        if(damage != null)
+            damage.getDamage();
     }
     public void lookPlayer()
     {
         transform.LookAt(GameManager.Instance.testPlayer.transform.position);
     }
-    IEnumerator Off()
+    IEnumerator Off(float num)
     {
         //2초후 총알 비활성화
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(num);
         gameObject.SetActive(false);
     }
 }

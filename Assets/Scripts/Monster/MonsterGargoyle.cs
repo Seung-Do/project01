@@ -439,7 +439,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     }
     public IEnumerator Cast1()
     {
-        GameObject light = GameManager.Instance.poolManager.Get(2);
+        GameObject light = GameManager.Instance.poolManager[0].Get(2);
         light.transform.position = firePos.transform.position;
         yield return new WaitForSeconds(1.3f);
         MonsterGargoyleBullet bullet = light.GetComponent<MonsterGargoyleBullet>();
@@ -453,7 +453,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     }
     public void meteor()
     {
-        GameObject meteor = GameManager.Instance.poolManager.Get(3);
+        GameObject meteor = GameManager.Instance.poolManager[0].Get(3);
         meteor.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x + Random.Range(-1f, 1f), GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z + Random.Range(-1f, 1f));
     }
 }
