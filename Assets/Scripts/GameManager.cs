@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string secondScene = "stage01";
     [SerializeField] private Animator fadeAnim;
-    private Vector3 stage0position = new Vector3(193f, 7.2f, 71.5f);
-    private Vector3 stage1position = new Vector3(-32.5f, 15.1f, 22.5f);
+    private Vector3 stage0Position = new Vector3(193f, 7.2f, 71.5f);
+    private Vector3 stage1Position = new Vector3(-32.5f, 15.1f, 22.5f);
+    private Vector3 bossZone0 = new Vector3(-20f, 20f, 235f);
+    private Vector3 boss0Position = new Vector3(-20f, 20f, 245f);
     private void Awake()
     {
         if (Instance == null)
@@ -48,8 +50,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             SceneManager.LoadScene(firstScene);
-            playerTr.position = stage0position;
-            handsTr.position = playerTr.position + Vector3.up;
+            playerTr.position = stage0Position;
+            handsTr.position = stage0Position + Vector3.up;
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
 
             yield return new WaitForSeconds(1.5f);
@@ -64,13 +66,25 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             SceneManager.LoadScene(secondScene);
-            playerTr.position = stage1position;
-            handsTr.position = playerTr.position + Vector3.up;
+            playerTr.position = stage1Position;
+            handsTr.position = stage1Position + Vector3.up;
             playerTr.rotation = Quaternion.Euler(0, 180f, 0);
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
         }
+    }
+    private IEnumerator FadeScreenBoss0()
+    {
+        FadeOut();
+        yield return new WaitForSeconds(1f);
+
+        playerTr.position = bossZone0;
+        handsTr.position = bossZone0 + Vector3.up;
+        playerTr.rotation = Quaternion.Euler(0, 0, 0);
+
+        yield return new WaitForSeconds(2f);
+        FadeIn();
     }
     private void FadeOut()
     {
@@ -88,5 +102,9 @@ public class GameManager : MonoBehaviour
     public void Stage1Load()
     {
         StartCoroutine(FadeScreen1());
+    }
+    public void Boss0Load()
+    {
+        StartCoroutine(FadeScreenBoss0());
     }
 }

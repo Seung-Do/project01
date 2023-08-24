@@ -75,7 +75,7 @@ public class ControllManager : MonoBehaviour
         else if(rec == "2")
             index = 2;
 
-        Vector3 newPosition = leftControllerTr.position + Camera.main.transform.forward * 0.3f;
+        Vector3 newPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f + Vector3.down * 0.3f;
         GameObject spell = Instantiate(selectedSpell, newPosition, Camera.main.transform.rotation);
 
         /*if (isOpen)
