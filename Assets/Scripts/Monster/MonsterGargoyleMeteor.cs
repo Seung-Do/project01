@@ -28,7 +28,7 @@ public class MonsterGargoyleMeteor : MonoBehaviour
 
             if(damage != null)
             {
-                damage.getDamage();
+                damage.getDamage(20);
             }
         }
     }

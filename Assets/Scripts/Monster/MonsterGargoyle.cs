@@ -365,7 +365,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     }
 
     //IDamage인터페이스 상속 메서드
-    public void getDamage()
+    public void getDamage(int damage)
     {
         isHit = true;
         //데미지 받는 내용 작성

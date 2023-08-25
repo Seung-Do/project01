@@ -26,6 +26,7 @@ public class ControllManager : MonoBehaviour
     public GameObject selectedSpell;
     public GameObject[] magicPrefabs;
     public GameObject[] bookSpell;
+    public GameObject[] allSpells;
     public int index;
 
     //public TMP_Text text;
@@ -69,11 +70,20 @@ public class ControllManager : MonoBehaviour
     public void IndexChange(string rec)
     {
         if (rec == "0")
+        {
             index = 0;
-        else if(rec == "1")
+            //SelectSpell(0);
+        }
+        else if (rec == "1")
+        {
             index = 1;
-        else if(rec == "2")
+            //SelectSpell(1);
+        }
+        else if (rec == "2")
+        {
             index = 2;
+            //SelectSpell(2);
+        }
 
         Vector3 newPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f + Vector3.down * 0.3f;
         GameObject spell = Instantiate(selectedSpell, newPosition, Camera.main.transform.rotation);
@@ -124,7 +134,7 @@ public class ControllManager : MonoBehaviour
             else if (index == 1)
             {
                 Vector3 playerDirection = Camera.main.transform.forward;
-                playerDirection.y = 0f;
+                //playerDirection.y = 0f;
                 spell.Direction = playerDirection;
                 spell.SpellStart.transform.position = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 StartCoroutine(LightningSpell());
@@ -132,10 +142,10 @@ public class ControllManager : MonoBehaviour
             }
             else if (index == 2)
             {
-                
+
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
-                Quaternion rotationNoY = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
-                GameObject magic = Instantiate(magicPrefabs[index - 1], newPosition, rotationNoY);
+                //Quaternion rotationNoY = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
+                GameObject magic = Instantiate(magicPrefabs[index - 1], newPosition, Camera.main.transform.rotation);
                 Destroy(magic, 1.5f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
 
@@ -189,11 +199,11 @@ public class ControllManager : MonoBehaviour
         IsPosible = true;
     }
 
-    void SelectSpell(int index)
+    private void SelectSpell(int index)
     {
         for (int i = 0; i < 3; i++)
         {
-            bookSpell[i].SetActive(i == index);
+            allSpells[i].SetActive(i == index);
         }
     }
     //3D 제스쳐 인식

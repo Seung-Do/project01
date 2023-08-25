@@ -10,7 +10,7 @@ public class SelectedSpell : MonoBehaviour
     private float fadeSpeed = 1.5f;
     void Awake()
     {
-        controllManager = GameObject.FindGameObjectWithTag("Player").GetComponent<ControllManager>();
+        controllManager = GameObject.FindGameObjectWithTag("PLAYER").GetComponent<ControllManager>();
     }
 
     // Update is called once per frame
@@ -21,11 +21,11 @@ public class SelectedSpell : MonoBehaviour
 
     private void OnEnable()
     {
-        spell[controllManager.index].SetActive(true);
+        spell[controllManager.index].SetActive(true);      
         particle = GetComponentInChildren<ParticleSystem>();
-        StartCoroutine(FadeOut());
+        StartCoroutine(SpellFadeOut());
     }
-    IEnumerator FadeOut()
+    public IEnumerator SpellFadeOut()
     {
         yield return new WaitForSeconds(0.5f);
         var mainModule = particle.main;

@@ -22,11 +22,10 @@ public class IceDamage : MonoBehaviour
         //Debug.Log(transform.position.ToString());
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("MONSTER"))
+            if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
-
-                Animator animator = collider.GetComponent<Animator>();
-                collider.GetComponent<MonsterDamage>().hitNumber++;
+                Animator animator = collider.GetComponent<Animator>();            
+                GameManager.Instance.hitNumber++;
                 StartCoroutine(AnimatorSlow(animator));
             }
         }

@@ -28,7 +28,7 @@ public class BossShockWave : MonoBehaviour
 
             if (damage != null)
             {
-                damage.getDamage();
+                damage.getDamage(20);
             }
         }
     }

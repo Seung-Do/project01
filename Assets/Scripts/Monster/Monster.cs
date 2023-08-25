@@ -14,7 +14,9 @@ public class Monster : MonoBehaviour, IDamage
     float hp;
     float speed;
     float damage;
+    [SerializeField]
     float move;
+    [SerializeField]
     float moveSpeed;
 
     bool isHit;
@@ -30,10 +32,11 @@ public class Monster : MonoBehaviour, IDamage
     public float TraceTime = 0f;
     float TraceMaxTime = 5f;
 
+    [SerializeField]
     float attackDist;
 
     int Type;
-
+    [SerializeField]
     public float viewRange;
     [Range(0, 360)]
     public float viewAngle = 120f;
@@ -106,7 +109,9 @@ public class Monster : MonoBehaviour, IDamage
                 }
                 //플레이어가 안보이면
                 else
+                {
                     state = State.IDLE;
+                }
 
             }
             else
@@ -183,7 +188,7 @@ public class Monster : MonoBehaviour, IDamage
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange, 1 << playerLayer);
 
         //설정된 반경안에 플레이어가 탐지된다면
-        if (colls.Length == 1)
+        if (colls.Length >= 1)
         {
             Vector3 dir = (GameManager.Instance.testPlayer.transform.position - transform.position).normalized;
             //적의 시야각에 플레이어가 존재하는지 판단
@@ -214,6 +219,7 @@ public class Monster : MonoBehaviour, IDamage
         //플레이어를 향해 레이캐스트
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
         {
+            Debug.Log(hit.collider.gameObject.name);
             //찾으면 true 못찾으면 false반환
             Find = hit.collider.CompareTag("PLAYER");
         }
@@ -324,10 +330,11 @@ public class Monster : MonoBehaviour, IDamage
     }
 
     //IDamage인터페이스 상속 메서드
-    public void getDamage()
+    public void getDamage(float damage)
     {
         isHit = true;
         //데미지 받는 내용 작성
+        hp -= hp - damage;
     }
     //애니메이션이벤트에서 hit애니메이션 끝날때 호출
     public void Hit()
@@ -357,22 +364,34 @@ public class Monster : MonoBehaviour, IDamage
     }
     IEnumerator Move()
     {
+        if (move >= 1)
+        {
+            move = 1;
+            yield break;
+        }
         while (move <= 1)
         {
             move += Time.deltaTime;
             yield return Time.deltaTime;
         }
-        /*move += Time.deltaTime;
-        move = Mathf.Clamp(move, 0, 1);*/
     }
     IEnumerator Idle()
     {
+        if (move <= 0)
+        {
+            move = 0;
+            yield break;
+        }
+
         while (move >= 0)
         {
             move -= Time.deltaTime;
             yield return Time.deltaTime;
         }
-        /*move -= Time.deltaTime;
-        move = Mathf.Clamp(move, 0, 1);*/
+    }
+
+    public void getDamage(int damage)
+    {
+        throw new System.NotImplementedException();
     }
 }

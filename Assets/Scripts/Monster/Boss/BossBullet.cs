@@ -24,7 +24,7 @@ public class BossBullet : MonoBehaviour
         StartCoroutine(Off(1));
         IDamage damage = other.GetComponent<IDamage>();
         if(damage != null)
-            damage.getDamage();
+            damage.getDamage(20);
     }
     public void lookPlayer()
     {

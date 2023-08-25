@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     float damage = 20f;
-    float speed = 1000f;
+    float speed = 1500f;
     float destroyDistance = 20f;
 
     Rigidbody rb;
@@ -30,7 +30,7 @@ public class Fireball : MonoBehaviour
         Vector3 playerDirection = Camera.main.transform.forward;
 
         // Y 축 회전을 고려하지 않도록 설정
-        playerDirection.y = 0f;
+        //playerDirection.y = 0f;
 
         // 정규화하여 방향 벡터로 변환
         playerDirection.Normalize();
@@ -65,12 +65,16 @@ public class Fireball : MonoBehaviour
         fireEffect.Stop();
         collisonEffect.Play();
         
-        if (collision.gameObject.CompareTag("MONSTER"))
+        
+        GameManager.Instance.hitNumber++;
+       
+
+        IDamage damage = collision.gameObject.GetComponent<IDamage>();
+        if(damage != null)
         {
-           collision.gameObject.GetComponent<MonsterDamage>().hitNumber++;
-            Animator animator = collision.gameObject.GetComponent<Animator>();
-            animator.SetTrigger("damage");
+            damage.getDamage(50);
         }
+
         Destroy(gameObject,1f);
     }
 }

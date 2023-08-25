@@ -34,7 +34,7 @@ public class ExplosionDamage : MonoBehaviour
     {
         yield return waitTime;
         animator.SetTrigger("damage");
-        collider.GetComponent<MonsterDamage>().hitNumber++;
+        
         animator.speed = 0.5f;
         yield return waitTime;
         animator.speed = 1f;

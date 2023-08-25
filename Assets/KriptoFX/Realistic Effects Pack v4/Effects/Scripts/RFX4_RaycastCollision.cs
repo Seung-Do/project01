@@ -83,7 +83,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
             }
             //이 부분만 수정했음
-            if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.CompareTag("MONSTER"))
+            if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
                 foreach (var effect in Effects) {
                     if (effect != null)
                     {

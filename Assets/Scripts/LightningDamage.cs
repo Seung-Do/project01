@@ -18,12 +18,12 @@ public class LightningDamage : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
-        if (other.gameObject.CompareTag("MONSTER") && !isDamage)
+        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY") && !isDamage)
         {
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
-            other.GetComponent<MonsterDamage>().hitNumber++;
-            animator.SetTrigger("damage");
+            GameManager.Instance.hitNumber++;
+            animator.SetTrigger("Hit");
             StartCoroutine(AnimatorSlow(animator));
             
         }

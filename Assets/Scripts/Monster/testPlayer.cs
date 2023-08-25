@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class testPlayer : MonoBehaviour, IDamage
 {
-    public void getDamage()
+    public void getDamage(int damage)
     {
         throw new System.NotImplementedException();
     }
