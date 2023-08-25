@@ -74,7 +74,7 @@ public class Boss_Elemental_Skill : MonoBehaviour
         skill.transform.parent = GameManager.Instance.testPlayer.transform;
         GameObject Death = GameManager.Instance.poolManager[1].Get(12);
         //나중에 카메라위치로 변경
-        Death.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z);
+        Death.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2 - 1, GameManager.Instance.testPlayer.transform.position.z);
         Death.transform.parent = GameManager.Instance.testPlayer.transform;
         Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
         skilloff.skilloff(7);

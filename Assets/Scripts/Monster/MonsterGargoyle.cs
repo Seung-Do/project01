@@ -27,6 +27,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     bool isChase;
     bool isDead;
     public bool isFindPlayer;
+    public bool isFreeze;
 
     int playerLayer;
     int enemyLayer;
@@ -76,6 +77,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         damage = data.Damage;
         TraceTime = 0;
         anim.SetBool("Dead", false);
+        isFreeze = false;
 
         attackDist = data.AttackDistance;
         viewRange = data.ViewRange;
@@ -89,6 +91,9 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         chase();
         StopTrace();
         moveSpeed = move * speed;
+
+        if (isFreeze)
+            rb.velocity = Vector3.zero;
     }
 
     //몬스터의 상태를 정하는 코루틴
@@ -455,5 +460,14 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     {
         GameObject meteor = GameManager.Instance.poolManager[0].Get(3);
         meteor.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x + Random.Range(-1f, 1f), GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z + Random.Range(-1f, 1f));
+    }
+    public void Freeze()
+    {
+        StartCoroutine(OffFreeze());
+    }
+    IEnumerator OffFreeze()
+    {
+        yield return new WaitForSeconds(5f);
+        isFreeze = false;
     }
 }

@@ -10,17 +10,21 @@ public class Boss_Elemental : MonoBehaviour
     Rigidbody rb;
     Animator anim;
     public GameObject pos;
-    public Boss_Elemental_Skill bossSkill;
+    Boss_Elemental_Skill bossSkill;
+    BossChange change;
+    public GameObject changeAura;
+    public GameObject[] spellAura;
+    public GameObject SpellPos;
 
-    public float hp;
+    [SerializeField] float hp;
     float speed;
     float damage;
-    public float move;
-    public float moveSpeed;
+    [SerializeField] float move;
+    [SerializeField] float moveSpeed;
     bool isDead;
 
     float attackDist;
-
+    [HideInInspector]
     public int Type;
     float dist;
 
@@ -29,14 +33,16 @@ public class Boss_Elemental : MonoBehaviour
     float mageTime;
     float mageMaxTime;
 
-    public bool canAttack;
-    public bool canMage;
+    [SerializeField] bool canAttack;
+    [SerializeField] bool canMage;
     bool canSpell;
 
     bool cool;
     bool isChanged;
+    bool isSpellMove;
+    public bool isSpellPos;
 
-    public float MaxHp;
+    [SerializeField] float MaxHp;
     public enum State
     {
         IDLE,
@@ -46,18 +52,21 @@ public class Boss_Elemental : MonoBehaviour
         DEAD,
         HIT,
         CHANGE,
-        SPELL
+        SPELL,
+        SPELLMOVE
     }
-    public State state = State.IDLE;
+    [SerializeField] State state = State.IDLE;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.5f);
+        bossSkill = GetComponent<Boss_Elemental_Skill>();
+        change = GetComponent<BossChange>();
 
-        //Type = Random.Range(0, 5);
-        Type = 3;
+        Type = Random.Range(0, 5);
+        //Type = 4;
     }
     private void Start()
     {
@@ -66,6 +75,8 @@ public class Boss_Elemental : MonoBehaviour
     }
     private void OnEnable()
     {
+        isSpellPos = false;
+        isSpellMove = false;
         canSpell = true;
         canMage = false;
         canAttack = false;
@@ -79,14 +90,19 @@ public class Boss_Elemental : MonoBehaviour
         anim.SetBool("Dead", false);
         attackMaxTime = data[Type].AttackTime;
         mageMaxTime = data[Type].CassTime;
+        change.Change(Type);
     }
 
     void Update()
     {
         dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
         moveSpeed = move * speed;
-
-        AttackLook();
+        if (isSpellMove)
+        {
+            MoveSpellPos();
+        }
+        else
+            AttackLook();
     }
     private void FixedUpdate()
     {
@@ -124,23 +140,33 @@ public class Boss_Elemental : MonoBehaviour
                 state = State.CHANGE;
                 isChanged = true;
                 canSpell = true;
+                yield return new WaitForSeconds(5);
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
-            else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell)
-                || ((hp / MaxHp * 100) <= 30 && (hp / MaxHp * 100) >= 20) && canSpell)
+            else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell && !isSpellPos)
+                || ((hp / MaxHp * 100) <= 30 && (hp / MaxHp * 100) >= 20) && canSpell && !isSpellPos)
+            {
+                state = State.SPELLMOVE;
+                isSpellMove = true;
+            }
+            else if (state == State.SPELLMOVE && isSpellPos)
             {
                 state = State.SPELL;
-                if(Type == 3 || Type == 4)
+                isSpellMove = false; 
+                
+                if (Type >= 3)
                 {
-                    yield return new WaitForSeconds(16f);
+                    yield return new WaitForSeconds(14f);
                 }
-                yield return new WaitForSeconds(22f);
+                else
+                    yield return new WaitForSeconds(22f);
             }
             //원거리 공격
-            else if (dist > 5 && canMage)
+            else if (dist > 5 && canMage && !canSpell)
             {
                 state = State.MAGE;
                 yield return new WaitForSeconds(5);
+                yield return !canMage;
             }
             //접근
             else if (dist > attackDist && !canMage)
@@ -188,6 +214,7 @@ public class Boss_Elemental : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     anim.SetTrigger("Mage");
                     yield return new WaitForSeconds(5);
+                    yield return !canMage;
                     cooldown();
                     useMage();
                     break;
@@ -203,6 +230,11 @@ public class Boss_Elemental : MonoBehaviour
                 case State.DEAD:
                     move = 0;
                     anim.SetBool("Dead", true);
+                    break;
+                case State.SPELLMOVE:
+                    StartCoroutine(Move());
+                    anim.SetFloat("Move", move);
+                    isSpellMove = true;
                     break;
                 case State.SPELL:
                     move = 0;
@@ -313,11 +345,15 @@ public class Boss_Elemental : MonoBehaviour
     {
         if (state == State.SPELL)
         {
-            yield return new WaitForSeconds(10f);
+            if (Type >= 3)
+                yield return new WaitForSeconds(4f);
+            else
+                yield return new WaitForSeconds(10f);
             anim.SetBool("Spelling", false);
             canSpell = false;
+            OffSpellAura();
         }
-            
+
     }
     public IEnumerator Ready()
     {
@@ -334,7 +370,6 @@ public class Boss_Elemental : MonoBehaviour
     {
         mageTime = 0f;
         canMage = false;
-        anim.SetBool("Spelling", false);
     }
     public void useAttack()
     {
@@ -383,7 +418,7 @@ public class Boss_Elemental : MonoBehaviour
         anim.SetBool("NormalSpell", true);
 
         //땅, 마법 타입은 BossBullet스크립트를 가지고있지않아 Break
-        if (num <= 3)
+        if (num >= 3)
             yield break;
 
         BossBullet bullet = skill.GetComponent<BossBullet>();
@@ -414,12 +449,47 @@ public class Boss_Elemental : MonoBehaviour
 
     public void useSkill()
     {
-        if(state == State.SPELL)
+        if (state == State.SPELL)
             bossSkill.TypeSkill(Type);
     }
     public IEnumerator normalCasting()
     {
         anim.SetBool("NormalSpell", false);
         yield return null;
+    }
+
+    public void HpChange()
+    {
+        int a = 5;
+        while (a != Type)
+        {
+            a = Random.Range(0, 5);
+            if (a != Type)
+            {
+                Type = a;
+                break;
+            }
+        }
+        change.Change(Type);
+    }
+    public void OnChangeAura()
+    {
+        changeAura.SetActive(true);
+    }
+    public void OnSpellAura()
+    {
+        spellAura[Type].SetActive(true);
+    }
+    void OffSpellAura()
+    {
+        spellAura[Type].SetActive(false);
+    }
+    void MoveSpellPos()
+    {
+        Vector3 moveDirection = SpellPos.transform.position - transform.position;
+        moveDirection.Normalize(); // 방향을 정규화
+        Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
+        rb.velocity = moveDirection * moveSpeed;
     }
 }
