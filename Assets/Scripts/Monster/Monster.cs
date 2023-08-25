@@ -21,6 +21,7 @@ public class Monster : MonoBehaviour, IDamage
     bool isChase;
     bool isDead;
     public bool isFindPlayer;
+    public bool isFreeze;
 
     int playerLayer;
     int enemyLayer;
@@ -70,6 +71,7 @@ public class Monster : MonoBehaviour, IDamage
         TraceTime = 0;
         Type = data.MonsterType;
         anim.SetBool("Dead", false);
+        isFreeze = false;
     }
 
     void Update()
@@ -79,6 +81,9 @@ public class Monster : MonoBehaviour, IDamage
         chase();
         StopTrace();
         moveSpeed = move * speed;
+        
+        if(isFreeze)
+            rb.velocity = Vector3.zero;
     }
 
     //몬스터의 상태를 정하는 코루틴
@@ -183,7 +188,7 @@ public class Monster : MonoBehaviour, IDamage
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange, 1 << playerLayer);
 
         //설정된 반경안에 플레이어가 탐지된다면
-        if (colls.Length == 1)
+        if (colls.Length >= 1)
         {
             Vector3 dir = (GameManager.Instance.testPlayer.transform.position - transform.position).normalized;
             //적의 시야각에 플레이어가 존재하는지 판단
@@ -223,7 +228,7 @@ public class Monster : MonoBehaviour, IDamage
     IEnumerator TracePlayer()
     {
         //상태가 TRACE일때만 반복
-        while (state == State.TRACE)
+        while (state == State.TRACE && !isFreeze)
         {
             Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
             moveDirection.Normalize(); // 방향을 정규화
@@ -270,7 +275,7 @@ public class Monster : MonoBehaviour, IDamage
     //한번이라도 공격시작하면 chaseMaxTime만큼 시야각에서 벗어나도 추격함
     void chase()
     {
-        if (isChase && state != State.ATTACK)
+        if (isChase && state != State.ATTACK && !isFreeze)
         {
             if (chaseTime <= chaseMaxTime)
             {
@@ -357,22 +362,29 @@ public class Monster : MonoBehaviour, IDamage
     }
     IEnumerator Move()
     {
+        if (move >= 1)
+        {
+            move = 1;
+            yield break;
+        }
         while (move <= 1)
         {
             move += Time.deltaTime;
             yield return Time.deltaTime;
         }
-        /*move += Time.deltaTime;
-        move = Mathf.Clamp(move, 0, 1);*/
     }
     IEnumerator Idle()
     {
+        if (move <= 0)
+        {
+            move = 0;
+            yield break;
+        }
+
         while (move >= 0)
         {
             move -= Time.deltaTime;
             yield return Time.deltaTime;
         }
-        /*move -= Time.deltaTime;
-        move = Mathf.Clamp(move, 0, 1);*/
     }
 }
