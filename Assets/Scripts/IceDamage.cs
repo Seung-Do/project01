@@ -24,16 +24,26 @@ public class IceDamage : MonoBehaviour
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
-                Animator animator = collider.GetComponent<Animator>();            
                 GameManager.Instance.hitNumber++;
-                StartCoroutine(AnimatorSlow(animator));
+                Animator animator = collider.GetComponent<Animator>();
+                
+                IDamage damage = collider.gameObject.GetComponent<IDamage>();
+                if (damage != null)
+                {
+                    damage.getDamage(50);
+                    Monster monster = collider.GetComponent<Monster>();
+                    StartCoroutine(AnimatorSlow(animator, monster));
+                }
+                
             }
         }
     }
-    IEnumerator AnimatorSlow(Animator animator)
+    IEnumerator AnimatorSlow(Animator animator, Monster monster)
     {      
         animator.speed = 0f;
+        monster.isFreeze = true;
         yield return waitTime;
         animator.speed = 1f;
+        monster.isFreeze = false;   
     }
 }

@@ -20,11 +20,17 @@ public class LightningDamage : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY") && !isDamage)
         {
+            GameManager.Instance.hitNumber++;
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
-            GameManager.Instance.hitNumber++;
-            animator.SetTrigger("Hit");
-            StartCoroutine(AnimatorSlow(animator));
+            IDamage damage = other.gameObject.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.getDamage(50);
+                StartCoroutine(AnimatorSlow(animator));
+            }
+
+            
             
         }
     }
