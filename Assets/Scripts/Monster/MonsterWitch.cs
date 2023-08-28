@@ -24,7 +24,7 @@ public class MonsterWitch : MonoBehaviour
 
     void lookPlayer()
     {
-        Vector3 dir = GameManager.Instance.testPlayer.transform.position - fire.transform.position;
+        Vector3 dir = GameManager.Instance.playerTr.position - fire.transform.position;
         fire.transform.rotation = Quaternion.LookRotation(dir);
     }
 
