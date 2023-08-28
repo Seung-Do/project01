@@ -63,7 +63,7 @@ public class Teleportation : MonoBehaviour
         }
         //UnityEngine.Debug.Log(interactables[0].interactionLayers.value);      
         TeleportRequest request = new TeleportRequest();
-        if (interactables[0].interactionLayers == 2)
+        if (interactables[0].interactionLayers == 8)
         {
             request.destinationPosition = hit.point;
         }

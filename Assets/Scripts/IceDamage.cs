@@ -19,13 +19,13 @@ public class IceDamage : MonoBehaviour
     void OnEnable()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRadius);
-        //Debug.Log(transform.position.ToString());
+       
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
                 Animator animator = collider.GetComponent<Animator>();
-                
+                Debug.Log("아이스 레이어 :" + collider.gameObject.layer);
                 IDamage damage = collider.gameObject.GetComponent<IDamage>();
                 if (damage != null)
                 {

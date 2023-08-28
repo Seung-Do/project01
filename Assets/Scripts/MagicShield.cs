@@ -26,6 +26,6 @@ public class MagicShield : MonoBehaviour, IDamage
 
     public void getDamage(int damage)
     {
-        Debug.Log("막음");
+        Debug.Log("방패로 막음");
     }
 }

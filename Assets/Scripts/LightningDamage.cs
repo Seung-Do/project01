@@ -18,8 +18,9 @@ public class LightningDamage : MonoBehaviour
     }
     void OnParticleCollision(GameObject other)
     {
-        
-        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+        Debug.Log("라이트닝 레이어 :"+other.gameObject.layer);
+        Debug.Log(other.gameObject.tag);
+       /* if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
         {
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class LightningDamage : MonoBehaviour
                 StartCoroutine(AnimatorSlow(animator));
             }         
             
-        }
+        }*/
     }
     IEnumerator AnimatorSlow(Animator animator)
     {

@@ -108,15 +108,15 @@ public class Monster : MonoBehaviour, IDamage
             //주변에 플레이어를 공격하는 몬스터가 없을 때
             if (viewRange >= dist)
             {
-                print("주변에 플레이어가 있음");
+               // print("주변에 플레이어가 있음");
                 //시야에 플레이어가 들어왔을 때
                 if (isTracePlayer())
                 {
-                    print("시야에 플레이어가 있음");
+                    //print("시야에 플레이어가 있음");
                     //플레이어가 보이면
                     if (ViewPlayer())
                     {
-                        print("플레이어가 보임");
+                       // print("플레이어가 보임");
                         //플레이어가 공격거리 안에 들어왔을 때
                         if (attackDist >= dist)
                         {
@@ -235,7 +235,7 @@ public class Monster : MonoBehaviour, IDamage
         //플레이어를 향해 레이캐스트
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
         {
-            print(hit.collider.gameObject.name);
+           // print(hit.collider.gameObject.name);
             //찾으면 true 못찾으면 false반환
             Find = hit.collider.CompareTag("PLAYER");
         }

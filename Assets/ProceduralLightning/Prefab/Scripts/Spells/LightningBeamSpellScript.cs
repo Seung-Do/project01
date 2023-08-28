@@ -30,13 +30,14 @@ namespace DigitalRuby.ThunderAndLightning
         [HideInInspector]
         public System.Action<RaycastHit> CollisionCallback;
 
+
         private void CheckCollision()
         {
             RaycastHit hit;
 
-            // send out a ray to see what gets hit
+            // send out a ray to see what gets hit 
             if (Physics.Raycast(SpellStart.transform.position, Direction, out hit, MaxDistance, CollisionMask))
-            {
+            {          
                 // we hit something, set the end object position
                 SpellEnd.transform.position = hit.point;
 
@@ -117,5 +118,7 @@ namespace DigitalRuby.ThunderAndLightning
         {
             LightningPathScript.ManualMode = true;
         }
+
+
     }
 }

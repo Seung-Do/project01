@@ -12,12 +12,12 @@ public class PlayerDamage : MonoBehaviour, IDamage
     public void getDamage(int damage)
     {
         hp -= damage;
-        if (hp < 0)
+        if (hp <= 0)
             print("플레이어 죽음");
         if (hp > 100)
             hp = 100;
         //Debug.Log("플레이어 HP :" + hp.ToString());
-        image.fillAmount = hp;
+        image.fillAmount = hp/100;
         if (damage > 0)
             StartCoroutine(ShowVignette());
     }
