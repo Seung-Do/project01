@@ -4849,6 +4849,7 @@ GameObject:
   - component: {fileID: 5958336960384427862}
   - component: {fileID: 5958856492178172176}
   - component: {fileID: 1724468171249025821}
+  - component: {fileID: 872172746256632798}
   m_Layer: 7
   m_Name: Thunderstorm
   m_TagString: Untagged
@@ -9623,6 +9624,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72dffaab125f0ca4b8473cc4fc940036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &872172746256632798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798236008120826026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2f67414869bff4a8c077282a13b1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5798253305201938468

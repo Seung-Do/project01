@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testPlayer : MonoBehaviour, IDamage
+public class testPlayer : MonoBehaviour
 {
-    public void getDamage(int damage)
-    {
-        throw new System.NotImplementedException();
-    }
+    public GameObject shield;
 
     // Start is called before the first frame update
     void Start()

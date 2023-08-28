@@ -24,7 +24,7 @@ public class BossShockWave : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             GameObject hit = collider.gameObject;
-            testPlayer damage = hit.GetComponent<testPlayer>();
+            PlayerDamage damage = hit.GetComponent<PlayerDamage>();
 
             if (damage != null)
             {

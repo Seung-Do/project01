@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public PoolManager[] poolManager;
     public Transform playerTr;
     public Transform handsTr;
+    public Boss_Elemental elemental;
     public int hitNumber;
     [SerializeField]
     private string firstScene = "stage00";

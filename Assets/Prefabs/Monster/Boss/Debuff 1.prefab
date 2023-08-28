@@ -4952,6 +4952,7 @@ GameObject:
   - component: {fileID: 5742360263926747672}
   - component: {fileID: 5744168223444375482}
   - component: {fileID: 1243519994929153504}
+  - component: {fileID: 8047640294239305375}
   m_Layer: 0
   m_Name: Debuff 1
   m_TagString: Untagged
@@ -9842,6 +9843,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72dffaab125f0ca4b8473cc4fc940036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8047640294239305375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5581692755648065324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2f67414869bff4a8c077282a13b1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &5581744990528079284
 GameObject:
   m_ObjectHideFlags: 0

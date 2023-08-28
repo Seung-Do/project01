@@ -6,6 +6,8 @@ using UnityEngine;
 public class Boss_Elemental_Skill : MonoBehaviour
 {
     public GameObject[] spike;
+
+    int ran;
     public void TypeSkill(int num)
     {
         switch (num)
@@ -20,9 +22,8 @@ public class Boss_Elemental_Skill : MonoBehaviour
                 thunder();
                 break;
             case 3:
-                int a = Random.Range(0, spike.Length);
-                earth(a);
-                spike[a].SetActive(true);
+                earth(ran);
+                backearth();
                 break;
             case 4:
                 magic();
@@ -68,7 +69,14 @@ public class Boss_Elemental_Skill : MonoBehaviour
         {
             if(i == a)
                 continue;
-            StartCoroutine(earthSkill(i));
+            StartCoroutine(frontearthSkill(i));
+        }
+    }
+    public void backearth()
+    {
+        for (int i = 0; i < spike.Length; i++)
+        {
+            StartCoroutine(backearthSkill(i));
         }
     }
 
@@ -87,15 +95,22 @@ public class Boss_Elemental_Skill : MonoBehaviour
         Deathskilloff.skilloff(7);
     }
 
-    IEnumerator earthSkill(int num)
+    IEnumerator frontearthSkill(int num)
     {
         //발판 5개로 할 경우 9부터 시작 발판의 갯수를 다르게갈 경우 시작수 변경
         //발판 1개의 가로사이즈가 4이므로 1, 3으로 놔눠짐
         //다음 발판으로 넘어갈 경우 num에 * 4를 해줘 다음 발판으로 넘어감
-        int a = 9 - (num * 4);
-        for(int i = 1; i <= 20; i++)
+        //int a = 9 - (num * 4);
+        int a = 18 - (num * 6);
+        for (int i = 1; i <= 21; i += 3)
         {
-            if(i % 2 == 0)
+            GameObject skill = GameManager.Instance.poolManager[1].Get(10);
+            skill.transform.parent = transform;
+            skill.transform.localPosition = new Vector3(a, 0, i);
+            Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
+            skilloff.skilloff(5);
+
+           /* if (i % 2 == 0)
             {
                 GameObject Rskill = GameManager.Instance.poolManager[1].Get(10);
                 Rskill.transform.parent = transform;
@@ -110,13 +125,62 @@ public class Boss_Elemental_Skill : MonoBehaviour
                 Lskill.transform.localPosition = new Vector3(a - 2, 0, i);
                 Boss_Elemental_Skill_Off skilloff = Lskill.GetComponent<Boss_Elemental_Skill_Off>();
                 skilloff.skilloff(5);
-            }
+            }*/
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.07f);
         }
-        foreach(var spikes in spike)
+        foreach (var spikes in spike)
         {
             spikes.SetActive(false);
         }
+    }
+    IEnumerator backearthSkill(int num)
+    {
+        //발판 5개로 할 경우 9부터 시작 발판의 갯수를 다르게갈 경우 시작수 변경
+        //발판 1개의 가로사이즈가 4이므로 1, 3으로 놔눠짐
+        //다음 발판으로 넘어갈 경우 num에 * 4를 해줘 다음 발판으로 넘어감
+        //int a = 9 - (num * 4);
+        int a = 18 - (num * 6);
+        for (int i = -1; i >= -21; i -= 3)
+        {
+            GameObject skill = GameManager.Instance.poolManager[1].Get(13);
+            skill.transform.parent = transform;
+            skill.transform.localPosition = new Vector3(a, 0, i);
+            Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
+            skilloff.skilloff(5);
+            /* if (i % 2 == 0)
+             {
+                 GameObject Rskill = GameManager.Instance.poolManager[1].Get(13);
+                 Rskill.transform.parent = transform;
+                 Rskill.transform.localPosition = new Vector3(a, 0, i);
+                 Boss_Elemental_Skill_Off skilloff = Rskill.GetComponent<Boss_Elemental_Skill_Off>();
+                 skilloff.skilloff(5);
+             }
+             else
+             {
+                 GameObject Lskill = GameManager.Instance.poolManager[1].Get(13);
+                 Lskill.transform.parent = transform;
+                 Lskill.transform.localPosition = new Vector3(a - 2, 0, i);
+                 Boss_Elemental_Skill_Off skilloff = Lskill.GetComponent<Boss_Elemental_Skill_Off>();
+                 skilloff.skilloff(5);
+             }*/
+
+            yield return new WaitForSeconds(0.07f);
+        }
+        foreach (var spikes in spike)
+        {
+            spikes.SetActive(false);
+        }
+    }
+
+    public void rand(int num)
+    {
+        ran = num;
+        StartCoroutine(SpikeWaring(num));
+    }
+    IEnumerator SpikeWaring(int a)
+    {
+        yield return new WaitForSeconds(5);
+        spike[a].SetActive(true);
     }
 }
