@@ -1145,10 +1145,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2.89
-  m_Height: 11.1
+  m_Radius: 3
+  m_Height: 14
   m_Direction: 1
-  m_Center: {x: 0, y: 5.5, z: 0}
+  m_Center: {x: 0, y: 7, z: 0}
 --- !u!114 &4573800244306656604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 152d50024bb1f574c9ed09cb262486f7, type: 2}
   shield: {fileID: 4573800244306656605}
+  hp: 0
   isFindPlayer: 0
+  isFreeze: 0
   TraceTime: 0
   viewRange: 0
   viewAngle: 120

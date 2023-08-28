@@ -17,8 +17,11 @@ public class Fountain : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("PLAYER"))
+        if (other.gameObject.CompareTag("PLAYER"))
+        {
             buff.Play();
+            other.gameObject.GetComponent<PlayerDamage>().getDamage(-100);
+        }
     }    
                 
 }

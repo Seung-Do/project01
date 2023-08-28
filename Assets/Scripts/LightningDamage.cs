@@ -16,11 +16,11 @@ public class LightningDamage : MonoBehaviour
     {
 
     }
-    private void OnParticleCollision(GameObject other)
+    void OnParticleCollision(GameObject other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY") && !isDamage)
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
         {
-            GameManager.Instance.hitNumber++;
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
             IDamage damage = other.gameObject.GetComponent<IDamage>();
@@ -28,9 +28,7 @@ public class LightningDamage : MonoBehaviour
             {
                 damage.getDamage(50);
                 StartCoroutine(AnimatorSlow(animator));
-            }
-
-            
+            }         
             
         }
     }

@@ -65,10 +65,6 @@ public class Fireball : MonoBehaviour
         fireEffect.Stop();
         collisonEffect.Play();
         
-        
-        GameManager.Instance.hitNumber++;
-       
-
         IDamage damage = collision.gameObject.GetComponent<IDamage>();
         if(damage != null)
         {

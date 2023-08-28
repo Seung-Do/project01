@@ -10,7 +10,8 @@ public class TutorialAttack : TutorialBase
  
     public GameObject skeletonObject;
     public GameObject rightControllerImage;
-    
+    public TutorialSkeleton skeleton;
+
     public override void Enter()
     {
         skeletonObject.SetActive(true); 
@@ -22,7 +23,7 @@ public class TutorialAttack : TutorialBase
 
     public override void Execute(TutorialController controller)
     {
-        if(GameManager.Instance.hitNumber == 1)
+        if(skeleton.hitNumber == 1)
             controller.SetNextTutorial();
     }
 

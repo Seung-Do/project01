@@ -4569,12 +4569,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bcd4d4aef247d48915d2aa7cc7bc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RaycastDistance: 100
+  RaycastDistance: 20
   Effects:
   - {fileID: 173866, guid: 6692e3c69d930964f89b810020ae7d5c, type: 3}
   Offset: 0
   EnableTimeDelay: 0.1
-  DestroyTime: 13
+  DestroyTime: 6
   UsePivotPosition: 1
   UseNormalRotation: 0
   IsWorldSpace: 1
@@ -28382,7 +28382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4230090646841990
 Transform:
   m_ObjectHideFlags: 0
@@ -42705,7 +42705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4238933878890784
 Transform:
   m_ObjectHideFlags: 0
