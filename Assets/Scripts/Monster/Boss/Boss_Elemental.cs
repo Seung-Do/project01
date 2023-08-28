@@ -16,6 +16,8 @@ public class Boss_Elemental : MonoBehaviour
     public GameObject[] spellAura;
     public GameObject SpellPos;
 
+    Vector3 SpellPosition;
+
     [SerializeField] float hp;
     float speed;
     float damage;
@@ -35,11 +37,13 @@ public class Boss_Elemental : MonoBehaviour
 
     [SerializeField] bool canAttack;
     [SerializeField] bool canMage;
-    bool canSpell;
+    [SerializeField] bool canSpell;
 
     bool cool;
     bool isChanged;
     bool isSpellMove;
+    [HideInInspector]
+    public bool isCanMoveSpellPos;
     public bool isSpellPos;
 
     [SerializeField] float MaxHp;
@@ -64,7 +68,7 @@ public class Boss_Elemental : MonoBehaviour
         wait = new WaitForSeconds(0.5f);
         bossSkill = GetComponent<Boss_Elemental_Skill>();
         change = GetComponent<BossChange>();
-
+        SpellPosition = Vector3.zero;
         Type = Random.Range(0, 5);
         //Type = 4;
     }
@@ -75,6 +79,7 @@ public class Boss_Elemental : MonoBehaviour
     }
     private void OnEnable()
     {
+        isCanMoveSpellPos = false;
         isSpellPos = false;
         isSpellMove = false;
         canSpell = true;
@@ -95,7 +100,7 @@ public class Boss_Elemental : MonoBehaviour
 
     void Update()
     {
-        dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+        dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
         moveSpeed = move * speed;
         if (isSpellMove)
         {
@@ -103,6 +108,9 @@ public class Boss_Elemental : MonoBehaviour
         }
         else
             AttackLook();
+
+        if (state == State.SPELLMOVE && Mathf.Abs(transform.localPosition.x) <= 0.1f && Mathf.Abs(transform.localPosition.z) <= 0.1f)
+            isSpellPos = true;
     }
     private void FixedUpdate()
     {
@@ -129,6 +137,7 @@ public class Boss_Elemental : MonoBehaviour
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
             if (cool)
             {
+                print("쿨타임");
                 state = State.IDLE;
                 yield return new WaitForSeconds(0.5f);
                 cool = false;
@@ -140,7 +149,8 @@ public class Boss_Elemental : MonoBehaviour
                 state = State.CHANGE;
                 isChanged = true;
                 canSpell = true;
-                yield return new WaitForSeconds(5);
+                isCanMoveSpellPos = false;
+                isSpellPos = false;
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
             else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell && !isSpellPos)
@@ -148,6 +158,7 @@ public class Boss_Elemental : MonoBehaviour
             {
                 state = State.SPELLMOVE;
                 isSpellMove = true;
+                isCanMoveSpellPos = true;
             }
             else if (state == State.SPELLMOVE && isSpellPos)
             {
@@ -162,7 +173,7 @@ public class Boss_Elemental : MonoBehaviour
                     yield return new WaitForSeconds(22f);
             }
             //원거리 공격
-            else if (dist > 5 && canMage && !canSpell)
+            else if (dist > 5 && canMage)
             {
                 state = State.MAGE;
                 yield return new WaitForSeconds(5);
@@ -254,7 +265,7 @@ public class Boss_Elemental : MonoBehaviour
         //상태가 TRACE일때만 반복
         while (state == State.TRACE)
         {
-            Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
+            Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
             moveDirection.Normalize(); // 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
@@ -267,7 +278,7 @@ public class Boss_Elemental : MonoBehaviour
     //애니메이션 이벤트에서 호출
     public void attack()
     {
-        float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+        float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (dist < attackDist - 0.5f)
         {
@@ -279,7 +290,7 @@ public class Boss_Elemental : MonoBehaviour
     //시점을 플레이어한테 고정
     void AttackLook()
     {
-        Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
+        Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
         moveDirection.Normalize(); // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
@@ -431,7 +442,7 @@ public class Boss_Elemental : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         GameObject Time = GameManager.Instance.poolManager[1].Get(5);
-        Time.transform.position = GameManager.Instance.testPlayer.transform.position;
+        Time.transform.position = GameManager.Instance.playerTr.position;
     }
 
     //속도 회복 메서드
@@ -486,7 +497,9 @@ public class Boss_Elemental : MonoBehaviour
     }
     void MoveSpellPos()
     {
-        Vector3 moveDirection = SpellPos.transform.position - transform.position;
+        Vector3 pos = new Vector3(SpellPosition.x, transform.localPosition.y, SpellPosition.z);
+        //Vector3 moveDirection = SpellPos.transform.position - transform.position;
+        Vector3 moveDirection = pos - transform.localPosition;
         moveDirection.Normalize(); // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);

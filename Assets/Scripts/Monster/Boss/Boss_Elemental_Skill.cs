@@ -32,8 +32,8 @@ public class Boss_Elemental_Skill : MonoBehaviour
     public void fire()
     {
         GameObject skill = GameManager.Instance.poolManager[1].Get(7);
-        skill.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z);
-        skill.transform.parent = GameManager.Instance.testPlayer.transform;
+        skill.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z);
+        skill.transform.parent = GameManager.Instance.playerTr;
         Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
         skilloff.skilloff(11);
     }
@@ -41,17 +41,22 @@ public class Boss_Elemental_Skill : MonoBehaviour
     public void ice()
     {
         GameObject skill = GameManager.Instance.poolManager[1].Get(8);
-        skill.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z);
-        skill.transform.parent = GameManager.Instance.testPlayer.transform;
+        skill.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z);
+        skill.transform.parent = GameManager.Instance.playerTr;
         Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
         skilloff.skilloff(11);
     }
 
     public void thunder()
     {
+        thunder2();
+        thunder2();
+    }
+    void thunder2()
+    {
         GameObject skill = GameManager.Instance.poolManager[1].Get(9);
-        skill.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z);
-        skill.transform.parent = GameManager.Instance.testPlayer.transform;
+        skill.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z);
+        skill.transform.parent = GameManager.Instance.playerTr;
         Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
         skilloff.skilloff(10);
     }
@@ -70,12 +75,12 @@ public class Boss_Elemental_Skill : MonoBehaviour
     public void magic()
     {
         GameObject skill = GameManager.Instance.poolManager[1].Get(11);
-        skill.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2, GameManager.Instance.testPlayer.transform.position.z);
-        skill.transform.parent = GameManager.Instance.testPlayer.transform;
+        skill.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z);
+        skill.transform.parent = GameManager.Instance.playerTr;
         GameObject Death = GameManager.Instance.poolManager[1].Get(12);
         //나중에 카메라위치로 변경
-        Death.transform.position = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y / 2 - 1, GameManager.Instance.testPlayer.transform.position.z);
-        Death.transform.parent = GameManager.Instance.testPlayer.transform;
+        Death.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y / 2 - 1, GameManager.Instance.playerTr.position.z);
+        Death.transform.parent = GameManager.Instance.playerTr;
         Boss_Elemental_Skill_Off skilloff = skill.GetComponent<Boss_Elemental_Skill_Off>();
         skilloff.skilloff(7);
         Boss_Elemental_Skill_Off Deathskilloff = Death.GetComponent<Boss_Elemental_Skill_Off>();
@@ -95,12 +100,16 @@ public class Boss_Elemental_Skill : MonoBehaviour
                 GameObject Rskill = GameManager.Instance.poolManager[1].Get(10);
                 Rskill.transform.parent = transform;
                 Rskill.transform.localPosition = new Vector3(a, 0, i);
+                Boss_Elemental_Skill_Off skilloff = Rskill.GetComponent<Boss_Elemental_Skill_Off>();
+                skilloff.skilloff(5);
             }
            else
             {
                 GameObject Lskill = GameManager.Instance.poolManager[1].Get(10);
                 Lskill.transform.parent = transform;
                 Lskill.transform.localPosition = new Vector3(a - 2, 0, i);
+                Boss_Elemental_Skill_Off skilloff = Lskill.GetComponent<Boss_Elemental_Skill_Off>();
+                skilloff.skilloff(5);
             }
 
             yield return new WaitForSeconds(0.1f);

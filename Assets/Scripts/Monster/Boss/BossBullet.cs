@@ -28,7 +28,7 @@ public class BossBullet : MonoBehaviour
     }
     public void lookPlayer()
     {
-        transform.LookAt(GameManager.Instance.testPlayer.transform.position);
+        transform.LookAt(GameManager.Instance.playerTr.position);
     }
     IEnumerator Off(float num)
     {

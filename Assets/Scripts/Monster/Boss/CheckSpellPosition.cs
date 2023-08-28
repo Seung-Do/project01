@@ -7,9 +7,9 @@ public class CheckSpellPosition : MonoBehaviour
     public Boss_Elemental boss;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("MONSTER"))
+        if(other.CompareTag("MONSTER") && boss.isCanMoveSpellPos)
         {
-            boss.isSpellPos = true;
+            //boss.isSpellPos = true;
             print("½ºÆç À§Ä¡");
         }
     }
