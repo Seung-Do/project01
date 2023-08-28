@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4329900310407163274}
   - component: {fileID: 6217023924279394612}
   - component: {fileID: 3417795546201686270}
-  - component: {fileID: 5189756578271708381}
   - component: {fileID: 6200501333021900812}
-  m_Layer: 0
+  - component: {fileID: 1275773854164636719}
+  - component: {fileID: 243786658418425427}
+  m_Layer: 3
   m_Name: Magic Shield
   m_TagString: SHIELD
   m_Icon: {fileID: 0}
@@ -86,20 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5189756578271708381
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3103183941474667490}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!82 &6200501333021900812
 AudioSource:
   m_ObjectHideFlags: 0
@@ -196,6 +183,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1275773854164636719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103183941474667490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c50a6f0724665945bff4121a348bbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &243786658418425427
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103183941474667490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5597490190189768813
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +220,7 @@ GameObject:
   - component: {fileID: 5722460446042258681}
   - component: {fileID: 5722353560253413549}
   - component: {fileID: 5487834065368841191}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5341,7 +5353,7 @@ GameObject:
   - component: {fileID: 5595043210245359771}
   - component: {fileID: 5722807991261251249}
   - component: {fileID: 5724033047427972849}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magic shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10225,7 +10237,7 @@ GameObject:
   - component: {fileID: 5595093858533355245}
   - component: {fileID: 5722578748942119421}
   - component: {fileID: 5722338556471638877}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CenterShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

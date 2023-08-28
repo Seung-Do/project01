@@ -10,6 +10,8 @@ TagManager:
   - Fire
   - PLAYER
   - SPELLPOS
+  - Collide
+  - MONSTERMAGIC
   layers:
   - Default
   - TransparentFX

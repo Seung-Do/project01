@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterWitchFireball : MonoBehaviour
 {
-    Rigidbody rb;
     void Start()
     {
     }
@@ -15,6 +14,12 @@ public class MonsterWitchFireball : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        //gameObject.SetActive(false);
+        IDamage damage = other.GetComponent<IDamage>();
+        if (damage != null)
+        {
+            damage.getDamage(1);
+            gameObject.SetActive(false);
+        }
+        gameObject.SetActive(false);
     }
 }

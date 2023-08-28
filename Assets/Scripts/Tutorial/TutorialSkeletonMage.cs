@@ -15,7 +15,7 @@ public class TutorialSkeletonMage : MonoBehaviour
     readonly float damping = 10f;
     void Start()
     {
-        playerTr = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
+        playerTr = GameObject.FindGameObjectWithTag("PLAYER").GetComponent<Transform>(); 
         monsterTr = GetComponent<Transform>();
     }
         

@@ -15,7 +15,7 @@ public class Monster : MonoBehaviour, IDamage
     [SerializeField]
     float hp;
     float speed;
-    float damage;
+    int damage;
     float move;
     float moveSpeed;
 
@@ -266,6 +266,8 @@ public class Monster : MonoBehaviour, IDamage
         {
             //플레이어가 데미지 받는 메서드
             print("플레이어 데미지" + damage);
+            PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+            player.getDamage(damage);
         }
     }
     //플레이어를 발견하고 추격할 때 주변에 있는 몬스터에게 알리는 메서드

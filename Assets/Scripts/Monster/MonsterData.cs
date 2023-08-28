@@ -17,7 +17,7 @@ public class MonsterData : ScriptableObject
     [Header("# Monster Data")]
     public float Health;    //체력
     public float Speed;     //이동 속도
-    public float Damage;    //공격 데미지
+    public int Damage;    //공격 데미지
     public float AttackDistance;    //공격 사거리
     public float ViewRange; //발각 범위
 

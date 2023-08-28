@@ -24,14 +24,13 @@ public class MonsterWitch : MonoBehaviour
 
     void lookPlayer()
     {
-        Vector3 dir = GameManager.Instance.playerTr.position - fire.transform.position;
+        Vector3 dir = GameManager.Instance.playerTr.position - fire.transform.position + Vector3.up * 0.8f;
         fire.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     public void fireballAttack()
     {
         GameObject fireball = GameManager.Instance.poolManager[0].Get(0);
-        //GameObject fireball = Instantiate(fireBall);
         fireball.transform.position = fire.transform.position;
         fireball.transform.rotation = fire.transform.rotation;
     }
