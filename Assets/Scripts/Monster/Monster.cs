@@ -102,7 +102,7 @@ public class Monster : MonoBehaviour, IDamage
                 yield break;
             }
 
-            float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+            float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
             //시야에 플레이어가 들어오지 않았거나
             //주변에 플레이어를 공격하는 몬스터가 없을 때
@@ -205,7 +205,7 @@ public class Monster : MonoBehaviour, IDamage
         //설정된 반경안에 플레이어가 탐지된다면
         if (colls.Length >= 1)
         {
-            Vector3 dir = (GameManager.Instance.testPlayer.transform.position - transform.position).normalized;
+            Vector3 dir = (GameManager.Instance.playerTr.position - transform.position).normalized;
             //적의 시야각에 플레이어가 존재하는지 판단
             if (Vector3.Angle(transform.forward, dir) < viewAngle * 0.5)
             {
@@ -230,7 +230,7 @@ public class Monster : MonoBehaviour, IDamage
         bool Find = false;
         RaycastHit hit;
 
-        Vector3 player = new Vector3(GameManager.Instance.testPlayer.transform.position.x, GameManager.Instance.testPlayer.transform.position.y + 0.5f, GameManager.Instance.testPlayer.transform.position.z);
+        Vector3 player = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y + 0.5f, GameManager.Instance.playerTr.position.z);
         Vector3 dir = (player - transform.position).normalized;
         //플레이어를 향해 레이캐스트
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
@@ -247,7 +247,7 @@ public class Monster : MonoBehaviour, IDamage
         //상태가 TRACE일때만 반복
         while (state == State.TRACE && !isFreeze)
         {
-            Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
+            Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
             moveDirection.Normalize(); // 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
@@ -260,7 +260,7 @@ public class Monster : MonoBehaviour, IDamage
     //애니메이션 이벤트에서 호출
     public void attack()
     {
-        float dist = Vector3.Distance(GameManager.Instance.testPlayer.transform.position, transform.position);
+        float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (dist < attackDist + 0.5f)
         {
@@ -296,7 +296,7 @@ public class Monster : MonoBehaviour, IDamage
         {
             if (chaseTime <= chaseMaxTime)
             {
-                Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
+                Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
                 moveDirection.Normalize(); // 방향을 정규화
                 Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
@@ -308,7 +308,7 @@ public class Monster : MonoBehaviour, IDamage
     }
     void AttackLook()
     {
-        Vector3 moveDirection = GameManager.Instance.testPlayer.transform.position - transform.position;
+        Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
         moveDirection.Normalize(); // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);

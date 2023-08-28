@@ -27,7 +27,7 @@ public class MonsterGargoyleBullet : MonoBehaviour
     }
     public void lookPlayer()
     {
-        transform.LookAt(GameManager.Instance.testPlayer.transform.position);
+        transform.LookAt(GameManager.Instance.playerTr.position);
     }
     void GrowUp()
     {

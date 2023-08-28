@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
-    public testPlayer testPlayer;
     public PoolManager[] poolManager;
     public Transform playerTr;
     public Transform handsTr;
