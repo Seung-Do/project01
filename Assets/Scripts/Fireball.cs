@@ -64,7 +64,7 @@ public class Fireball : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         fireEffect.Stop();
         collisonEffect.Play();
-        Debug.Log("파이어볼 레이어 :" + collision.gameObject.layer);
+       
         IDamage damage = collision.gameObject.GetComponent<IDamage>();
         if(damage != null)
         {

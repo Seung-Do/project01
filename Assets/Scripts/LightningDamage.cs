@@ -16,11 +16,10 @@ public class LightningDamage : MonoBehaviour
     {
 
     }
-    void OnParticleCollision(GameObject other)
+    /*void OnParticleCollision(GameObject other)
     {
-        Debug.Log("라이트닝 레이어 :"+other.gameObject.layer);
-        Debug.Log(other.gameObject.tag);
-       /* if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
         {
             isDamage = true;
             Animator animator = other.GetComponent<Animator>();
@@ -31,13 +30,30 @@ public class LightningDamage : MonoBehaviour
                 StartCoroutine(AnimatorSlow(animator));
             }         
             
-        }*/
-    }
+        }
+    }*/
+   
+
     IEnumerator AnimatorSlow(Animator animator)
     {
         animator.speed = 0.2f;
         yield return waitTime;
         animator.speed = 1f;
         isDamage = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY") && !isDamage)
+        {
+            isDamage = true;
+            Animator animator = other.GetComponent<Animator>();
+            IDamage damage = other.gameObject.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.getDamage(50);
+                StartCoroutine(AnimatorSlow(animator));
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ public class IceDamage : MonoBehaviour
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
                 Animator animator = collider.GetComponent<Animator>();
-                Debug.Log("아이스 레이어 :" + collider.gameObject.layer);
+      
                 IDamage damage = collider.gameObject.GetComponent<IDamage>();
                 if (damage != null)
                 {
