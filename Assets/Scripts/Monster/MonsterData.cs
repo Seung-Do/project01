@@ -13,6 +13,8 @@ public class MonsterData : ScriptableObject
     //3 : KingCobra
     //4 : Shield
     //5 : Witch
+    //6 : Guardion
+    //7 : Gargoyle
 
     [Header("# Monster Data")]
     public float Health;    //Ã¼·Â
