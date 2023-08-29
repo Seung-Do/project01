@@ -4,32 +4,20 @@ using UnityEngine;
 
 public class BossShockWave : MonoBehaviour
 {
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(Hit());
     }
 
     IEnumerator Hit()
     {
-        yield return new WaitForSeconds(1);
-        Wave();
-        yield return new WaitForSeconds(1);
+        shockWave();
+        yield return new WaitForSeconds(4);
         gameObject.SetActive(false);
     }    
-
-    void Wave()
+    void shockWave()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2);
-
-        foreach (Collider collider in colliders)
-        {
-            GameObject hit = collider.gameObject;
-            PlayerDamage damage = hit.GetComponent<PlayerDamage>();
-
-            if (damage != null)
-            {
-                damage.getDamage(20);
-            }
-        }
+        GameObject Shock = GameManager.Instance.poolManager[1].Get(14);
+        Shock.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, 2.5f, GameManager.Instance.playerTr.position.z);
     }
 }

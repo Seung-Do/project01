@@ -18,7 +18,7 @@ public class PlayerDamage : MonoBehaviour, IDamage
                 print("플레이어 죽음");
             if (hp > 100)
                 hp = 100;
-            //Debug.Log("플레이어 HP :" + hp.ToString());
+            Debug.Log("플레이어 HP :" + hp.ToString());
             image.fillAmount = hp / 100;
             if (damage > 0)
                 StartCoroutine(ShowVignette());

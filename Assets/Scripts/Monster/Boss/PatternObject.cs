@@ -6,8 +6,8 @@ public class PatternObject : MonoBehaviour, IDamage
 {
     public void getDamage(int damage)
     {
-        testPlayer player = GameManager.Instance.playerTr.GetComponent<testPlayer>();
-        player.shield.SetActive(true);
-        Destroy(gameObject);
+        PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+        player.isSuper = true;
+        gameObject.SetActive(false);
     }
 }

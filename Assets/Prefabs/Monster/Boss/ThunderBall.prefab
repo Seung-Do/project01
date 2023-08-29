@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6150611121920790099}
   - component: {fileID: 7705329934636939132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ThunderBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2504972163630706722}
   - component: {fileID: 2310832006930320844}
   - component: {fileID: 2311994567740802924}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4939,7 +4939,7 @@ GameObject:
   - component: {fileID: 2512421263891503802}
   - component: {fileID: 2311467466921791136}
   - component: {fileID: 2312511398834009204}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: CoreEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9718,7 +9718,7 @@ GameObject:
   - component: {fileID: 2504990558845435494}
   - component: {fileID: 2311291361715150212}
   - component: {fileID: 2312333536146808388}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14488,7 +14488,7 @@ GameObject:
   - component: {fileID: 2512340230459597734}
   - component: {fileID: 2310874399756196886}
   - component: {fileID: 2312282415080447780}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Distortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19266,7 +19266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2511898030444102334}
   - component: {fileID: 2544892259141356058}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19361,7 +19361,7 @@ GameObject:
   - component: {fileID: 2504975154201285522}
   - component: {fileID: 2310722731133943118}
   - component: {fileID: 2310610831521044286}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24140,7 +24140,7 @@ GameObject:
   - component: {fileID: 2512418673650773122}
   - component: {fileID: 2310727880826710694}
   - component: {fileID: 2311915828709315848}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28928,7 +28928,7 @@ GameObject:
   - component: {fileID: 2505108824901973428}
   - component: {fileID: 2310629190761394094}
   - component: {fileID: 2310518342168941982}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33725,7 +33725,7 @@ GameObject:
   - component: {fileID: 2504608674703344892}
   - component: {fileID: 2311297410431416430}
   - component: {fileID: 2312492999541339678}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Thunder Ball 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
