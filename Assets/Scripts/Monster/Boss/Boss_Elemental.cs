@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Boss_Elemental : MonoBehaviour
+public class Boss_Elemental : MonoBehaviour, IDamage
 {
     public BossData[] data;
     WaitForSeconds wait;
@@ -517,5 +517,11 @@ public class Boss_Elemental : MonoBehaviour
     public void DontLookPlayer()
     {
         isSpelling = true;
+    }
+
+    public void getDamage(int damage)
+    {
+        hp -= damage;
+        print("³²Àº HP" + hp);
     }
 }
