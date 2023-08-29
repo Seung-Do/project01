@@ -14201,13 +14201,14 @@ GameObject:
   - component: {fileID: 199580386365231288}
   - component: {fileID: 114039827405728944}
   - component: {fileID: 3689986653703006518}
+  - component: {fileID: 3498067162242926351}
   m_Layer: 0
   m_Name: Blizzard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4429542801138502
 Transform:
   m_ObjectHideFlags: 0
@@ -19032,6 +19033,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3498067162242926351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828916075665712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c038bc908e15546885d859dc23a2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 6
 --- !u!1 &1834126560459172
 GameObject:
   m_ObjectHideFlags: 0

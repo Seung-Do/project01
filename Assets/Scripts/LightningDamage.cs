@@ -36,7 +36,7 @@ public class LightningDamage : MonoBehaviour
 
     IEnumerator AnimatorSlow(Animator animator)
     {
-        animator.speed = 0.2f;
+        animator.speed = 0.3f;
         yield return waitTime;
         animator.speed = 1f;
         isDamage = false;

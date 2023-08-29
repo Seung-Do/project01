@@ -14,12 +14,17 @@ public class MonsterWitchFireball : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        IDamage damage = other.GetComponent<IDamage>();
-        if (damage != null)
+        if (!(other.gameObject.layer == LayerMask.NameToLayer("Left Hand") || other.gameObject.layer == LayerMask.NameToLayer("Right Hand")))
         {
-            damage.getDamage(1);
+            //Debug.Log("몬스터 파이어볼 레이어" + other.gameObject.name);
+            IDamage damage = other.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.getDamage(20);
+                gameObject.SetActive(false);
+            }
+            
             gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }

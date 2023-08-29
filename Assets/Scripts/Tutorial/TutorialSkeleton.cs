@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialSkeleton : MonoBehaviour
+public class TutorialSkeleton : MonoBehaviour, IDamage
 {
     public Animator animator;
     public int hitNumber;
@@ -93,10 +93,11 @@ public class TutorialSkeleton : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
+    
+
+    public void getDamage(int damage)
     {
         animator.SetTrigger("damage");
         hitNumber++;
     }
-    
 }

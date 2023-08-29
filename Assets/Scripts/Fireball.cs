@@ -22,7 +22,7 @@ public class Fireball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();         
+        rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();
     }
 
     private void OnEnable()
@@ -40,16 +40,16 @@ public class Fireball : MonoBehaviour
         collisonEffect.Stop();
         fireEffect.Play();
         //fire.Play();
-      
+
 
     }
     private void OnDisable()
     {
-        rb.Sleep();      
+        rb.Sleep();
     }
     void Update()
     {
-       
+
         Vector3 startPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
         float distance = Vector3.Distance(startPosition, transform.position);
         if (distance >= destroyDistance)
@@ -57,20 +57,21 @@ public class Fireball : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         explosion.Play();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         fireEffect.Stop();
         collisonEffect.Play();
-       
-        IDamage damage = collision.gameObject.GetComponent<IDamage>();
-        if(damage != null)
+        //Debug.Log("파이어볼 " + other.gameObject.name);
+        IDamage damage = other.gameObject.GetComponent<IDamage>();
+        if (damage != null)
         {
             damage.getDamage(50);
         }
 
-        Destroy(gameObject,1f);
+        Destroy(gameObject, 1f);
     }
+
 }

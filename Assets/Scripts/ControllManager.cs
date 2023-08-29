@@ -28,6 +28,7 @@ public class ControllManager : MonoBehaviour
     public GameObject[] bookSpell;
     public GameObject[] allSpells;
     public int index;
+    public Collider lightningCollider;
 
     //public TMP_Text text;
     private void Awake()
@@ -44,6 +45,7 @@ public class ControllManager : MonoBehaviour
         IsPosible = true;
         //SelectSpell(0);
         GestureRecognition gr = new GestureRecognition();
+        lightningCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -124,14 +126,14 @@ public class ControllManager : MonoBehaviour
         else if (rec == "Slash" && IsPosible)
         {
             IsPosible = false;
-            if (index == 0)
+            if (index == 0) //파이어볼
             {
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 GameObject magic = Instantiate(magicPrefabs[index], newPosition, Quaternion.identity);
                 Destroy(magic, 1.2f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
-            else if (index == 1)
+            else if (index == 1) //라이트닝
             {
                 Vector3 playerDirection = Camera.main.transform.forward;
                 //playerDirection.y = 0f;
@@ -140,7 +142,7 @@ public class ControllManager : MonoBehaviour
                 StartCoroutine(LightningSpell());
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
-            else if (index == 2)
+            else if (index == 2) // 얼음화살
             {
 
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
@@ -154,14 +156,14 @@ public class ControllManager : MonoBehaviour
         else if (rec == "X" && IsPosible)
         {
             IsPosible = false;
-            if (index == 0)
+            if (index == 0) //메테오
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
-            else if (index == 1)
+            else if (index == 1) //천둥 다발
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
                 //Debug.Log("스폰 위치 y값" + spawnPosition.y);
@@ -170,7 +172,7 @@ public class ControllManager : MonoBehaviour
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
-            else if (index == 2)
+            else if (index == 2) //블리자드
             {
                 //Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
                 //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
@@ -188,9 +190,11 @@ public class ControllManager : MonoBehaviour
     }
     IEnumerator LightningSpell()
     {
+        lightningCollider.enabled = true;
         spell.CastSpell();
         yield return lightningWait;
         spell.StopSpell();
+        lightningCollider.enabled = false;
     }
     //마법발사 쿨타임
     IEnumerator MagicIsPosible(WaitForSeconds wait)

@@ -31,13 +31,16 @@ public class IceDamage : MonoBehaviour
                 {
                     damage.getDamage(50);
                     Monster monster = collider.GetComponent<Monster>();
-                    StartCoroutine(AnimatorSlow(animator, monster));
+                    if (monster != null)
+                        StartCoroutine(AnimatorSlowMonster(animator, monster));
+                    else
+                        StartCoroutine(AnimatorSlow(animator));
                 }
                 
             }
         }
     }
-    IEnumerator AnimatorSlow(Animator animator, Monster monster)
+    IEnumerator AnimatorSlowMonster(Animator animator, Monster monster)
     {      
         animator.speed = 0f;
         monster.isFreeze = true;
@@ -45,4 +48,11 @@ public class IceDamage : MonoBehaviour
         animator.speed = 1f;
         monster.isFreeze = false;   
     }
+    IEnumerator AnimatorSlow(Animator animator)
+    {
+        animator.speed = 0f;
+        yield return waitTime;
+        animator.speed = 1f;
+    }
+       
 }
