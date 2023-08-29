@@ -8,24 +8,30 @@ public class PlayerDamage : MonoBehaviour, IDamage
     public int hp = 100;
     [SerializeField] Image image;
     [SerializeField] GameObject vignette;
-
+    public bool isSuper;
     public void getDamage(int damage)
     {
-        hp -= damage;
-        if (hp <= 0)
-            print("플레이어 죽음");
-        if (hp > 100)
-            hp = 100;
-        //Debug.Log("플레이어 HP :" + hp.ToString());
-        image.fillAmount = hp/100;
-        if (damage > 0)
-            StartCoroutine(ShowVignette());
+        if (!isSuper)
+        {
+            hp -= damage;
+            if (hp <= 0)
+                print("플레이어 죽음");
+            if (hp > 100)
+                hp = 100;
+            //Debug.Log("플레이어 HP :" + hp.ToString());
+            image.fillAmount = hp / 100;
+            if (damage > 0)
+                StartCoroutine(ShowVignette());
+        }
+        else
+            print("무적상태");
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        isSuper = false;
     }
 
     // Update is called once per frame
