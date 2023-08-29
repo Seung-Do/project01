@@ -9,7 +9,7 @@ public class testDamage : MonoBehaviour
         IDamage damage = other.GetComponent<IDamage>();
         if(damage != null )
         {
-            damage.getDamage(1);
+            damage.getDamage(50);
         }
     }
 }
