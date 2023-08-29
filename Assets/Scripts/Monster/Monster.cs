@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour, IDamage
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
+    Collider coll;
 
     public MonsterShield shield;
 
@@ -57,6 +58,7 @@ public class Monster : MonoBehaviour, IDamage
         wait = new WaitForSeconds(0.5f);
         playerLayer = LayerMask.NameToLayer("PLAYER");
         enemyLayer = LayerMask.NameToLayer("ENEMY");
+        coll = GetComponent<Collider>();
     }
     private void OnEnable()
     {
@@ -75,6 +77,8 @@ public class Monster : MonoBehaviour, IDamage
         isFreeze = false;
         StartCoroutine(Action());
         StartCoroutine(CheckState());
+        rb.isKinematic = false;
+        coll.enabled = true;
     }
 
     void Update()
@@ -190,6 +194,7 @@ public class Monster : MonoBehaviour, IDamage
                 case State.DEAD:
                     anim.SetBool("Dead", true);
                     isDead = true;
+                    StartCoroutine(Death());
                     yield break;
             }
         }
@@ -407,4 +412,13 @@ public class Monster : MonoBehaviour, IDamage
             yield return Time.deltaTime;
         }
     }
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(1);
+        rb.isKinematic = true;
+        coll.enabled = false;
+        yield return new WaitForSeconds(10);
+        gameObject.SetActive(false);
+    }
+
 }
