@@ -1866,7 +1866,7 @@ Animator:
   m_GameObject: {fileID: 8514941889303367078}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f629670f101982d43b53a8fa58739b39, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3b7356c37b3a2ce43b48889df86068b8, type: 2}
+  m_Controller: {fileID: 9100000, guid: b775f67338ab5c74d8f67c6373dcb8a1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1920,6 +1920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ce54b658dcd154945a300a5a6b6e9e0b, type: 2}
   shield: {fileID: 0}
+  hp: 0
   isFindPlayer: 0
   isFreeze: 0
   TraceTime: 0
