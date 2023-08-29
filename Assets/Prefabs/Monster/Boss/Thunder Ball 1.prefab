@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6064317073543753836}
   - component: {fileID: 6267325822272867714}
   - component: {fileID: 6268553395733825314}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4893,7 +4893,7 @@ GameObject:
   - component: {fileID: 6068128819154148084}
   - component: {fileID: 6266831159999893230}
   - component: {fileID: 6267895827211007034}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: CoreEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9672,7 +9672,7 @@ GameObject:
   - component: {fileID: 6064539483520648370}
   - component: {fileID: 6266999026052315168}
   - component: {fileID: 6267914430552962640}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Thunder Ball 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14508,7 +14508,7 @@ GameObject:
   - component: {fileID: 6064191330146334202}
   - component: {fileID: 6267528363638878176}
   - component: {fileID: 6267646077656847824}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19305,7 +19305,7 @@ GameObject:
   - component: {fileID: 6064325011513185244}
   - component: {fileID: 6267582151407107328}
   - component: {fileID: 6267685330063791984}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24084,7 +24084,7 @@ GameObject:
   - component: {fileID: 6068140551286910156}
   - component: {fileID: 6267568214148786920}
   - component: {fileID: 6268493793868649798}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ball 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28872,7 +28872,7 @@ GameObject:
   - component: {fileID: 6068067193200698344}
   - component: {fileID: 6267421695244065880}
   - component: {fileID: 6268265546347372394}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Distortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33650,7 +33650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6068520394661659376}
   - component: {fileID: 6177527809265191508}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33745,7 +33745,7 @@ GameObject:
   - component: {fileID: 6064160062546001448}
   - component: {fileID: 6267007275952479690}
   - component: {fileID: 6268084682808270346}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

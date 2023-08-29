@@ -9,7 +9,7 @@ public class FireShield : MonoBehaviour, IDamage
     {
         print("ºÎ½¤Áü");
         shield.SetActive(false);
-        testPlayer player = GameManager.Instance.playerTr.GetComponent<testPlayer>();
-        player.shield.SetActive(true);
+        PlayerDamage playerDamage = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+        playerDamage.isSuper = true;
     }
 }

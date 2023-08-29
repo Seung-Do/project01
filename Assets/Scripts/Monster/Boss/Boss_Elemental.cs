@@ -19,7 +19,7 @@ public class Boss_Elemental : MonoBehaviour
 
     [SerializeField] float hp;
     float speed;
-    float damage;
+    int damage;
     [SerializeField] float move;
     [SerializeField] float moveSpeed;
     bool isDead;
@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         //Type = Random.Range(0, 5);
-        Type = 2;
+        Type = 1;
     }
     private void Start()
     {
@@ -174,6 +174,8 @@ public class Boss_Elemental : MonoBehaviour
                 else
                     yield return new WaitForSeconds(22f);
                 isSpelling = false;
+                PlayerDamage playerDamage = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+                playerDamage.isSuper = false;
             }
             //원거리 공격
             else if (dist > 5 && canMage)
@@ -287,6 +289,8 @@ public class Boss_Elemental : MonoBehaviour
         {
             //플레이어가 데미지 받는 메서드
             print("플레이어 데미지" + damage);
+            PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+            player.getDamage(damage);
         }
     }
 
@@ -412,11 +416,11 @@ public class Boss_Elemental : MonoBehaviour
                 num = 3;
                 break;
             case 4:
-                num = Random.Range(4, 6);
+                /*num = Random.Range(4, 6);
                 if (num == 4)
                     StartCoroutine(TimeCast());
-                else
-                    num = 5;
+                else*/
+                    num = 6;
                 break;
         }
 
@@ -443,12 +447,12 @@ public class Boss_Elemental : MonoBehaviour
         bullet.Throw = true;
     }
     //마법 타입만 사용
-    IEnumerator TimeCast()
+   /* IEnumerator TimeCast()
     {
         yield return new WaitForSeconds(1.5f);
         GameObject Time = GameManager.Instance.poolManager[1].Get(5);
         Time.transform.position = GameManager.Instance.playerTr.position;
-    }
+    }*/
 
     //속도 회복 메서드
     IEnumerator RecoverySpeed()

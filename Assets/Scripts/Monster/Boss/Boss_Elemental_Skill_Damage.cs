@@ -21,16 +21,16 @@ public class Boss_Elemental_Skill_Damage : MonoBehaviour
                 Hit(10);
                 break;
             case 1:
-                StartCoroutine(Ice(20));
+                StartCoroutine(Ice(30));
                 break;
             case 2:
-                StartCoroutine(Thunder(20));
+                StartCoroutine(Thunder(30));
                 break;
             case 3:
                 Hit(20);
                 break;
             case 4:
-                Death(70);
+                StartCoroutine(Death(70));
                 break;
         }
     }
@@ -52,7 +52,7 @@ public class Boss_Elemental_Skill_Damage : MonoBehaviour
     IEnumerator Ice(int num)
     {
         int a = 0;
-        while (a <= 5)
+        while (a <= 4)
         {
             a++;
             PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
@@ -63,7 +63,7 @@ public class Boss_Elemental_Skill_Damage : MonoBehaviour
     IEnumerator Thunder(int num)
     {
         int a = 0;
-        while(a <= 5)
+        while(a <= 4)
         {
             a++;
             PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();

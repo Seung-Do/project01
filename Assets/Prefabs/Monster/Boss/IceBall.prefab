@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3207016699796118603}
   - component: {fileID: 3336698707505357259}
   - component: {fileID: 3335914897500635471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ice (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 3215201367958888231}
   - component: {fileID: 3336748930890720769}
   - component: {fileID: 3335736663603051143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ice Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9484,7 +9484,7 @@ GameObject:
   - component: {fileID: 3215145242004758283}
   - component: {fileID: 3336297293474036321}
   - component: {fileID: 3335883479966772535}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Summon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14191,7 +14191,7 @@ GameObject:
   - component: {fileID: 3215201541772650723}
   - component: {fileID: 3336735202071050569}
   - component: {fileID: 3336431803191669231}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Core (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18898,7 +18898,7 @@ GameObject:
   - component: {fileID: 3215484745796925071}
   - component: {fileID: 3336156616082342435}
   - component: {fileID: 3335700228277577615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23607,7 +23607,7 @@ GameObject:
   - component: {fileID: 3215190831285944343}
   - component: {fileID: 3336686457430690931}
   - component: {fileID: 3335669284753602459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Summon (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28372,7 +28372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3206753264620728565}
   - component: {fileID: 3246776165147931037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28467,7 +28467,7 @@ GameObject:
   - component: {fileID: 3206815298117047739}
   - component: {fileID: 3336837395596510403}
   - component: {fileID: 3335496055433419611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33223,7 +33223,7 @@ GameObject:
   - component: {fileID: 3207119390368032857}
   - component: {fileID: 3336751274673231021}
   - component: {fileID: 3335701357443433703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Summon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37931,7 +37931,7 @@ GameObject:
   - component: {fileID: 3207012705445340137}
   - component: {fileID: 3336050473541308221}
   - component: {fileID: 3335501225900793307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42696,7 +42696,7 @@ GameObject:
   - component: {fileID: 3215306137020068149}
   - component: {fileID: 3336732711233265297}
   - component: {fileID: 3336595116949143005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Summon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47516,7 +47516,7 @@ GameObject:
   - component: {fileID: 3207081692595308805}
   - component: {fileID: 3336268858947017621}
   - component: {fileID: 3334946572297535193}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52271,7 +52271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 342192940808905029}
   - component: {fileID: 1528990933590486320}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IceBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
