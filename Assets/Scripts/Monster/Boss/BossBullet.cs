@@ -21,10 +21,11 @@ public class BossBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Off(1));
+        //StartCoroutine(Off(1));
         IDamage damage = other.GetComponent<IDamage>();
         if(damage != null)
             damage.getDamage(20);
+        gameObject.SetActive(false);
     }
     public void lookPlayer()
     {

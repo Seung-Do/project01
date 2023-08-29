@@ -16,7 +16,7 @@ public class ToBossZone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("PLAYER"))
         {
             GameManager.Instance.Boss0Load();          
         }
