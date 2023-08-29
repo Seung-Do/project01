@@ -87,16 +87,19 @@ public class Monster : MonoBehaviour, IDamage
         chase();
         StopTrace();
         moveSpeed = move * speed;
-        
-        if(isFreeze)
+
+        if (isFreeze)
             rb.velocity = Vector3.zero;
+
+        if (isChase || isFindPlayer)
+            AttackLook();
     }
 
     //몬스터의 상태를 정하는 코루틴
     IEnumerator CheckState()
     {
         yield return wait;
-        while(!isDead)
+        while (!isDead)
         {
             //hp가 0이하가 되었을 때
             if (hp <= 0)
@@ -108,11 +111,16 @@ public class Monster : MonoBehaviour, IDamage
 
             float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
+            //데미지 받았을 때
+            if (isHit)
+            {
+                state = State.HIT;
+            }
             //시야에 플레이어가 들어오지 않았거나
             //주변에 플레이어를 공격하는 몬스터가 없을 때
-            if (viewRange >= dist)
+            else if (viewRange >= dist)
             {
-               // print("주변에 플레이어가 있음");
+                // print("주변에 플레이어가 있음");
                 //시야에 플레이어가 들어왔을 때
                 if (isTracePlayer())
                 {
@@ -120,7 +128,7 @@ public class Monster : MonoBehaviour, IDamage
                     //플레이어가 보이면
                     if (ViewPlayer())
                     {
-                       // print("플레이어가 보임");
+                        // print("플레이어가 보임");
                         //플레이어가 공격거리 안에 들어왔을 때
                         if (attackDist >= dist)
                         {
@@ -142,12 +150,7 @@ public class Monster : MonoBehaviour, IDamage
             {
                 state = State.TRACE;
             }
-            
-            //데미지 받았을 때
-            else if (isHit)
-            {
-                state = State.HIT;
-            }
+
             else
                 state = State.IDLE;
 
@@ -184,7 +187,6 @@ public class Monster : MonoBehaviour, IDamage
                     chaseTime = 0f;
                     isChase = true;
                     rb.velocity = Vector3.zero;
-                    AttackLook();
                     AttackAnim();
                     break;
                 case State.HIT:
@@ -240,7 +242,7 @@ public class Monster : MonoBehaviour, IDamage
         //플레이어를 향해 레이캐스트
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
         {
-           // print(hit.collider.gameObject.name);
+            // print(hit.collider.gameObject.name);
             //찾으면 true 못찾으면 false반환
             Find = hit.collider.CompareTag("PLAYER");
         }
