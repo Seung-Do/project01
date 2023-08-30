@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         //Type = Random.Range(0, 5);
-        Type = 3;
+        Type = 4;
     }
     private void Start()
     {
