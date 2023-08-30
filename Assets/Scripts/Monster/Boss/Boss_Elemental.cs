@@ -153,6 +153,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 canSpell = true;
                 isCanMoveSpellPos = false;
                 isSpellPos = false;
+                anim.SetBool("Spelling", false);
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
             else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell && !isSpellPos)
