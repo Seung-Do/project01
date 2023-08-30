@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         Type = Random.Range(0, 5);
-        // = 1;
+        //Type = 4;
     }
     private void Start()
     {
@@ -438,7 +438,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         anim.SetBool("NormalSpell", true);
 
         //땅, 마법 타입은 BossBullet스크립트를 가지고있지않아 Break
-        if (num >= 3)
+        if (num == 3)
             yield break;
 
         BossBullet bullet = skill.GetComponent<BossBullet>();
