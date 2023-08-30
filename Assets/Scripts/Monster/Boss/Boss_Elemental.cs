@@ -470,13 +470,17 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     public void HpChange()
     {
+        bool isSame;
+        isSame = true;
         int a = 5;
-        while (a != Type)
+        while (isSame)
         {
             a = Random.Range(0, 5);
+            print("변신 번호" + a);
             if (a != Type)
             {
                 Type = a;
+                isSame = false;
                 break;
             }
         }

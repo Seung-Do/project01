@@ -19,8 +19,16 @@ public class MonsterGuardianBullet : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("PLAYER"))
+        if (!(other.gameObject.layer == LayerMask.NameToLayer("Left Hand") || other.gameObject.layer == LayerMask.NameToLayer("Right Hand")))
         {
+            //Debug.Log("몬스터 파이어볼 레이어" + other.gameObject.name);
+            IDamage damage = other.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.getDamage(20);
+                gameObject.SetActive(false);
+            }
+
             gameObject.SetActive(false);
         }
     }
