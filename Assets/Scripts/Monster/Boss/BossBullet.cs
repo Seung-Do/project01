@@ -22,6 +22,7 @@ public class BossBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //StartCoroutine(Off(1));
+        Debug.Log("보스불렛에 맞음 : "+other.gameObject.name);
         IDamage damage = other.GetComponent<IDamage>();
         if(damage != null)
             damage.getDamage(20);
@@ -29,7 +30,7 @@ public class BossBullet : MonoBehaviour
     }
     public void lookPlayer()
     {
-        transform.LookAt(GameManager.Instance.playerTr.position);
+        transform.LookAt(GameManager.Instance.playerTr.position + Vector3.up);
     }
     IEnumerator Off(float num)
     {

@@ -15,7 +15,7 @@ MonoBehaviour:
   BossType: 2
   Speed: 2
   Damage: 20
-  AttackDistance: 4.5
+  AttackDistance: 3
   CassTime: 4.5
   AttackTime: 1
   Sound: 0

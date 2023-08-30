@@ -69,8 +69,8 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         bossSkill = GetComponent<Boss_Elemental_Skill>();
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
-        Type = Random.Range(0, 5);
-        //Type = 4;
+        //Type = Random.Range(0, 5);
+        Type = 1;
     }
     private void Start()
     {

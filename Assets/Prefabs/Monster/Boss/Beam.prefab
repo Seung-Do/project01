@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4338993832884247993}
   - component: {fileID: 4658264130692014862}
+  - component: {fileID: 8720213417642976656}
   m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
@@ -46,6 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Throw: 0
+--- !u!135 &8720213417642976656
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699743886444916255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9091987512324617064
 GameObject:
   m_ObjectHideFlags: 0
