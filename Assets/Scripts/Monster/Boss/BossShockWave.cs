@@ -18,6 +18,6 @@ public class BossShockWave : MonoBehaviour
     void shockWave()
     {
         GameObject Shock = GameManager.Instance.poolManager[1].Get(14);
-        Shock.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, 2.5f, GameManager.Instance.playerTr.position.z);
+        Shock.transform.position = new Vector3(GameManager.Instance.playerTr.position.x, 0, GameManager.Instance.playerTr.position.z);
     }
 }
