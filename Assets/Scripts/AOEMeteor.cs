@@ -2,35 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AOEDamage : MonoBehaviour
+public class AOEMeteor : MonoBehaviour
 {
     [SerializeField] private float radius;
-    [SerializeField] private int sizeOfDamage;
+    private WaitForSeconds wait = new WaitForSeconds(1f);
+    public Color sphereColor = Color.red;
     void Start()
     {
 
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
 
     }
     void OnEnable()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.down * 5f, radius);
 
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
+                Animator animator = collider.gameObject.GetComponent<Animator>();
 
                 IDamage damage = collider.gameObject.GetComponent<IDamage>();
                 if (damage != null)
                 {
-                    damage.getDamage(sizeOfDamage);
+                    StartCoroutine(DamageWait(damage));
                 }
             }
         }
+    }
+    IEnumerator DamageWait(IDamage damage)
+    {
+        yield return wait;
+        damage.getDamage(100);
     }
 }

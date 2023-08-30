@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 108106897617494064}
   - component: {fileID: 114745230419815290}
   - component: {fileID: 82820276732194086}
+  - component: {fileID: 763773164738101638}
   m_Layer: 0
   m_Name: Meteor shower
   m_TagString: Untagged
@@ -5115,6 +5116,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &763773164738101638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090634406790140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31fca50cd00c534999b3c246cd9412a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 6
 --- !u!1 &1100218262181834
 GameObject:
   m_ObjectHideFlags: 0

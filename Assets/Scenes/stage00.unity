@@ -14927,6 +14927,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Jewel_07
       objectReference: {fileID: 0}
+    - target: {fileID: 7957027601829565096, guid: fb049a52cba32e04489559c42ae9dc58, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb049a52cba32e04489559c42ae9dc58, type: 3}
 --- !u!1 &984927586 stripped
