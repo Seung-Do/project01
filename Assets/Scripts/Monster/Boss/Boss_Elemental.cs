@@ -146,7 +146,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             }
 
             //체력 절반 이하가 되면 변신
-            if (hp < MaxHp / 2 && !isChanged)
+            if (hp <= MaxHp / 2 && !isChanged)
             {
                 state = State.CHANGE;
                 isChanged = true;
