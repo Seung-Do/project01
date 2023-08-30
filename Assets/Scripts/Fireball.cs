@@ -65,12 +65,14 @@ public class Fireball : MonoBehaviour
         fireEffect.Stop();
         collisonEffect.Play();
         //Debug.Log("파이어볼 " + other.gameObject.name);
-        IDamage damage = other.gameObject.GetComponent<IDamage>();
-        if (damage != null)
+        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
         {
-            damage.getDamage(50);
+            IDamage damage = other.gameObject.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.getDamage(50);
+            }
         }
-
         Destroy(gameObject, 1f);
     }
 

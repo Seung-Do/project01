@@ -39193,7 +39193,7 @@ GameObject:
   - component: {fileID: 2098633494}
   m_Layer: 6
   m_Name: Boss_LavaElemental
-  m_TagString: MONSTER
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

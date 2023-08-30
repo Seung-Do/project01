@@ -12,6 +12,7 @@ TagManager:
   - SPELLPOS
   - Collide
   - MONSTERMAGIC
+  - BOSS
   layers:
   - Default
   - TransparentFX

@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         //Type = Random.Range(0, 5);
-        Type = 1;
+        Type = 3;
     }
     private void Start()
     {
@@ -285,7 +285,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     {
         float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-        if (dist < attackDist - 0.5f)
+        if (dist <= attackDist)
         {
             //플레이어가 데미지 받는 메서드
             print("플레이어 데미지" + damage);
