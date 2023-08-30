@@ -185,7 +185,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 yield return !canMage;
             }
             //Á¢±Ù
-            else if (dist > attackDist && !canMage)
+            else if ((dist > 5 && !canMage) || (dist > attackDist && canAttack)) 
             {
                 state = State.TRACE;
             }
