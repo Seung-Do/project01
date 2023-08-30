@@ -130,12 +130,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     {
         while (!isDead)
         {
-            //사망
-            if (hp <= 0)
-            {
-                state = State.DEAD;
-                isDead = true;
-            }
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
             if (cool)
             {
@@ -245,8 +239,8 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                     break;
                 case State.DEAD:
                     move = 0;
-                    anim.SetBool("Dead", true);
-                    break;
+                    anim.SetTrigger("Dead");
+                    yield break;
                 case State.SPELLMOVE:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
@@ -304,17 +298,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
         }
-    }
-
-    //IDamage인터페이스 상속 메서드
-    public void getDamage()
-    {
-        state = State.HIT;
-        //피격되면 속도 감소
-        speed -= 0.5f;
-        //속도 회복 코루틴
-        StartCoroutine(RecoverySpeed());
-        //데미지 받는 내용 작성
     }
 
     //랜덤하게 공격 모션 재생
@@ -521,7 +504,18 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     public void getDamage(int damage)
     {
+        /*//피격되면 속도 감소
+        speed -= 0.5f;
+        //속도 회복 코루틴
+        StartCoroutine(RecoverySpeed());*/
+
         hp -= damage;
-        print("남은 HP" + hp);
+        print("남은 HP" + hp); 
+        
+        if (hp <= 0)
+        {
+            state = State.DEAD;
+            print("죽음");
+        }
     }
 }

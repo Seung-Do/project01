@@ -10,4 +10,12 @@ public class PatternObject : MonoBehaviour, IDamage
         player.isSuper = true;
         gameObject.SetActive(false);
     }
+    private void Start()
+    {
+        StartCoroutine(off());
+    }
+    IEnumerator off()
+    {
+        yield return new WaitForSeconds(21);
+    }
 }
