@@ -113,6 +113,12 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
         /*if(state == State.SPELL)
             transform.rotation = Quaternion.Euler(Vector3.zero);*/
+
+        if (hp <= 0)
+        {
+            state = State.DEAD;
+            print("Á×À½");
+        }
     }
     private void FixedUpdate()
     {
@@ -511,11 +517,5 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
         hp -= damage;
         print("³²Àº HP" + hp); 
-        
-        if (hp <= 0)
-        {
-            state = State.DEAD;
-            print("Á×À½");
-        }
     }
 }
