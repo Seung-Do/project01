@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 199063384625614962}
   - component: {fileID: 114511828130158186}
   - component: {fileID: 82735332245208658}
+  - component: {fileID: 486437142080856291}
   m_Layer: 0
   m_Name: ULT Lightning AOE
   m_TagString: Untagged
@@ -5131,3 +5132,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &486437142080856291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367730529187618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94f073ecc3292448c3c485cb886ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 6

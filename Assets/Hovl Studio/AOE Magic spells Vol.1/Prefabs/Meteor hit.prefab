@@ -29312,7 +29312,6 @@ GameObject:
   - component: {fileID: 4912967495656520}
   - component: {fileID: 198103461194717624}
   - component: {fileID: 199106617544808292}
-  - component: {fileID: 8270312308126525502}
   m_Layer: 0
   m_Name: Meteor hit
   m_TagString: Untagged
@@ -29912,7 +29911,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 1
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -34211,19 +34210,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8270312308126525502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850291782047516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a6bc02309e4fd48b2396bae1ec09ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 3
 --- !u!1 &1863505010802622
 GameObject:
   m_ObjectHideFlags: 0

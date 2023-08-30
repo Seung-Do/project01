@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AOEDamage : MonoBehaviour
+public class AOELightning : MonoBehaviour
 {
     [SerializeField] private float radius;
-    [SerializeField] private int sizeOfDamage;
+    private WaitForSeconds wait = new WaitForSeconds(1f);
     void Start()
     {
 
@@ -24,13 +24,19 @@ public class AOEDamage : MonoBehaviour
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
+                Animator animator = collider.gameObject.GetComponent<Animator>();
 
                 IDamage damage = collider.gameObject.GetComponent<IDamage>();
                 if (damage != null)
                 {
-                    damage.getDamage(sizeOfDamage);
+                    StartCoroutine(DamageWait(damage));
                 }
             }
         }
+    }
+    IEnumerator DamageWait(IDamage damage)
+    {
+        yield return wait;
+        damage.getDamage(100);
     }
 }
