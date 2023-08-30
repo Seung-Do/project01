@@ -246,6 +246,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 case State.DEAD:
                     move = 0;
                     anim.SetTrigger("Dead");
+                    isDead = true;
                     yield break;
                 case State.SPELLMOVE:
                     StartCoroutine(Move());
