@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         //Type = Random.Range(0, 5);
-        Type = 4;
+        Type = 2;
     }
     private void Start()
     {
@@ -507,7 +507,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         moveDirection.Normalize(); // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-        rb.velocity = moveDirection * moveSpeed;
+        rb.velocity = moveDirection * moveSpeed * 2;
     }
     public void DontLookPlayer()
     {

@@ -4835,6 +4835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Magic shield 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5852866533690120292, guid: 6031d253d99ce94449a5b68b149eac68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5953723537496732570, guid: 6031d253d99ce94449a5b68b149eac68, type: 3}
       propertyPath: m_IsTrigger
       value: 1
