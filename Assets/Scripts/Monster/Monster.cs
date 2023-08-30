@@ -20,7 +20,6 @@ public class Monster : MonoBehaviour, IDamage
     float move;
     float moveSpeed;
 
-    bool isHit;
     bool isChase;
     bool isDead;
     public bool isFindPlayer;
@@ -46,8 +45,7 @@ public class Monster : MonoBehaviour, IDamage
         IDLE,
         TRACE,
         ATTACK,
-        DEAD,
-        HIT
+        DEAD
     }
     public State state = State.IDLE;
 
@@ -64,7 +62,6 @@ public class Monster : MonoBehaviour, IDamage
     {
         move = 0;
         isDead = false;
-        isHit = false;
         isChase = false;
         hp = data.Health;
         speed = data.Speed;
@@ -111,14 +108,9 @@ public class Monster : MonoBehaviour, IDamage
 
             float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-            //데미지 받았을 때
-            if (isHit)
-            {
-                state = State.HIT;
-            }
             //시야에 플레이어가 들어오지 않았거나
             //주변에 플레이어를 공격하는 몬스터가 없을 때
-            else if (viewRange >= dist)
+            if (viewRange >= dist)
             {
                 // print("주변에 플레이어가 있음");
                 //시야에 플레이어가 들어왔을 때
@@ -188,10 +180,6 @@ public class Monster : MonoBehaviour, IDamage
                     isChase = true;
                     rb.velocity = Vector3.zero;
                     AttackAnim();
-                    break;
-                case State.HIT:
-                    anim.SetTrigger("Hit");
-                    Hit();
                     break;
                 case State.DEAD:
                     anim.SetBool("Dead", true);
@@ -357,14 +345,9 @@ public class Monster : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
-        isHit = true;
-        //데미지 받는 내용 작성
         hp -= damage;
-    }
-    //애니메이션이벤트에서 hit애니메이션 끝날때 호출
-    public void Hit()
-    {
-        isHit = false;
+        if(hp >0)
+            anim.SetTrigger("Hit");
     }
 
     void randomAttackAnim()
