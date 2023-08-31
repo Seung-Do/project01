@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
 
 //EnemyFOV 스크립트를 활용하기위한 커스텀에디터임을 명시
 [CustomEditor(typeof(Monster))]
@@ -26,3 +24,4 @@ public class FOVEditor : Editor
         Handles.Label(fov.transform.position + (fov.transform.forward * 2f), fov.viewAngle.ToString());
     }
 }
+#endif
