@@ -5032,7 +5032,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11f5a6ec61bc7ae46b15ed167b50519a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5129,6 +5129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 6
+  sphereColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1100218262181834
 GameObject:
   m_ObjectHideFlags: 0

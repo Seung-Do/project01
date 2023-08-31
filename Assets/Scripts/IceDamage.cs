@@ -38,6 +38,14 @@ public class IceDamage : MonoBehaviour
                 }
                 
             }
+            else if (collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
+            {
+                IDamage damage = collider.gameObject.GetComponent<IDamage>();
+                if (damage != null)
+                {
+                    damage.getDamage(50);
+                }
+            }
         }
     }
     IEnumerator AnimatorSlowMonster(Animator animator, Monster monster)

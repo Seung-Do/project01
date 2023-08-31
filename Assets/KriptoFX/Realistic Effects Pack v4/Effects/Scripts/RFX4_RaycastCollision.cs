@@ -83,7 +83,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
             }
             //이 부분만 수정했음
-            if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+            /*if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
                 foreach (var effect in Effects) {
                     if (effect != null)
                     {
@@ -107,7 +107,52 @@ public class RFX4_RaycastCollision : MonoBehaviour
                         if (DestroyTime > 0.0001f)
                             Destroy(instance, DestroyTime);
                     }
+                }*/
+            //요기서 부터~~~~~~~~~~~~
+            if(CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+            {
+                var instance = Instantiate(Effects[0], position, new Quaternion()) as GameObject;
+                var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
+                var effectSettingsRoot = GetComponentInParent<RFX4_EffectSettings>();
+                if (effectSettings != null && effectSettingsRoot != null)
+                {
+                    //effectSettings.EffectQuality = effectSettingsRoot.EffectQuality;
+                    // effectSettings.ForceInitialize();
                 }
+
+                CollidedInstances.Add(instance);
+
+                if (HUE > -0.9f) RFX4_ColorHelper.ChangeObjectColorByHUE(instance, HUE);
+
+                if (!IsWorldSpace)
+                    instance.transform.parent = transform;
+                if (UseNormalRotation)
+                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);
+                if (DestroyTime > 0.0001f)
+                    Destroy(instance, DestroyTime);
+            }
+            else if(CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
+            {
+                var instance = Instantiate(Effects[1], position, new Quaternion()) as GameObject;
+                var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
+                var effectSettingsRoot = GetComponentInParent<RFX4_EffectSettings>();
+                if (effectSettings != null && effectSettingsRoot != null)
+                {
+                    //effectSettings.EffectQuality = effectSettingsRoot.EffectQuality;
+                    // effectSettings.ForceInitialize();
+                }
+
+                CollidedInstances.Add(instance);
+
+                if (HUE > -0.9f) RFX4_ColorHelper.ChangeObjectColorByHUE(instance, HUE);
+
+                if (!IsWorldSpace)
+                    instance.transform.parent = transform;
+                if (UseNormalRotation)
+                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);
+                if (DestroyTime > 0.0001f)
+                    Destroy(instance, DestroyTime);
+            }//~~~~~~~~~~~~~~요까지 추가됨
             else
                 foreach (var instance in CollidedInstances) {
                     if (instance == null) continue;

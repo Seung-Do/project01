@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Transform playerTr;
     public Transform handsTr;
     public Boss_Elemental elemental;
-    public int hitNumber;
+    //public RawImage image;
     [SerializeField]
     private string firstScene = "stage00";
     [SerializeField]

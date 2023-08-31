@@ -4572,6 +4572,7 @@ MonoBehaviour:
   RaycastDistance: 20
   Effects:
   - {fileID: 173866, guid: 6692e3c69d930964f89b810020ae7d5c, type: 3}
+  - {fileID: 173866, guid: 6846eb16792ee6d4399df8388eb03868, type: 3}
   Offset: 0
   EnableTimeDelay: 0.1
   DestroyTime: 6
@@ -4627,7 +4628,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b53d2f87935e60a4daf885b0d46cb35e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
