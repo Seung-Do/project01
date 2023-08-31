@@ -1,39 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Boss_SpiritDemon : MonoBehaviour
 {
-    public BossData[] data;
+    [SerializeField] Boss_SpiritDemon_Data data;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
 
     [SerializeField] float hp;
-    float speed;
-    int damage;
+    public int damage;
     [SerializeField] float move;
-    [SerializeField] float moveSpeed;
     bool isDead;
 
     float attackDist;
+    float specialAttackDist;
+    float DashAttackDist;
     float dist;
 
     float attackTime;
     float attackMaxTime;
+    float castTime;
+    float castMaxTime;
+    float specialAttackTime;
+    float specialAttackMaxTime;
+    float DashAttackTime;
+    float DashAttackMaxTime;
 
     bool cool;
     bool canAttack;
+    bool canCast;
+    bool canSpecialAttack;
+    bool canDashAttack;
 
-    [SerializeField] float MaxHp;
-
-    bool isChange;
+    [SerializeField] bool isChange;
+    [SerializeField] bool isAttacking;
 
     public enum State
     {
         IDLE,
         TRACE,
+        WALK,
         ATTACK,
+        DASHATTACK,
+        SPECIALATTACK,
         MAGE,
         DEAD
     }
@@ -43,29 +56,39 @@ public class Boss_SpiritDemon : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        wait = new WaitForSeconds(0.5f);
+        wait = new WaitForSeconds(0.1f);
     }
     private void Start()
     {
         StartCoroutine(Action());
-        StartCoroutine(CheckState());
+        StartCoroutine(Phase1State());
     }
     private void OnEnable()
     {
+        isAttacking = false;
+        canDashAttack = false;
         canAttack = false;
+        canCast = false;
+        canSpecialAttack = false;
         move = 0;
         isDead = false;
-        hp = MaxHp;
+        hp = data.Health;
         anim.SetBool("Dead", false);
+        attackMaxTime = data.AttackTime;
+        castMaxTime = data.CassTime;
+        specialAttackMaxTime = data.SpecialAttackTime;
+        DashAttackMaxTime = data.DashAttackTime;
+        attackDist = data.AttackDistance;
+        specialAttackDist = data.SpecialAttackDistance;
+        DashAttackDist = data.DashAttackDistance;
+        damage = data.Damage;
     }
 
     void Update()
     {
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
-        moveSpeed = move * speed;
 
-        if(isChange)
-            AttackLook();
+        AttackLook();
 
         if (hp <= 0)
         {
@@ -76,33 +99,78 @@ public class Boss_SpiritDemon : MonoBehaviour
     private void FixedUpdate()
     {
         attackTime += Time.fixedDeltaTime;
+        DashAttackTime += Time.fixedDeltaTime;
+        castTime += Time.fixedDeltaTime;
+        specialAttackTime += Time.fixedDeltaTime;
 
         if (attackTime > attackMaxTime)
             canAttack = true;
+        if (castTime > castMaxTime)
+            canCast = true;
+        if (specialAttackTime > specialAttackMaxTime)
+            canSpecialAttack = true;
+        if (DashAttackTime > DashAttackMaxTime)
+            canDashAttack = true;
+
+        Vector3 gravity = -15f * Vector3.up;
+        rb.AddForce(gravity, ForceMode.Acceleration);
     }
 
-    //몬스터의 상태를 정하는 코루틴
-    IEnumerator CheckState()
+    //1페이즈 상태를 정하는 코루틴
+    IEnumerator Phase1State()
     {
+        print("페이즈1");
+        /*while (isChange)
+        {
+            yield return wait;
+
+            StartCoroutine(Phase2State());
+            yield break;
+        }*/
+        isChange = true;
+        anim.SetBool("Phase", true);
+        yield break;
+    }
+    //2페이즈 상태를 정하는 코루틴
+    IEnumerator Phase2State()
+    {
+        print("페이즈2");
         while (!isDead)
         {
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
             if (cool)
             {
                 print("쿨타임");
-                state = State.IDLE;
+                state = State.WALK;
                 yield return new WaitForSeconds(0.5f);
                 cool = false;
             }
-            //접근
-            else if (dist > attackDist)
+            //거리가 멀면 달려가서 접근
+            else if (dist > DashAttackDist)
             {
                 state = State.TRACE;
+            }
+            //대쉬 공격
+            else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack)
+            {
+                state = State.DASHATTACK;
+            }
+            //특수 공격
+            else if (dist <= specialAttackDist && dist > attackDist && canSpecialAttack)
+            {
+                state = State.SPECIALATTACK;
             }
             //근거리 공격
             else if (dist <= attackDist && canAttack)
             {
                 state = State.ATTACK;
+                rb.velocity = Vector3.zero;
+                move = 0;
+            }
+            //접근
+            else if (dist > attackDist)
+            {
+                state = State.WALK;
             }
             else
                 state = State.IDLE;
@@ -116,7 +184,7 @@ public class Boss_SpiritDemon : MonoBehaviour
     {
         while (!isDead)
         {
-            yield return wait;
+            yield return new WaitForSeconds(1f);
             switch (state)
             {
                 case State.IDLE:
@@ -124,16 +192,33 @@ public class Boss_SpiritDemon : MonoBehaviour
                     anim.SetFloat("Move", move);
                     break;
                 case State.TRACE:
+                    StartCoroutine(Run());
+                    anim.SetFloat("Move", move);
+                    break;
+                case State.WALK:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
-                    StartCoroutine(TracePlayer());
                     break;
                 case State.ATTACK:
                     move = 0;
-                    rb.velocity = Vector3.zero;
                     randomAttackAnim();
                     attackTime = 0f;
                     canAttack = false;
+                    isAttacking = true;
+                    break;
+                case State.SPECIALATTACK:
+                    move = 0;
+                    randomSpecialAttackAnim();
+                    specialAttackTime = 0f;
+                    canSpecialAttack = false;
+                    isAttacking = true;
+                    break;
+                case State.DASHATTACK:
+                    move = 0;
+                    anim.SetTrigger("DashAttack");
+                    DashAttackTime = 0f;
+                    canDashAttack = false;
+                    isAttacking = true;
                     break;
                 case State.DEAD:
                     move = 0;
@@ -144,41 +229,12 @@ public class Boss_SpiritDemon : MonoBehaviour
         }
     }
 
-    //상태가 TRACE일때 플레이어방향으로 이동하는 메서드
-    IEnumerator TracePlayer()
-    {
-        //상태가 TRACE일때만 반복
-        while (state == State.TRACE)
-        {
-            Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-            moveDirection.Normalize(); // 방향을 정규화
-            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-            rb.velocity = moveDirection * moveSpeed;
-
-            yield return Time.deltaTime;
-        }
-    }
-    //근접공격 범위안에 플레이어가 있는지 판단
-    //애니메이션 이벤트에서 호출
-    public void attack()
-    {
-        float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
-
-        if (dist <= attackDist)
-        {
-            //플레이어가 데미지 받는 메서드
-            print("플레이어 데미지" + damage);
-            PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
-            player.getDamage(damage);
-        }
-    }
-
     //시점을 플레이어한테 고정
     void AttackLook()
     {
-        if (true)
+        if (isChange && !isAttacking)
         {
+            //Vector3 pos = new Vector3(GameManager.Instance.playerTr.position.x, 1, GameManager.Instance.playerTr.position.z);
             Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
             moveDirection.Normalize(); // 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
@@ -201,15 +257,50 @@ public class Boss_SpiritDemon : MonoBehaviour
                 break;
         }
     }
-    //이동시 속도 증가
+    //랜덤하게 특수공격 모션 재생
+    void randomSpecialAttackAnim()
+    {
+        int ran = Random.Range(0, 4);
+
+        switch (ran)
+        {
+            case 0:
+                anim.SetTrigger("Attack3");
+                break;
+            case 1:
+                anim.SetTrigger("Attack4");
+                break;
+            case 2:
+                anim.SetTrigger("Attack5");
+                break;
+            case 3:
+                anim.SetTrigger("Attack6");
+                break;
+        }
+    }
+    //걷기 속도 증가
     IEnumerator Move()
     {
-        if (move >= 1)
+        if (move >= 0.6)
         {
-            move = 1;
+            move = 0.6f;
             yield break;
         }
-        while (move <= 1)
+        while (move <= 0.6)
+        {
+            move += Time.deltaTime;
+            yield return Time.deltaTime;
+        }
+    }
+    //달리기 속도 증가
+    IEnumerator Run()
+    {
+        if (move >= 0.8)
+        {
+            move = 0.8f;
+            yield break;
+        }
+        while (move <= 0.8f)
         {
             move += Time.deltaTime;
             yield return Time.deltaTime;
@@ -230,26 +321,11 @@ public class Boss_SpiritDemon : MonoBehaviour
         }
     }
 
-    public IEnumerator Ready()
-    {
-        yield return new WaitForSeconds(10f);
-        anim.SetBool("Spelling", true);
-    }
-
     //애니메이션 이벤트로 호출
     public void cooldown()
     {
         cool = true;
-    }
-    public void useAttack()
-    {
-        canAttack = false;
-    }
-
-    public IEnumerator normalCasting()
-    {
-        anim.SetBool("NormalSpell", false);
-        yield return null;
+        isAttacking = false;
     }
 
     public void getDamage(int damage)
@@ -261,5 +337,19 @@ public class Boss_SpiritDemon : MonoBehaviour
 
         hp -= damage;
         print("남은 HP" + hp);
+    }
+
+    public void ChangePhase()
+    {
+        StartCoroutine(Phase2State());
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        PlayerDamage player = collision.collider.GetComponent<PlayerDamage>();
+        if (player != null)
+        {
+            Vector3 repulsionDirection = (transform.position - GameManager.Instance.playerTr.position).normalized;
+            rb.AddForce(repulsionDirection * 10, ForceMode.Impulse);
+        }
     }
 }
