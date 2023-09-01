@@ -1648,10 +1648,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5365023673370710704}
   - component: {fileID: 5416089597019001854}
-  - component: {fileID: 3479954346251451722}
   - component: {fileID: 5407353707445250697}
   - component: {fileID: 1712567228223625766}
   - component: {fileID: 1712567228223625767}
+  - component: {fileID: 1627491944}
   m_Layer: 6
   m_Name: Monster_Witch
   m_TagString: Untagged
@@ -1697,27 +1697,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3479954346251451722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368200268907355550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba16f9016e4c20849963ec17d654857f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a8f298ebe15376043967f35d0ca4729b, type: 2}
-  shield: {fileID: 0}
-  hp: 0
-  isFindPlayer: 0
-  isFreeze: 0
-  TraceTime: 0
-  viewRange: 0
-  viewAngle: 150
-  state: 0
 --- !u!114 &5407353707445250697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,6 +1740,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6437691, y: 1.8316036, z: 0.37608892}
   m_Center: {x: 0.008940498, y: 0.95720243, z: -0.019752184}
+--- !u!114 &1627491944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368200268907355550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb637dae8f69d747858cb1034664032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: a8f298ebe15376043967f35d0ca4729b, type: 2}
+  shield: {fileID: 0}
+  hp: 0
+  isFindPlayer: 0
+  isFreeze: 0
+  TraceTime: 0
+  viewRange: 0
+  viewAngle: 120
+  state: 0
 --- !u!1 &5368214262427557840
 GameObject:
   m_ObjectHideFlags: 0
