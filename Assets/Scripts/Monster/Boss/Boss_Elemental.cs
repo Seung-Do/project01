@@ -14,6 +14,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     BossChange change;
     public GameObject changeAura;
     public GameObject[] spellAura;
+    Collider coll;
 
     Vector3 SpellPosition;
 
@@ -47,6 +48,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     public bool isSpellPos;
 
     [SerializeField] float MaxHp;
+    [SerializeField] GameObject spellBook;
     public enum State
     {
         IDLE,
@@ -69,6 +71,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         bossSkill = GetComponent<Boss_Elemental_Skill>();
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
+        coll = GetComponent<Collider>();
         Type = Random.Range(0, 5);
         //Type = 3;
     }
@@ -89,6 +92,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         isChanged = false;
         move = 0;
         isDead = false;
+        coll.enabled = true;
         hp = MaxHp;
         speed = data[Type].Speed;
         damage = data[Type].Damage;
@@ -101,6 +105,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     void Update()
     {
+        if(isDead) return;
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
         moveSpeed = move * speed;
         if (isSpellMove)
@@ -246,6 +251,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                     move = 0;
                     anim.SetTrigger("Dead");
                     isDead = true;
+                    StartCoroutine(Death());
                     yield break;
                 case State.SPELLMOVE:
                     StartCoroutine(Move());
@@ -523,5 +529,14 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
         hp -= damage;
         print("³²Àº HP" + hp); 
+    }
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(1);
+        rb.isKinematic = true;
+        coll.enabled = false;
+        yield return new WaitForSeconds(6);
+        GameObject electroBook = Instantiate(spellBook,transform.position + Vector3.up, Quaternion.identity);
+        gameObject.SetActive(false);
     }
 }

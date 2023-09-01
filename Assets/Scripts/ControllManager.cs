@@ -26,8 +26,9 @@ public class ControllManager : MonoBehaviour
     public GameObject selectedSpell;
     public GameObject[] magicPrefabs;
     public GameObject[] bookSpell;
-    public GameObject[] allSpells;
     public int index;
+    public bool lightningPosible;
+    public bool icePosible;
     public Collider lightningCollider;
 
     //public TMP_Text text;
@@ -43,6 +44,7 @@ public class ControllManager : MonoBehaviour
         isOpen = false;
         isButton = false;
         IsPosible = true;
+        bookSpell[0].SetActive(true);
         //SelectSpell(0);
         GestureRecognition gr = new GestureRecognition();
         lightningCollider.enabled = false;
@@ -75,16 +77,19 @@ public class ControllManager : MonoBehaviour
         {
             index = 0;
             ShowSpell();
+            //SelectSpell(0);
         }
-        else if (rec == "1" && GameManager.Instance.lightningPosible)
+        else if (rec == "1" && lightningPosible)
         {
             index = 1;
             ShowSpell();
+            //SelectSpell(1);
         }
-        else if (rec == "2" & GameManager.Instance.icePosible)
+        else if (rec == "2" & icePosible)
         {
             index = 2;
             ShowSpell();
+            //SelectSpell(2);
         }
 
         
@@ -132,7 +137,7 @@ public class ControllManager : MonoBehaviour
                 Destroy(magic, 1.2f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
-            else if (index == 1 && GameManager.Instance.lightningPosible) //라이트닝
+            else if (index == 1 && lightningPosible) //라이트닝
             {
                 Vector3 playerDirection = Camera.main.transform.forward;
                 //playerDirection.y = 0f;
@@ -141,7 +146,7 @@ public class ControllManager : MonoBehaviour
                 StartCoroutine(LightningSpell());
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
             }
-            else if (index == 2 && GameManager.Instance.icePosible) // 얼음화살
+            else if (index == 2 && icePosible) // 얼음화살
             {
 
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
@@ -162,7 +167,7 @@ public class ControllManager : MonoBehaviour
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
-            else if (index == 1 && GameManager.Instance.lightningPosible) //천둥 다발
+            else if (index == 1 && lightningPosible) //천둥 다발
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
                 //Debug.Log("스폰 위치 y값" + spawnPosition.y);
@@ -171,7 +176,7 @@ public class ControllManager : MonoBehaviour
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
-            else if (index == 2 && GameManager.Instance.icePosible) //블리자드
+            else if (index == 2 && icePosible) //블리자드
             {
                 //Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
                 //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
@@ -206,7 +211,7 @@ public class ControllManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            allSpells[i].SetActive(i == index);
+            bookSpell[i].SetActive(i == index);
         }
     }
     //3D 제스쳐 인식

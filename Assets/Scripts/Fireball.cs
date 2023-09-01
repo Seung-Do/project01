@@ -14,6 +14,7 @@ public class Fireball : MonoBehaviour
     public ParticleSystem fireEffect;
     public AudioSource fire;
     public AudioSource explosion;
+    [SerializeField] private int damageValue;
 
 
 
@@ -70,7 +71,7 @@ public class Fireball : MonoBehaviour
             IDamage damage = other.gameObject.GetComponent<IDamage>();
             if (damage != null)
             {
-                damage.getDamage(50);
+                damage.getDamage(damageValue);
             }
         }
         Destroy(gameObject, 1f);

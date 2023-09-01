@@ -12,8 +12,7 @@ public class GameManager : MonoBehaviour
     public Transform playerTr;
     public Transform handsTr;
     public Boss_Elemental elemental;
-    public bool lightningPosible;
-    public bool icePosible;
+    
     //public RawImage image;
     [SerializeField]
     private string firstScene = "stage00";

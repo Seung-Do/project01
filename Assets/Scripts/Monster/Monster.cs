@@ -80,6 +80,7 @@ public class Monster : MonoBehaviour, IDamage
 
     void Update()
     {
+        if (isDead) return;
         chaseTime += Time.deltaTime;
         chase();
         StopTrace();
