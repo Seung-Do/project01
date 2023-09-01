@@ -79,7 +79,7 @@ public class Boss_Elemental_Pattern : MonoBehaviour
             a = -1;
         if (b == 0)
             b = -1;
-        PatternObject.transform.localPosition = new Vector3(Random.Range(1f, 15f) * a, 2, Random.Range(1f, 15f) * b);
+        PatternObject.transform.localPosition = new Vector3(Random.Range(1f, 14f) * a, 0.5f, Random.Range(1f, 14f) * b);
         PatternObject.SetActive(true);
     }
     IEnumerator SakuraShield()
