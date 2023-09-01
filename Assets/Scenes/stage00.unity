@@ -263,6 +263,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 766645986}
     - target: {fileID: 2098633494, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
+      propertyPath: fireShield
+      value: 
+      objectReference: {fileID: 16331297}
+    - target: {fileID: 2098633494, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
       propertyPath: DivineShine
       value: 
       objectReference: {fileID: 1795829688}
@@ -372,6 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7424d4367e11ea6449a47103e4ad1c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &16331297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 457255344, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
+  m_PrefabInstance: {fileID: 16331294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &18383162
 PrefabInstance:
   m_ObjectHideFlags: 0

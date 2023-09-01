@@ -6,18 +6,20 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     public bool Throw;
+    [SerializeField] private float speed;
     private void Start()
     {
-        StartCoroutine(Off(8));
+        
     }
     private void OnEnable()
     {
         Throw = false;
+        StartCoroutine(Off(8));
     }
     void Update()
     {
         if (Throw)
-            transform.Translate(Vector3.forward * Time.deltaTime * 7);
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
     private void OnTriggerEnter(Collider other)
     {
