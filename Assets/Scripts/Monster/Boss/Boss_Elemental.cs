@@ -39,7 +39,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     [SerializeField] bool canSpell;
 
     bool cool;
-    bool isChanged;
+    [SerializeField] bool isChanged;
     bool isSpellMove;
     bool isSpelling;
     [HideInInspector]
@@ -70,7 +70,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         //Type = Random.Range(0, 5);
-        Type = 2;
+        Type = 3;
     }
     private void Start()
     {
@@ -150,14 +150,13 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             {
                 state = State.CHANGE;
                 isChanged = true;
-                canSpell = true;
-                isCanMoveSpellPos = false;
-                isSpellPos = false;
+
                 anim.SetBool("Spelling", false);
+                yield return new WaitForSeconds(3f);
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
             else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell && !isSpellPos)
-                || ((hp / MaxHp * 100) <= 30 && (hp / MaxHp * 100) >= 20) && canSpell && !isSpellPos)
+                || ((hp / MaxHp * 100) <= 30 && (hp / MaxHp * 100) >= 20 && canSpell && !isSpellPos))
             {
                 state = State.SPELLMOVE;
                 isSpellMove = true;
@@ -361,7 +360,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             else
                 yield return new WaitForSeconds(10f);
             anim.SetBool("Spelling", false);
-            canSpell = false;
             OffSpellAura();
         }
 
@@ -485,6 +483,9 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 break;
             }
         }
+        canSpell = true;
+        isCanMoveSpellPos = false;
+        isSpellPos = false;
         change.Change(Type);
     }
     public void OnChangeAura()
