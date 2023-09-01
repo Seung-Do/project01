@@ -2,23 +2,23 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-//EnemyFOV О©╫О©╫е╘О©╫О©╫ф╝О©╫О©╫ х╟О©╫О©╫О©╫о╠О©╫О©╫О©╫О©╫О©╫ д©О©╫О©╫О©╫р©О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
+//EnemyFOV ╫╨е╘╦Ёф╝╦╕ х╟©Кго╠Бю╖гя д©╫╨ер©║╣Пемюсю╩ ╦М╫ц
 [CustomEditor(typeof(Monster))]
 public class FOVEditor : Editor
 {
     private void OnSceneGUI()
     {
         Monster fov = (Monster)target;
-        //О©╫ц╬ъ╟О©╫(О©╫О©╫О©╫О©╫) О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫г╔О©╫О©╫ О©╫О©╫О©╫(О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ 1/2 О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫)
+        //╫ц╬ъ╟╒(©Ьаж) ╫цюша║юг абг╔╦╕ ╟Х╩Й(аж╬НаЬ ╟╒╣╣юг 1/2 аЖа║╨нем)
         Vector3 fromAnglePos = fov.CirclePoint(-fov.viewAngle * 0.5f);
 
         Handles.color = Color.green;
-        //О©╫О©╫О©╫О©╫О©╫О©╫г╔, О©╫О©╫ж╨О©╫О©╫О©╫, О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+        //©Ьа║абг╔, ЁК╦ж╨╓ем, ©Ьюг ╧щаЖ╦╖ ╩ГюлаН
         Handles.DrawWireDisc(fov.transform.position, Vector3.up, fov.viewRange);
 
         Handles.color = new Color(255, 1, 1, 0.2f);
-        //SolidArd = О©╫О©╫ц╓О©╫О©╫
-        //О©╫О©╫О©╫О©╫О©╫О©╫г╔, О©╫О©╫ж╨О©╫О©╫О©╫, О©╫О©╫ц╓О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫, О©╫О©╫ц╓О©╫О©╫ О©╫О©╫О©╫О©╫, О©╫О©╫ц╓О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+        //SolidArd = ╨нц╓╡ц
+        //©Ьа║абг╔, ЁК╦ж╨╓ем, ╨нц╓╡ц ╫цюш ╟╒╣╣, ╨нц╓╡ц ╟╒╣╣, ╨нц╓╡ц ╧щаЖ╦╖
         Handles.DrawSolidArc(fov.transform.position, Vector3.up, fromAnglePos, fov.viewAngle, fov.viewRange);
 
         Handles.Label(fov.transform.position + (fov.transform.forward * 2f), fov.viewAngle.ToString());

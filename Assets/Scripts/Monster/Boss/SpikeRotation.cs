@@ -6,7 +6,7 @@ public class SpikeRotation : MonoBehaviour
 {
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         transform.localPosition = new Vector3 (transform.localPosition.x, 0, transform.localPosition.z);
     }
 }

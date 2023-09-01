@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Boss_SpiritDemon : MonoBehaviour
+public class Boss_SpiritDemon : MonoBehaviour, IDamage
 {
     [SerializeField] Boss_SpiritDemon_Data data;
+    Boss_SpiritDemon_Summon summon;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
@@ -39,11 +41,17 @@ public class Boss_SpiritDemon : MonoBehaviour
     [SerializeField] bool isChange;
     [SerializeField] bool isAttacking;
 
+    public bool isOver;
+    public bool isAllDead;
+
+    int summonTime;
+
     public enum State
     {
         IDLE,
         TRACE,
         WALK,
+        SUMMON,
         ATTACK,
         DASHATTACK,
         SPECIALATTACK,
@@ -57,6 +65,7 @@ public class Boss_SpiritDemon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.1f);
+        summon = GetComponent<Boss_SpiritDemon_Summon>();
     }
     private void Start()
     {
@@ -65,6 +74,7 @@ public class Boss_SpiritDemon : MonoBehaviour
     }
     private void OnEnable()
     {
+        summonTime = 0;
         isAttacking = false;
         canDashAttack = false;
         canAttack = false;
@@ -120,16 +130,23 @@ public class Boss_SpiritDemon : MonoBehaviour
     IEnumerator Phase1State()
     {
         print("페이즈1");
-        /*while (isChange)
+        yield return new WaitForSeconds(1f);
+        while (!isOver)
         {
-            yield return wait;
+            if (isAllDead)
+                state = State.SUMMON;
+            else
+                state = State.IDLE;
 
-            StartCoroutine(Phase2State());
-            yield break;
-        }*/
-        isChange = true;
-        anim.SetBool("Phase", true);
-        yield break;
+            if (isOver)
+            {
+                isChange = true;
+
+                anim.SetBool("Phase", true);
+                yield break;
+            }
+            yield return wait;
+        }
     }
     //2페이즈 상태를 정하는 코루틴
     IEnumerator Phase2State()
@@ -199,12 +216,17 @@ public class Boss_SpiritDemon : MonoBehaviour
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
                     break;
+                case State.SUMMON:
+                    SummonAnim();
+                    isAllDead = false;
+                    break;
                 case State.ATTACK:
                     move = 0;
                     randomAttackAnim();
                     attackTime = 0f;
                     canAttack = false;
                     isAttacking = true;
+                    rb.angularDrag = 0f;
                     break;
                 case State.SPECIALATTACK:
                     move = 0;
@@ -351,5 +373,39 @@ public class Boss_SpiritDemon : MonoBehaviour
             Vector3 repulsionDirection = (transform.position - GameManager.Instance.playerTr.position).normalized;
             rb.AddForce(repulsionDirection * 10, ForceMode.Impulse);
         }
+    }
+    public void SummonAnim()
+    {
+        if (summonTime % 2 == 0)
+        {
+            anim.SetTrigger("Summon1");
+        }
+        else
+            anim.SetTrigger("Summon2");
+    }
+    public void Summon()
+    {
+        switch (summonTime)
+        {
+            case 0:
+                summon.SummonWarriorZombie();
+                print("근거리 몬스터 소환");
+                break;
+            case 1:
+                summon.SummonMageZombie();
+                print("원거리 몬스터 소환");
+                break;
+            case 2:
+                summon.SummonWarriorZombie();
+                summon.SummonMageZombie();
+                print("근거리 원거리 몬스터 소환");
+                break;
+            case 3:
+                print("골렘 소환");
+                break;
+            default:
+                break;
+        }
+        summonTime++;
     }
 }

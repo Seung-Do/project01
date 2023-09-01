@@ -27004,7 +27004,6 @@ MonoBehaviour:
   playerTr: {fileID: 1484961682}
   handsTr: {fileID: 0}
   elemental: {fileID: 2098633489}
-  hitNumber: 0
   firstScene: stage00
   secondScene: stage01
   fadeAnim: {fileID: 0}
@@ -43232,6 +43231,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7567877667057033705, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517295678266180076, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
