@@ -69,8 +69,8 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         bossSkill = GetComponent<Boss_Elemental_Skill>();
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
-        //Type = Random.Range(0, 5);
-        Type = 3;
+        Type = Random.Range(0, 5);
+        //Type = 3;
     }
     private void Start()
     {
@@ -152,7 +152,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 isChanged = true;
 
                 anim.SetBool("Spelling", false);
-                yield return new WaitForSeconds(3f);
             }
             //체력 70퍼이하 60퍼이상일때, 30퍼이하 20퍼이상일때 전체패턴  
             else if (((hp / MaxHp * 100) <= 70 && (hp / MaxHp * 100) >= 60 && canSpell && !isSpellPos)
