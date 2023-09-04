@@ -21,6 +21,9 @@ public class Boss_SpiritDemon_Data : ScriptableObject
     public float DashAttackDistance;    //대쉬스킬 사거리
     public float DashAttackTime; // 대쉬스킬 쿨타임
 
+    [Header("# Summon Info")]
+    public float SummonTime; // 소환 쿨타임
+
     [Header("# Sound")]
     public float Sound;
 }

@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class Boss_SpiritDemon_Zombie_Mage_Attack : MonoBehaviour
 {
-   
-    void Start()
+    ParticleSystem par;
+    bool isThrow;
+    private void Awake()
     {
-        transform.LookAt(GameManager.Instance.playerTr.position);
+        par = GetComponent<ParticleSystem>();
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(Throw());
     }
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * 10f);
+        if(!isThrow)
+            transform.LookAt(GameManager.Instance.playerTr.position);
+        else
+            transform.Translate(Vector3.forward * Time.deltaTime * 10f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         PlayerDamage damage = other.GetComponent<PlayerDamage>();
-        if(damage != null )
+        if (damage != null)
         {
             damage.getDamage(20);
+            gameObject.SetActive(false);
         }
+        isThrow = false;
         gameObject.SetActive(false);
+    }
+    IEnumerator Throw()
+    {
+        par.Play();
+        yield return new WaitForSeconds(0.1f);
+        isThrow = true;
     }
 }

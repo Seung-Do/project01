@@ -21,4 +21,5 @@ MonoBehaviour:
   SpecialAttackTime: 8
   DashAttackDistance: 7
   DashAttackTime: 15
+  SummonTime: 5
   Sound: 0

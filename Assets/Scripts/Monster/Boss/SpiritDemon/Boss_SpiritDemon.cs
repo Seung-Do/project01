@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.AI;
 
 public class Boss_SpiritDemon : MonoBehaviour, IDamage
 {
     [SerializeField] Boss_SpiritDemon_Data data;
+    [SerializeField] GameObject PhaseFX;
     Boss_SpiritDemon_Summon summon;
+    NavMeshAgent nav;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
@@ -31,20 +30,24 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     float specialAttackMaxTime;
     float DashAttackTime;
     float DashAttackMaxTime;
+    float summonTime;
+    float summonMaxTime;
 
     bool cool;
     bool canAttack;
     bool canCast;
     bool canSpecialAttack;
     bool canDashAttack;
+    [SerializeField] bool canSummon;
+    bool isAction;
 
-    [SerializeField] bool isChange;
+    public bool isChange;
     [SerializeField] bool isAttacking;
 
     public bool isOver;
     public bool isAllDead;
 
-    int summonTime;
+    public int summonInt;
 
     public enum State
     {
@@ -56,7 +59,8 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         DASHATTACK,
         SPECIALATTACK,
         MAGE,
-        DEAD
+        DEAD,
+        WAIT
     }
     [SerializeField] State state = State.IDLE;
 
@@ -66,6 +70,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.1f);
         summon = GetComponent<Boss_SpiritDemon_Summon>();
+        nav = GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
@@ -74,12 +79,14 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     }
     private void OnEnable()
     {
-        summonTime = 0;
+        summonInt = 0;
+        isAction = false;
         isAttacking = false;
         canDashAttack = false;
         canAttack = false;
         canCast = false;
         canSpecialAttack = false;
+        canSummon = true;
         move = 0;
         isDead = false;
         hp = data.Health;
@@ -88,6 +95,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         castMaxTime = data.CassTime;
         specialAttackMaxTime = data.SpecialAttackTime;
         DashAttackMaxTime = data.DashAttackTime;
+        summonMaxTime = data.SummonTime;
         attackDist = data.AttackDistance;
         specialAttackDist = data.SpecialAttackDistance;
         DashAttackDist = data.DashAttackDistance;
@@ -98,7 +106,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     {
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-        AttackLook();
+        //AttackLook();
 
         if (hp <= 0)
         {
@@ -112,6 +120,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         DashAttackTime += Time.fixedDeltaTime;
         castTime += Time.fixedDeltaTime;
         specialAttackTime += Time.fixedDeltaTime;
+        summonTime += Time.fixedDeltaTime;
 
         if (attackTime > attackMaxTime)
             canAttack = true;
@@ -121,6 +130,8 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             canSpecialAttack = true;
         if (DashAttackTime > DashAttackMaxTime)
             canDashAttack = true;
+        if (summonTime > summonMaxTime)
+            canSummon = true;
 
         Vector3 gravity = -15f * Vector3.up;
         rb.AddForce(gravity, ForceMode.Acceleration);
@@ -129,10 +140,17 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     //1페이즈 상태를 정하는 코루틴
     IEnumerator Phase1State()
     {
+        yield return new WaitForSeconds(2f);
         print("페이즈1");
-        yield return new WaitForSeconds(1f);
-        while (!isOver)
+        while (!isChange)
         {
+            if (cool)
+            {
+                state = State.IDLE;
+                nav.speed = 0;
+                yield return new WaitForSeconds(1f);
+                cool = false;
+            }
             if (isAllDead)
                 state = State.SUMMON;
             else
@@ -143,6 +161,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                 isChange = true;
 
                 anim.SetBool("Phase", true);
+                summonMaxTime = 30;
+                summonTime = 0;
+                canSummon = false;
                 yield break;
             }
             yield return wait;
@@ -157,35 +178,39 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
             if (cool)
             {
-                print("쿨타임");
                 state = State.WALK;
                 yield return new WaitForSeconds(0.5f);
                 cool = false;
             }
+
+            if (canSummon && hp < data.Health / 2)
+            {
+                state = State.SUMMON;
+            }
             //거리가 멀면 달려가서 접근
-            else if (dist > DashAttackDist)
+            else if (dist > DashAttackDist && !isAction)
             {
                 state = State.TRACE;
             }
             //대쉬 공격
-            else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack)
+            else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack && !isAction)
             {
                 state = State.DASHATTACK;
             }
             //특수 공격
-            else if (dist <= specialAttackDist && dist > attackDist && canSpecialAttack)
+            else if (dist <= specialAttackDist && dist > attackDist && canSpecialAttack && !isAction)
             {
                 state = State.SPECIALATTACK;
             }
             //근거리 공격
-            else if (dist <= attackDist && canAttack)
+            else if (dist <= attackDist && canAttack && !isAction)
             {
                 state = State.ATTACK;
                 rb.velocity = Vector3.zero;
                 move = 0;
             }
             //접근
-            else if (dist > attackDist)
+            else if (dist > attackDist && !isAction)
             {
                 state = State.WALK;
             }
@@ -207,21 +232,30 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                 case State.IDLE:
                     StartCoroutine(Idle());
                     anim.SetFloat("Move", move);
+                    nav.speed = 0;
                     break;
                 case State.TRACE:
                     StartCoroutine(Run());
                     anim.SetFloat("Move", move);
+                    nav.speed = move * 5;
+                    nav.SetDestination(GameManager.Instance.playerTr.position);
                     break;
                 case State.WALK:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
+                    nav.speed = move * 5;
+                    nav.SetDestination(GameManager.Instance.playerTr.position);
                     break;
                 case State.SUMMON:
+                    anim.SetFloat("Move", 0);
+                    nav.speed = 0;
                     SummonAnim();
                     isAllDead = false;
+                    canSummon = false;
+                    summonTime = 0f;
                     break;
                 case State.ATTACK:
-                    move = 0;
+                    nav.speed = 0;
                     randomAttackAnim();
                     attackTime = 0f;
                     canAttack = false;
@@ -229,24 +263,25 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                     rb.angularDrag = 0f;
                     break;
                 case State.SPECIALATTACK:
-                    move = 0;
+                    nav.speed = 0;
                     randomSpecialAttackAnim();
                     specialAttackTime = 0f;
                     canSpecialAttack = false;
                     isAttacking = true;
                     break;
                 case State.DASHATTACK:
-                    move = 0;
+                    nav.speed = 0;
                     anim.SetTrigger("DashAttack");
                     DashAttackTime = 0f;
                     canDashAttack = false;
                     isAttacking = true;
                     break;
-                case State.DEAD:
-                    move = 0;
-                    anim.SetTrigger("Dead");
-                    isDead = true;
+                case State.WAIT:
+                    nav.speed = 0;
                     break;
+                case State.DEAD:
+                    nav.speed = 0;
+                    yield break;
             }
         }
     }
@@ -358,7 +393,12 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         StartCoroutine(RecoverySpeed());*/
 
         hp -= damage;
-        print("남은 HP" + hp);
+        print("Boss 남은 HP" + hp);
+        if (hp < 0)
+        {
+            anim.SetTrigger("Dead");
+            isDead = true;
+        }
     }
 
     public void ChangePhase()
@@ -376,36 +416,58 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     }
     public void SummonAnim()
     {
-        if (summonTime % 2 == 0)
+        if (canSummon)
         {
-            anim.SetTrigger("Summon1");
+            if (summonInt % 2 == 0)
+            {
+                anim.SetTrigger("Summon1");
+            }
+            else
+                anim.SetTrigger("Summon2");
         }
-        else
-            anim.SetTrigger("Summon2");
     }
     public void Summon()
     {
-        switch (summonTime)
+        if (summonInt > 3)
+            summonInt = 0;
+        switch (summonInt)
         {
             case 0:
                 summon.SummonWarriorZombie();
-                print("근거리 몬스터 소환");
                 break;
             case 1:
                 summon.SummonMageZombie();
-                print("원거리 몬스터 소환");
                 break;
             case 2:
                 summon.SummonWarriorZombie();
                 summon.SummonMageZombie();
-                print("근거리 원거리 몬스터 소환");
                 break;
             case 3:
-                print("골렘 소환");
+                summon.SummonGolem();
                 break;
             default:
                 break;
         }
-        summonTime++;
+        summonInt++;
+        summonTime = 0;
+    }
+    //애니메이션 이벤트에서 호출
+    public void Phase2FX()
+    {
+        PhaseFX.SetActive(true);
+        StartCoroutine(PhaseFxOff());
+    }
+    IEnumerator PhaseFxOff()
+    {
+        yield return new WaitForSeconds(8f);
+        PhaseFX.SetActive(false);
+    }
+    public void WaitOn()
+    {
+        isAction = true;
+    }
+    public void WaitOff()
+    {
+        isAction = false;
     }
 }

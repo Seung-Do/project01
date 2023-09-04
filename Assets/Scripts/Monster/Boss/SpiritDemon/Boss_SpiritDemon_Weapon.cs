@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boss_SpiritDemon_Weapon : MonoBehaviour
 {
     [SerializeField] GameObject Weapon;
+    [SerializeField] ParticleSystem par;
     Collider coll;
     Boss_SpiritDemon boss;
     void Start()
@@ -20,6 +21,7 @@ public class Boss_SpiritDemon_Weapon : MonoBehaviour
     public void UseWeapon()
     {
         coll.enabled = true;
+        par.Play();
     }
     public void NotUseWeapon()
     {

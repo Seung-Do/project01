@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
+public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
 {
     [SerializeField] Boss_SpiritDemon_Zombie_Data data;
     [SerializeField] GameObject pos;
     [SerializeField] ParticleSystem par;
+    public Boss_SpiritDemon_Summon summon;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
@@ -19,6 +20,7 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
     bool isDead;
     public bool isFreeze;
     bool cool;
+    bool isStart;
 
     public enum State
     {
@@ -40,12 +42,14 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
     private void OnEnable()
     {
         isAttacking = true;
+        isStart = false;
         isDead = false;
         hp = data.Health;
         anim.SetBool("Dead", false);
         isFreeze = false;
         rb.isKinematic = false;
         coll.enabled = true;
+        state = State.IDLE;
     }
 
     void Update()
@@ -76,7 +80,7 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
             {
                 print("쿨타임");
                 state = State.IDLE;
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
                 cool = false;
             }
 
@@ -131,14 +135,23 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
-        hp -= damage;
-        if (hp > 0)
-            anim.SetTrigger("Hit");
+        if (isStart)
+        {
+            hp -= damage;
+            if (hp > 0)
+                anim.SetTrigger("Hit");
+            else
+                StartCoroutine(Death());
+        }
     }
-   
+
     IEnumerator Death()
     {
+        isDead = true;
+        state = State.DEAD;
+        anim.SetBool("Dead", true);
         yield return new WaitForSeconds(1);
+        summon.RemoveList(gameObject);
         rb.isKinematic = true;
         coll.enabled = false;
         yield return new WaitForSeconds(10);
@@ -149,6 +162,7 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour
         StartCoroutine(Action());
         StartCoroutine(CheckState());
         isAttacking = false;
+        isStart = true;
     }
     public void attack()
     {
