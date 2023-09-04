@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour, IDamage
 {
@@ -10,6 +11,7 @@ public class Monster : MonoBehaviour, IDamage
     Rigidbody rb;
     Animator anim;
     Collider coll;
+    NavMeshAgent nav;
 
     public MonsterShield shield;
 
@@ -18,7 +20,7 @@ public class Monster : MonoBehaviour, IDamage
     float speed;
     int damage;
     float move;
-    float moveSpeed;
+    //float moveSpeed;
 
     bool isChase;
     bool isDead;
@@ -57,6 +59,7 @@ public class Monster : MonoBehaviour, IDamage
         playerLayer = LayerMask.NameToLayer("PLAYER");
         enemyLayer = LayerMask.NameToLayer("ENEMY");
         coll = GetComponent<Collider>();
+        nav = GetComponent<NavMeshAgent>();
     }
     private void OnEnable()
     {
@@ -84,7 +87,7 @@ public class Monster : MonoBehaviour, IDamage
         chaseTime += Time.deltaTime;
         chase();
         StopTrace();
-        moveSpeed = move * speed;
+        //moveSpeed = move * speed;
 
         if (isFreeze)
             rb.velocity = Vector3.zero;
@@ -174,6 +177,7 @@ public class Monster : MonoBehaviour, IDamage
                     }
                     StartCoroutine(TracePlayer());
                     FindPlayer();
+                    nav.SetDestination(GameManager.Instance.playerTr.position);
                     break;
                 case State.ATTACK:
                     isFindPlayer = false;
@@ -183,7 +187,7 @@ public class Monster : MonoBehaviour, IDamage
                     AttackAnim();
                     break;
                 case State.DEAD:
-                    anim.SetBool("Dead", true);
+                    //anim.SetBool("Dead", true);
                     isDead = true;
                     StartCoroutine(Death());
                     yield break;
@@ -247,7 +251,7 @@ public class Monster : MonoBehaviour, IDamage
             moveDirection.Normalize(); // 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-            rb.velocity = moveDirection * moveSpeed;
+            //rb.velocity = moveDirection * moveSpeed;
 
             yield return Time.deltaTime;
         }
@@ -270,7 +274,7 @@ public class Monster : MonoBehaviour, IDamage
     void FindPlayer()
     {
         //발견반경 * 1.5만큼 범위내의 몬스터들 찾기
-        Collider[] colls = Physics.OverlapSphere(transform.position, viewRange * 1.5f, 1 << enemyLayer);
+        Collider[] colls = Physics.OverlapSphere(transform.position, viewRange * 0.7f, 1 << enemyLayer);
 
         //있을 경우 inFindPlayer를 true로 변경
         if (colls.Length >= 1)
@@ -298,7 +302,7 @@ public class Monster : MonoBehaviour, IDamage
                 moveDirection.Normalize(); // 방향을 정규화
                 Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-                rb.velocity = moveDirection * moveSpeed;
+                //rb.velocity = moveDirection * moveSpeed;
             }
             else
                 isChase = false;
@@ -349,6 +353,8 @@ public class Monster : MonoBehaviour, IDamage
         hp -= damage;
         if(hp >0)
             anim.SetTrigger("Hit");
+        else
+            anim.SetBool("Dead", true);
     }
 
     void randomAttackAnim()
@@ -383,6 +389,7 @@ public class Monster : MonoBehaviour, IDamage
             move += Time.deltaTime;
             yield return Time.deltaTime;
         }
+        nav.speed = move * speed;
     }
     IEnumerator Idle()
     {
@@ -400,10 +407,11 @@ public class Monster : MonoBehaviour, IDamage
     }
     IEnumerator Death()
     {
+        nav.speed = 0;
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(6);
         gameObject.SetActive(false);
     }
 

@@ -40,8 +40,8 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4260977533450559750}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -1210,6 +1210,7 @@ GameObject:
   - component: {fileID: 4261876597165388473}
   - component: {fileID: 4261876597165388472}
   - component: {fileID: 4261876597165388455}
+  - component: {fileID: 7939283393474746664}
   m_Layer: 6
   m_Name: Monster_King Cobra
   m_TagString: Untagged
@@ -1312,8 +1313,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5243825, z: 3.0036352}
-  m_Center: {x: 0, y: 0.7532918, z: -0.826383}
+  m_Size: {x: 1, y: 1.5243825, z: 2.34}
+  m_Center: {x: 0, y: 0.7532918, z: -0.68}
 --- !u!114 &4261876597165388455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,6 +1336,28 @@ MonoBehaviour:
   viewRange: 0
   viewAngle: 120
   state: 0
+--- !u!195 &7939283393474746664
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261876597165388454}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.7
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &4261894716582387834
 GameObject:
   m_ObjectHideFlags: 0

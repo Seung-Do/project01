@@ -133,7 +133,7 @@ MonoBehaviour:
   fireEffect: {fileID: 7079739292009869601}
   fire: {fileID: 6999105559011528397}
   explosion: {fileID: 8947066180313903688}
-  damageValue: 100
+  damageValue: 50
 --- !u!1001 &5306405073965593247
 PrefabInstance:
   m_ObjectHideFlags: 0

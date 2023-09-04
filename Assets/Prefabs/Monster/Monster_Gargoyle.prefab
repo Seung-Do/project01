@@ -3977,13 +3977,14 @@ GameObject:
   - component: {fileID: 6525847611423037199}
   - component: {fileID: 6525847611423037197}
   - component: {fileID: 6525847611423037201}
+  - component: {fileID: 3681480480222192464}
   m_Layer: 6
   m_Name: Monster_Gargoyle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8327751558656087524
 Transform:
   m_ObjectHideFlags: 0
@@ -4076,6 +4077,28 @@ CapsuleCollider:
   m_Height: 2.2082684
   m_Direction: 1
   m_Center: {x: 3.9726056e-11, y: 1.1396896, z: -0.06895477}
+--- !u!195 &3681480480222192464
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708217059556101982}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8823847781983247813
 GameObject:
   m_ObjectHideFlags: 0
