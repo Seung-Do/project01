@@ -9,6 +9,7 @@ public class Fireball : MonoBehaviour
     float destroyDistance = 20f;
 
     Rigidbody rb;
+    Collider coll;
     Transform rightControllerTr;
     public ParticleSystem collisonEffect;
     public ParticleSystem fireEffect;
@@ -23,6 +24,7 @@ public class Fireball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
         rightControllerTr = GameObject.Find("Right Controller").GetComponent<Transform>();
     }
 
@@ -60,6 +62,7 @@ public class Fireball : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        coll.enabled = false;
         explosion.Play();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

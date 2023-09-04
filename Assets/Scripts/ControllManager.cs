@@ -22,6 +22,7 @@ public class ControllManager : MonoBehaviour
 
     public Transform rightControllerTr;
     public Transform leftControllerTr;
+    public PlayerDamage playerDamage;
     public GameObject sheild;
     public GameObject selectedSpell;
     public GameObject[] magicPrefabs;
@@ -164,6 +165,7 @@ public class ControllManager : MonoBehaviour
             {
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
+                playerDamage.getDamage(20);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
@@ -173,6 +175,7 @@ public class ControllManager : MonoBehaviour
                 //Debug.Log("스폰 위치 y값" + spawnPosition.y);
                 //Debug.Log("카메라높이" + Camera.main.transform.position.y);
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
+                playerDamage.getDamage(20);
                 Destroy(magic, 4f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
@@ -185,6 +188,7 @@ public class ControllManager : MonoBehaviour
                 Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                 //spawnPosition.y = 1f;
                 GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.Euler(90f, 0, 0));
+                playerDamage.getDamage(20);
                 Destroy(magic, 3.6f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
             }
