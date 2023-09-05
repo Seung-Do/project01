@@ -8,13 +8,15 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
     [SerializeField] GameObject pos;
     [SerializeField] ParticleSystem par;
     public Boss_SpiritDemon_Summon summon;
+    [SerializeField] GameObject SkullFX;
+    [SerializeField] GameObject BloodFX;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
     Collider coll;
 
     [SerializeField]
-    float hp;
+    public float hp;
 
     bool isAttacking;
     bool isDead;
@@ -135,6 +137,9 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
+        if (hp <= 0)
+            return;
+        
         if (isStart)
         {
             hp -= damage;
@@ -173,5 +178,13 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
     public void particleOn()
     {
         par.Play();
+    }
+    public void Skull()
+    {
+        SkullFX.SetActive(true);
+    }
+    public void Blood()
+    {
+        BloodFX.SetActive(true);
     }
 }

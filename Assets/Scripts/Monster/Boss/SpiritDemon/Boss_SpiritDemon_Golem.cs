@@ -7,6 +7,8 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
 {
     public Boss_SpiritDemon_Zombie_Data data;
     public Boss_SpiritDemon_Summon summon;
+    [SerializeField] GameObject SkullFX;
+    [SerializeField] GameObject BloodFX;
     NavMeshAgent nav;
     WaitForSeconds wait;
     Rigidbody rb;
@@ -14,7 +16,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
     Collider coll;
 
     [SerializeField]
-    float hp;
+    public float hp;
     int damage;
     float move;
     float dist;
@@ -204,9 +206,13 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
+        if (hp <= 0)
+            return;
+
         if (isStart)
         {
             hp -= damage;
+            nav.speed = 0;
             if (hp > 0)
                 anim.SetTrigger("Hit");
             else
@@ -289,5 +295,13 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
         Vector3 pos = new Vector3(-0.4f, 0.3f, -1);
         GameObject jumpAttack = GameManager.Instance.poolManager[2].Get(5);
         jumpAttack.transform.position = transform.position + pos;
+    }
+    public void Skull()
+    {
+        SkullFX.SetActive(true);
+    }
+    public void Blood()
+    {
+        BloodFX.SetActive(true);
     }
 }

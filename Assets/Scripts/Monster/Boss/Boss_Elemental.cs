@@ -105,7 +105,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     void Update()
     {
-        if(isDead) return;
+        if (isDead) return;
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
         moveSpeed = move * speed;
         if (isSpellMove)
@@ -189,7 +189,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 yield return !canMage;
             }
             //접근
-            else if ((dist > 5 && !canMage) || (dist > attackDist && canAttack)) 
+            else if ((dist > 5 && !canMage) || (dist > attackDist && canAttack))
             {
                 state = State.TRACE;
             }
@@ -249,9 +249,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                     break;
                 case State.DEAD:
                     move = 0;
-                    anim.SetTrigger("Dead");
-                    isDead = true;
-                    StartCoroutine(Death());
                     yield break;
                 case State.SPELLMOVE:
                     StartCoroutine(Move());
@@ -303,7 +300,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     //시점을 플레이어한테 고정
     void AttackLook()
     {
-        if(!isSpelling)
+        if (!isSpelling)
         {
             Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
             moveDirection.Normalize(); // 방향을 정규화
@@ -414,7 +411,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 if (num == 4)
                     StartCoroutine(TimeCast());
                 else*/
-                    num = 6;
+                num = 6;
                 break;
         }
 
@@ -441,12 +438,12 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         bullet.Throw = true;
     }
     //마법 타입만 사용
-   /* IEnumerator TimeCast()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GameObject Time = GameManager.Instance.poolManager[1].Get(5);
-        Time.transform.position = GameManager.Instance.playerTr.position;
-    }*/
+    /* IEnumerator TimeCast()
+     {
+         yield return new WaitForSeconds(1.5f);
+         GameObject Time = GameManager.Instance.poolManager[1].Get(5);
+         Time.transform.position = GameManager.Instance.playerTr.position;
+     }*/
 
     //속도 회복 메서드
     IEnumerator RecoverySpeed()
@@ -527,8 +524,17 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         //속도 회복 코루틴
         StartCoroutine(RecoverySpeed());*/
 
+        if (hp <= 0)
+            return;
+
         hp -= damage;
-        print("남은 HP" + hp); 
+        print("Boss 남은 HP" + hp);
+        if (hp <= 0)
+        {
+            anim.SetTrigger("Dead");
+            isDead = true;
+            StartCoroutine(Death());
+        }
     }
     IEnumerator Death()
     {
@@ -536,7 +542,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         rb.isKinematic = true;
         coll.enabled = false;
         yield return new WaitForSeconds(6);
-        GameObject electroBook = Instantiate(spellBook,transform.position + Vector3.up, Quaternion.identity);
+        GameObject electroBook = Instantiate(spellBook, transform.position + Vector3.up, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

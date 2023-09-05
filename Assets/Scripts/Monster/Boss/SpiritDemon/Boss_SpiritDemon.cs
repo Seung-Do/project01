@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,8 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     [SerializeField] Boss_SpiritDemon_Data data;
     [SerializeField] GameObject PhaseFX;
     [SerializeField] GameObject ShieldFX;
+    [SerializeField] GameObject SmokeFX;
+    [SerializeField] GameObject HandFX;
     Boss_SpiritDemon_Summon summon;
     NavMeshAgent nav;
     WaitForSeconds wait;
@@ -59,9 +62,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         ATTACK,
         DASHATTACK,
         SPECIALATTACK,
-        MAGE,
         DEAD,
-        WAIT
+        WAIT,
+        BLOOD
     }
     [SerializeField] State state = State.IDLE;
 
@@ -188,6 +191,10 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             {
                 state = State.SUMMON;
             }
+            else if(canCast && !canSummon && hp < data.Health / 2)
+            {
+                state = State.BLOOD;
+            }
             //거리가 멀면 달려가서 접근
             else if (dist > DashAttackDist && !isAction)
             {
@@ -254,6 +261,13 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                     isAllDead = false;
                     canSummon = false;
                     summonTime = 0f;
+                    castTime = 0f;
+                    break;
+                case State.BLOOD:
+                    nav.speed = 0;
+                    anim.SetTrigger("Blood");
+                    castTime = 0f;
+                    canCast = false;
                     break;
                 case State.ATTACK:
                     nav.speed = 0;
@@ -393,6 +407,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         //속도 회복 코루틴
         StartCoroutine(RecoverySpeed());*/
 
+        if (hp <= 0)
+            return;
+
         if(ShieldFX.activeSelf)
         {
             print("무적상태");
@@ -401,10 +418,11 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         {
             hp -= damage;
             print("Boss 남은 HP" + hp);
-            if (hp < 0)
+            if (hp <= 0)
             {
                 anim.SetTrigger("Dead");
                 isDead = true;
+                SmokeFX.SetActive(false);
             }
         }
     }
@@ -458,6 +476,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         }
         summonInt++;
         summonTime = 0;
+
+        if (hp <= data.Health / 2)
+            StartCoroutine(Skull());
     }
     //애니메이션 이벤트에서 호출
     public void Phase2FX()
@@ -481,5 +502,66 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     public void ShieldOff()
     {
         ShieldFX.SetActive(false);
+    }
+    public void SmokeOn()
+    {
+        if(hp < data.Health / 2)
+            SmokeFX.SetActive(true);
+    }
+    IEnumerator Skull()
+    {
+        yield return new WaitForSeconds(1);
+        BloodReady();
+    }
+    void BloodReady()
+    {
+        foreach (GameObject obj in summon.summonList)
+        {
+            Boss_SpiritDemon_Golem golem = obj.GetComponent<Boss_SpiritDemon_Golem>();
+            Boss_SpiritDemon_Zombie zombie = obj.GetComponent<Boss_SpiritDemon_Zombie>();
+            Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
+            if (golem != null)
+                golem.Skull();
+            if(zombie != null)
+                zombie.Skull();
+            if(mage != null) 
+                mage.Skull();
+        }
+    }
+
+    public void BloodBoom()
+    {
+        foreach (GameObject obj in summon.summonList)
+        {
+            Boss_SpiritDemon_Golem golem = obj.GetComponent<Boss_SpiritDemon_Golem>();
+            Boss_SpiritDemon_Zombie zombie = obj.GetComponent<Boss_SpiritDemon_Zombie>();
+            Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
+            if (golem != null)
+            {
+                hp += golem.hp;
+                golem.getDamage(1000);
+                golem.Blood();
+            }
+            if (zombie != null)
+            {
+                hp += zombie.hp;
+                zombie.getDamage(1000);
+                zombie.Blood();
+            }
+            if (mage != null)
+            {
+                hp += mage.hp;
+                mage.getDamage(1000);
+                mage.Blood();
+            }
+        }
+    }
+    public void HandFxOn()
+    {
+        HandFX.SetActive(true);
+    }
+    public void HandFxOff()
+    {
+        HandFX.SetActive(false);
     }
 }
