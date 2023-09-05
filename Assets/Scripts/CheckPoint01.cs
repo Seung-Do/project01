@@ -7,6 +7,7 @@ public class CheckPoint01 : MonoBehaviour
 {
     [SerializeField] private GameObject location01;
     [SerializeField] private GameObject location02;
+    [SerializeField] private GameObject checkPoint02;
     [SerializeField] private GameObject[] monsters;
     [SerializeField] private float playerDistance;
 
@@ -29,6 +30,7 @@ public class CheckPoint01 : MonoBehaviour
                 {
                     location01.SetActive(false);
                     location02.SetActive(true);
+                    checkPoint02.SetActive(true);
                     foreach (GameObject monster in monsters)
                     {
                         monster.SetActive(true);

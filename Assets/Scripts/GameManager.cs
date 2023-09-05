@@ -93,13 +93,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ReturnToStage0()
     {
+        bossTime.SetActive(true);
+        yield return new WaitForSeconds(3);
         FadeOut();
         yield return new WaitForSeconds(1f);
 
         playerTr.position = returnStage0;
         handsTr.position = returnStage0 + Vector3.up;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
-
+        bossTime.SetActive(false);
         yield return new WaitForSeconds(2f);
         FadeIn();
     }

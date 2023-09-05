@@ -22,16 +22,9 @@ public class SpellBookLightning : MonoBehaviour
             ControllManager controllManager = other.gameObject.GetComponent<ControllManager>();
             controllManager.bookSpell[1].SetActive(true);
             controllManager.lightningPosible = true;
-            StartCoroutine(ToTheStage0());
-            
+            GameManager.Instance.Boss0Kill();
+            gameObject.SetActive(false);
         }
     }
-    IEnumerator ToTheStage0()
-    {
-        GameManager.Instance.bossTime.SetActive(true);
-        yield return new WaitForSeconds(3);
-        GameManager.Instance.Boss0Kill();    
-        GameManager.Instance.bossTime.SetActive(false);
-        gameObject.SetActive(false);
-    }
+    
 }
