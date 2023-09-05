@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Monster8
   m_EditorClassIdentifier: 
   MonsterType: 7
-  Health: 100
+  Health: 300
   Speed: 0.5
   Damage: 50
-  AttackDistance: 8
+  AttackDistance: 3
   ViewRange: 9
   Sound: 0

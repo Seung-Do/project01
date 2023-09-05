@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 3000
   Damage: 20
-  CassTime: 30
+  CassTime: 20
   AttackDistance: 2
   AttackTime: 2
   SpecialAttackDistance: 4
   SpecialAttackTime: 8
   DashAttackDistance: 7
   DashAttackTime: 15
-  SummonTime: 5
+  SummonTime: 3
   Sound: 0

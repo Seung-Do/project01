@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4111252481170441075}
   - component: {fileID: 51222421323657447}
   - component: {fileID: 6617895040566510331}
+  - component: {fileID: 4577538665352537618}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -4871,6 +4872,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4577538665352537618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058415765195330246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 51222421323657447}
+  Speed: 2
 --- !u!1001 &5364674876822278262
 PrefabInstance:
   m_ObjectHideFlags: 0

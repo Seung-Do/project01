@@ -7,6 +7,7 @@ public class MonsterGargoyleMeteor : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(Hit());
+        StartCoroutine(off());
     }
 
     IEnumerator Hit()
@@ -39,5 +40,10 @@ public class MonsterGargoyleMeteor : MonoBehaviour
 
         // 구체 기즈모 그리기 (감지 범위 표시)
         Gizmos.DrawWireSphere(transform.position, 2);
+    }
+    IEnumerator off()
+    {
+        yield return new WaitForSeconds(5);
+        gameObject.SetActive(false);
     }
 }
