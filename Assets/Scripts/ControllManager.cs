@@ -93,7 +93,7 @@ public class ControllManager : MonoBehaviour
             //SelectSpell(2);
         }
 
-        
+
 
         /*if (isOpen)
         {
@@ -133,19 +133,24 @@ public class ControllManager : MonoBehaviour
             IsPosible = false;
             if (index == 0) //파이어볼
             {
+
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 GameObject magic = Instantiate(magicPrefabs[index], newPosition, Quaternion.identity);
                 Destroy(magic, 1.2f);
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
+
+
             }
             else if (index == 1 && lightningPosible) //라이트닝
             {
+
                 Vector3 playerDirection = Camera.main.transform.forward;
                 //playerDirection.y = 0f;
                 spell.Direction = playerDirection;
                 spell.SpellStart.transform.position = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 StartCoroutine(LightningSpell());
                 StartCoroutine(MagicIsPosible(new WaitForSeconds(1.5f)));
+
             }
             else if (index == 2 && icePosible) // 얼음화살
             {
@@ -160,37 +165,51 @@ public class ControllManager : MonoBehaviour
         }
         else if (rec == "X" && IsPosible)
         {
-            IsPosible = false;
+            
             if (index == 0) //메테오
             {
-                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
-                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
-                playerDamage.getDamage(20);
-                Destroy(magic, 4f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                if (playerDamage.hp > 20)
+                {
+                    IsPosible = false;
+                    playerDamage.StrongMagic(20);
+                    Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
+                    GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
+                    Destroy(magic, 4f);
+                    StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                }
+
             }
             else if (index == 1 && lightningPosible) //천둥 다발
             {
-                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
-                //Debug.Log("스폰 위치 y값" + spawnPosition.y);
-                //Debug.Log("카메라높이" + Camera.main.transform.position.y);
-                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
-                playerDamage.getDamage(20);
-                Destroy(magic, 4f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                if (playerDamage.hp > 20)
+                {
+                    IsPosible = false;
+                    playerDamage.StrongMagic(20);
+                    Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
+                    //Debug.Log("스폰 위치 y값" + spawnPosition.y);
+                    //Debug.Log("카메라높이" + Camera.main.transform.position.y);
+                    GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
+                    Destroy(magic, 4f);
+                    StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                }
             }
             else if (index == 2 && icePosible) //블리자드
             {
-                //Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
-                //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
-                //Destroy(magic, 3f);
-                //StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
-                Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
-                //spawnPosition.y = 1f;
-                GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.Euler(90f, 0, 0));
-                playerDamage.getDamage(20);
-                Destroy(magic, 3.6f);
-                StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                if (playerDamage.hp > 20)
+                {
+                    IsPosible = false;
+                    playerDamage.StrongMagic(20);
+
+                    //Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
+                    //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            
+                    //Destroy(magic, 3f);
+                    //StartCoroutine(MagicIsPosible(new WaitForSeconds(3.3f)));
+                    Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
+                    //spawnPosition.y = 1f;
+                    GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.Euler(90f, 0, 0));
+                    Destroy(magic, 3.6f);
+                    StartCoroutine(MagicIsPosible(new WaitForSeconds(4f)));
+                }
             }
         }
         else

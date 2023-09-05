@@ -14,13 +14,9 @@ public class CheckPoint02 : MonoBehaviour
     {
         StartCoroutine(Check());
     }
-    private void Update()
+    void Update()
     {
-        float distance = Vector3.Distance(transform.position, GameManager.Instance.playerTr.position);
-        if (distance <= playerDistance)
-        {
-            location02.SetActive(false);
-        }          
+
     }
     IEnumerator Check()
     {
@@ -36,19 +32,24 @@ public class CheckPoint02 : MonoBehaviour
                     enemyCount++;
 
                 if (collider.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
+                {
                     health = collider.gameObject.GetComponent<PlayerDamage>().hp;
+                    location02.SetActive(false);
+                }
 
-                if (enemyCount == 0 && health ==100)
+                if (enemyCount == 0 && health == 100)
                 {
                     GameManager.Instance.bossTime.SetActive(true);
                     yield return new WaitForSeconds(3);
                     GameManager.Instance.Boss0Load();
                     yield return new WaitForSeconds(3);
                     boss.SetActive(true);
+                    GameManager.Instance.bossTime.SetActive(false);
                     gameObject.SetActive(false);
                 }
-                yield return new WaitForSeconds(1);
+
             }
+            yield return new WaitForSeconds(1);
         }
     }
 

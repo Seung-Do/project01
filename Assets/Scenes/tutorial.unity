@@ -7174,7 +7174,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 175568, guid: a3c052cecc151054c9f9cab729654964, type: 3}
   m_PrefabInstance: {fileID: 194749861}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &252381170
+--- !u!114 &252381169
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44540,7 +44540,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 102510, guid: a3c052cecc151054c9f9cab729654964, type: 3}
   m_PrefabInstance: {fileID: 194749861}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &798819316
+--- !u!114 &798819315
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88613,7 +88613,7 @@ MonoBehaviour:
   playerTr: {fileID: 2050033834}
   handsTr: {fileID: 793622038}
   elemental: {fileID: 0}
-  bossTime: {fileID: 0}
+  bossTime: {fileID: 1902519075}
   firstScene: stage00
   secondScene: stage01
   fadeAnim: {fileID: 60420059}
@@ -97280,6 +97280,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902387123}
   m_CullTransparentMesh: 1
+--- !u!1 &1902519075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1375346480814298, guid: 791cb22bb7862584b9f83002614956d5, type: 3}
+  m_PrefabInstance: {fileID: 1771828937}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1904077647
 GameObject:
   m_ObjectHideFlags: 0
@@ -108132,6 +108137,7 @@ MonoBehaviour:
   spell: {fileID: 1925782009}
   rightControllerTr: {fileID: 1081472063}
   leftControllerTr: {fileID: 1765764459}
+  playerDamage: {fileID: 2050033840}
   sheild: {fileID: 3103183941474667490, guid: 1a7b2c50b226cc94c8c12162b3e5060c, type: 3}
   selectedSpell: {fileID: 7828234119547833516, guid: 1d05e58b82d699842ae140452149e6ed, type: 3}
   magicPrefabs:
@@ -158653,7 +158659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2438982495429061976, guid: 7940fc9f8896897419e9e4a20cd7db20, type: 3}
       propertyPath: followSpeed
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2438982495429061976, guid: 7940fc9f8896897419e9e4a20cd7db20, type: 3}
       propertyPath: rotateSpeed
@@ -158717,7 +158723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452227311767591222, guid: 7940fc9f8896897419e9e4a20cd7db20, type: 3}
       propertyPath: followSpeed
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6452227311767591222, guid: 7940fc9f8896897419e9e4a20cd7db20, type: 3}
       propertyPath: rotateSpeed

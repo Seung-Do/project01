@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 291945069670002052}
   - component: {fileID: 291945069670002053}
   - component: {fileID: 291945069670002054}
-  - component: {fileID: 2973782708102527967}
+  - component: {fileID: 604343666368139926}
   m_Layer: 0
   m_Name: Spellbook_Electro
   m_TagString: Untagged
@@ -185,7 +185,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2973782708102527967
+--- !u!114 &604343666368139926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,10 +194,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 291945069670002055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5edfbf6965f10f346b5f7cdccf38436c, type: 3}
+  m_Script: {fileID: 11500000, guid: a3ded084233ccc04c96efc36cb929ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
 --- !u!1 &3647735060868994020
 GameObject:
   m_ObjectHideFlags: 0

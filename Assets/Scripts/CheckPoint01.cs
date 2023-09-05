@@ -9,25 +9,34 @@ public class CheckPoint01 : MonoBehaviour
     [SerializeField] private GameObject location02;
     [SerializeField] private GameObject[] monsters;
     [SerializeField] private float playerDistance;
-    
+
     void Start()
+    {
+        StartCoroutine(Check());
+    }
+    void Update()
     {
         
     }
-    private void Update()
+    IEnumerator Check()
     {
-        float distance = Vector3.Distance(transform.position, GameManager.Instance.playerTr.position);
-        if (distance <= playerDistance)
+        while (true)
         {
-            location01.SetActive(false);
-            location02.SetActive(true);
-            foreach (GameObject monster in monsters)
+            Collider[] colliders = Physics.OverlapSphere(transform.position, playerDistance);
+            foreach (Collider collider in colliders)
             {
-                monster.SetActive(true);
+                if (collider.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
+                {
+                    location01.SetActive(false);
+                    location02.SetActive(true);
+                    foreach (GameObject monster in monsters)
+                    {
+                        monster.SetActive(true);
+                    }
+                    gameObject.SetActive(false);
+                }
             }
-            gameObject.SetActive(false);
+            yield return new WaitForSeconds(1);
         }
     }
-
-   
 }

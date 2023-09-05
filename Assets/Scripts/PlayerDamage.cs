@@ -28,6 +28,12 @@ public class PlayerDamage : MonoBehaviour, IDamage
 
     }
 
+    public void StrongMagic(int damage)
+    {
+        hp -= damage;
+        image.fillAmount = hp / 100f;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

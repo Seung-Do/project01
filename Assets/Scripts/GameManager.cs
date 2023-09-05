@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private Vector3 stage0Position = new Vector3(193f, 7.2f, 71.5f);
     private Vector3 stage1Position = new Vector3(-32.5f, 15.1f, 22.5f);
     private Vector3 bossZone0 = new Vector3(-20f, 20f, 235f);
-    private Vector3 boss0Position = new Vector3(-20f, 20f, 245f);
+    private Vector3 returnStage0 = new Vector3(107f, 20f, 244f);
     private void Awake()
     {
         if (Instance == null)
@@ -90,6 +90,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         FadeIn();
     }
+
+    private IEnumerator ReturnToStage0()
+    {
+        FadeOut();
+        yield return new WaitForSeconds(1f);
+
+        playerTr.position = returnStage0;
+        handsTr.position = returnStage0 + Vector3.up;
+        playerTr.rotation = Quaternion.Euler(0, 0, 0);
+
+        yield return new WaitForSeconds(2f);
+        FadeIn();
+    }
     private void FadeOut()
     {
         fadeAnim.SetBool("fadein", false);
@@ -110,5 +123,9 @@ public class GameManager : MonoBehaviour
     public void Boss0Load()
     {
         StartCoroutine(FadeScreenBoss0());
+    }
+    public void Boss0Kill()
+    {
+        StartCoroutine(ReturnToStage0());
     }
 }

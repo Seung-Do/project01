@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBook : MonoBehaviour
+public class SpellBookLightning : MonoBehaviour
 {
-    [SerializeField] private int index;
     private float rotationSpeed = 60f;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -21,13 +20,18 @@ public class SpellBook : MonoBehaviour
         if (other.gameObject.CompareTag("PLAYER"))
         {
             ControllManager controllManager = other.gameObject.GetComponent<ControllManager>();
-            controllManager.bookSpell[index].SetActive(true);
-            if (index == 1)
-                controllManager.lightningPosible = true;
-            else if (index == 2)
-                controllManager.icePosible = true;
-
-            gameObject.SetActive(false);
+            controllManager.bookSpell[1].SetActive(true);
+            controllManager.lightningPosible = true;
+            StartCoroutine(ToTheStage0());
+            
         }
+    }
+    IEnumerator ToTheStage0()
+    {
+        GameManager.Instance.bossTime.SetActive(true);
+        yield return new WaitForSeconds(3);
+        GameManager.Instance.Boss0Kill();    
+        GameManager.Instance.bossTime.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
