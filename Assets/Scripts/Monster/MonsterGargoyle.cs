@@ -372,8 +372,14 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
-        isHit = true;
-        //데미지 받는 내용 작성
+        if (state == State.IDLE)
+            state = State.TRACE;
+
+        hp -= damage;
+        if (hp > 0)
+            anim.SetTrigger("Hit");
+        else
+            anim.SetBool("Dead", true);
     }
     //애니메이션이벤트에서 hit애니메이션 끝날때 호출
     public void Hit()

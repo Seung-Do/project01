@@ -6,6 +6,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
 {
     [SerializeField] Boss_SpiritDemon_Data data;
     [SerializeField] GameObject PhaseFX;
+    [SerializeField] GameObject ShieldFX;
     Boss_SpiritDemon_Summon summon;
     NavMeshAgent nav;
     WaitForSeconds wait;
@@ -392,12 +393,19 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         //속도 회복 코루틴
         StartCoroutine(RecoverySpeed());*/
 
-        hp -= damage;
-        print("Boss 남은 HP" + hp);
-        if (hp < 0)
+        if(ShieldFX.activeSelf)
         {
-            anim.SetTrigger("Dead");
-            isDead = true;
+            print("무적상태");
+        }
+        else
+        {
+            hp -= damage;
+            print("Boss 남은 HP" + hp);
+            if (hp < 0)
+            {
+                anim.SetTrigger("Dead");
+                isDead = true;
+            }
         }
     }
 
@@ -469,5 +477,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     public void WaitOff()
     {
         isAction = false;
+    }
+    public void ShieldOff()
+    {
+        ShieldFX.SetActive(false);
     }
 }

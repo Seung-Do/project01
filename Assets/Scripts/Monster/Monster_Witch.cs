@@ -307,9 +307,14 @@ public class Monster_Witch : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
+        if (state == State.IDLE)
+            state = State.TRACE;
+
         hp -= damage;
         if (hp > 0)
             anim.SetTrigger("Hit");
+        else
+            anim.SetBool("Dead", true);
     }
 
     IEnumerator Move()
