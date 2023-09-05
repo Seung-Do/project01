@@ -9,6 +9,8 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
 {
     public Boss_SpiritDemon_Zombie_Data data;
     public Boss_SpiritDemon_Summon summon;
+    [SerializeField] GameObject SkullFX;
+    [SerializeField] GameObject BloodFX;
     NavMeshAgent nav;
     WaitForSeconds wait;
     Rigidbody rb;
@@ -16,7 +18,7 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
     Collider coll;
 
     [SerializeField]
-    float hp;
+    public float hp;
     int damage;
     float move;
     float dist;
@@ -64,11 +66,11 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
         rb.isKinematic = false;
         coll.enabled = true;
         state = State.IDLE;
-}
+    }
 
     void Update()
     {
-        if(isDead) return;
+        if (isDead) return;
 
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
@@ -120,12 +122,12 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
                     anim.SetFloat("Move", move);
                     nav.speed = 0;
                     break;
-              /*  case State.WALK:
-                    StartCoroutine(Walk());
-                    anim.SetFloat("Move", move);
-                    nav.speed = move * 5;
-                    nav.SetDestination(GameManager.Instance.playerTr.position);
-                    break;*/
+                /*  case State.WALK:
+                      StartCoroutine(Walk());
+                      anim.SetFloat("Move", move);
+                      nav.speed = move * 5;
+                      nav.SetDestination(GameManager.Instance.playerTr.position);
+                      break;*/
                 case State.TRACE:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
@@ -180,8 +182,10 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
-        if(isStart)
-            {
+        if (hp <= 0)
+            return;
+        if (isStart)
+        {
             hp -= damage;
             if (hp > 0)
                 anim.SetTrigger("Hit");
@@ -248,7 +252,7 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
             yield return Time.deltaTime;
         }
     }
-     IEnumerator Death()
+    IEnumerator Death()
     {
         nav.speed = 0;
         isDead = true;
@@ -276,5 +280,13 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
     {
         isAction = false;
         cool = true;
+    }
+    public void Skull()
+    {
+        SkullFX.SetActive(true);
+    }
+    public void Blood()
+    {
+        BloodFX.SetActive(true);
     }
 }
