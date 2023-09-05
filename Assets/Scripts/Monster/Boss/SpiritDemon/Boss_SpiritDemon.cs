@@ -478,7 +478,10 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         summonTime = 0;
 
         if (hp <= data.Health / 2)
+        {
+            HandFxOn();
             StartCoroutine(Skull());
+        }
     }
     //애니메이션 이벤트에서 호출
     public void Phase2FX()

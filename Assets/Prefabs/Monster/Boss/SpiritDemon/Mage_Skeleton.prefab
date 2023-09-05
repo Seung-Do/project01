@@ -1841,6 +1841,8 @@ MonoBehaviour:
   pos: {fileID: 208775594028378015}
   par: {fileID: 2549426000367383766}
   summon: {fileID: 0}
+  SkullFX: {fileID: 5999002016611305988}
+  BloodFX: {fileID: 531190672616497560}
   hp: 0
   isFreeze: 0
   state: 0
@@ -6515,11 +6517,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
 --- !u!4 &531190672616142132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 849436430383703682, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+  m_PrefabInstance: {fileID: 907166314383201206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &531190672616497560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
   m_PrefabInstance: {fileID: 907166314383201206}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1291374366285831372
@@ -6532,6 +6543,10 @@ PrefabInstance:
     - target: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
       propertyPath: m_Name
       value: Skull2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
       propertyPath: m_RootOrder
@@ -6579,6 +6594,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+--- !u!1 &5999002016611305988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+  m_PrefabInstance: {fileID: 1291374366285831372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5999002016611603934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}

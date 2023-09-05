@@ -1546,6 +1546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9f9ef005cbb52a747a37a546555eed50, type: 2}
   summon: {fileID: 0}
+  SkullFX: {fileID: 2408143508440739350}
+  BloodFX: {fileID: 5118263180312191113}
   hp: 0
   isFreeze: 0
   state: 0
@@ -1919,8 +1921,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+--- !u!1 &5118263180312191113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+  m_PrefabInstance: {fileID: 5534489430887518887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5118263180312687653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 849436430383703682, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
@@ -1994,6 +2005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull2
       objectReference: {fileID: 0}
+    - target: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2043,5 +2058,10 @@ PrefabInstance:
 --- !u!4 &2408143508440445388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+  m_PrefabInstance: {fileID: 7187797142910466270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2408143508440739350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
   m_PrefabInstance: {fileID: 7187797142910466270}
   m_PrefabAsset: {fileID: 0}

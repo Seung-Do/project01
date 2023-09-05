@@ -105,6 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 0c0c785dd47c97d43ab414b7c8ba822a, type: 2}
   summon: {fileID: 0}
+  SkullFX: {fileID: 2017796778704208228}
+  BloodFX: {fileID: 9186386733885590014}
   hp: 0
   isFreeze: 0
   state: 0
@@ -1875,6 +1877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull2
       objectReference: {fileID: 0}
+    - target: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1924,6 +1930,11 @@ PrefabInstance:
 --- !u!4 &2017796778703920830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4804037503847729426, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
+  m_PrefabInstance: {fileID: 6821820743470061484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2017796778704208228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4804037503847438024, guid: d94f5a88634cd3148b395957c73b7a75, type: 3}
   m_PrefabInstance: {fileID: 6821820743470061484}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8409724631087381456
@@ -1981,11 +1992,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
 --- !u!4 &9186386733885496658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 849436430383703682, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
+  m_PrefabInstance: {fileID: 8409724631087381456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9186386733885590014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849436430383739438, guid: dabb7756adc312a49bea32aad3d22a01, type: 3}
   m_PrefabInstance: {fileID: 8409724631087381456}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8428324125235172484

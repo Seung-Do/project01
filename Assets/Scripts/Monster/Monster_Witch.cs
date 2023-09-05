@@ -10,17 +10,15 @@ public class Monster_Witch : MonoBehaviour, IDamage
     Animator anim;
     Collider coll;
 
-    public MonsterShield shield;
-
     [SerializeField]
     float hp;
     float speed;
-    int damage;
     float move;
     float moveSpeed;
 
     bool isChase;
     bool isDead;
+    bool isGetHit;
     public bool isFindPlayer;
     public bool isFreeze;
 
@@ -61,11 +59,11 @@ public class Monster_Witch : MonoBehaviour, IDamage
     private void OnEnable()
     {
         move = 0;
+        isGetHit = false;
         isDead = false;
         isChase = false;
         hp = data.Health;
         speed = data.Speed;
-        damage = data.Damage;
         attackDist = data.AttackDistance;
         viewRange = data.ViewRange;
         TraceTime = 0;
@@ -106,12 +104,15 @@ public class Monster_Witch : MonoBehaviour, IDamage
                 print("죽음");
                 yield break;
             }
-
+            //맞았을 때
+            if (isGetHit)
+            {
+                state = State.TRACE;
+            }  
             //시야에 플레이어가 들어오지 않았거나
             //주변에 플레이어를 공격하는 몬스터가 없을 때
-            if (viewRange >= dist)
+           else if (viewRange >= dist)
             {
-                // print("주변에 플레이어가 있음");
                 //시야에 플레이어가 들어왔을 때
                 if (isTracePlayer())
                 {
@@ -136,7 +137,6 @@ public class Monster_Witch : MonoBehaviour, IDamage
                 else
                     state = State.IDLE;
             }
-
             yield return wait;
         }
     }
@@ -161,6 +161,7 @@ public class Monster_Witch : MonoBehaviour, IDamage
                     break;
                 case State.ATTACK:
                     isFindPlayer = false;
+                    isGetHit = false;
                     anim.SetFloat("Move", 0);
                     chaseTime = 0f;
                     isChase = true;
@@ -308,7 +309,7 @@ public class Monster_Witch : MonoBehaviour, IDamage
     public void getDamage(int damage)
     {
         if (state == State.IDLE)
-            state = State.TRACE;
+            isGetHit = true;
 
         hp -= damage;
         if (hp > 0)
