@@ -10,11 +10,14 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     [SerializeField] GameObject ShieldFX;
     [SerializeField] GameObject SmokeFX;
     [SerializeField] GameObject HandFX;
+    [SerializeField] GameObject HealFX;
+    [SerializeField] GameObject DebuffFX;
     Boss_SpiritDemon_Summon summon;
     NavMeshAgent nav;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
+    Collider coll;
 
     [SerializeField] float hp;
     public int damage;
@@ -44,6 +47,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     bool canDashAttack;
     [SerializeField] bool canSummon;
     bool isAction;
+    bool isSummoned;
 
     public bool isChange;
     [SerializeField] bool isAttacking;
@@ -75,6 +79,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         wait = new WaitForSeconds(0.1f);
         summon = GetComponent<Boss_SpiritDemon_Summon>();
         nav = GetComponent<NavMeshAgent>();
+        coll = GetComponent<Collider>();
     }
     private void Start()
     {
@@ -84,6 +89,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     private void OnEnable()
     {
         summonInt = 0;
+        isSummoned = false;
         isAction = false;
         isAttacking = false;
         canDashAttack = false;
@@ -190,8 +196,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             if (canSummon && hp < data.Health / 2)
             {
                 state = State.SUMMON;
+                isSummoned = true;
             }
-            else if(canCast && !canSummon && hp < data.Health / 2)
+            else if(canCast && !canSummon && hp < data.Health / 2 && isSummoned)
             {
                 state = State.BLOOD;
             }
@@ -260,6 +267,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                     SummonAnim();
                     isAllDead = false;
                     canSummon = false;
+                    canCast = false;
                     summonTime = 0f;
                     castTime = 0f;
                     break;
@@ -420,9 +428,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             print("Boss ³²Àº HP" + hp);
             if (hp <= 0)
             {
-                anim.SetTrigger("Dead");
-                isDead = true;
-                SmokeFX.SetActive(false);
+                StartCoroutine(Death());
             }
         }
     }
@@ -513,7 +519,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     }
     IEnumerator Skull()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         BloodReady();
     }
     void BloodReady()
@@ -534,6 +540,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
 
     public void BloodBoom()
     {
+        bool isNull = true;
         foreach (GameObject obj in summon.summonList)
         {
             Boss_SpiritDemon_Golem golem = obj.GetComponent<Boss_SpiritDemon_Golem>();
@@ -541,22 +548,34 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
             if (golem != null)
             {
-                hp += golem.hp;
+                hp += golem.hp * 2;
                 golem.getDamage(1000);
                 golem.Blood();
+                isNull = false;
             }
             if (zombie != null)
             {
                 hp += zombie.hp;
                 zombie.getDamage(1000);
                 zombie.Blood();
+                isNull = false;
             }
             if (mage != null)
             {
-                hp += mage.hp;
+                hp += mage.hp * 1.5f;
                 mage.getDamage(1000);
                 mage.Blood();
+                isNull = false;
             }
+        }
+        if (!isNull)
+        {
+            HealFX.SetActive(true);
+        }
+        else
+        {
+            DebuffFX.SetActive(true);
+            hp -= 200;
         }
     }
     public void HandFxOn()
@@ -566,5 +585,18 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     public void HandFxOff()
     {
         HandFX.SetActive(false);
+    }
+    IEnumerator Death()
+    {
+        state = State.DEAD;
+        anim.SetTrigger("Dead");
+        SmokeFX.SetActive(false);
+        nav.speed = 0;
+        isDead = true;
+        yield return new WaitForSeconds(1);
+        rb.isKinematic = true;
+        coll.enabled = false;
+        yield return new WaitForSeconds(10);
+        gameObject.SetActive(false);
     }
 }

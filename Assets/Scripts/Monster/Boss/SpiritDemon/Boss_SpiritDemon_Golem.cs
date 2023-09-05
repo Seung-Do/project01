@@ -9,6 +9,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
     public Boss_SpiritDemon_Summon summon;
     [SerializeField] GameObject SkullFX;
     [SerializeField] GameObject BloodFX;
+    [SerializeField] GameObject FireFX;
     NavMeshAgent nav;
     WaitForSeconds wait;
     Rigidbody rb;
@@ -54,6 +55,8 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
     }
     private void OnEnable()
     {
+        SkullFX.SetActive(false);
+        BloodFX.SetActive(false);
         move = 0;
         JumpAttackTime = 0f;
         canJumpAttack = false;
@@ -303,5 +306,9 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
     public void Blood()
     {
         BloodFX.SetActive(true);
+    }
+    public void FireFxOn()
+    {
+        FireFX.SetActive(true); 
     }
 }

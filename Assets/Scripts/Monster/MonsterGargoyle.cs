@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class MonsterGargoyle : MonoBehaviour, IDamage
 {
@@ -11,6 +10,8 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     Rigidbody rb;
     Animator anim;
     CapsuleCollider coll;
+    BoxCollider deadColl;
+    NavMeshAgent nav;
     public GameObject firePos;
     public ParticleSystem MetoerCircle;
 
@@ -18,14 +19,17 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     float speed;
     float damage;
     public float move;
-    float moveSpeed;
 
     Vector3 originColl;
 
     bool isFly;
-    bool isHit;
+    bool canCast;
     bool isChase;
     bool isDead;
+    bool isAttack;
+    bool cool;
+    bool isStart;
+    [SerializeField] bool isAction;
     public bool isFindPlayer;
     public bool isFreeze;
 
@@ -36,6 +40,10 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     float chaseMaxTime = 5f;
     public float TraceTime = 0f;
     float TraceMaxTime = 5f;
+    float CastTime = 0f;
+    float CastMaxTime = 5f;
+    float ActionTime = 0f;
+    float ActionMaxTime = 5f;
 
     float attackDist;
 
@@ -56,21 +64,24 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     void Awake()
     {
         coll = GetComponent<CapsuleCollider>();
+        deadColl = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         wait = new WaitForSeconds(0.5f);
         playerLayer = LayerMask.NameToLayer("PLAYER");
         enemyLayer = LayerMask.NameToLayer("ENEMY");
-        StartCoroutine(Action());
-        StartCoroutine(CheckState());
+        nav = GetComponent<NavMeshAgent>();
         originColl = coll.center;
     }
     private void OnEnable()
     {
         isFly = false;
         move = 0;
+        isStart = false;
+        isAttack = false;
+        canCast = false;
+        isAction = false;
         isDead = false;
-        isHit = false;
         isChase = false;
         hp = data.Health;
         speed = data.Speed;
@@ -87,13 +98,35 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
     void Update()
     {
-        chaseTime += Time.deltaTime;
-        chase();
-        StopTrace();
-        moveSpeed = move * speed;
+        if (hp <= 0)
+        {
+            state = State.DEAD;
+            nav.speed = 0;
+            return;
+        }
 
+        //chaseTime += Time.deltaTime;
+        //chase();
+        //StopTrace();
+       
         if (isFreeze)
-            rb.velocity = Vector3.zero;
+            nav.speed = 0;
+
+        if (isAttack && !isFreeze)
+            AttackLook();
+
+    }
+
+    void FixedUpdate()
+    {
+        CastTime += Time.fixedDeltaTime;
+        ActionTime += Time.fixedDeltaTime;
+
+        if (CastTime > CastMaxTime)
+            canCast = true;
+        if (isAction)
+            if (ActionTime > ActionMaxTime)
+                isAction = false;
     }
 
     //몬스터의 상태를 정하는 코루틴
@@ -105,71 +138,45 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
             float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-            if (hp < data.Health / 2 && !isFly)
+            if (hp < data.Health / 2 && !isFly && !isAction)
             {
-                attackDist = data.AttackDistance + 5;
+                //attackDist = data.AttackDistance + 1;
                 viewRange = data.ViewRange + 5;
                 anim.SetTrigger("DoFly");
-                isFly = true;
                 yield return new WaitForSeconds(1);
             }
-
-            //hp가 0이하가 되었을 때
-            if (hp <= 0)
+;
+            //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
+            if (cool)
             {
-                state = State.DEAD;
-                isDead = true;
+                print("쿨타임");
+                state = State.IDLE;
+                yield return new WaitForSeconds(1f);
+                cool = false;
             }
-            //시야에 플레이어가 들어오지 않았거나
-            //주변에 플레이어를 공격하는 몬스터가 없을 때
-            else if (viewRange >= dist)
+            //플레이어가 공격거리 안에 들어왔을 때
+            if (viewRange >= dist)
             {
-                //시야에 플레이어가 들어왔을 때
-                if (isTracePlayer())
+                if (attackDist >= dist && !isAction)
                 {
-                    //플레이어가 보이면
-                    if (ViewPlayer())
-                    {
-                        //플레이어가 공격거리 안에 들어왔을 때
-                        if (attackDist >= dist)
-                        {
-                            if (3 >= dist)
-                            {
-                                state = State.ATTACK;
-                            }
-                            else
-                            {
-                                state = State.CAST;
-                                yield return new WaitForSeconds(6f);
-                            }
-                        }
-                        else
-                            state = State.TRACE;
-                    }
-                    //플레이어가 안보이면
-                    else
-                        state = State.IDLE;
-
+                    state = State.ATTACK;
+                }
+                else if (attackDist < dist && canCast && !isAction)
+                {
+                    state = State.CAST;
                 }
                 else
-                    state = State.IDLE;
-
+                    state = State.TRACE;
             }
             //주변 몬스터가 플레이어를 발견했을 때
-            else if (isFindPlayer)
+            else if (isFindPlayer || viewRange < dist && !isAction)
             {
                 state = State.TRACE;
-            }
-            //데미지 받았을 때
-            else if (isHit)
-            {
-                state = State.HIT;
             }
             else
                 state = State.IDLE;
         }
     }
-
     //상태에 따른 행동을 실행하는 코루틴
     IEnumerator Action()
     {
@@ -181,35 +188,34 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
                 case State.IDLE:
                     StartCoroutine(Idle());
                     anim.SetFloat("Move", move);
+                    nav.speed = move * speed;
                     break;
                 case State.TRACE:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
+                    nav.speed = move * speed;
                     StartCoroutine(TracePlayer());
                     FindPlayer();
                     break;
                 case State.CAST:
                     anim.SetTrigger("Cast");
-                    rb.velocity = Vector3.zero;
-                    AttackLook();
+                    nav.speed = 0;
+                    canCast = false;
+                    CastTime = 0;
                     break;
                 case State.ATTACK:
-                    if (isFly)
-                        StartCoroutine(Back());
+                    /*if (isFly)
+                        StartCoroutine(Back());*/
                     isFindPlayer = false;
                     chaseTime = 0f;
                     isChase = true;
-                    rb.velocity = Vector3.zero;
-                    transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
-                    AttackLook();
+                    nav.speed = 0;
+                    //transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
                     AttackAnim();
                     break;
-                case State.HIT:
-                    anim.SetTrigger("Hit");
-                    break;
                 case State.DEAD:
-                    anim.SetBool("Dead", true);
-                    break;
+                    isDead = true;
+                    yield break;
             }
         }
     }
@@ -223,7 +229,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange, 1 << playerLayer);
 
         //설정된 반경안에 플레이어가 탐지된다면
-        if (colls.Length == 1)
+        if (colls.Length >= 1)
         {
             Vector3 dir = (GameManager.Instance.playerTr.position - transform.position).normalized;
             //적의 시야각에 플레이어가 존재하는지 판단
@@ -265,11 +271,11 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         //상태가 TRACE일때만 반복
         while (state == State.TRACE)
         {
-            Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-            moveDirection.Normalize(); // 방향을 정규화
-            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-            rb.velocity = moveDirection * moveSpeed;
+            /* Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
+             moveDirection.Normalize(); // 방향을 정규화
+             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
+             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);*/
+            nav.SetDestination(GameManager.Instance.playerTr.position);
 
             yield return Time.deltaTime;
         }
@@ -280,7 +286,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     {
         float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-        if (dist < 3)
+        if (dist < attackDist + 0.5f)
         {
             //플레이어가 데미지 받는 메서드
             print("플레이어 데미지" + damage);
@@ -318,11 +324,11 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
                 if (dist < 3)
                 {
-                    Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-                    moveDirection.Normalize(); // 방향을 정규화
-                    Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-                    rb.velocity = moveDirection * moveSpeed;
+                    /* Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
+                     moveDirection.Normalize(); // 방향을 정규화
+                     Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
+                     transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);*/
+                    nav.SetDestination(GameManager.Instance.playerTr.position);
                 }
                 else
                     return;
@@ -337,7 +343,6 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         moveDirection.Normalize(); // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-
     }
 
     //거리가 멀어져도 지속적으로 추격하는 문제 해결 메서드
@@ -372,19 +377,23 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
+        if(!isStart) return;
+
+        if (hp <= 0)
+            return;
+
         if (state == State.IDLE)
-            state = State.TRACE;
+            isFindPlayer = true;
 
         hp -= damage;
         if (hp > 0)
             anim.SetTrigger("Hit");
         else
-            anim.SetBool("Dead", true);
+            StartCoroutine(Death());
     }
     //애니메이션이벤트에서 hit애니메이션 끝날때 호출
     public void Hit()
     {
-        isHit = false;
     }
 
     IEnumerator Move()
@@ -460,12 +469,12 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     public IEnumerator Cast2()
     {
         MetoerCircle.Play();
-        yield return new WaitForSeconds(1f);
-    }
-    public void meteor()
-    {
+        Vector3 pos = new Vector3(GameManager.Instance.playerTr.position.x + Random.Range(-1f, 1f), GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z + Random.Range(-1f, 1f));
+        GameObject Circle = GameManager.Instance.poolManager[0].Get(4);
+        Circle.transform.position = pos;
+        yield return new WaitForSeconds(2.5f);
         GameObject meteor = GameManager.Instance.poolManager[0].Get(3);
-        meteor.transform.position = new Vector3(GameManager.Instance.playerTr.position.x + Random.Range(-1f, 1f), GameManager.Instance.playerTr.position.y / 2, GameManager.Instance.playerTr.position.z + Random.Range(-1f, 1f));
+        meteor.transform.position = pos;
     }
     public void Freeze()
     {
@@ -475,5 +484,65 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(5f);
         isFreeze = false;
+    }
+    //애니메이션 이벤트로 호출
+    public void WaitOn()
+    {
+        isAction = true;
+    }
+    public void WaitOff()
+    {
+        isAction = false;
+        cool = true;
+    }
+    public void AttackOn()
+    {
+        isAttack = true;
+        ActionTime = 0;
+    }
+    public void AttackOff()
+    {
+        isAttack = false;
+    }
+    IEnumerator Death()
+    {
+        //StartCoroutine(deadY());
+        nav.speed = 0;
+        isDead = true;
+        anim.SetBool("Dead", true);
+        state = State.DEAD;
+        yield return new WaitForSeconds(1);
+        rb.isKinematic = true;
+        coll.enabled = false;
+        yield return new WaitForSeconds(10);
+        gameObject.SetActive(false);
+    }
+    IEnumerator deadY()
+    {
+        float elapsedTime = 0f;
+        float startY = transform.position.y;
+        float targetY = -2f;
+        while (elapsedTime < 1f)
+        {
+            // 현재 y 위치를 보간하여 업데이트
+            float newY = Mathf.Lerp(startY, targetY, elapsedTime);
+            Vector3 newPosition = transform.position;
+            newPosition.y = newY;
+            transform.position = newPosition;
+
+            // 경과 시간 업데이트
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // 목표 위치에 도달하면 코루틴 종료
+        yield break;
+    }
+    public void StartState()
+    {
+        StartCoroutine(Action());
+        StartCoroutine(CheckState());
+        isStart = true;
     }
 }

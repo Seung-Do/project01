@@ -501,14 +501,21 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.43031427
+      - time: 0
+        functionName: FireFxOn
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.475907
         functionName: JumpAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.65625
+      - time: 0.7899886
         functionName: WaitOff
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterGargoyleBullet : MonoBehaviour
@@ -23,7 +24,13 @@ public class MonsterGargoyleBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        //gameObject.SetActive(false);
+        PlayerDamage damage = other.GetComponent<PlayerDamage>();
+        if (damage != null)
+        {
+            damage.getDamage(20);
+            gameObject.SetActive(false);
+        }
+        gameObject.SetActive(false);
     }
     public void lookPlayer()
     {

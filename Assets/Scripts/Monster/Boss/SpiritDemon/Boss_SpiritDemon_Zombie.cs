@@ -53,6 +53,8 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
     }
     private void OnEnable()
     {
+        SkullFX.SetActive(false);
+        BloodFX.SetActive(false);
         move = 0;
         isAction = false;
         isStart = false;

@@ -43845,6 +43845,7 @@ GameObject:
   - component: {fileID: 9037971853478028269}
   - component: {fileID: 9068292318144077215}
   - component: {fileID: 5258001468322453546}
+  - component: {fileID: 484899498512402508}
   m_Layer: 0
   m_Name: Energy explosion
   m_TagString: Untagged
@@ -48876,6 +48877,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0166239d32c2c43803ea02a2d94f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &484899498512402508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956380108343503999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 9147291578145671667}
+  Speed: 2
 --- !u!1 &8956442931365385365
 GameObject:
   m_ObjectHideFlags: 0
