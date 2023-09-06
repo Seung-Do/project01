@@ -6,7 +6,7 @@ using UnityEngine;
 public class MonsterGuardianBullet : MonoBehaviour
 {
     ParticleSystem particle;
-    private void Start()
+    void OnEnable()
     {
         StartCoroutine(Off());
     }
@@ -14,7 +14,7 @@ public class MonsterGuardianBullet : MonoBehaviour
     {
         Vector3 dir = GameManager.Instance.playerTr.position - transform.position + Vector3.up * 0.8f;
         transform.rotation = Quaternion.LookRotation(dir);
-        transform.Translate(Vector3.forward * 0.7f);
+        transform.Translate(Vector3.forward * 0.3f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,7 +34,7 @@ public class MonsterGuardianBullet : MonoBehaviour
     IEnumerator Off()
     {
         //2초후 총알 비활성화
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false);
     }
 }

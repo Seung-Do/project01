@@ -4767,6 +4767,7 @@ GameObject:
   - component: {fileID: 3215201367958888231}
   - component: {fileID: 3336748930890720769}
   - component: {fileID: 3335736663603051143}
+  - component: {fileID: 8580288658468929511}
   m_Layer: 7
   m_Name: Ice Ball
   m_TagString: Untagged
@@ -9473,6 +9474,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8580288658468929511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208961416864514493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336748930890720769}
+  Speed: 2
 --- !u!1 &3208985717919551491
 GameObject:
   m_ObjectHideFlags: 0
@@ -9484,6 +9508,7 @@ GameObject:
   - component: {fileID: 3215145242004758283}
   - component: {fileID: 3336297293474036321}
   - component: {fileID: 3335883479966772535}
+  - component: {fileID: 824269593377477842}
   m_Layer: 7
   m_Name: Summon
   m_TagString: Untagged
@@ -14180,6 +14205,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &824269593377477842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208985717919551491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336297293474036321}
+  Speed: 2
 --- !u!1 &3209009767399268411
 GameObject:
   m_ObjectHideFlags: 0
@@ -14191,13 +14239,14 @@ GameObject:
   - component: {fileID: 3215201541772650723}
   - component: {fileID: 3336735202071050569}
   - component: {fileID: 3336431803191669231}
+  - component: {fileID: 5189891494633391815}
   m_Layer: 7
   m_Name: Core (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3215201541772650723
 Transform:
   m_ObjectHideFlags: 0
@@ -18887,6 +18936,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5189891494633391815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209009767399268411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336735202071050569}
+  Speed: 2
 --- !u!1 &3209384398127288039
 GameObject:
   m_ObjectHideFlags: 0
@@ -18898,6 +18970,7 @@ GameObject:
   - component: {fileID: 3215484745796925071}
   - component: {fileID: 3336156616082342435}
   - component: {fileID: 3335700228277577615}
+  - component: {fileID: 6400572987732047348}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -23596,6 +23669,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6400572987732047348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209384398127288039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336156616082342435}
+  Speed: 2
 --- !u!1 &3209463272529618755
 GameObject:
   m_ObjectHideFlags: 0
@@ -23607,6 +23703,7 @@ GameObject:
   - component: {fileID: 3215190831285944343}
   - component: {fileID: 3336686457430690931}
   - component: {fileID: 3335669284753602459}
+  - component: {fileID: 41518210802569956}
   m_Layer: 7
   m_Name: Summon (1)
   m_TagString: Untagged
@@ -28362,6 +28459,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &41518210802569956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209463272529618755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336686457430690931}
+  Speed: 2
 --- !u!1 &3209540999913597595
 GameObject:
   m_ObjectHideFlags: 0
@@ -42696,6 +42816,7 @@ GameObject:
   - component: {fileID: 3215306137020068149}
   - component: {fileID: 3336732711233265297}
   - component: {fileID: 3336595116949143005}
+  - component: {fileID: 1543950837704673046}
   m_Layer: 7
   m_Name: Summon
   m_TagString: Untagged
@@ -47505,6 +47626,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1543950837704673046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209901891915275745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336732711233265297}
+  Speed: 2
 --- !u!1 &3209928718603751877
 GameObject:
   m_ObjectHideFlags: 0
@@ -47516,6 +47660,7 @@ GameObject:
   - component: {fileID: 3207081692595308805}
   - component: {fileID: 3336268858947017621}
   - component: {fileID: 3334946572297535193}
+  - component: {fileID: 9021141785154263023}
   m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
@@ -52261,6 +52406,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9021141785154263023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209928718603751877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336268858947017621}
+  Speed: 2
 --- !u!1 &8807902687273796162
 GameObject:
   m_ObjectHideFlags: 0
