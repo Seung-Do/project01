@@ -24,6 +24,7 @@ public class Monster : MonoBehaviour, IDamage
 
     bool isChase;
     bool isDead;
+    bool isAction;
     public bool isFindPlayer;
     public bool isFreeze;
 
@@ -65,6 +66,7 @@ public class Monster : MonoBehaviour, IDamage
     {
         move = 0;
         isDead = false;
+        isAction = false;
         isChase = false;
         hp = data.Health;
         speed = data.Speed;
@@ -90,7 +92,15 @@ public class Monster : MonoBehaviour, IDamage
         //moveSpeed = move * speed;
 
         if (isFreeze)
-            nav.speed = speed;
+        {
+            nav.isStopped = true;
+            isAction = true;
+        }
+        else
+        {
+            nav.isStopped = false;
+            isAction = false;
+        }
 
         if (isChase || isFindPlayer)
             AttackLook();
@@ -122,7 +132,7 @@ public class Monster : MonoBehaviour, IDamage
                 {
                     //print("시야에 플레이어가 있음");
                     //플레이어가 보이면
-                    if (ViewPlayer())
+                    if (ViewPlayer() && !isAction)
                     {
                         // print("플레이어가 보임");
                         //플레이어가 공격거리 안에 들어왔을 때
@@ -142,7 +152,7 @@ public class Monster : MonoBehaviour, IDamage
                     state = State.IDLE;
             }
             //주변 몬스터가 플레이어를 발견했을 때
-            else if (isFindPlayer)
+            else if (isFindPlayer && !isAction)
             {
                 state = State.TRACE;
             }

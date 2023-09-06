@@ -81,7 +81,15 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (isFreeze)
-            nav.speed = 0;
+        {
+            nav.isStopped = true;
+            isAction = true;
+        }
+        else
+        {
+            nav.isStopped = false;
+            isAction = false;
+        }
 
         /*if (!isAttacking)
             AttackLook();*/
