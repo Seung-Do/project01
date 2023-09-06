@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster_Witch : MonoBehaviour, IDamage
+public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
 {
     public MonsterData data;
     WaitForSeconds wait;
@@ -360,5 +360,10 @@ public class Monster_Witch : MonoBehaviour, IDamage
             rb.velocity = Vector3.zero;
             move = 0;
         }
+    }
+    public void IFreeze()
+    {
+        if (isFreeze) isFreeze = false;
+        else isFreeze = true;
     }
 }

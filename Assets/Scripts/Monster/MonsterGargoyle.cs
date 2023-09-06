@@ -116,13 +116,9 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         //chaseTime += Time.deltaTime;
         //chase();
         //StopTrace();
-       
-        if (isFreeze)
-            nav.speed = 0;
 
         if (isAttack && !isFreeze)
             AttackLook();
-
     }
 
     void FixedUpdate()
@@ -483,15 +479,6 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         yield return new WaitForSeconds(2.5f);
         GameObject meteor = GameManager.Instance.poolManager[0].Get(3);
         meteor.transform.position = pos;
-    }
-    public void Freeze()
-    {
-        StartCoroutine(OffFreeze());
-    }
-    IEnumerator OffFreeze()
-    {
-        yield return new WaitForSeconds(5f);
-        isFreeze = false;
     }
     //애니메이션 이벤트로 호출
     public void WaitOn()

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : MonoBehaviour, IDamage
+public class Monster : MonoBehaviour, IDamage, IFreeze
 {
     public MonsterData data;
     WaitForSeconds wait;
@@ -428,4 +428,9 @@ public class Monster : MonoBehaviour, IDamage
         gameObject.SetActive(false);
     }
 
+    public void IFreeze()
+    {
+        if(isFreeze) isFreeze = false;
+        else isFreeze = true;
+    }
 }

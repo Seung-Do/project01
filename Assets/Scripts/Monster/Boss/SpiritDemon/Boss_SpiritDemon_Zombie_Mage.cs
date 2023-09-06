@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
+public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage, IFreeze
 {
     [SerializeField] Boss_SpiritDemon_Zombie_Data data;
     [SerializeField] GameObject pos;
@@ -188,5 +188,10 @@ public class Boss_SpiritDemon_Zombie_Mage : MonoBehaviour, IDamage
     public void Blood()
     {
         BloodFX.SetActive(true);
+    }
+    public void IFreeze()
+    {
+        if (isFreeze) isFreeze = false;
+        else isFreeze = true;
     }
 }

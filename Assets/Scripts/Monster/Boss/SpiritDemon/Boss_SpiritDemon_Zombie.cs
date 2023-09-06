@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
+public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage, IFreeze
 {
     public Boss_SpiritDemon_Zombie_Data data;
     public Boss_SpiritDemon_Summon summon;
@@ -298,5 +298,10 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
     public void Blood()
     {
         BloodFX.SetActive(true);
+    }
+    public void IFreeze()
+    {
+        if (isFreeze) isFreeze = false;
+        else isFreeze = true;
     }
 }
