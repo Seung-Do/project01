@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
-            handsTr.position = stage0Position + Vector3.up;
+            handsTr.position = stage0Position;
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
 
             yield return new WaitForSeconds(1.5f);
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
             SceneManager.LoadScene(secondScene);
             playerTr.position = stage1Position;
-            handsTr.position = stage1Position + Vector3.up;
+            handsTr.position = stage1Position;
             playerTr.rotation = Quaternion.Euler(0, 180f, 0);
 
             yield return new WaitForSeconds(1.5f);
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerTr.position = bossZone0;
-        handsTr.position = bossZone0 + Vector3.up;
+        handsTr.position = bossZone0;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
 
         yield return new WaitForSeconds(2f);
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerTr.position = returnStage0;
-        handsTr.position = returnStage0 + Vector3.up;
+        handsTr.position = returnStage0;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
         bossTime.SetActive(false);
         yield return new WaitForSeconds(2f);
