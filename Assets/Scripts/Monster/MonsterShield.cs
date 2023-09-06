@@ -6,6 +6,7 @@ public class MonsterShield : MonoBehaviour
 {
     Animator anim;
     Rigidbody rb;
+    Monster monster;
 
     float dashTime;
     float dashMaxTime = 10f;
@@ -14,6 +15,7 @@ public class MonsterShield : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        monster = GetComponent<Monster>();
     }
     private void OnEnable()
     {
@@ -36,5 +38,10 @@ public class MonsterShield : MonoBehaviour
     private void Update()
     {
         dashTime += Time.deltaTime;
+        if((int) monster.state == 3)
+        {
+            rb.useGravity = true;   
+        }
+
     }
 }

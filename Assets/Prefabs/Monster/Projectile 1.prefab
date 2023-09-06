@@ -4859,6 +4859,7 @@ GameObject:
   - component: {fileID: 5658243970919432572}
   - component: {fileID: 5602823381804657400}
   - component: {fileID: 7416674595188440900}
+  - component: {fileID: -216653724652934153}
   m_Layer: 0
   m_Name: Projectile 1
   m_TagString: Untagged
@@ -9807,6 +9808,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fd6d5c60963c6498d49ed27b664be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-216653724652934153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5496112082070233736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 5657468192995307550}
+  Speed: 2
 --- !u!1 &5496219236559796342
 GameObject:
   m_ObjectHideFlags: 0

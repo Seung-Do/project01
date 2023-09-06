@@ -8,7 +8,7 @@ public class Fountain : MonoBehaviour
     public ParticleSystem flow01;
     public ParticleSystem flow02;
     private WaitForSeconds wait= new WaitForSeconds(3f);
-    private bool isTouched;
+    public bool isTouched;
     void Start()
     {      
         buff.Stop();

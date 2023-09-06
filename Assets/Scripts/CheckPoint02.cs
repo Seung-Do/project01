@@ -12,6 +12,7 @@ public class CheckPoint02 : MonoBehaviour
     [SerializeField] private GameObject boss;
     [SerializeField] private GameObject lightningText;
     [SerializeField] private float playerDistance;
+    [SerializeField] private Fountain fountain;
     
 
     void Start()
@@ -35,8 +36,7 @@ public class CheckPoint02 : MonoBehaviour
                     enemyCount++;
 
                 if (collider.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
-                {
-                    location02.SetActive(false);
+                {                  
                     health = collider.gameObject.GetComponent<PlayerDamage>().hp;
                     ControllManager controllManager = collider.gameObject.GetComponent<ControllManager>();
                     if(controllManager.lightningPosible) 
@@ -48,7 +48,7 @@ public class CheckPoint02 : MonoBehaviour
                 }            
             }
             //Debug.Log(enemyCount);
-            if (enemyCount == 0 && health == 100)
+            if (enemyCount == 0 && (fountain.isTouched || health ==100))
             {
                 GameManager.Instance.bossTime.SetActive(true);
                 yield return new WaitForSeconds(3);
@@ -56,6 +56,8 @@ public class CheckPoint02 : MonoBehaviour
                 yield return new WaitForSeconds(3);
                 boss.SetActive(true);
                 GameManager.Instance.bossTime.SetActive(false);
+
+                location02.SetActive(false);
             }
             yield return new WaitForSeconds(1);
         }
