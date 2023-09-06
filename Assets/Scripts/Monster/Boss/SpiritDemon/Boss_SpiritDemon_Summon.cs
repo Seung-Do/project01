@@ -44,11 +44,11 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
         GameObject zombie1 = GameManager.Instance.poolManager[2].Get(0);
         zombie1.transform.position = pos1;
         zombie1.transform.localRotation = Quaternion.Euler(rot);
-        SummonFxOn(pos1);
+        SummonFxOn(zombie1.transform.position);
         GameObject zombie2 = GameManager.Instance.poolManager[2].Get(0);
         zombie2.transform.position = pos2;
         zombie2.transform.localRotation = Quaternion.Euler(rot);
-        SummonFxOn(pos2);
+        SummonFxOn(zombie2.transform.position);
 
         //summonList¿¡ Ãß°¡
         summonList.Add(zombie1);
