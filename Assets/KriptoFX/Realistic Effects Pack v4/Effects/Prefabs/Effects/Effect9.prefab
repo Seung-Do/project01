@@ -4579,7 +4579,7 @@ MonoBehaviour:
   UsePivotPosition: 1
   UseNormalRotation: 0
   IsWorldSpace: 1
-  RealTimeUpdateRaycast: 0
+  RealTimeUpdateRaycast: 1
   DestroyAfterDisabling: 0
   HUE: -1
   CollidedInstances: []

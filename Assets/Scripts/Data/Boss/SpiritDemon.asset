@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8cb702e53d4c1468f94fb0913ef858, type: 3}
   m_Name: SpiritDemon
   m_EditorClassIdentifier: 
-  Health: 3000
+  Health: 2000
   Damage: 20
   CassTime: 20
   AttackDistance: 2

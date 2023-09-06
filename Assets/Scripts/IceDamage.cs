@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceDamage : MonoBehaviour
 {
-    private float interactRadius = 0.3f;
+    private float interactRadius = 0.6f;
     private WaitForSeconds waitTime = new WaitForSeconds(5f);
     void Start()
     {
@@ -19,25 +19,34 @@ public class IceDamage : MonoBehaviour
     void OnEnable()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRadius);
-       
+
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
                 Animator animator = collider.GetComponent<Animator>();
-      
-                IDamage damage = collider.gameObject.GetComponent<IDamage>();
-                if (damage != null)
+
+                IFreeze freeze = collider.GetComponent<IFreeze>();
+                if (freeze != null)
                 {
-                    damage.getDamage(50);
-                    IFreeze monster = collider.GetComponent<IFreeze>();
-                    if (monster != null)
-                        StartCoroutine(AnimatorSlowMonster(animator, monster));
-                    else
-                        StartCoroutine(AnimatorSlow(animator));
+
+                    IDamage damage = collider.gameObject.GetComponent<IDamage>();
+                    if (damage != null)
+                    {
+                        StartCoroutine(AnimatorSlowMonster(animator, freeze, damage));
+                    }
                 }
-                
+                else
+                {
+                    IDamage damage = collider.gameObject.GetComponent<IDamage>();
+                    if (damage != null)
+                    {
+                        damage.getDamage(50);
+                    }
+                    StartCoroutine(AnimatorSlow(animator));
+                }
             }
+
             else if (collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
             {
                 IDamage damage = collider.gameObject.GetComponent<IDamage>();
@@ -48,13 +57,15 @@ public class IceDamage : MonoBehaviour
             }
         }
     }
-    IEnumerator AnimatorSlowMonster(Animator animator, IFreeze monster)
-    {      
+    IEnumerator AnimatorSlowMonster(Animator animator, IFreeze freeze, IDamage damage)
+    {
         animator.speed = 0f;
-        monster.IFreeze();
+        freeze.IFreeze();
+        print("¾ó¸²");
+        damage.getDamage(50);
         yield return waitTime;
         animator.speed = 1f;
-        monster.IFreeze();
+        freeze.IFreeze();
     }
     IEnumerator AnimatorSlow(Animator animator)
     {
@@ -62,5 +73,5 @@ public class IceDamage : MonoBehaviour
         yield return waitTime;
         animator.speed = 1f;
     }
-       
+
 }

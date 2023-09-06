@@ -32,11 +32,11 @@ public class LightningDamage : MonoBehaviour
             
         }
     }*/
-   
+
 
     IEnumerator AnimatorSlow(Animator animator)
-    {
-        animator.speed = 0.3f;
+    {      
+        animator.speed = 0.5f;
         yield return waitTime;
         animator.speed = 1f;
         isDamage = false;
@@ -44,16 +44,17 @@ public class LightningDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("ENEMY") && !isDamage)
-        {
-            isDamage = true;
-            Animator animator = other.GetComponent<Animator>();
+        if (!isDamage)
+        {        
             IDamage damage = other.gameObject.GetComponent<IDamage>();
             if (damage != null)
             {
+                isDamage = true;
                 damage.getDamage(50);
+                Animator animator = other.GetComponent<Animator>();
                 StartCoroutine(AnimatorSlow(animator));
             }
         }
     }
 }
+

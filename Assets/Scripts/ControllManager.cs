@@ -171,7 +171,7 @@ public class ControllManager : MonoBehaviour
                 if (playerDamage.hp > 20)
                 {
                     IsPosible = false;
-                    playerDamage.StrongMagic(20);
+                    //playerDamage.StrongMagic(20);
                     Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f + Vector3.up * 5f;
                     GameObject magic = Instantiate(magicPrefabs[index + 2], spawnPosition, Quaternion.identity);
                     Destroy(magic, 4f);
@@ -184,7 +184,7 @@ public class ControllManager : MonoBehaviour
                 if (playerDamage.hp > 20)
                 {
                     IsPosible = false;
-                    playerDamage.StrongMagic(20);
+                    //playerDamage.StrongMagic(20);
                     Vector3 spawnPosition = Camera.main.transform.position + playerTr.forward * 5f;
                     //Debug.Log("스폰 위치 y값" + spawnPosition.y);
                     //Debug.Log("카메라높이" + Camera.main.transform.position.y);
@@ -198,7 +198,7 @@ public class ControllManager : MonoBehaviour
                 if (playerDamage.hp > 20)
                 {
                     IsPosible = false;
-                    playerDamage.StrongMagic(20);
+                    //playerDamage.StrongMagic(20);
 
                     //Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 5f + Vector3.up * 5f;
                     //GameObject magic = Instantiate(magicPrefabs[index +1], spawnPosition, Quaternion.Euler(90f, 0, 0));            

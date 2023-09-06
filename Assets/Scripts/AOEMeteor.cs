@@ -23,7 +23,7 @@ public class AOEMeteor : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+            if (collider.gameObject.layer == LayerMask.NameToLayer("ENEMY") || collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
             {
                 Animator animator = collider.gameObject.GetComponent<Animator>();
 

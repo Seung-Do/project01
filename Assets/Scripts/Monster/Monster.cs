@@ -364,10 +364,11 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             state = State.TRACE;
 
         hp -= damage;
-        if(hp >0)
+        if(hp > 0 && !isFreeze)
             anim.SetTrigger("Hit");
-        else
+        else if (hp <= 0)
             anim.SetBool("Dead", true);
+
     }
 
     void randomAttackAnim()

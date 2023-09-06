@@ -17,7 +17,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
     public float hp;
     float speed;
-    float damage;
+    int damage;
     public float move;
 
     Vector3 originColl;
@@ -292,7 +292,8 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
         if (dist < attackDist + 0.5f)
         {
-            //플레이어가 데미지 받는 메서드
+            PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
+            player.getDamage(damage);
             print("플레이어 데미지" + damage);
         }
     }
