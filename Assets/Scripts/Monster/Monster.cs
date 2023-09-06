@@ -373,6 +373,8 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     void randomAttackAnim()
     {
         int ran = Random.Range(0, 4);
+        if(Type == 8)
+            ran = Random.Range(0, 3); 
 
         switch (ran)
         {
