@@ -108,8 +108,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.7
     agentHeight: 2
-    agentSlope: 42.4
-    agentClimb: 0.4
+    agentSlope: 43.3
+    agentClimb: 0.5
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -1297,6 +1297,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -1671,6 +1675,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4185743091488311343, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
 --- !u!1 &73380744 stripped
@@ -1801,6 +1809,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650397609324097722, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7179430833401478851, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -2925,6 +2937,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650397609324097722, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7179430833401478851, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4490,6 +4506,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4185743091488311343, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
 --- !u!1001 &274322759
@@ -5280,6 +5300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -5585,6 +5609,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650397609324097722, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7179430833401478851, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -7132,6 +7160,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650397609324097722, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7179430833401478851, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -14156,7 +14188,7 @@ MonoBehaviour:
   boss: {fileID: 16331298}
   lightningText: {fileID: 1847193584}
   playerDistance: 30
-  fountain: {fileID: 1077418925}
+  fountain: {fileID: 1090958627}
 --- !u!4 &617311077
 Transform:
   m_ObjectHideFlags: 0
@@ -14583,6 +14615,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7939283393474746664, guid: 5945e508f97dd894b9f8388a018101e4, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5945e508f97dd894b9f8388a018101e4, type: 3}
 --- !u!1 &650039357 stripped
@@ -14888,6 +14924,10 @@ PrefabInstance:
     - target: {fileID: 4183728432949688311, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185743091488311343, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
@@ -15441,6 +15481,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -16083,6 +16127,10 @@ PrefabInstance:
     - target: {fileID: 4183728432949688311, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185743091488311343, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
@@ -18940,6 +18988,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7939283393474746664, guid: 5945e508f97dd894b9f8388a018101e4, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5945e508f97dd894b9f8388a018101e4, type: 3}
 --- !u!1 &972495121 stripped
@@ -19574,6 +19626,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -20471,6 +20527,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1222264197542155216, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8514941889303367078, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
       propertyPath: m_Name
       value: Monster_Stag
@@ -20788,17 +20848,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
---- !u!114 &1077418925 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8840180879021682866, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
-  m_PrefabInstance: {fileID: 1077418924}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d52e84ebbfb0684e9fc3e94fb8c708b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1090958626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20884,6 +20933,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+--- !u!114 &1090958627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8840180879021682866, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1090958626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d52e84ebbfb0684e9fc3e94fb8c708b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1091305141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21722,6 +21782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1222264197542155216, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8514941889303367078, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
       propertyPath: m_Name
       value: Monster_Stag (3)
@@ -24229,6 +24293,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1222264197542155216, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8514941889303367078, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
       propertyPath: m_Name
       value: Monster_Stag (4)
@@ -25539,6 +25607,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -26341,6 +26413,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2650397609324097722, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7179430833401478851, guid: 39c8c3b02b530654b90f0bb94180c51e, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -28374,6 +28450,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4321145189040938500, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5365023673370710704, guid: 4442dd801d45fe445b5e7c61fd632268, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -28559,6 +28639,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1222264197542155216, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8514941889303367078, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
       propertyPath: m_Name
       value: Monster_Stag (2)
@@ -32260,6 +32344,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1222264197542155216, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8514941889303367078, guid: f4a00ce04d5085a4eaea48d03dabbcdd, type: 3}
       propertyPath: m_Name
       value: Monster_Stag (1)
@@ -34021,6 +34109,10 @@ PrefabInstance:
     - target: {fileID: 4183728432949688311, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185743091488311343, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb7bfd0034725e4b80275a270baccc9, type: 3}

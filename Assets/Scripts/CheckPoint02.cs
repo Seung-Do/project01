@@ -13,6 +13,7 @@ public class CheckPoint02 : MonoBehaviour
     [SerializeField] private GameObject lightningText;
     [SerializeField] private float playerDistance;
     [SerializeField] private Fountain fountain;
+    private bool isMove;
     
 
     void Start()
@@ -47,17 +48,23 @@ public class CheckPoint02 : MonoBehaviour
                     }                  
                 }            
             }
-            //Debug.Log(enemyCount);
-            if (enemyCount == 0 && (fountain.isTouched || health ==100))
+            if (!isMove)
             {
-                GameManager.Instance.bossTime.SetActive(true);
-                yield return new WaitForSeconds(3);
-                GameManager.Instance.Boss0Load();
-                yield return new WaitForSeconds(3);
-                boss.SetActive(true);
-                GameManager.Instance.bossTime.SetActive(false);
+                if (enemyCount == 0 && (fountain.isTouched || health == 100))
+                {
+                    Debug.Log("보스존으로 이동");
+                    Debug.Log(fountain.isTouched);
+                    Debug.Log(health);
+                    GameManager.Instance.bossTime.SetActive(true);
+                    yield return new WaitForSeconds(3);
+                    GameManager.Instance.Boss0Load();
+                    yield return new WaitForSeconds(3);
+                    boss.SetActive(true);
+                    GameManager.Instance.bossTime.SetActive(false);
 
-                location02.SetActive(false);
+                    location02.SetActive(false);
+                    isMove = true;
+                }
             }
             yield return new WaitForSeconds(1);
         }

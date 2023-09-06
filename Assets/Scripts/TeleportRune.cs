@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TeleportRune : MonoBehaviour
 {
-    private Vector3 newPosition = new Vector3(2.5f, 20f, -17.5f);
+    [SerializeField] GameObject runeEffect01;
+    [SerializeField] GameObject runeEffect02;
     void Start()
     {
         
@@ -19,8 +20,9 @@ public class TeleportRune : MonoBehaviour
     {
         if(other.gameObject.CompareTag("PLAYER"))
         {
-            other.gameObject.transform.position = newPosition;
-            GameManager.Instance.handsTr.position = newPosition;
+            runeEffect01.SetActive(false);
+            runeEffect02.SetActive(false);
+            GameManager.Instance.CenterHallStage1();
         }
     }
 }
