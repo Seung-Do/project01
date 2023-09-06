@@ -25,7 +25,7 @@ public class MonsterGargoyleMeteor : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             GameObject hit = collider.gameObject;
-            IDamage damage = hit.GetComponent<IDamage>();
+            PlayerDamage damage = hit.GetComponent<PlayerDamage>();
 
             if(damage != null)
             {

@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class MonsterGargoyle : MonoBehaviour, IDamage
 {
     public MonsterData data;
+    [SerializeField] SpawnManager spawnManager;
     WaitForSeconds wait;
     Rigidbody rb;
     Animator anim;
@@ -79,7 +79,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         move = 0;
         isStart = false;
         isAttack = false;
-        canCast = false;
+        canCast = true;
         isAction = false;
         isDead = false;
         isChase = false;
@@ -98,6 +98,14 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
 
     void Update()
     {
+        if(!isStart && spawnManager.spawnList.Count == 0)
+        {
+            StartCoroutine(StartAnim());
+        }
+
+        if(!isStart)
+            return;
+         
         if (hp <= 0)
         {
             state = State.DEAD;
@@ -506,7 +514,6 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
     }
     IEnumerator Death()
     {
-        //StartCoroutine(deadY());
         nav.speed = 0;
         isDead = true;
         anim.SetBool("Dead", true);
@@ -517,32 +524,17 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         yield return new WaitForSeconds(10);
         gameObject.SetActive(false);
     }
-    IEnumerator deadY()
-    {
-        float elapsedTime = 0f;
-        float startY = transform.position.y;
-        float targetY = -2f;
-        while (elapsedTime < 1f)
-        {
-            // 현재 y 위치를 보간하여 업데이트
-            float newY = Mathf.Lerp(startY, targetY, elapsedTime);
-            Vector3 newPosition = transform.position;
-            newPosition.y = newY;
-            transform.position = newPosition;
-
-            // 경과 시간 업데이트
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        // 목표 위치에 도달하면 코루틴 종료
-        yield break;
-    }
     public void StartState()
     {
         StartCoroutine(Action());
         StartCoroutine(CheckState());
         isStart = true;
+    }
+
+    IEnumerator StartAnim()
+    {
+        yield return new WaitForSeconds(1);
+        isStart = true;
+        anim.SetTrigger("Start");
     }
 }
