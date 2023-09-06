@@ -224,9 +224,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
         {
             hp -= damage;
             nav.speed = 0;
-            if (hp > 0)
-                anim.SetTrigger("Hit");
-            else
+            if (hp <= 0)
                 StartCoroutine(Death());
         }
     }
@@ -305,7 +303,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
     {
         Vector3 pos = new Vector3(-0.4f, 0.3f, -1);
         GameObject jumpAttack = GameManager.Instance.poolManager[2].Get(5);
-        jumpAttack.transform.position = transform.position + pos;
+        jumpAttack.transform.position = transform.position;
     }
     public void Skull()
     {

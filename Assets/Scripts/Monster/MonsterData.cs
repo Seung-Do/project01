@@ -15,6 +15,7 @@ public class MonsterData : ScriptableObject
     //5 : Witch
     //6 : Guardion
     //7 : Gargoyle
+    //8 : Zombie
 
     [Header("# Monster Data")]
     public float Health;    //Ã¼·Â

@@ -6,7 +6,7 @@ public class Boss_SpiritDemon_Golem_JumpAttack : MonoBehaviour
 {
     void OnEnable()
     {
-        JumpAttack();
+        StartCoroutine(attack());
         StartCoroutine(Off());
     }
 
@@ -31,5 +31,10 @@ public class Boss_SpiritDemon_Golem_JumpAttack : MonoBehaviour
     {
         yield return new  WaitForSeconds(3);
         gameObject.SetActive(false);
+    }
+    IEnumerator attack()
+    {
+        yield return new WaitForSeconds(0.1f);
+        JumpAttack();
     }
 }

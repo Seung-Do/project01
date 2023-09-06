@@ -12,12 +12,11 @@ public class MonsterGuardianBullet : MonoBehaviour
     }
     void Update()
     {
-        Vector3 dir = GameManager.Instance.playerTr.position - transform.position;
+        Vector3 dir = GameManager.Instance.playerTr.position - transform.position + Vector3.up * 0.8f;
         transform.rotation = Quaternion.LookRotation(dir);
-        transform.Translate(Vector3.forward * 1f);
+        transform.Translate(Vector3.forward * 0.7f);
     }
-
-    private void OnParticleCollision(GameObject other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!(other.gameObject.layer == LayerMask.NameToLayer("Left Hand") || other.gameObject.layer == LayerMask.NameToLayer("Right Hand")))
         {
