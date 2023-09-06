@@ -77,7 +77,7 @@ public class Boss_SpiritDemon_Zombie : MonoBehaviour, IDamage
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (isFreeze)
-            rb.velocity = Vector3.zero;
+            nav.speed = 0;
 
         /*if (!isAttacking)
             AttackLook();*/

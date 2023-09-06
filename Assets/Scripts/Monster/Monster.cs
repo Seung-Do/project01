@@ -90,7 +90,7 @@ public class Monster : MonoBehaviour, IDamage
         //moveSpeed = move * speed;
 
         if (isFreeze)
-            rb.velocity = Vector3.zero;
+            nav.speed = speed;
 
         if (isChase || isFindPlayer)
             AttackLook();

@@ -16,8 +16,11 @@ public class Boss_SpiritDemon_Zombie_Mage_Attack : MonoBehaviour
     }
     void Update()
     {
-        if(!isThrow)
-            transform.LookAt(GameManager.Instance.playerTr.position);
+        if (!isThrow) 
+        {
+            Vector3 dir = GameManager.Instance.playerTr.position - transform.position + Vector3.up * 0.8f;
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
         else
             transform.Translate(Vector3.forward * Time.deltaTime * 10f);
     }

@@ -198,7 +198,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                 state = State.SUMMON;
                 isSummoned = true;
             }
-            else if(canCast && !canSummon && hp < data.Health / 2 && isSummoned)
+            else if (canCast && !canSummon && hp < data.Health / 2 && isSummoned)
             {
                 state = State.BLOOD;
             }
@@ -418,7 +418,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         if (hp <= 0)
             return;
 
-        if(ShieldFX.activeSelf)
+        if (ShieldFX.activeSelf)
         {
             print("무적상태");
         }
@@ -465,13 +465,16 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         switch (summonInt)
         {
             case 0:
-                summon.SummonWarriorZombie();
+                if (hp < data.Health / 2)
+                    summon.SummonWarriorZombie1();
+                else
+                    summon.SummonWarriorZombie();
                 break;
             case 1:
                 summon.SummonMageZombie();
                 break;
             case 2:
-                summon.SummonWarriorZombie();
+                summon.SummonWarriorZombie2();
                 summon.SummonMageZombie();
                 break;
             case 3:
@@ -514,7 +517,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     }
     public void SmokeOn()
     {
-        if(hp < data.Health / 2)
+        if (hp < data.Health / 2)
             SmokeFX.SetActive(true);
     }
     IEnumerator Skull()
@@ -531,9 +534,9 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
             if (golem != null)
                 golem.Skull();
-            if(zombie != null)
+            if (zombie != null)
                 zombie.Skull();
-            if(mage != null) 
+            if (mage != null)
                 mage.Skull();
         }
     }
