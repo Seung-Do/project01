@@ -7174,7 +7174,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 175568, guid: a3c052cecc151054c9f9cab729654964, type: 3}
   m_PrefabInstance: {fileID: 194749861}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &252381169
+--- !u!114 &252381168
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33877,6 +33877,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 454930, guid: 196b993d2b0354842bd6fa90eb970550, type: 3}
   m_PrefabInstance: {fileID: 620001872}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &621282123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621282125}
+  - component: {fileID: 621282124}
+  m_Layer: 0
+  m_Name: 2BossPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &621282124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621282123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07cabdb64f65f4f45991341fbf89410b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 5483015374579097551, guid: ae9fdf398d1114b4e8e1bea2f5b659ba, type: 3}
+  - {fileID: 1691155289710544252, guid: caab9bf6dcea32e45bd19f146d459c90, type: 3}
+  - {fileID: 618793192809206903, guid: 8219aab5856875745b0d07fae2bcc017, type: 3}
+  - {fileID: 1525681556599722465, guid: 57a326a589dd3f0479815f83ddb38d57, type: 3}
+  - {fileID: 9084968642839780132, guid: 1c3fbfcf20460d84aadf1292bb18c975, type: 3}
+  - {fileID: 652370329312784497, guid: 41be8f8db84d8ef41be9fab277b47d01, type: 3}
+  - {fileID: 6421755436243063903, guid: 03a4b09fefd4fc44b92b6522191627cf, type: 3}
+--- !u!4 &621282125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621282123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1464753323}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &623525960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44540,7 +44592,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 102510, guid: a3c052cecc151054c9f9cab729654964, type: 3}
   m_PrefabInstance: {fileID: 194749861}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &798819315
+--- !u!114 &798819314
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88592,6 +88644,7 @@ Transform:
   m_Children:
   - {fileID: 1016385665}
   - {fileID: 1691761107}
+  - {fileID: 621282125}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88610,6 +88663,7 @@ MonoBehaviour:
   poolManager:
   - {fileID: 1016385664}
   - {fileID: 1691761106}
+  - {fileID: 621282124}
   playerTr: {fileID: 2050033834}
   handsTr: {fileID: 793622038}
   elemental: {fileID: 0}
