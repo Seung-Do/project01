@@ -9,8 +9,8 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
     Vector3 pos2;
     Vector3 pos3;
     Vector3 pos4;
-    Vector3 pos5;
-    Vector3 pos6;
+    //Vector3 pos5;
+    //Vector3 pos6;
     Vector3 pos7;
     Vector3 rot;
     public List<GameObject> summonList;
@@ -24,8 +24,8 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
         pos2 = new Vector3(-2f, -3.5f, 83);
         pos3 = new Vector3(7.5f, -3.5f, 81);
         pos4 = new Vector3(-2f, -3.5f, 81);
-        pos5 = new Vector3(-2, 2, 86.5f);
-        pos6 = new Vector3(7.5f, 2, 86.5f);
+        //pos5 = new Vector3(-2, 2, 86.5f);
+        //pos6 = new Vector3(7.5f, 2, 86.5f);
         pos7 = new Vector3(2.6f, -4.9f, 72.5f);
         rot = new Vector3(0, 180, 0);
     }
@@ -41,7 +41,7 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
     }
     public void SummonWarriorZombie1()
     {
-        GameObject zombie1 = GameManager.Instance.poolManager[2].Get(0);
+        GameObject zombie1 = GameManager.Instance.poolManager[2].Get(1);
         zombie1.transform.position = pos1;
         zombie1.transform.localRotation = Quaternion.Euler(rot);
         SummonFxOn(zombie1.transform.position);
@@ -66,7 +66,7 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
         zombie1.transform.position = pos3;
         zombie1.transform.localRotation = Quaternion.Euler(rot);
         SummonFxOn(pos3);
-        GameObject zombie2 = GameManager.Instance.poolManager[2].Get(1);
+        GameObject zombie2 = GameManager.Instance.poolManager[2].Get(0);
         zombie2.transform.position = pos4;
         zombie2.transform.localRotation = Quaternion.Euler(rot);
         SummonFxOn(pos4);
@@ -84,13 +84,13 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
     public void SummonMageZombie()
     {
         GameObject zombie1 = GameManager.Instance.poolManager[2].Get(2);
-        zombie1.transform.position = pos5;
+        zombie1.transform.position = pos1;
         zombie1.transform.localRotation = Quaternion.Euler(rot);
-        SummonFxOn(pos5);
+        SummonFxOn(pos1);
         GameObject zombie2 = GameManager.Instance.poolManager[2].Get(2);
-        zombie2.transform.position = pos6;
+        zombie2.transform.position = pos2;
         zombie2.transform.localRotation = Quaternion.Euler(rot);
-        SummonFxOn(pos6);
+        SummonFxOn(pos2);
 
         //summonList¿¡ Ãß°¡
         summonList.Add(zombie1);
