@@ -525,7 +525,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.42992646
+      - time: 0.3216462
         functionName: fireballAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
