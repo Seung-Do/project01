@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MonsterWitchFireball : MonoBehaviour
 {
-    void Start()
+    Vector3 pos;
+    void OnEnable()
     {
+        pos = transform.position;
     }
 
     void Update()
@@ -20,11 +22,12 @@ public class MonsterWitchFireball : MonoBehaviour
             PlayerDamage damage = other.GetComponent<PlayerDamage>();
             if (damage != null)
             {
-                damage.getDamage(20);
                 gameObject.SetActive(false);
-            }
-            
+                transform.position = pos;
+                damage.getDamage(20);
+            }           
             gameObject.SetActive(false);
+            transform.position = pos;
         }
     }
 }
