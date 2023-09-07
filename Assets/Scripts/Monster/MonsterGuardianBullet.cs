@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MonsterGuardianBullet : MonoBehaviour
 {
     ParticleSystem particle;
+    Vector3 pos;
     void OnEnable()
     {
+        pos = transform.position;
         StartCoroutine(Off());
     }
     void Update()
@@ -29,6 +32,7 @@ public class MonsterGuardianBullet : MonoBehaviour
             }
 
             gameObject.SetActive(false);
+            transform.position = pos;
         }
     }
     IEnumerator Off()
@@ -36,5 +40,6 @@ public class MonsterGuardianBullet : MonoBehaviour
         //2초후 총알 비활성화
         yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false);
+        transform.position = pos;
     }
 }

@@ -22,7 +22,7 @@ public class Boss_SpiritDemon_Zombie_Mage_Attack : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(dir);
         }
         else
-            transform.Translate(Vector3.forward * Time.deltaTime * 10f);
+            transform.Translate(Vector3.forward * Time.deltaTime * 15f);
     }
 
     private void OnTriggerEnter(Collider other)

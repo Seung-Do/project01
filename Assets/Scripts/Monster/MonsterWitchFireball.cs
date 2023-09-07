@@ -8,6 +8,7 @@ public class MonsterWitchFireball : MonoBehaviour
     void OnEnable()
     {
         pos = transform.position;
+        StartCoroutine(Off());
     }
 
     void Update()
@@ -29,5 +30,12 @@ public class MonsterWitchFireball : MonoBehaviour
             gameObject.SetActive(false);
             transform.position = pos;
         }
+    }
+    IEnumerator Off()
+    {
+        //2초후 총알 비활성화
+        yield return new WaitForSeconds(2.5f);
+        gameObject.SetActive(false);
+        transform.position = pos;
     }
 }

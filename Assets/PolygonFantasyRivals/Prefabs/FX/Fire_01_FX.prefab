@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
+<<<<<<< Updated upstream
   - component: {fileID: -7663324014702446368}
+=======
+  - component: {fileID: 2880737286329972538}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Fire_01_FX
   m_TagString: Untagged
@@ -4844,7 +4848,11 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+<<<<<<< Updated upstream
 --- !u!114 &-7663324014702446368
+=======
+--- !u!114 &2880737286329972538
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
