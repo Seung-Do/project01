@@ -1551,9 +1551,9 @@ GameObject:
   - component: {fileID: 1710975341571897379}
   - component: {fileID: 1652724277138883556}
   - component: {fileID: 1652724277138883559}
-  - component: {fileID: 1652724277138883558}
   - component: {fileID: 2811157009257414871}
   - component: {fileID: -4333576227596826565}
+  - component: {fileID: 6702445340597598310}
   m_Layer: 0
   m_Name: Monster_Guardian
   m_TagString: Untagged
@@ -1636,19 +1636,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &1652724277138883558
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652724277138883553}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.41088936, y: 2.071887, z: 0.44617093}
-  m_Center: {x: 0.00912389, y: 1.0285848, z: -0.007749314}
 --- !u!114 &2811157009257414871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,6 +1671,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6702445340597598310
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652724277138883553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.9750873
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9846309, z: 0}
 --- !u!1 &1652766019016823693
 GameObject:
   m_ObjectHideFlags: 0
