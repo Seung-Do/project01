@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Boss_SpiritDemon : MonoBehaviour, IDamage
 {
@@ -57,6 +59,10 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
 
     public int summonInt;
 
+    public GameObject hpBarPrefab;
+    Vector3 hpBarOffset = new Vector3(0f, 3f, 0f); 
+    Image hpBarImage;
+
     public enum State
     {
         IDLE,
@@ -110,6 +116,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         specialAttackDist = data.SpecialAttackDistance;
         DashAttackDist = data.DashAttackDistance;
         damage = data.Damage;
+       StartCoroutine(setHpBar());
     }
 
     void Update()
@@ -183,6 +190,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     IEnumerator Phase2State()
     {
         print("페이즈2");
+        hpBarPrefab.SetActive(true);
         while (!isDead)
         {
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
@@ -425,6 +433,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         else
         {
             hp -= damage;
+            hpBarImage.fillAmount = hp / data.Health;
             print("Boss 남은 HP" + hp);
             if (hp <= 0)
             {
@@ -601,5 +610,14 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         coll.enabled = false;
         yield return new WaitForSeconds(10);
         gameObject.SetActive(false);
+    }
+    IEnumerator setHpBar()
+    {
+        yield return new WaitForSeconds(1f);
+        //체력바 프리팹의 자식으로 있는 image를 말함
+        hpBarImage = hpBarPrefab.GetComponentsInChildren<Image>()[1];
+
+        var _hpBar = hpBarPrefab.GetComponent<Boss_HpBar>();
+        _hpBar.offset = hpBarOffset;
     }
 }

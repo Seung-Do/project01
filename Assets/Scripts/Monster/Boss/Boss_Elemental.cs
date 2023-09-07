@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss_Elemental : MonoBehaviour, IDamage
 {
@@ -49,6 +50,10 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     [SerializeField] float MaxHp;
     [SerializeField] GameObject spellBook;
+
+    public GameObject hpBarPrefab;
+    Vector3 hpBarOffset = new Vector3(0f, 0f, 0f);
+    Image hpBarImage;
     public enum State
     {
         IDLE,
@@ -101,6 +106,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         attackMaxTime = data[Type].AttackTime;
         mageMaxTime = data[Type].CassTime;
         change.Change(Type);
+        StartCoroutine(setHpBar());
     }
 
     void Update()
@@ -528,6 +534,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             return;
 
         hp -= damage;
+        hpBarImage.fillAmount = hp / MaxHp;
         print("Boss 남은 HP" + hp);
         if (hp <= 0)
         {
@@ -544,5 +551,15 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         yield return new WaitForSeconds(6);
         GameObject electroBook = Instantiate(spellBook, transform.position + Vector3.up, Quaternion.identity);
         gameObject.SetActive(false);
+    }
+    IEnumerator setHpBar()
+    {
+        yield return null;
+        hpBarPrefab.SetActive(true);
+        //체력바 프리팹의 자식으로 있는 image를 말함
+        hpBarImage = hpBarPrefab.GetComponentsInChildren<Image>()[1];
+
+        var _hpBar = hpBarPrefab.GetComponent<Boss_HpBar>();
+        _hpBar.offset = hpBarOffset;
     }
 }
