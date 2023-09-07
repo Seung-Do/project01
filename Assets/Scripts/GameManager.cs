@@ -13,7 +13,11 @@ public class GameManager : MonoBehaviour
     public Transform handsTr;
     public Boss_Elemental elemental;
     public GameObject bossTime;
-    
+
+    public Animator leftDoorAnim;
+    public Animator rightDoorAnim;
+    public bool isGargoyleDead;
+
     //public RawImage image;
     [SerializeField]
     private string firstScene = "stage00";
@@ -145,5 +149,16 @@ public class GameManager : MonoBehaviour
     public void CenterHallStage1()
     {
         StartCoroutine(MoveToCenterHall());
+    }
+
+    public void DoorOpen()
+    {
+        leftDoorAnim.SetBool("open", true);
+        rightDoorAnim.SetBool("open", true);
+    }
+    public void DoorClose()
+    {
+        leftDoorAnim.SetBool("open", false);
+        rightDoorAnim.SetBool("open", false);
     }
 }

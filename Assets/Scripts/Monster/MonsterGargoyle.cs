@@ -509,8 +509,9 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(6);
         gameObject.SetActive(false);
+        GameManager.Instance.isGargoyleDead = true;
     }
     public void StartState()
     {
