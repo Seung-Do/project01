@@ -73142,6 +73142,7 @@ GameObject:
   - component: {fileID: 1440414955647757834}
   - component: {fileID: 1389693958266435010}
   - component: {fileID: 1275071679040942069}
+  - component: {fileID: 6088152054095315563}
   m_Layer: 0
   m_Name: Meteor 2
   m_TagString: Untagged
@@ -78184,6 +78185,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3994733f002e3134fa916823b2e5780b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6088152054095315563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358816054080038838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1161625910047160298}
+  Speed: 2
 --- !u!1 &1358904137277257456
 GameObject:
   m_ObjectHideFlags: 0

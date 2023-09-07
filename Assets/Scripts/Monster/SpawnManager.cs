@@ -28,8 +28,9 @@ public class SpawnManager : MonoBehaviour
         //몬스터가 소환이 되었으면 몬스터가 죽었는지 아닌지 판단
         if(isSpawn)
         {
-            if(spawnList.Count == 0)
-                gameObject.SetActive(false);
+            if (spawnList.Count == 0)
+                StartCoroutine(off());
+
             foreach (GameObject spawn in spawnList)
             {
                 Monster monster = spawn.GetComponent<Monster>();
@@ -58,5 +59,11 @@ public class SpawnManager : MonoBehaviour
             dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    IEnumerator off()
+    {
+        yield return new WaitForSeconds(3f);
+        gameObject.SetActive(false);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossTrigger : MonoBehaviour
 {
     [SerializeField] GameObject boss;
-    [SerializeField] GameObject door;
+    [SerializeField] RotateDoor door;
 
     private void OnTriggerStay(Collider other)
     {
@@ -13,6 +13,7 @@ public class BossTrigger : MonoBehaviour
         {
             boss.SetActive(true);
             //문 닫히는 함수
+            door.ChangeDoor();
             gameObject.SetActive(false);
         }
     }
