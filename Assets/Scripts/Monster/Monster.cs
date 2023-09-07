@@ -292,10 +292,17 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             foreach (var coll in colls)
             {
                 Monster monster = coll.GetComponent<Monster>();
+                Monster_Witch witch = coll.GetComponent<Monster_Witch>();
+
                 if (monster != null)
                 {
                     monster.isFindPlayer = true;
                     monster.TraceTime = 0f;
+                }
+                else if (witch != null)
+                {
+                    witch.isFindPlayer = true;
+                    witch.TraceTime = 0f;
                 }
             }
         }
