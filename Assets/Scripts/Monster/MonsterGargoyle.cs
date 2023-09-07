@@ -395,6 +395,8 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
             anim.SetTrigger("Hit");
         else
             StartCoroutine(Death());
+
+        Debug.Log("가고일 hp : " + hp);
     }
     //애니메이션이벤트에서 hit애니메이션 끝날때 호출
     public void Hit()
@@ -512,6 +514,7 @@ public class MonsterGargoyle : MonoBehaviour, IDamage
         yield return new WaitForSeconds(6);
         gameObject.SetActive(false);
         GameManager.Instance.isGargoyleDead = true;
+        GameManager.Instance.doorStar.SetActive(true);
     }
     public void StartState()
     {

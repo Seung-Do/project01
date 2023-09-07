@@ -212,6 +212,10 @@ public class ControllManager : MonoBehaviour
                 }
             }
         }
+        else if(rec =="Star"&& GameManager.Instance.isGargoyleDead)
+        {
+            GameManager.Instance.DoorOpen();
+        }
         else
             Debug.Log("¾È¸ÂÀ½");
     }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Animator leftDoorAnim;
     public Animator rightDoorAnim;
     public bool isGargoyleDead;
+    public GameObject doorStar;
 
     //public RawImage image;
     [SerializeField]
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
     {
         leftDoorAnim.SetBool("open", true);
         rightDoorAnim.SetBool("open", true);
+        doorStar.SetActive(false);
     }
     public void DoorClose()
     {
