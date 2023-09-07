@@ -354,7 +354,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         {
             shield.ShieldAttack();
         }
-        else if (Type == 5 || Type == 6)
+        else if (Type == 5 || Type == 6 || Type == 10)
         {
             anim.SetTrigger("Attack");
         }
@@ -371,8 +371,8 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             state = State.TRACE;
 
         hp -= damage;
-        if(hp > 0 && !isFreeze)
-            anim.SetTrigger("Hit");
+        if (hp > 0 && !isFreeze)
+            StartCoroutine(getHit());
         else if (hp <= 0)
             anim.SetBool("Dead", true);
 
@@ -442,5 +442,12 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     {
         if(isFreeze) isFreeze = false;
         else isFreeze = true;
+    }
+    IEnumerator getHit()
+    {
+        anim.SetTrigger("Hit");
+        nav.isStopped = true;
+        yield return new WaitForSeconds(1);
+        nav.isStopped = false;
     }
 }

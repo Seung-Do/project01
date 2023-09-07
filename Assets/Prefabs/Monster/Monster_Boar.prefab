@@ -1902,10 +1902,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7179430833401478851}
   - component: {fileID: 7217246222920559773}
-  - component: {fileID: 4502583926613827160}
   - component: {fileID: 4502583926613827159}
   - component: {fileID: 4435632553701571282}
   - component: {fileID: 2650397609324097722}
+  - component: {fileID: 6240686726605638612}
   m_Layer: 6
   m_Name: Monster_Boar
   m_TagString: Untagged
@@ -1951,19 +1951,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &4502583926613827160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559756941674800249}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0247838, y: 2.0314207, z: 2.9053702}
-  m_Center: {x: 0.012391891, y: 1.0179713, z: 0.36950043}
 --- !u!54 &4502583926613827159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2023,6 +2010,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &6240686726605638612
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559756941674800249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.81668794
+  m_Height: 3.0184698
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.7271862, z: 0.28204855}
 --- !u!1 &7637404698754557547
 GameObject:
   m_ObjectHideFlags: 0

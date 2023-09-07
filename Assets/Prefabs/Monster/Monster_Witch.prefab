@@ -1650,9 +1650,9 @@ GameObject:
   - component: {fileID: 5416089597019001854}
   - component: {fileID: 5407353707445250697}
   - component: {fileID: 1712567228223625766}
-  - component: {fileID: 1712567228223625767}
   - component: {fileID: 1627491944}
   - component: {fileID: 4321145189040938500}
+  - component: {fileID: 3034864598357075202}
   m_Layer: 6
   m_Name: Monster_Witch
   m_TagString: Untagged
@@ -1728,19 +1728,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &1712567228223625767
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368200268907355550}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6437691, y: 1.8316036, z: 0.37608892}
-  m_Center: {x: 0.008940498, y: 0.95720243, z: -0.019752184}
 --- !u!114 &1627491944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1741,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: a8f298ebe15376043967f35d0ca4729b, type: 2}
-  shield: {fileID: 0}
   hp: 0
   isFindPlayer: 0
   isFreeze: 0
@@ -1784,6 +1770,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &3034864598357075202
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368200268907355550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.32672262
+  m_Height: 1.9255329
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9326823, z: 0}
 --- !u!1 &5368214262427557840
 GameObject:
   m_ObjectHideFlags: 0

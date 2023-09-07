@@ -1830,9 +1830,9 @@ GameObject:
   - component: {fileID: 9034491488489510684}
   - component: {fileID: 3134746068681018726}
   - component: {fileID: 7154389276753147561}
-  - component: {fileID: 7154389276753147560}
   - component: {fileID: 7154389276753147566}
   - component: {fileID: 1222264197542155216}
+  - component: {fileID: 7849692425149403715}
   m_Layer: 6
   m_Name: Monster_Stag
   m_TagString: Untagged
@@ -1894,19 +1894,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &7154389276753147560
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8514941889303367078}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5919527, y: 1.9541187, z: 1.8462481}
-  m_Center: {x: 0.017446578, y: 1.0045524, z: 0.044755697}
 --- !u!114 &7154389276753147566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,6 +1937,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &7849692425149403715
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514941889303367078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7000762
+  m_Height: 2.4070084
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1235138, z: 0.09303391}
 --- !u!1 &8775874913220024823
 GameObject:
   m_ObjectHideFlags: 0
