@@ -108,6 +108,8 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
             if (isGetHit)
             {
                 state = State.TRACE;
+                isChase = true;
+                isGetHit = false;
             }  
             //시야에 플레이어가 들어오지 않았거나
             //주변에 플레이어를 공격하는 몬스터가 없을 때
