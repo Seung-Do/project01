@@ -7,7 +7,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
 {
     public float RaycastDistance = 100;
     public GameObject[] Effects;
-    public float Offset = 0;
+    public float Offset; //float을 vector3 로 바꿈
     public float EnableTimeDelay = 0;
 
     public float DestroyTime = 3;
@@ -54,7 +54,8 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
     void Update()
     {
-        if (canUpdate) {
+        if (canUpdate)
+        {
             UpdateRaycast();
         }
     }
@@ -63,25 +64,26 @@ public class RFX4_RaycastCollision : MonoBehaviour
     private void UpdateRaycast()
     {
         RaycastHit raycastHit;
-        if (Physics.Raycast(transform.position, transform.forward, out raycastHit, RaycastDistance)) {
+        if (Physics.Raycast(transform.position, transform.forward, out raycastHit, RaycastDistance))
+        {
             Vector3 position;
             if (UsePivotPosition)
                 position = raycastHit.transform.position;
             else
-                position = raycastHit.point + raycastHit.normal * Offset;
+                position = raycastHit.point + raycastHit.normal* Offset - Vector3.up*0.5f; //- Vector3.up*0.5f 추가
 
             var handler = CollisionEnter;
             if (handler != null)
-                handler(this, new RFX4_PhysicsMotion.RFX4_CollisionInfo { HitPoint = raycastHit.point, HitCollider = raycastHit.collider, HitGameObject = raycastHit.transform.gameObject});
+                handler(this, new RFX4_PhysicsMotion.RFX4_CollisionInfo { HitPoint = raycastHit.point, HitCollider = raycastHit.collider, HitGameObject = raycastHit.transform.gameObject });
 
-            if (distanceParticles !=null)
-            foreach (var rayPS in distanceParticles)
-            {
+            if (distanceParticles != null)
+                foreach (var rayPS in distanceParticles)
+                {
 
                     if (rayPS != null && rayPS.name.Contains(particlesAdditionalName))
-                    rayPS.GetComponent<ParticleSystemRenderer>().lengthScale = (transform.position - raycastHit.point).magnitude / rayPS.main.startSize.constantMax;
+                        rayPS.GetComponent<ParticleSystemRenderer>().lengthScale = (transform.position - raycastHit.point).magnitude / rayPS.main.startSize.constantMax;
 
-            }
+                }
             //이 부분만 수정했음
             /*if (CollidedInstances.Count==0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
                 foreach (var effect in Effects) {
@@ -109,7 +111,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
                     }
                 }*/
             //요기서 부터~~~~~~~~~~~~
-            if(CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
+            if (CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
                 var instance = Instantiate(Effects[0], position, new Quaternion()) as GameObject;
                 var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
@@ -124,15 +126,15 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
                 if (HUE > -0.9f) RFX4_ColorHelper.ChangeObjectColorByHUE(instance, HUE);
 
-                if (!IsWorldSpace)
+                /*if (!IsWorldSpace)
                     instance.transform.parent = transform;
                 if (UseNormalRotation)
-                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);
+                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);*/ //옵션에서 확인
                 if (DestroyTime > 0.0001f)
                     Destroy(instance, DestroyTime);
             }
-            else if(CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
-            {
+            else if (CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
+            {              
                 var instance = Instantiate(Effects[1], position, new Quaternion()) as GameObject;
                 var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
                 var effectSettingsRoot = GetComponentInParent<RFX4_EffectSettings>();
@@ -146,15 +148,16 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
                 if (HUE > -0.9f) RFX4_ColorHelper.ChangeObjectColorByHUE(instance, HUE);
 
-                if (!IsWorldSpace)
+                /*if (!IsWorldSpace)
                     instance.transform.parent = transform;
                 if (UseNormalRotation)
-                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);
+                    instance.transform.LookAt(raycastHit.point + raycastHit.normal);*/ //옵션에서 확인
                 if (DestroyTime > 0.0001f)
                     Destroy(instance, DestroyTime);
             }//~~~~~~~~~~~~~~요까지 추가됨
             else
-                foreach (var instance in CollidedInstances) {
+                foreach (var instance in CollidedInstances)
+                {
                     if (instance == null) continue;
                     instance.transform.position = position;
                     if (UseNormalRotation)
@@ -168,7 +171,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-       Gizmos.color = Color.blue;
-       Gizmos.DrawLine(transform.position, transform.position + transform.forward * RaycastDistance);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * RaycastDistance);
     }
 }

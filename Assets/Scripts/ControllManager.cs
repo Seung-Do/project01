@@ -32,6 +32,9 @@ public class ControllManager : MonoBehaviour
     public bool icePosible;
     public Collider lightningCollider;
 
+    [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject teleportInteractor;
+
     //public TMP_Text text;
     private void Awake()
     {
@@ -63,11 +66,15 @@ public class ControllManager : MonoBehaviour
         {
             spellBook.SetActive(true);
             isOpen = true;
+            leftHand.SetActive(false);
+            teleportInteractor.SetActive(false);
         }
         else
         {
             spellBook.SetActive(false);
             isOpen = false;
+            leftHand.SetActive(true);
+            teleportInteractor.SetActive(true);
         }
     }
 

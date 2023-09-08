@@ -59,6 +59,9 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
         summon1.summon = GetComponent<Boss_SpiritDemon_Summon>();
         Boss_SpiritDemon_Zombie summon2 = zombie2.GetComponent<Boss_SpiritDemon_Zombie>();
         summon2.summon = GetComponent<Boss_SpiritDemon_Summon>();
+
+        //print(zombie1.transform.position);
+        //print(zombie2.transform.position);
     }
     public void SummonWarriorZombie2()
     {
@@ -79,7 +82,10 @@ public class Boss_SpiritDemon_Summon : MonoBehaviour
         Boss_SpiritDemon_Zombie summon1 = zombie1.GetComponent<Boss_SpiritDemon_Zombie>();
         summon1.summon = GetComponent<Boss_SpiritDemon_Summon>();
         Boss_SpiritDemon_Zombie summon2 = zombie2.GetComponent<Boss_SpiritDemon_Zombie>();
-        summon2.summon = GetComponent<Boss_SpiritDemon_Summon>();
+        summon2.summon = GetComponent<Boss_SpiritDemon_Summon>(); 
+        
+        //print(zombie1.transform.position);
+        //print(zombie2.transform.position);
     }
     public void SummonMageZombie()
     {

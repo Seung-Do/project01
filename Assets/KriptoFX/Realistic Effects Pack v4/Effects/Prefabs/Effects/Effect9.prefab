@@ -4573,10 +4573,10 @@ MonoBehaviour:
   Effects:
   - {fileID: 173866, guid: 6692e3c69d930964f89b810020ae7d5c, type: 3}
   - {fileID: 173866, guid: 6846eb16792ee6d4399df8388eb03868, type: 3}
-  Offset: 0
+  Offset: -0.5
   EnableTimeDelay: 0.1
   DestroyTime: 6
-  UsePivotPosition: 1
+  UsePivotPosition: 0
   UseNormalRotation: 0
   IsWorldSpace: 1
   RealTimeUpdateRaycast: 1

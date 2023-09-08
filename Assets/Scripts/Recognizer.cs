@@ -120,7 +120,7 @@ public class Recognizer : MonoBehaviour
         else //제스쳐 인식
         {
             Result result = PointCloudRecognizer.Classify(newGesture, trainingSet.ToArray());
-            Debug.Log(result.GestureClass +  result.Score);
+            //Debug.Log(result.GestureClass +  result.Score);
             if (result.Score > recognitionThreshold)
             {
                 OnRecognized.Invoke(result.GestureClass);
