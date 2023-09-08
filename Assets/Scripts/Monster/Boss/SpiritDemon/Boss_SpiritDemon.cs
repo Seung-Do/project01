@@ -181,7 +181,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                 isChange = true;
 
                 anim.SetBool("Phase", true);
-                summonMaxTime = 30;
+                summonMaxTime = 45;
                 summonTime = 0;
                 canSummon = false;
                 yield break;
@@ -217,11 +217,11 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             {
                 state = State.TRACE;
             }
-            //대쉬 공격
+          /*  //대쉬 공격
             else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack && !isAction)
             {
                 state = State.DASHATTACK;
-            }
+            }*/
             //특수 공격
             else if (dist <= specialAttackDist && dist > attackDist && canSpecialAttack && !isAction)
             {
@@ -483,11 +483,22 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
                     summon.SummonWarriorZombie();
                 break;
             case 1:
-                summon.SummonMageZombie();
+                if (hp < data.Health / 2)
+                    summon.SummonWarriorZombie2();
+                else
+                    summon.SummonMageZombie();
                 break;
             case 2:
-                summon.SummonWarriorZombie2();
-                summon.SummonMageZombie();
+                if (hp < data.Health / 2)
+                {
+                    summonInt = 0;
+                    summon.SummonGolem();
+                }
+                else
+                {
+                    summon.SummonWarriorZombie2();
+                    summon.SummonMageZombie();
+                }
                 break;
             case 3:
                 summon.SummonGolem();
@@ -563,7 +574,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
             if (golem != null)
             {
-                hp += golem.hp * 2;
+                hp += golem.hp;
                 golem.getDamage(1000);
                 golem.Blood();
                 isNull = false;
@@ -577,7 +588,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             }
             if (mage != null)
             {
-                hp += mage.hp * 1.5f;
+                hp += mage.hp;
                 mage.getDamage(1000);
                 mage.Blood();
                 isNull = false;
