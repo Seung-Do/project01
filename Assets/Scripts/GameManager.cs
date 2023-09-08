@@ -30,6 +30,13 @@ public class GameManager : MonoBehaviour
     private Vector3 bossZone0 = new Vector3(-20f, 20f, 235f);
     private Vector3 returnStage0 = new Vector3(107f, 20f, 244f);
     private Vector3 CenterHall = new Vector3(2.5f, 20f, -17.5f);
+
+    [SerializeField] private GameObject box;
+    [SerializeField] private XRRayInteractor leftInteractor;
+    [SerializeField] private XRRayInteractor rightInteractor;
+    [SerializeField] private GameObject canvasStart;
+    public ActionBasedContinuousMoveProvider moveProvider;
+    public ActionBasedSnapTurnProvider snapTurnProvider;
     private void Awake()
     {
         if (Instance == null)
@@ -45,12 +52,20 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FadeIn();
+        moveProvider.enabled = false;
+        snapTurnProvider.enabled = false; 
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    private IEnumerator JustFade()
+    {
+        FadeOut();
+        yield return new WaitForSeconds(1);
+        FadeIn();
     }
     private IEnumerator FadeScreen0()
     {      
@@ -162,5 +177,24 @@ public class GameManager : MonoBehaviour
     {
         leftDoorAnim.SetBool("open", false);
         rightDoorAnim.SetBool("open", false);
+    }
+
+    public void tutorialStart()
+    {
+        StartCoroutine(JustFade());
+        box.SetActive(false);
+        leftInteractor.enabled = false;
+        rightInteractor.enabled = false;
+        snapTurnProvider.enabled = true;
+        canvasStart.SetActive(false);
+    }
+
+    public void PassTutorial()
+    {
+        leftInteractor.enabled = false;
+        rightInteractor.enabled = false;
+        snapTurnProvider.enabled = true;
+        moveProvider.enabled = true;
+        Stage0Load();
     }
 }
