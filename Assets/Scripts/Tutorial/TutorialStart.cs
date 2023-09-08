@@ -9,18 +9,15 @@ public class TutorialStart : TutorialBase
     public GameObject canvas;
     public Transform playerTr;
     public TMP_Text text;
-    public GameObject teleportInteractor;
     public GameObject leftControllerImage;
-    //public GameObject Locomotion;
+
     Quaternion rotation = Quaternion.Euler(0f, 90f, 0f);
     Quaternion rotationR = Quaternion.Euler(0f, -270f, 0f);
-    
+
 
     public override void Enter()
     {
         canvas.SetActive(true);
-        //Locomotion.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
-        //teleportInteractor.SetActive(false);
         leftControllerImage.SetActive(true);
         text.text = "플레이어 조작에 대해 알아보겠습니다\r\n왼쪽 썸스틱을 좌우로 입력하여 스냅턴이 가능합니다\r\n왼쪽 썸스틱을 오른쪽으로 세번 입력해서 오른쪽 방향을 봐주세요";
     }
@@ -28,7 +25,7 @@ public class TutorialStart : TutorialBase
     public override void Execute(TutorialController controller)
     {
         //Debug.Log(playerTr.rotation.y);
-        if(playerTr.rotation == rotation || playerTr.rotation == rotationR)
+        if (playerTr.rotation == rotation || playerTr.rotation == rotationR)
             controller.SetNextTutorial();
     }
 
@@ -39,12 +36,12 @@ public class TutorialStart : TutorialBase
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

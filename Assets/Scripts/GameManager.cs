@@ -35,8 +35,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private XRRayInteractor leftInteractor;
     [SerializeField] private XRRayInteractor rightInteractor;
     [SerializeField] private GameObject canvasStart;
-    public ActionBasedContinuousMoveProvider moveProvider;
-    public ActionBasedSnapTurnProvider snapTurnProvider;
+    [SerializeField] private GameObject Locomotion;
+ 
+
     private void Awake()
     {
         if (Instance == null)
@@ -48,12 +49,13 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+  
     }
     void Start()
     {
+        //teleportInteractor.SetActive(false);
         FadeIn();
-        moveProvider.enabled = false;
-        snapTurnProvider.enabled = false; 
+         
     }
 
     // Update is called once per frame
@@ -64,8 +66,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator JustFade()
     {
         FadeOut();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         FadeIn();
+        box.SetActive(false);
     }
     private IEnumerator FadeScreen0()
     {      
@@ -182,10 +185,9 @@ public class GameManager : MonoBehaviour
     public void tutorialStart()
     {
         StartCoroutine(JustFade());
-        box.SetActive(false);
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
-        snapTurnProvider.enabled = true;
+        Locomotion.SetActive(true);
         canvasStart.SetActive(false);
     }
 
@@ -193,8 +195,7 @@ public class GameManager : MonoBehaviour
     {
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
-        snapTurnProvider.enabled = true;
-        moveProvider.enabled = true;
+        Locomotion.SetActive(true);
         Stage0Load();
     }
 }
