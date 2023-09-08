@@ -60,8 +60,11 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     public int summonInt;
 
     public GameObject hpBarPrefab;
-    Vector3 hpBarOffset = new Vector3(0f, 3f, 0f); 
+    Vector3 hpBarOffset = new Vector3(0f, 3f, 0f);
     Image hpBarImage;
+    Image hpBar;
+    Color color1;
+    Color color2;
 
     public enum State
     {
@@ -116,7 +119,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         specialAttackDist = data.SpecialAttackDistance;
         DashAttackDist = data.DashAttackDistance;
         damage = data.Damage;
-       StartCoroutine(setHpBar());
+        StartCoroutine(setHpBar());
     }
 
     void Update()
@@ -190,7 +193,6 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     IEnumerator Phase2State()
     {
         print("페이즈2");
-        hpBarPrefab.SetActive(true);
         while (!isDead)
         {
             //자체적으로 쿨타임을 가져 반복적으로 상태가 변화는것을 방지
@@ -434,6 +436,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         {
             hp -= damage;
             hpBarImage.fillAmount = hp / data.Health;
+            StartCoroutine(HideHp());
             print("Boss 남은 HP" + hp);
             if (hp <= 0)
             {
@@ -613,11 +616,29 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     }
     IEnumerator setHpBar()
     {
-        yield return new WaitForSeconds(1f);
-        //체력바 프리팹의 자식으로 있는 image를 말함
+        yield return new WaitForSeconds(0.5f);
+       //체력바 프리팹의 자식으로 있는 image를 말함
         hpBarImage = hpBarPrefab.GetComponentsInChildren<Image>()[1];
-
-        var _hpBar = hpBarPrefab.GetComponent<Boss_HpBar>();
-        _hpBar.offset = hpBarOffset;
+        //hpBar = hpBarPrefab.GetComponent<Image>();
+        /*color1 = hpBarImage.color;
+        color2 = hpBar.color;*/
+    }
+    IEnumerator HideHp()
+    {
+        hpBarPrefab.SetActive(true);
+       /* color1.a = 1f;
+        color2.a = 1f;
+        hpBarImage.color = color1;
+        hpBar.color = color2;*/
+        yield return new WaitForSeconds(1); 
+        hpBarPrefab.SetActive(false);
+        /*while (color1.a > 0)
+        {
+            color1.a -= Time.deltaTime;
+            hpBarImage.color = color1;
+            color2.a -= Time.deltaTime;
+            hpBar.color = color2;
+            yield return Time.deltaTime;
+        }*/
     }
 }
