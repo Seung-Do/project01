@@ -303,7 +303,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
     {
         Vector3 pos = new Vector3(-0.4f, 0.3f, -1);
         GameObject jumpAttack = GameManager.Instance.poolManager[2].Get(5);
-        jumpAttack.transform.position = transform.position;
+        jumpAttack.transform.position = transform.position + Vector3.down * 0.2f;
     }
     public void Skull()
     {

@@ -5070,7 +5070,7 @@ Transform:
   m_GameObject: {fileID: 652235331768882929}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.33, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 5, y: 0.01, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 650381270641506949}
@@ -9820,6 +9820,7 @@ GameObject:
   - component: {fileID: 655687306516464815}
   - component: {fileID: 849447933094355841}
   - component: {fileID: 850298342819208599}
+  - component: {fileID: 6926808158741234831}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -14471,6 +14472,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6926808158741234831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652605843489990001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 849447933094355841}
+  Speed: 2
 --- !u!1 &652765861815108319
 GameObject:
   m_ObjectHideFlags: 0
