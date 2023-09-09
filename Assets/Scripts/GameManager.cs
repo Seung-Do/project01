@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     public Animator leftDoorAnim;
     public Animator rightDoorAnim;
     public bool isGargoyleDead;
+    public bool isStart = false;
     public GameObject doorStar;
+    public GameObject teleportInteractor;
 
     //public RawImage image;
     [SerializeField]
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private XRRayInteractor leftInteractor;
     [SerializeField] private XRRayInteractor rightInteractor;
     [SerializeField] private GameObject canvasStart;
-    [SerializeField] private GameObject Locomotion;
+    
  
 
     private void Awake()
@@ -53,15 +55,18 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //teleportInteractor.SetActive(false);
-        FadeIn();
-         
+        teleportInteractor.SetActive(false);
+        FadeIn();    
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!isStart)
+        {
+            playerTr.position = new Vector3(0, 0.11f, -10f);
+            playerTr.rotation = Quaternion.identity;
+        }
     }
     private IEnumerator JustFade()
     {
@@ -187,15 +192,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(JustFade());
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
-        Locomotion.SetActive(true);
         canvasStart.SetActive(false);
+        isStart = true;
     }
 
     public void PassTutorial()
     {
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
-        Locomotion.SetActive(true);
         Stage0Load();
+        isStart = true;
     }
 }

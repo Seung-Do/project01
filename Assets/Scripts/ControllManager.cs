@@ -33,7 +33,6 @@ public class ControllManager : MonoBehaviour
     public Collider lightningCollider;
 
     [SerializeField] GameObject leftHand;
-    [SerializeField] GameObject teleportInteractor;
 
     //public TMP_Text text;
     private void Awake()
@@ -61,20 +60,23 @@ public class ControllManager : MonoBehaviour
     }
     void OpenBook()
     {
-        leftGripValue = openBook.action.ReadValue<float>();
-        if (leftGripValue > 0.9f)
+        if (GameManager.Instance.isStart)
         {
-            spellBook.SetActive(true);
-            isOpen = true;
-            leftHand.SetActive(false);
-            teleportInteractor.SetActive(false);
-        }
-        else
-        {
-            spellBook.SetActive(false);
-            isOpen = false;
-            leftHand.SetActive(true);
-            teleportInteractor.SetActive(true);
+            leftGripValue = openBook.action.ReadValue<float>();
+            if (leftGripValue > 0.9f)
+            {
+                spellBook.SetActive(true);
+                isOpen = true;
+                leftHand.SetActive(false);
+                GameManager.Instance.teleportInteractor.SetActive(false);
+            }
+            else
+            {
+                spellBook.SetActive(false);
+                isOpen = false;
+                leftHand.SetActive(true);
+                GameManager.Instance.teleportInteractor.SetActive(true);
+            }
         }
     }
 
