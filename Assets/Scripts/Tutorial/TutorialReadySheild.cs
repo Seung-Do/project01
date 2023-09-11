@@ -6,8 +6,8 @@ using UnityEngine;
 public class TutorialReadySheild : TutorialBase
 {
     public GameObject canvas;
-    public Transform playerTr;
     public TMP_Text text;
+    public GameObject rightControllerImage;
     public GameObject maker;
 
     void Start()
@@ -16,13 +16,15 @@ public class TutorialReadySheild : TutorialBase
     }
     public override void Enter()
     {
+        canvas.SetActive(true);
+        rightControllerImage.SetActive(true);
         maker.SetActive(true);
-        text.text = "3번째 마법인 폭발마법은 강력한 광역 마법이지만 플레이어의 체력을 한 칸 소모하고 체력이 한칸 남았을 때는 사용하지 못합니다\r\n만약 체력을 소모했다면 완쪽에 보이는 생명의 샘에서 체력을 회복할 수 있습니다\r\n준비가 되면 오른쪽에 나타난 표시 지점으로 이동해 주세요";
+        text.text = "오른쪽 컨트롤러의 A버튼을 누르고 원(○)을 그리고 버튼을 때면 마법 방패가 소환됩니다\r\n마법 공격만 막을 수 있고 근접 공격은 막지 못하므로 주의하세요\r\n마법 공격을 막을 준비가 되면 앞에 나타난 표시 지점으로 이동해 주세요";
     }
 
     public override void Execute(TutorialController controller)
     {
-        if ((playerTr.position.x > 2f && playerTr.position.x < 3f) && (playerTr.position.z < 4.5f && playerTr.position.z > 3.5f))
+        if ((GameManager.Instance.playerTr.position.x > 2f && GameManager.Instance.playerTr.position.x < 3f) && (GameManager.Instance.playerTr.position.z < 4.5f && GameManager.Instance.playerTr.position.z > 3.5f))
             controller.SetNextTutorial();
     }
 

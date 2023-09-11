@@ -7,8 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class TutorialMove : TutorialBase
 {
-    public GameObject canvas;
-    public Transform playerTr;
+    public GameObject canvas; 
     public TMP_Text text;
     public GameObject maker;
     public GameObject rightControllerImage;
@@ -28,7 +27,7 @@ public class TutorialMove : TutorialBase
 
     public override void Execute(TutorialController controller)
     {
-        if ((playerTr.position.x > -3f && playerTr.position.x < -2f) && (playerTr.position.z < 1.5f && playerTr.position.z > 0.5f))
+        if ((GameManager.Instance.playerTr.position.x > -3f && GameManager.Instance.playerTr.position.x < -2f) && (GameManager.Instance.playerTr.position.z < 1.5f && GameManager.Instance.playerTr.position.z > 0.5f))
             controller.SetNextTutorial();
     }
 

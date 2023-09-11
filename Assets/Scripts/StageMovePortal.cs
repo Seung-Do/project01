@@ -15,9 +15,9 @@ public class StageMovePortal : MonoBehaviour
     {
         
     }
-    private void OnParticleCollision(GameObject other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))       
-            moveNext = true;      
+        if (other.gameObject.CompareTag("PLAYER"))
+            moveNext = true;
     }
 }

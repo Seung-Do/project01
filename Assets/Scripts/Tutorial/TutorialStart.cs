@@ -7,7 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class TutorialStart : TutorialBase
 {
     public GameObject canvas;
-    public Transform playerTr;
     public TMP_Text text;
     public GameObject leftControllerImage;
 
@@ -25,7 +24,7 @@ public class TutorialStart : TutorialBase
     public override void Execute(TutorialController controller)
     {
         //Debug.Log(playerTr.rotation.y);
-        if (playerTr.rotation == rotation || playerTr.rotation == rotationR)
+        if (GameManager.Instance.playerTr.rotation == rotation || GameManager.Instance.playerTr.rotation == rotationR)
             controller.SetNextTutorial();
     }
 

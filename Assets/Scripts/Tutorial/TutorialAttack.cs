@@ -18,12 +18,12 @@ public class TutorialAttack : TutorialBase
         //GameObject skeletonMon = Instantiate(skeletonObject, new Vector3( -2.5f, 0.11f, 12.5f ), Quaternion.Euler(0, 180f, 0));
      
         canvas.SetActive(true);
-        text.text = "<해골 병사를 5번 공격하세요!>";
+        text.text = "<해골 병사를 3번 공격하세요!>";
     }
 
     public override void Execute(TutorialController controller)
     {
-        if(skeleton.hitNumber == 1)
+        if(skeleton.hitNumber == 3)
             controller.SetNextTutorial();
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MagicShield : MonoBehaviour, IDamage
 {
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -15,14 +14,7 @@ public class MagicShield : MonoBehaviour, IDamage
     {
         
     }
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("MONSTERMAGIC"))
-        {
-            other.gameObject.SetActive(false);
-            print("¸·À½");
-        }
-    }*/
+    
 
     public void getDamage(int damage)
     {

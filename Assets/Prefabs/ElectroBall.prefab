@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 13094094539516644}
   - component: {fileID: 627532176468635110}
   - component: {fileID: 2218793668132909337}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4890,7 +4890,7 @@ GameObject:
   - component: {fileID: 4472301501426242162}
   - component: {fileID: 4378277339477810048}
   - component: {fileID: 4378584520673325828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9772,7 +9772,7 @@ GameObject:
   - component: {fileID: 4471954773153904356}
   - component: {fileID: 4378036069077147242}
   - component: {fileID: 4379013471542992608}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Electro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14661,7 +14661,7 @@ GameObject:
   - component: {fileID: 4377705779148198144}
   - component: {fileID: 4378926647288285304}
   - component: {fileID: 672171418829194804}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Electro orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19686,7 +19686,7 @@ GameObject:
   - component: {fileID: 8863938288386698229}
   - component: {fileID: 6898478022489062831}
   - component: {fileID: 2947493479280133188}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Electro hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24619,7 +24619,7 @@ GameObject:
   - component: {fileID: 3912570450780759602}
   - component: {fileID: 2896700000178015274}
   - component: {fileID: 6095444676459411893}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ElectroBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24701,7 +24701,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6326319530959298160}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -24747,7 +24747,7 @@ GameObject:
   - component: {fileID: 8690299296902504054}
   - component: {fileID: 4701745257380802675}
   - component: {fileID: 681204144684921380}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

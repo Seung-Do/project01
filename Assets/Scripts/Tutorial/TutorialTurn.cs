@@ -6,7 +6,6 @@ using UnityEngine;
 public class TutorialTurn : TutorialBase
 {
     public GameObject canvas;
-    public Transform playerTr;
     public TMP_Text text;
     
     
@@ -21,7 +20,7 @@ public class TutorialTurn : TutorialBase
 
     public override void Execute(TutorialController controller)
     {
-        if (playerTr.rotation == rotation || playerTr.rotation == rotationR)
+        if (GameManager.Instance.playerTr.rotation == rotation || GameManager.Instance.playerTr.rotation == rotationR)
             controller.SetNextTutorial();
     }
 
