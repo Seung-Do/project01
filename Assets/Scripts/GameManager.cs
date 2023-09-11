@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool isGargoyleDead;
     public bool isStart = false;
     public GameObject doorStar;
-    public GameObject teleportInteractor;
+   // public GameObject teleportInteractor;
 
     //public RawImage image;
     [SerializeField]
@@ -34,11 +34,16 @@ public class GameManager : MonoBehaviour
     private Vector3 CenterHall = new Vector3(2.5f, 20f, -17.5f);
 
     [SerializeField] private GameObject box;
+    [SerializeField] private GameObject plane;
     [SerializeField] private XRRayInteractor leftInteractor;
     [SerializeField] private XRRayInteractor rightInteractor;
     [SerializeField] private GameObject canvasStart;
-    
- 
+    [SerializeField] private GameObject tutorials;
+    [SerializeField] private GameObject hands;
+    [SerializeField] private GameObject leftmodel;
+    [SerializeField] private GameObject rightmodel;
+
+
 
     private void Awake()
     {
@@ -51,32 +56,30 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-  
+
     }
     void Start()
     {
-        teleportInteractor.SetActive(false);
-        FadeIn();    
+        hands.SetActive(false);
+        FadeIn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!isStart)
-        {
-            playerTr.position = new Vector3(0, 0.11f, -10f);
-            playerTr.rotation = Quaternion.identity;
-        }
+ 
     }
-    private IEnumerator JustFade()
+    private IEnumerator ToTutorial()
     {
         FadeOut();
         yield return new WaitForSeconds(1.5f);
         FadeIn();
         box.SetActive(false);
+        hands.SetActive(true);
     }
-    private IEnumerator FadeScreen0()
-    {      
+
+    private IEnumerator ToStage0()
+    {
         if (!firstScene.Equals(""))
         {
             FadeOut();
@@ -89,7 +92,25 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
-        }       
+            hands.SetActive(true);
+            isStart = true;
+        }
+    }
+    private IEnumerator FadeScreen0()
+    {
+        if (!firstScene.Equals(""))
+        {
+            FadeOut();
+            yield return new WaitForSeconds(1f);
+
+            SceneManager.LoadScene(firstScene);
+            playerTr.position = stage0Position;
+            handsTr.position = stage0Position;
+            playerTr.rotation = Quaternion.Euler(0, 270f, 0);
+
+            yield return new WaitForSeconds(1.5f);
+            FadeIn();
+        }
     }
     private IEnumerator FadeScreen1()
     {
@@ -189,10 +210,14 @@ public class GameManager : MonoBehaviour
 
     public void tutorialStart()
     {
-        StartCoroutine(JustFade());
+        StartCoroutine(ToTutorial());
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
+        leftmodel.SetActive(false);
+        rightmodel.SetActive(false);
+        plane.SetActive(true);
         canvasStart.SetActive(false);
+        tutorials.SetActive(true);
         isStart = true;
     }
 
@@ -200,7 +225,9 @@ public class GameManager : MonoBehaviour
     {
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
-        Stage0Load();
-        isStart = true;
+        leftmodel.SetActive(false);
+        rightmodel.SetActive(false);
+        StartCoroutine(ToStage0());
+        
     }
 }

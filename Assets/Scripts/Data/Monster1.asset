@@ -16,6 +16,6 @@ MonoBehaviour:
   Health: 100
   Speed: 3
   Damage: 30
-  AttackDistance: 2
+  AttackDistance: 2.5
   ViewRange: 10
   Sound: 0

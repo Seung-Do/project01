@@ -12297,7 +12297,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -14180,7 +14180,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -21941,7 +21941,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -26584,7 +26584,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -27177,6 +27177,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+--- !u!198 &1077418925 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7961882785498883915, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1077418924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1077418926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6943022870796785991, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1077418924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1077418927 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6713470449749336902, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1077418924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1077418928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5985232759144062282, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1077418924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1077418929
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077418926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1077418925}
+  Speed: 2
+--- !u!114 &1077418930
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077418928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1077418927}
+  Speed: 2
 --- !u!1001 &1090958626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27191,6 +27257,10 @@ PrefabInstance:
     - target: {fileID: 1736480704860302893, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776645989588011515, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5560072843529344013, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -27273,6 +27343,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d52e84ebbfb0684e9fc3e94fb8c708b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1090958628 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7961882785498883915, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1090958626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1090958629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6943022870796785991, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1090958626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1090958630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5985232759144062282, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1090958626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1090958631 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6713470449749336902, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1090958626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1090958632
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090958629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1090958628}
+  Speed: 2
+--- !u!114 &1090958633
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090958630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1090958631}
+  Speed: 2
 --- !u!1001 &1091305141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28654,7 +28790,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -29109,7 +29245,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -32464,7 +32600,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -32642,7 +32778,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -36182,6 +36318,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+--- !u!198 &1685999863 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6713470449749336902, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1685999862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1685999864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5985232759144062282, guid: 50ec042516c11f346bb23eebdb15c0d2, type: 3}
+  m_PrefabInstance: {fileID: 1685999862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1685999865
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685999864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 1685999863}
+  Speed: 2
 --- !u!1001 &1688633905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36325,7 +36494,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -41020,7 +41189,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -53577,7 +53746,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1
@@ -55043,7 +55212,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 8
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_FocusMode: 1

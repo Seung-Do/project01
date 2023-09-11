@@ -14,8 +14,6 @@ public class ControllManager : MonoBehaviour
     public InputActionProperty indexChange;
     public LightningSpellScript spell;
     float leftGripValue;
-    bool isOpen;
-    bool isButton;
     bool IsPosible;
 
     private WaitForSeconds lightningWait = new WaitForSeconds(0.6f);
@@ -33,6 +31,7 @@ public class ControllManager : MonoBehaviour
     public Collider lightningCollider;
 
     [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject teleportInteractor;
 
     //public TMP_Text text;
     private void Awake()
@@ -42,10 +41,9 @@ public class ControllManager : MonoBehaviour
     }
     void Start()
     {
+        teleportInteractor.SetActive(false);
         index = 0;
         spellBook.SetActive(false);
-        isOpen = false;
-        isButton = false;
         IsPosible = true;
         bookSpell[0].SetActive(true);
         //SelectSpell(0);
@@ -66,16 +64,14 @@ public class ControllManager : MonoBehaviour
             if (leftGripValue > 0.9f)
             {
                 spellBook.SetActive(true);
-                isOpen = true;
                 leftHand.SetActive(false);
-                GameManager.Instance.teleportInteractor.SetActive(false);
+                teleportInteractor.SetActive(false);
             }
             else
             {
                 spellBook.SetActive(false);
-                isOpen = false;
                 leftHand.SetActive(true);
-                GameManager.Instance.teleportInteractor.SetActive(true);
+                teleportInteractor.SetActive(true);
             }
         }
     }
