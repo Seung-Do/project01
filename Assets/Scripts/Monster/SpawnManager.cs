@@ -20,6 +20,19 @@ public class SpawnManager : MonoBehaviour
         {
             foreach(GameObject spawn in spawnList) 
             {
+                Monster monster = spawn.GetComponent<Monster>();
+                Monster_Witch Witch = spawn.GetComponent<Monster_Witch>();
+                //소환된 몬스터가 Monster스크립트를 가지고 있으면
+                if (monster != null)
+                {
+                    monster.spawn = GetComponent<SpawnManager>();
+                }
+                //소환된 몬스터가 Monster_Witch 스크립트를 가지고 있으면
+                else if (Witch != null)
+                {
+                    Witch.spawn = GetComponent<SpawnManager>();
+                }
+
                 spawn.SetActive(true);
             }
             //소환될 몬스터들 전부 활성화되면 isSpawn = Ture
@@ -31,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             if (spawnList.Count == 0)
                 StartCoroutine(off());
 
-            foreach (GameObject spawn in spawnList)
+            /*foreach (GameObject spawn in spawnList)
             {
                 Monster monster = spawn.GetComponent<Monster>();
                 Monster_Witch Witch = spawn.GetComponent<Monster_Witch>();
@@ -47,7 +60,7 @@ public class SpawnManager : MonoBehaviour
                     if (Witch.state == Monster_Witch.State.DEAD)
                         spawnList.Remove(spawn);
                 }
-            }
+            }*/
         }
     }
     IEnumerator Distance()

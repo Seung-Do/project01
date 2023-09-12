@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     Animator anim;
     Collider coll;
     NavMeshAgent nav;
+    public SpawnManager spawn;
 
     public MonsterShield shield;
 
@@ -431,6 +432,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     IEnumerator Death()
     {
         nav.speed = 0;
+        spawn.spawnList.Remove(gameObject);
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
