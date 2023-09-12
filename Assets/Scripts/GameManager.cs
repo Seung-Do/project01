@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
     public PoolManager[] poolManager;
     public Transform playerTr;
-    public Transform handsTr;
+    public Transform makerTr;
     public Boss_Elemental elemental;
     public GameObject bossTime;
 
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool isGargoyleDead;
     public bool isStart = false;
     public GameObject doorStar;
-   // public GameObject teleportInteractor;
+    // public GameObject teleportInteractor;
 
     //public RawImage image;
     [SerializeField]
@@ -28,23 +28,24 @@ public class GameManager : MonoBehaviour
     private string secondScene = "stage01";
     [SerializeField] private Animator fadeAnim;
     private Vector3 stage0Position = new Vector3(193f, 7.2f, 71.5f);
-    private Vector3 stage1Position = new Vector3(-32.5f, 15.1f, 22.5f);
-    private Vector3 bossZone0 = new Vector3(-20f, 20f, 235f);
-    private Vector3 returnStage0 = new Vector3(107f, 20f, 244f);
-    private Vector3 centerHall = new Vector3(2.5f, 20f, -17.5f);
-    private Vector3 deadZone = new Vector3(-10f, 20f, 100f);
-
+    private Vector3 stage1Position = new Vector3(-32.5f, 6f, 22.5f);
+    private Vector3 bossZone0 = new Vector3(-20f, 1f, 235f);
+    private Vector3 returnStage0 = new Vector3(107f, 2f, 244f);
+    private Vector3 centerHall = new Vector3(2.5f, 6f, -17.5f);
+    private Vector3 deadZone = new Vector3(-10f, -1f, 100f);
+    [SerializeField] private GameObject leftHand;
+    [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject plane;
     [SerializeField] private XRRayInteractor leftInteractor;
     [SerializeField] private XRRayInteractor rightInteractor;
     //[SerializeField] private GameObject canvasStart;
     [SerializeField] private GameObject tutorials;
-    [SerializeField] private GameObject hands;
     [SerializeField] private GameObject leftmodel;
     [SerializeField] private GameObject rightmodel;
     [SerializeField] private Image image;
     [SerializeField] private PlayerDamage playerDamage;
+    [SerializeField] private ControllManager controllManager;
 
 
 
@@ -63,22 +64,24 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        hands.SetActive(false);
+        leftHand.SetActive(false);
+        rightHand.SetActive(false);
         FadeIn();
     }
 
     // Update is called once per frame
     void Update()
     {
- 
+
     }
     private IEnumerator ToTutorial()
     {
         FadeOut();
-        yield return new WaitForSeconds(1.5f);
-        FadeIn();
+        yield return new WaitForSeconds(1f);
+        HideController();
+        yield return new WaitForSeconds(1f);
         box.SetActive(false);
-        hands.SetActive(true);
+        FadeIn();
     }
 
     private IEnumerator ToStage0()
@@ -87,14 +90,16 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-            HideController();          
+            
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
-            handsTr.position = stage0Position;
-            playerTr.rotation = Quaternion.Euler(0, 270f, 0);    
+            leftHand.transform.position = stage0Position;
+            rightHand.transform.position = stage0Position;
+            HideController();
+            playerTr.rotation = Quaternion.Euler(0, 270f, 0);
             yield return new WaitForSeconds(1.5f);
             FadeIn();
-            
+
             isStart = true;
         }
     }
@@ -105,14 +110,17 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-            HideController();
+            
             SceneManager.LoadScene(secondScene);
             playerTr.position = stage1Position;
-            handsTr.position = stage1Position;
-            playerTr.rotation = Quaternion.Euler(0, 180f, 0);         
+            leftHand.transform.position = stage1Position;
+            rightHand.transform.position = stage1Position;
+            HideController();
+            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
+            makerTr.localScale = new Vector3(9f, 9f, 9f);
             yield return new WaitForSeconds(1.5f);
             FadeIn();
-          
+
             isStart = true;
         }
     }
@@ -125,7 +133,8 @@ public class GameManager : MonoBehaviour
 
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
-            handsTr.position = stage0Position;
+            leftHand.transform.position = stage0Position;
+            rightHand.transform.position = stage0Position;
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
 
             yield return new WaitForSeconds(1.5f);
@@ -141,8 +150,10 @@ public class GameManager : MonoBehaviour
 
             SceneManager.LoadScene(secondScene);
             playerTr.position = stage1Position;
-            handsTr.position = stage1Position;
+            leftHand.transform.position = stage1Position;
+            rightHand.transform.position = stage1Position;
             playerTr.rotation = Quaternion.Euler(0, 180f, 0);
+            makerTr.localScale = new Vector3(9f, 9f, 9f);
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
@@ -154,10 +165,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerTr.position = bossZone0;
-        handsTr.position = bossZone0;
+        leftHand.transform.position = bossZone0;
+        rightHand.transform.position = bossZone0;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         FadeIn();
     }
 
@@ -169,10 +181,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerTr.position = returnStage0;
-        handsTr.position = returnStage0;
+        leftHand.transform.position = returnStage0;
+        rightHand.transform.position = returnStage0;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
         bossTime.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         FadeIn();
     }
 
@@ -181,25 +194,29 @@ public class GameManager : MonoBehaviour
         FadeOut();
         yield return new WaitForSeconds(1f);
         playerTr.position = centerHall;
-        handsTr.position = centerHall;
+        leftHand.transform.position = centerHall;
+        rightHand.transform.position = centerHall;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         FadeIn();
     }
+    //죽었을때
     private IEnumerator ToDeadZone()
     {
         image.color = Color.red;
         FadeOut();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
+        
         playerTr.position = deadZone;
-        ShowController();
-        handsTr.position = deadZone;
+        leftHand.transform.position = deadZone;
+        rightHand.transform.position = deadZone;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+        isStart = false;
+        ShowController();
         FadeIn();
         image.color = Color.black;
-        playerDamage.getDamage(-100);
-        isStart = false;    
+        playerDamage.getDamage(-100);    
     }
     private void FadeOut()
     {
@@ -247,35 +264,31 @@ public class GameManager : MonoBehaviour
         leftDoorAnim.SetBool("open", false);
         rightDoorAnim.SetBool("open", false);
     }
-
+    //튜토리얼을 한다
     public void tutorialStart()
     {
         StartCoroutine(ToTutorial());
-        HideController();
         plane.SetActive(true);
-        //canvasStart.SetActive(false);
         tutorials.SetActive(true);
         isStart = true;
     }
     //튜토리얼 안하고 스테이지0로 갈 때, 죽고 다시시작
     public void PassTutorial()
     {
-        StartCoroutine(ToStage0());     
+        StartCoroutine(ToStage0());
     }
-    public void RestartStage1() 
+    public void RestartStage1()
     {
         StartCoroutine(ToStage1());
-        ControllManager controllManager = GameObject.FindWithTag("PLAYER").GetComponent<ControllManager>();
-        if (controllManager != null)
-        {
-            controllManager.icePosible = false;
-            controllManager.bookSpell[1].SetActive(false);
-        }
+
+        controllManager.icePosible = false;
+        controllManager.bookSpell[1].SetActive(false);
     }
-  
+
     public void ShowController()
     {
-        hands.SetActive(false);
+        leftHand.SetActive(false);
+        rightHand.SetActive(false);
         leftmodel.SetActive(true);
         rightmodel.SetActive(true);
         leftInteractor.enabled = true;
@@ -288,6 +301,7 @@ public class GameManager : MonoBehaviour
         rightInteractor.enabled = false;
         leftmodel.SetActive(false);
         rightmodel.SetActive(false);
-        hands.SetActive(true);
+        leftHand.SetActive(true);
+        rightHand.SetActive(true);
     }
 }
