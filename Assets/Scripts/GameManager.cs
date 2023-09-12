@@ -31,17 +31,20 @@ public class GameManager : MonoBehaviour
     private Vector3 stage1Position = new Vector3(-32.5f, 15.1f, 22.5f);
     private Vector3 bossZone0 = new Vector3(-20f, 20f, 235f);
     private Vector3 returnStage0 = new Vector3(107f, 20f, 244f);
-    private Vector3 CenterHall = new Vector3(2.5f, 20f, -17.5f);
+    private Vector3 centerHall = new Vector3(2.5f, 20f, -17.5f);
+    private Vector3 deadZone = new Vector3(-10f, 20f, 100f);
 
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject plane;
     [SerializeField] private XRRayInteractor leftInteractor;
     [SerializeField] private XRRayInteractor rightInteractor;
-    [SerializeField] private GameObject canvasStart;
+    //[SerializeField] private GameObject canvasStart;
     [SerializeField] private GameObject tutorials;
     [SerializeField] private GameObject hands;
     [SerializeField] private GameObject leftmodel;
     [SerializeField] private GameObject rightmodel;
+    [SerializeField] private Image image;
+    [SerializeField] private PlayerDamage playerDamage;
 
 
 
@@ -84,11 +87,30 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-
+            HideController();
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
             handsTr.position = stage0Position;
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
+
+            yield return new WaitForSeconds(1.5f);
+            FadeIn();
+            hands.SetActive(true);
+            isStart = true;
+        }
+    }
+
+    private IEnumerator ToStage1()
+    {
+        if (!secondScene.Equals(""))
+        {
+            FadeOut();
+            yield return new WaitForSeconds(1f);
+            HideController();
+            SceneManager.LoadScene(secondScene);
+            playerTr.position = stage1Position;
+            handsTr.position = stage1Position;
+            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
@@ -114,7 +136,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator FadeScreen1()
     {
-        if (!firstScene.Equals(""))
+        if (!secondScene.Equals(""))
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
@@ -160,11 +182,27 @@ public class GameManager : MonoBehaviour
     {
         FadeOut();
         yield return new WaitForSeconds(1f);
-        playerTr.position = CenterHall;
-        handsTr.position = CenterHall;
+        playerTr.position = centerHall;
+        handsTr.position = centerHall;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
         yield return new WaitForSeconds(2f);
         FadeIn();
+    }
+    private IEnumerator ToDeadZone()
+    {
+        image.color = Color.red;
+        FadeOut();
+        yield return new WaitForSeconds(1f);
+        playerTr.position = deadZone;
+        hands.SetActive(false);
+        ShowController();
+        handsTr.position = deadZone;
+        playerTr.rotation = Quaternion.Euler(0, 0, 0);
+        yield return new WaitForSeconds(2f);
+        FadeIn();
+        image.color = Color.black;
+        playerDamage.getDamage(-100);
+        isStart = false;    
     }
     private void FadeOut()
     {
@@ -174,7 +212,7 @@ public class GameManager : MonoBehaviour
     {
         fadeAnim.SetBool("fadein", true);
     }
-
+    //튜토리얼 끝나고 포탈로 스테이지0로 갈때
     public void Stage0Load()
     {
         StartCoroutine(FadeScreen0());
@@ -196,6 +234,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MoveToCenterHall());
     }
 
+    public void PlayerDead()
+    {
+        StartCoroutine(ToDeadZone());
+    }
+
     public void DoorOpen()
     {
         leftDoorAnim.SetBool("open", true);
@@ -211,23 +254,40 @@ public class GameManager : MonoBehaviour
     public void tutorialStart()
     {
         StartCoroutine(ToTutorial());
-        leftInteractor.enabled = false;
-        rightInteractor.enabled = false;
-        leftmodel.SetActive(false);
-        rightmodel.SetActive(false);
+        HideController();
         plane.SetActive(true);
-        canvasStart.SetActive(false);
+        //canvasStart.SetActive(false);
         tutorials.SetActive(true);
         isStart = true;
     }
-
+    //튜토리얼 안하고 스테이지0로 갈 때, 죽고 다시시작
     public void PassTutorial()
+    {
+        StartCoroutine(ToStage0());     
+    }
+    public void RestartStage1() 
+    {
+        StartCoroutine(ToStage1());
+        ControllManager controllManager = GameObject.FindWithTag("PLAYER").GetComponent<ControllManager>();
+        if (controllManager != null)
+        {
+            controllManager.icePosible = false;
+        }
+    }
+  
+    public void ShowController()
+    {
+        leftmodel.SetActive(true);
+        rightmodel.SetActive(true);
+        leftInteractor.enabled = true;
+        rightInteractor.enabled = true;
+    }
+
+    public void HideController()
     {
         leftInteractor.enabled = false;
         rightInteractor.enabled = false;
         leftmodel.SetActive(false);
         rightmodel.SetActive(false);
-        StartCoroutine(ToStage0());
-        
     }
 }
