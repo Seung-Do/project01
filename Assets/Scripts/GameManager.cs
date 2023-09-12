@@ -87,15 +87,14 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-            HideController();
+            HideController();          
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
             handsTr.position = stage0Position;
-            playerTr.rotation = Quaternion.Euler(0, 270f, 0);
-
+            playerTr.rotation = Quaternion.Euler(0, 270f, 0);    
             yield return new WaitForSeconds(1.5f);
             FadeIn();
-            hands.SetActive(true);
+            
             isStart = true;
         }
     }
@@ -110,11 +109,10 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(secondScene);
             playerTr.position = stage1Position;
             handsTr.position = stage1Position;
-            playerTr.rotation = Quaternion.Euler(0, 180f, 0);
-
+            playerTr.rotation = Quaternion.Euler(0, 180f, 0);         
             yield return new WaitForSeconds(1.5f);
             FadeIn();
-            hands.SetActive(true);
+          
             isStart = true;
         }
     }
@@ -194,7 +192,6 @@ public class GameManager : MonoBehaviour
         FadeOut();
         yield return new WaitForSeconds(1f);
         playerTr.position = deadZone;
-        hands.SetActive(false);
         ShowController();
         handsTr.position = deadZone;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
@@ -272,11 +269,13 @@ public class GameManager : MonoBehaviour
         if (controllManager != null)
         {
             controllManager.icePosible = false;
+            controllManager.bookSpell[1].SetActive(false);
         }
     }
   
     public void ShowController()
     {
+        hands.SetActive(false);
         leftmodel.SetActive(true);
         rightmodel.SetActive(true);
         leftInteractor.enabled = true;
@@ -289,5 +288,6 @@ public class GameManager : MonoBehaviour
         rightInteractor.enabled = false;
         leftmodel.SetActive(false);
         rightmodel.SetActive(false);
+        hands.SetActive(true);
     }
 }

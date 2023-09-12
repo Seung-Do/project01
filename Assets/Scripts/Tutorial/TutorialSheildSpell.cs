@@ -37,7 +37,7 @@ public class TutorialSheildSpell : TutorialBase
 
     private IEnumerator SpawnSkeleton()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         skeletonMageObject.SetActive(true);
     }
 

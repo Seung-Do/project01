@@ -4909,7 +4909,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.22
+  m_Radius: 0.3
   m_Height: 1.8733134
   m_Direction: 1
   m_Center: {x: -3.0375225e-10, y: 0.8702785, z: -0.13590221}
@@ -4926,6 +4926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 21aaff0465c4ac04791306adf58f893d, type: 2}
+  spawn: {fileID: 0}
   hp: 0
   isFindPlayer: 0
   isFreeze: 0
