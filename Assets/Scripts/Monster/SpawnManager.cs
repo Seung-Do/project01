@@ -8,9 +8,11 @@ public class SpawnManager : MonoBehaviour
     bool isSpawn = false;   //소환 유무
     public float spawnDistance; //소환할 거리
     [SerializeField] float dist; //플레이어와의 거리
+    int spawnCount = 0;
     private void OnEnable()
     {
         StartCoroutine(Distance());
+        spawnCount = spawnList.Count;
     }
 
     void Update()
@@ -20,7 +22,7 @@ public class SpawnManager : MonoBehaviour
         {
             foreach(GameObject spawn in spawnList) 
             {
-                Monster monster = spawn.GetComponent<Monster>();
+               /* Monster monster = spawn.GetComponent<Monster>();
                 Monster_Witch Witch = spawn.GetComponent<Monster_Witch>();
                 //소환된 몬스터가 Monster스크립트를 가지고 있으면
                 if (monster != null)
@@ -31,7 +33,7 @@ public class SpawnManager : MonoBehaviour
                 else if (Witch != null)
                 {
                     Witch.spawn = GetComponent<SpawnManager>();
-                }
+                }*/
 
                 spawn.SetActive(true);
             }
@@ -41,7 +43,7 @@ public class SpawnManager : MonoBehaviour
         //몬스터가 소환이 되었으면 몬스터가 죽었는지 아닌지 판단
         if(isSpawn)
         {
-            if (spawnList.Count == 0)
+            if (spawnCount == 0)
                 StartCoroutine(off());
 
             /*foreach (GameObject spawn in spawnList)
@@ -61,6 +63,23 @@ public class SpawnManager : MonoBehaviour
                         spawnList.Remove(spawn);
                 }
             }*/
+            foreach (GameObject spawn in spawnList)
+            {
+                Monster monster = spawn.GetComponent<Monster>();
+                Monster_Witch Witch = spawn.GetComponent<Monster_Witch>();
+                //소환된 몬스터가 Monster스크립트를 가지고 있으면
+                if (monster != null)
+                {
+                    if (monster.state == Monster.State.DEAD)
+                        spawnCount--;
+                }
+                //소환된 몬스터가 Monster_Witch 스크립트를 가지고 있으면
+                else if (Witch != null)
+                {
+                    if (Witch.state == Monster_Witch.State.DEAD)
+                        spawnCount--;
+                }
+            }
         }
     }
     IEnumerator Distance()
@@ -76,6 +95,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator off()
     {
+        spawnList.Clear();
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
     }

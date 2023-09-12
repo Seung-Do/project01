@@ -432,7 +432,6 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     IEnumerator Death()
     {
         nav.speed = 0;
-        spawn.spawnList.Remove(gameObject);
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;

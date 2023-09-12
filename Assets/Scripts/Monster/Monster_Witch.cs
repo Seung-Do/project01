@@ -357,7 +357,6 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
     }
     IEnumerator Death()
     {
-        spawn.spawnList.Remove(gameObject);
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
