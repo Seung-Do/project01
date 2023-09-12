@@ -50,10 +50,12 @@ public class CheckPoint01 : MonoBehaviour
             {
                 location01.SetActive(false);
                 location02.SetActive(true);
-                
-                monsters.SetActive(true);
-                
-                checkPoint02.SetActive(true);
+                             
+                if (checkPoint02 != null)
+                {
+                    checkPoint02.SetActive(true);
+                    monsters.SetActive(true);
+                }
                 gameObject.SetActive(false);
             }
             yield return new WaitForSeconds(1);

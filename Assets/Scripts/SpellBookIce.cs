@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpellBookIce : MonoBehaviour
 {
     private float rotationSpeed = 60f;
+    [SerializeField] GameObject currTarget;
+    [SerializeField] GameObject nextTarget;
     void Start()
     {
 
@@ -21,9 +23,9 @@ public class SpellBookIce : MonoBehaviour
         {
             ControllManager controllManager = other.gameObject.GetComponent<ControllManager>();
             controllManager.bookSpell[2].SetActive(true);
-
             controllManager.icePosible = true;
-
+            currTarget.SetActive(false);
+            nextTarget.SetActive(true);
             gameObject.SetActive(false);
         }
     }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TeleportRune : MonoBehaviour
 {
-    [SerializeField] GameObject runeEffect01;
-    [SerializeField] GameObject runeEffect02;
+    [SerializeField] GameObject target;
     void Start()
     {
         
@@ -20,9 +19,9 @@ public class TeleportRune : MonoBehaviour
     {
         if(other.gameObject.CompareTag("PLAYER"))
         {
-            runeEffect01.SetActive(false);
-            runeEffect02.SetActive(false);
+            target.SetActive(false);
             GameManager.Instance.CenterHallStage1();
+            gameObject.SetActive(false);
         }
     }
 }
