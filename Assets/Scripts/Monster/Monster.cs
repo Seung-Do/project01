@@ -451,4 +451,8 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         yield return new WaitForSeconds(1);
         nav.isStopped = false;
     }
+    public void Hit()
+    {
+        //애니메이션 이벤트 메서드 땜빵용
+    }
 }
