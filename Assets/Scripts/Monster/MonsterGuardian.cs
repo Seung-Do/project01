@@ -19,7 +19,7 @@ public class MonsterGuardian : MonoBehaviour
 
     void lookPlayer()
     {
-        Vector3 dir = GameManager.Instance.playerTr.position - firePos.transform.position;
+        Vector3 dir = GameManager.Instance.playerTr.position - firePos.transform.position + Vector3.up * 0.8f;
         firePos.transform.rotation = Quaternion.LookRotation(dir);
     }
 

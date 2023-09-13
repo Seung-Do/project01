@@ -5,6 +5,8 @@ using UnityEngine;
 public class MonsterWitchFireball : MonoBehaviour
 {
     Vector3 pos;
+    [SerializeField] private float speed;
+    [SerializeField] private int damageSize;
     void OnEnable()
     {
         pos = transform.position;
@@ -13,7 +15,7 @@ public class MonsterWitchFireball : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * 0.7f);
+        transform.Translate(Vector3.forward * speed);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +27,7 @@ public class MonsterWitchFireball : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 transform.position = pos;
-                damage.getDamage(20);
+                damage.getDamage(damageSize);
             }           
             gameObject.SetActive(false);
             transform.position = pos;
