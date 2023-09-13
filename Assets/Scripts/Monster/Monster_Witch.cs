@@ -318,6 +318,9 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
     //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
+        if (hp <= 0)
+            return;
+
         if (state == State.IDLE)
             isGetHit = true;
 
