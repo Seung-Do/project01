@@ -43,6 +43,7 @@ public class Boss_HpBar : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(GameManager.Instance.playerTr.position);
+        Vector3 pos = new Vector3(GameManager.Instance.playerTr.position.x, transform.position.y, GameManager.Instance.playerTr.position.z);
+        transform.LookAt(pos);
     }
 }
