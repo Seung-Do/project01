@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
     {
         leftHand.SetActive(false);
         rightHand.SetActive(false);
+        controllManager.IsPosible = false;
+        Debug.Log("마법 불가능");
         FadeIn();
     }
 
@@ -92,18 +94,20 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-            
+
             SceneManager.LoadScene(firstScene);
             playerTr.position = stage0Position;
             leftHand.transform.position = stage0Position;
             rightHand.transform.position = stage0Position;
             HideController();
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
-          
+
             yield return new WaitForSeconds(1.5f);
             FadeIn();
 
             isStart = true;
+            controllManager.IsPosible = true;
+            Debug.Log("마법 가능");
             stage0Canvas.SetActive(true);
         }
     }
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
         {
             FadeOut();
             yield return new WaitForSeconds(1f);
-            
+
             SceneManager.LoadScene(secondScene);
             playerTr.position = stage1Position;
             leftHand.transform.position = stage1Position;
@@ -126,6 +130,8 @@ public class GameManager : MonoBehaviour
             FadeIn();
 
             isStart = true;
+            controllManager.IsPosible = true;
+            Debug.Log("마법 가능");
             stage1Canvas.SetActive(true);
         }
     }
@@ -212,8 +218,10 @@ public class GameManager : MonoBehaviour
     {
         image.color = Color.red;
         FadeOut();
+        controllManager.IsPosible = false;
+        Debug.Log("마법 불가능");
         yield return new WaitForSeconds(1.5f);
-        
+
         playerTr.position = deadZone;
         leftHand.transform.position = deadZone;
         rightHand.transform.position = deadZone;
@@ -223,7 +231,7 @@ public class GameManager : MonoBehaviour
         ShowController();
         FadeIn();
         image.color = Color.black;
-        playerDamage.getDamage(-100);    
+        playerDamage.getDamage(-100);
     }
     private IEnumerator GameQuit()
     {
@@ -284,12 +292,15 @@ public class GameManager : MonoBehaviour
         plane.SetActive(true);
         tutorials.SetActive(true);
         isStart = true;
+        controllManager.IsPosible = true;
+        Debug.Log("마법 가능");
     }
-    //튜토리얼 안하고 스테이지0로 갈 때, 죽고 다시시작
+    //튜토리얼 안하고 스테이지0로 갈 때, 죽고 다시 시작
     public void PassTutorial()
     {
         StartCoroutine(ToStage0());
     }
+    //스테이지1 죽고 다시 시작
     public void RestartStage1()
     {
         StartCoroutine(ToStage1());
@@ -321,5 +332,5 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameQuit());
     }
-    
+
 }

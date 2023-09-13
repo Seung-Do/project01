@@ -5,13 +5,13 @@ using UnityEngine;
 public class SuperShield : MonoBehaviour
 {
     public GameObject shield;
-
+    PlayerDamage player;
+    private void Start()
+    {
+        player = GetComponent<PlayerDamage>();
+    }
     void Update()
     {
-        PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
-        if(player.isSuper)
-            shield.SetActive(true);
-        else
-            shield.SetActive(false);
+        shield.SetActive(player.isSuper);
     }
 }

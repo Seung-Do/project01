@@ -434,7 +434,6 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     IEnumerator Death()
     {
         nav.speed = 0;
-        yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
         yield return new WaitForSeconds(6);
