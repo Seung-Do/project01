@@ -360,6 +360,8 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
     }
     IEnumerator Death()
     {
+        isFindPlayer = false;
+        isChase = false;
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
