@@ -14,6 +14,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     [SerializeField] GameObject HandFX;
     [SerializeField] GameObject HealFX;
     [SerializeField] GameObject DebuffFX;
+    [SerializeField] GameObject Portal;
     Boss_SpiritDemon_Summon summon;
     NavMeshAgent nav;
     WaitForSeconds wait;
@@ -622,6 +623,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
+        Portal.SetActive(true);
         yield return new WaitForSeconds(10);
         gameObject.SetActive(false);
     }
