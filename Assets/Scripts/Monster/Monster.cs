@@ -437,7 +437,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         nav.speed = 0; 
         isFindPlayer = false;
         isChase = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         rb.isKinematic = true;
         coll.enabled = false;
         yield return new WaitForSeconds(6);
