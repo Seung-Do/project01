@@ -180,6 +180,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                 case State.TRACE:
                     StartCoroutine(Move());
                     anim.SetFloat("Move", move);
+                    nav.isStopped = false;
                     switch (Type)
                     {
                         case 4:
@@ -194,7 +195,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                     isFindPlayer = false;
                     chaseTime = 0f;
                     isChase = true;
-                    rb.velocity = Vector3.zero;
+                    nav.isStopped = true;
                     AttackAnim();
                     break;
                 case State.DEAD:
@@ -433,7 +434,9 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     }
     IEnumerator Death()
     {
-        nav.speed = 0;
+        nav.speed = 0; 
+        isFindPlayer = false;
+        isChase = false;
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;

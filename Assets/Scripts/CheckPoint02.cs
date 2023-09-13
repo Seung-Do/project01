@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class CheckPoint02 : MonoBehaviour
 {
