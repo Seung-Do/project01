@@ -11099,7 +11099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &681597829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11190,7 +11190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40869e2d632fecd4d8166da88f59cb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dam: 0
+  dam: 100
 --- !u!1001 &689393048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18159,6 +18159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ef5ba996d3b0942a2c92c508f95a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossMonster: {fileID: 0}
 --- !u!65 &1230452515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23161,7 +23162,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31322
+  m_Name: pb_Mesh106950
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27332,16 +27333,29 @@ MonoBehaviour:
   - {fileID: 1016327300}
   - {fileID: 1800659150}
   playerTr: {fileID: 1484961682}
-  handsTr: {fileID: 0}
+  makerTr: {fileID: 0}
   elemental: {fileID: 2098633489}
   bossTime: {fileID: 0}
   leftDoorAnim: {fileID: 0}
   rightDoorAnim: {fileID: 0}
   isGargoyleDead: 0
+  isStart: 0
   doorStar: {fileID: 0}
   firstScene: stage00
   secondScene: stage01
   fadeAnim: {fileID: 0}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  box: {fileID: 0}
+  plane: {fileID: 0}
+  leftInteractor: {fileID: 0}
+  rightInteractor: {fileID: 0}
+  tutorials: {fileID: 0}
+  leftmodel: {fileID: 0}
+  rightmodel: {fileID: 0}
+  image: {fileID: 0}
+  playerDamage: {fileID: 0}
+  controllManager: {fileID: 0}
 --- !u!4 &1839364266
 Transform:
   m_ObjectHideFlags: 0
@@ -43521,7 +43535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1813614164637546428, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3188727612292277014, guid: e802a1a6067021e4b89e299f9fc08507, type: 3}
       propertyPath: m_IsActive
