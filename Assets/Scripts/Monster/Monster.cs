@@ -107,36 +107,36 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             AttackLook();
     }
 
-    //¸ó½ºÅÍÀÇ »óÅÂ¸¦ Á¤ÇÏ´Â ÄÚ·çÆ¾
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
     IEnumerator CheckState()
     {
         yield return wait;
         while (!isDead)
         {
-            //hp°¡ 0ÀÌÇÏ°¡ µÇ¾úÀ» ¶§
+            //hpï¿½ï¿½ 0ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½
             if (hp <= 0)
             {
                 state = State.DEAD;
-                print("Á×À½");
+                print("ï¿½ï¿½ï¿½ï¿½");
                 yield break;
             }
 
             float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-            //½Ã¾ß¿¡ ÇÃ·¹ÀÌ¾î°¡ µé¾î¿ÀÁö ¾Ê¾Ò°Å³ª
-            //ÁÖº¯¿¡ ÇÃ·¹ÀÌ¾î¸¦ °ø°ÝÇÏ´Â ¸ó½ºÅÍ°¡ ¾øÀ» ¶§
+            //ï¿½Ã¾ß¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò°Å³ï¿½
+            //ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             if (viewRange >= dist)
             {
-                // print("ÁÖº¯¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖÀ½");
-                //½Ã¾ß¿¡ ÇÃ·¹ÀÌ¾î°¡ µé¾î¿ÔÀ» ¶§
+                // print("ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½");
+                //ï¿½Ã¾ß¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                 if (isTracePlayer())
                 {
-                    //print("½Ã¾ß¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖÀ½");
-                    //ÇÃ·¹ÀÌ¾î°¡ º¸ÀÌ¸é
+                    //print("ï¿½Ã¾ß¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½");
+                    //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½Ì¸ï¿½
                     if (ViewPlayer() && !isAction)
                     {
-                        // print("ÇÃ·¹ÀÌ¾î°¡ º¸ÀÓ");
-                        //ÇÃ·¹ÀÌ¾î°¡ °ø°Ý°Å¸® ¾È¿¡ µé¾î¿ÔÀ» ¶§
+                        // print("ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½");
+                        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½Ý°Å¸ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
                         if (attackDist >= dist)
                         {
                             state = State.ATTACK;
@@ -144,7 +144,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                         else
                             state = State.TRACE;
                     }
-                    //ÇÃ·¹ÀÌ¾î°¡ ¾Èº¸ÀÌ¸é
+                    //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Èºï¿½ï¿½Ì¸ï¿½
                     else
                         state = State.IDLE;
 
@@ -152,7 +152,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                 else
                     state = State.IDLE;
             }
-            //ÁÖº¯ ¸ó½ºÅÍ°¡ ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇßÀ» ¶§
+            //ï¿½Öºï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             else if (isFindPlayer && !isAction)
             {
                 state = State.TRACE;
@@ -165,7 +165,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //»óÅÂ¿¡ µû¸¥ Çàµ¿À» ½ÇÇàÇÏ´Â ÄÚ·çÆ¾
+    //ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
     IEnumerator Action()
     {
         while (!isDead)
@@ -207,18 +207,18 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //½Ã¾ß°¢¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ³ª ¾ø´Â Ã¼Å©ÇÏ´Â ¸Þ¼­µå
+    //ï¿½Ã¾ß°ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ö³ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     bool isTracePlayer()
     {
         bool FindPlayer = false;
-        //¼³Á¤µÈ ¹Ý°æ¸¸Å­ OverlapSphere ¸Þ¼Òµå¸¦ È°¿ëÇÏ¿© ÇÃ·¹ÀÌ¾î Å½Áö
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý°æ¸¸Å­ OverlapSphere ï¿½Þ¼Òµå¸¦ È°ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Å½ï¿½ï¿½
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange, 1 << playerLayer);
 
-        //¼³Á¤µÈ ¹Ý°æ¾È¿¡ ÇÃ·¹ÀÌ¾î°¡ Å½ÁöµÈ´Ù¸é
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý°ï¿½È¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ Å½ï¿½ï¿½ï¿½È´Ù¸ï¿½
         if (colls.Length >= 1)
         {
             Vector3 dir = (GameManager.Instance.playerTr.position - transform.position).normalized;
-            //ÀûÀÇ ½Ã¾ß°¢¿¡ ÇÃ·¹ÀÌ¾î°¡ Á¸ÀçÇÏ´ÂÁö ÆÇ´Ü
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¾ß°ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
             if (Vector3.Angle(transform.forward, dir) < viewAngle * 0.5)
             {
                 FindPlayer = true;
@@ -227,16 +227,16 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         return FindPlayer;
     }
 
-    //Ä¿½ºÅÒ¿¡µðÅÍ¿¡ »ç¿ëµÉ ±âÁî¸ð¼³Á¤
+    //Ä¿ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Vector3 CirclePoint(float angle)
     {
-        //angleÀ» Æ®·£Æ®ÆûÀÇ y¿¡ ¸Â°Ô ¼³Á¤ÇØÁÜ
+        //angleï¿½ï¿½ Æ®ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         angle += transform.eulerAngles.y;
 
-        //±×³É ¾Þ±Û¸¸ °öÇÏ¸é ¼öÀÇ ¿À·ù°¡ ÀÏ¾î³ª¹Ç·Î pi/2(Radion)À» °öÇØÁÜ
+        //ï¿½×³ï¿½ ï¿½Þ±Û¸ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾î³ªï¿½Ç·ï¿½ pi/2(Radion)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         return new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
     }
-    //ÇÃ·¹ÀÌ¾î°¡ ¼û¾ú´ÂÁö Ã¼Å©ÇÏ´Â ¸Þ¼­µå
+    //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public bool ViewPlayer()
     {
         bool Find = false;
@@ -244,23 +244,23 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
 
         Vector3 player = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y + 0.5f, GameManager.Instance.playerTr.position.z);
         Vector3 dir = (player - transform.position).normalized;
-        //ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ·¹ÀÌÄ³½ºÆ®
+        //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
         {
             // print(hit.collider.gameObject.name);
-            //Ã£À¸¸é true ¸øÃ£À¸¸é false¹ÝÈ¯
+            //Ã£ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½È¯
             Find = hit.collider.CompareTag("PLAYER");
         }
         return Find;
     }
-    //»óÅÂ°¡ TRACEÀÏ¶§ ÇÃ·¹ÀÌ¾î¹æÇâÀ¸·Î ÀÌµ¿ÇÏ´Â ¸Þ¼­µå
+    //ï¿½ï¿½ï¿½Â°ï¿½ TRACEï¿½Ï¶ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     IEnumerator TracePlayer()
     {
-        //»óÅÂ°¡ TRACEÀÏ¶§¸¸ ¹Ýº¹
+        //ï¿½ï¿½ï¿½Â°ï¿½ TRACEï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½Ýºï¿½
         while (state == State.TRACE && !isFreeze)
         {
             Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-            moveDirection.Normalize(); // ¹æÇâÀ» Á¤±ÔÈ­
+            moveDirection.Normalize(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
             //rb.velocity = moveDirection * moveSpeed;
@@ -268,27 +268,27 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             yield return Time.deltaTime;
         }
     }
-    //±ÙÁ¢°ø°Ý ¹üÀ§¾È¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö ÆÇ´Ü
-    //¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
+    //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
     public void attack()
     {
         float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (dist < attackDist + 0.5f)
         {
-            //ÇÃ·¹ÀÌ¾î°¡ µ¥¹ÌÁö ¹Þ´Â ¸Þ¼­µå
-            print("ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö" + damage);
+            //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+            print("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + damage);
             PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
             player.getDamage(damage);
         }
     }
-    //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇÏ°í Ãß°ÝÇÒ ¶§ ÁÖº¯¿¡ ÀÖ´Â ¸ó½ºÅÍ¿¡°Ô ¾Ë¸®´Â ¸Þ¼­µå
+    //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ï¿½Ï°ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void FindPlayer()
     {
-        //¹ß°ß¹Ý°æ * 1.5¸¸Å­ ¹üÀ§³»ÀÇ ¸ó½ºÅÍµé Ã£±â
+        //ï¿½ß°ß¹Ý°ï¿½ * 1.5ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Íµï¿½ Ã£ï¿½ï¿½
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange * 0.7f, 1 << enemyLayer);
 
-        //ÀÖÀ» °æ¿ì inFindPlayer¸¦ true·Î º¯°æ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ inFindPlayerï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (colls.Length >= 1)
         {
             foreach (var coll in colls)
@@ -309,8 +309,8 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             }
         }
     }
-    //°©ÀÚ±â ½Ã¾ß°¢¿¡¼­ ÇÃ·¹ÀÌ¾î°¡ »ç¶óÁö¸é idle·Î º¯°æµÇ´ø ¹®Á¦¸¦ ÇØ°áÇÏ±âÀ§ÇÑ ¸Þ¼­µå
-    //ÇÑ¹øÀÌ¶óµµ °ø°Ý½ÃÀÛÇÏ¸é chaseMaxTime¸¸Å­ ½Ã¾ß°¢¿¡¼­ ¹þ¾î³ªµµ Ãß°ÝÇÔ
+    //ï¿½ï¿½ï¿½Ú±ï¿½ ï¿½Ã¾ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idleï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø°ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    //ï¿½Ñ¹ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ chaseMaxTimeï¿½ï¿½Å­ ï¿½Ã¾ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³ªï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½
     void chase()
     {
         if (isChase && state != State.ATTACK && !isFreeze)
@@ -318,7 +318,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             if (chaseTime <= chaseMaxTime)
             {
                 Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-                moveDirection.Normalize(); // ¹æÇâÀ» Á¤±ÔÈ­
+                moveDirection.Normalize(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
                 Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
                 //rb.velocity = moveDirection * moveSpeed;
@@ -330,13 +330,13 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     void AttackLook()
     {
         Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-        moveDirection.Normalize(); // ¹æÇâÀ» Á¤±ÔÈ­
+        moveDirection.Normalize(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
 
     }
 
-    //°Å¸®°¡ ¸Ö¾îÁ®µµ Áö¼ÓÀûÀ¸·Î Ãß°ÝÇÏ´Â ¹®Á¦ ÇØ°á ¸Þ¼­µå
+    //ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void StopTrace()
     {
         if (isFindPlayer)
@@ -366,7 +366,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //IDamageÀÎÅÍÆäÀÌ½º »ó¼Ó ¸Þ¼­µå
+    //IDamageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void getDamage(int damage)
     {
         if (hp <= 0)
@@ -458,6 +458,6 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     }
     public void Hit()
     {
-        //¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ® ¸Þ¼­µå ¶«»§¿ë
+        //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ® ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 }

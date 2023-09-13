@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using static UnityEngine.XR.Interaction.Toolkit.Inputs.Simulation.XRDeviceSimulator;
 
 public class RFX4_RaycastCollision : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
             if (UsePivotPosition)
                 position = raycastHit.transform.position;
             else
-                position = raycastHit.point + raycastHit.normal* Offset - Vector3.up*0.5f; //- Vector3.up*0.5f 추가
+                position = raycastHit.point + raycastHit.normal * Offset - Vector3.up * 0.5f; //- Vector3.up*0.5f 추가
 
             var handler = CollisionEnter;
             if (handler != null)
@@ -113,6 +114,20 @@ public class RFX4_RaycastCollision : MonoBehaviour
             //요기서 부터~~~~~~~~~~~~
             if (CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
+                Monster monster = raycastHit.collider.gameObject.GetComponent<Monster>();
+                if (monster != null)
+                {
+                    if (monster.isFreeze == true)
+                        return;
+                }
+
+                Monster_Witch witch = raycastHit.collider.gameObject.GetComponent<Monster_Witch>();
+                if (witch != null)
+                {
+                    if (witch.isFreeze == true)
+                        return;
+                }
+
                 var instance = Instantiate(Effects[0], position, new Quaternion()) as GameObject;
                 var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
                 var effectSettingsRoot = GetComponentInParent<RFX4_EffectSettings>();
@@ -134,7 +149,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
                     Destroy(instance, DestroyTime);
             }
             else if (CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
-            {              
+            {
                 var instance = Instantiate(Effects[1], position, new Quaternion()) as GameObject;
                 var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
                 var effectSettingsRoot = GetComponentInParent<RFX4_EffectSettings>();

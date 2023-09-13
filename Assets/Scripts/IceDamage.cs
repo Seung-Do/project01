@@ -36,15 +36,6 @@ public class IceDamage : MonoBehaviour
                         StartCoroutine(AnimatorSlowMonster(animator, freeze, damage));
                     }
                 }
-                else
-                {
-                    IDamage damage = collider.gameObject.GetComponent<IDamage>();
-                    if (damage != null)
-                    {
-                        damage.getDamage(50);
-                    }
-                    StartCoroutine(AnimatorSlow(animator));
-                }
             }
 
             else if (collider.gameObject.layer == LayerMask.NameToLayer("BOSS"))
@@ -61,17 +52,11 @@ public class IceDamage : MonoBehaviour
     {
         animator.speed = 0f;
         freeze.IFreeze();
-        print("얼림");
+        print("얼림");     
+        yield return waitTime;
+        animator.speed = 1f;
         damage.getDamage(50);
-        yield return waitTime;
-        animator.speed = 1f;
         freeze.IFreeze();
-    }
-    IEnumerator AnimatorSlow(Animator animator)
-    {
-        animator.speed = 0f;
-        yield return waitTime;
-        animator.speed = 1f;
     }
 
 }

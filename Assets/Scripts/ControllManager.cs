@@ -14,7 +14,7 @@ public class ControllManager : MonoBehaviour
     public InputActionProperty indexChange;
     public LightningSpellScript spell;
     float leftGripValue;
-    bool IsPosible;
+    public bool IsPosible;
 
     private WaitForSeconds lightningWait = new WaitForSeconds(0.6f);
 
@@ -44,7 +44,6 @@ public class ControllManager : MonoBehaviour
         teleportInteractor.SetActive(false);
         index = 0;
         spellBook.SetActive(false);
-        IsPosible = true;
         bookSpell[0].SetActive(true);
         //SelectSpell(0);
         GestureRecognition gr = new GestureRecognition();
@@ -135,10 +134,9 @@ public class ControllManager : MonoBehaviour
         }
         else if (rec == "Slash" && IsPosible)
         {
-            IsPosible = false;
             if (index == 0) //파이어볼
             {
-
+                IsPosible = false;
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 GameObject magic = Instantiate(magicPrefabs[index], newPosition, Quaternion.identity);
                 Destroy(magic, 1.2f);
@@ -148,7 +146,7 @@ public class ControllManager : MonoBehaviour
             }
             else if (index == 1 && lightningPosible) //라이트닝
             {
-
+                IsPosible = false;
                 Vector3 playerDirection = Camera.main.transform.forward;
                 //playerDirection.y = 0f;
                 spell.Direction = playerDirection;
@@ -159,7 +157,7 @@ public class ControllManager : MonoBehaviour
             }
             else if (index == 2 && icePosible) // 얼음화살
             {
-
+                IsPosible = false;
                 Vector3 newPosition = rightControllerTr.position + Camera.main.transform.forward * 0.1f;
                 //Quaternion rotationNoY = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
                 GameObject magic = Instantiate(magicPrefabs[index - 1], newPosition, Camera.main.transform.rotation);
