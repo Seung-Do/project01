@@ -8,7 +8,7 @@ public class Clear_Portal : MonoBehaviour
     {
         if(other.CompareTag("PLAYER"))
         {
-            //보스 잡고 생성된 포탈에서 이동하는 코드
+            GameManager.Instance.GameClear();
             print("클리어 포탈 진입");
         }
     }

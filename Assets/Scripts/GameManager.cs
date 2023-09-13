@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool isGargoyleDead;
     public bool isStart = false;
     public GameObject doorStar;
+    public GameObject stage0Canvas;
+    public GameObject stage1Canvas;
     // public GameObject teleportInteractor;
 
     //public RawImage image;
@@ -97,10 +99,12 @@ public class GameManager : MonoBehaviour
             rightHand.transform.position = stage0Position;
             HideController();
             playerTr.rotation = Quaternion.Euler(0, 270f, 0);
+          
             yield return new WaitForSeconds(1.5f);
             FadeIn();
 
             isStart = true;
+            stage0Canvas.SetActive(true);
         }
     }
 
@@ -122,6 +126,7 @@ public class GameManager : MonoBehaviour
             FadeIn();
 
             isStart = true;
+            stage1Canvas.SetActive(true);
         }
     }
     private IEnumerator FadeScreen0()
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
+            stage0Canvas.SetActive(true);
         }
     }
     private IEnumerator FadeScreen1()
@@ -157,6 +163,7 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             FadeIn();
+            stage1Canvas.SetActive(true);
         }
     }
     private IEnumerator FadeScreenBoss0()
@@ -217,6 +224,12 @@ public class GameManager : MonoBehaviour
         FadeIn();
         image.color = Color.black;
         playerDamage.getDamage(-100);    
+    }
+    private IEnumerator GameQuit()
+    {
+        FadeOut();
+        yield return new WaitForSeconds(1f);
+        Application.Quit();
     }
     private void FadeOut()
     {
@@ -304,4 +317,9 @@ public class GameManager : MonoBehaviour
         leftHand.SetActive(true);
         rightHand.SetActive(true);
     }
+    public void GameClear()
+    {
+        StartCoroutine(GameQuit());
+    }
+    
 }
