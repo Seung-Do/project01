@@ -77,7 +77,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         change = GetComponent<BossChange>();
         SpellPosition = Vector3.zero;
         coll = GetComponent<Collider>();
-        Type = Random.Range(0, 5);
+        Type = Random.Range(0, 4);
         hpbar = hpBarPrefab.GetComponent<Image>();
         //Type = 3;
     }
@@ -484,7 +484,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         int a = 5;
         while (isSame)
         {
-            a = Random.Range(0, 5);
+            a = Random.Range(0, 4);
             print("변신 번호" + a);
             if (a != Type)
             {
