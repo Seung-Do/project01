@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     private Vector3 returnStage0 = new Vector3(107f, 2f, 244f);
     private Vector3 centerHall = new Vector3(2.5f, 6f, -17.5f);
     private Vector3 deadZone = new Vector3(-10f, -1f, 100f);
+
+    private Vector3 bossZone1 = new Vector3(2.5f, 1f, 33.5f);
+
     [SerializeField] private GameObject leftHand;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private GameObject box;
@@ -332,5 +335,26 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameQuit());
     }
+    public void Stage1Boss()
+    {
+        StartCoroutine(FadeBoss1());
+    }
+    private IEnumerator FadeBoss1()
+    {
+        if (!secondScene.Equals(""))
+        {
+            FadeOut();
+            yield return new WaitForSeconds(1f);
 
+            SceneManager.LoadScene(secondScene);
+            playerTr.position = bossZone1;
+            leftHand.transform.position = bossZone1;
+            rightHand.transform.position = bossZone1;
+            playerTr.rotation = Quaternion.Euler(0, 0, 0);
+            makerTr.localScale = new Vector3(9f, 9f, 9f);
+
+            yield return new WaitForSeconds(1.5f);
+            FadeIn();
+        }
+    }
 }
