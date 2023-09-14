@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ToStage1());
 
         controllManager.icePosible = false;
-        controllManager.bookSpell[1].SetActive(false);
+        controllManager.bookSpell[2].SetActive(false);
     }
 
     public void ShowController()
