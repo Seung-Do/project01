@@ -22,7 +22,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
     int damage;
     [SerializeField] float move;
     [SerializeField] float moveSpeed;
-    bool isDead;
+    [SerializeField] bool isDead;
 
     float attackDist;
     [HideInInspector]
@@ -51,9 +51,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
 
     public GameObject hpBarPrefab;
     Image hpbar;
-    Vector3 hpBarOffset = new Vector3(0f, 0f, 0f);
     Image hpBarImage;
-    Color color;
     public enum State
     {
         IDLE,
@@ -108,7 +106,6 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         mageMaxTime = data[Type].CassTime;
         change.Change(Type);
         StartCoroutine(setHpBar());
-        color = hpbar.color;
     }
 
     void Update()
@@ -116,10 +113,13 @@ public class Boss_Elemental : MonoBehaviour, IDamage
         if (isDead) return;
         dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
         moveSpeed = move * speed;
-        if (isSpellMove)
+        if (isSpellMove && !isDead)
             MoveSpellPos();
         else
+        {
+            print("플레이어 바라봄");
             AttackLook();
+        }
 
         if (state == State.SPELLMOVE && Mathf.Abs(transform.localPosition.x) <= 0.1f && Mathf.Abs(transform.localPosition.z) <= 0.1f)
             isSpellPos = true;
@@ -544,6 +544,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
             anim.SetTrigger("Dead");
             isDead = true;
             StartCoroutine(Death());
+            state = State.DEAD;
         }
     }
     IEnumerator Death()
