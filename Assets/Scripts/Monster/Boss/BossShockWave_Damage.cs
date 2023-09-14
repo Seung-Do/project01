@@ -15,7 +15,7 @@ public class BossShockWave_Damage : MonoBehaviour
     }
     void Wave()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 4);
 
         foreach (Collider collider in colliders)
         {
