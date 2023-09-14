@@ -15,7 +15,7 @@ MonoBehaviour:
   MonsterType: 5
   Health: 100
   Speed: 0.5
-  Damage: 40
+  Damage: 20
   AttackDistance: 15
   ViewRange: 17
   Sound: 0

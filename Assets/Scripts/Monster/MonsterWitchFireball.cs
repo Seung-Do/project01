@@ -36,7 +36,7 @@ public class MonsterWitchFireball : MonoBehaviour
     IEnumerator Off()
     {
         //2초후 총알 비활성화
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         transform.position = pos;
     }

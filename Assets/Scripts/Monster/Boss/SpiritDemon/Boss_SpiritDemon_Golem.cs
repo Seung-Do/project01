@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
+public class Boss_SpiritDemon_Golem : FreezableMonster, IDamage
 {
     public Boss_SpiritDemon_Zombie_Data data;
     public Boss_SpiritDemon_Summon summon;
@@ -24,7 +24,7 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
 
     bool isAttacking;
     bool isDead;
-    public bool isFreeze;
+    //public bool isFreeze;
     bool cool;
     bool isStart;
    [SerializeField] bool isAction;
@@ -317,9 +317,9 @@ public class Boss_SpiritDemon_Golem : MonoBehaviour, IDamage, IFreeze
     {
         FireFX.SetActive(true);
     }
-    public void IFreeze()
+    /*public void IFreeze()
     {
         if (isFreeze) isFreeze = false;
         else isFreeze = true;
-    }
+    }*/
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
+public class Monster_Witch : FreezableMonster, IDamage
 {
     public MonsterData data;
     WaitForSeconds wait;
@@ -21,7 +21,7 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
     bool isDead;
     bool isGetHit;
     public bool isFindPlayer;
-    public bool isFreeze;
+   // public bool isFreeze;
 
     int playerLayer;
     int enemyLayer;
@@ -376,9 +376,9 @@ public class Monster_Witch : MonoBehaviour, IDamage, IFreeze
             move = 0;
         }
     }
-    public void IFreeze()
+    /*public void IFreeze()
     {
         if (isFreeze) isFreeze = false;
         else isFreeze = true;
-    }
+    }*/
 }

@@ -114,17 +114,10 @@ public class RFX4_RaycastCollision : MonoBehaviour
             //요기서 부터~~~~~~~~~~~~
             if (CollidedInstances.Count == 0 && raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("ENEMY"))
             {
-                Monster monster = raycastHit.collider.gameObject.GetComponent<Monster>();
+                FreezableMonster monster = raycastHit.collider.gameObject.GetComponent<FreezableMonster>();
                 if (monster != null)
                 {
                     if (monster.isFreeze == true)
-                        return;
-                }
-
-                Monster_Witch witch = raycastHit.collider.gameObject.GetComponent<Monster_Witch>();
-                if (witch != null)
-                {
-                    if (witch.isFreeze == true)
                         return;
                 }
 

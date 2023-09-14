@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : MonoBehaviour, IDamage, IFreeze
+public class Monster : FreezableMonster, IDamage
 {
     public MonsterData data;
     WaitForSeconds wait;
@@ -27,7 +27,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     bool isDead;
     bool isAction;
     public bool isFindPlayer;
-    public bool isFreeze;
+    //public bool isFreeze;
 
     int playerLayer;
     int enemyLayer;
@@ -445,11 +445,11 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         gameObject.SetActive(false);
     }
 
-    public void IFreeze()
+    /*public void IFreeze()
     {
         if(isFreeze) isFreeze = false;
         else isFreeze = true;
-    }
+    }*/
     IEnumerator getHit()
     {
         anim.SetTrigger("Hit");

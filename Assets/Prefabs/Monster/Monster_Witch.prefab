@@ -1740,10 +1740,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb637dae8f69d747858cb1034664032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFreeze: 0
   data: {fileID: 11400000, guid: a8f298ebe15376043967f35d0ca4729b, type: 2}
+  spawn: {fileID: 0}
   hp: 0
   isFindPlayer: 0
-  isFreeze: 0
   TraceTime: 0
   viewRange: 0
   viewAngle: 120
@@ -1783,7 +1784,7 @@ CapsuleCollider:
   m_Radius: 0.32672262
   m_Height: 1.9255329
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9326823, z: 0}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!1 &5368214262427557840
 GameObject:
   m_ObjectHideFlags: 0

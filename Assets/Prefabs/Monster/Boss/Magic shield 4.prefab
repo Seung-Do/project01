@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7129309414895364372}
   - component: {fileID: 5850481445712106017}
   - component: {fileID: 5722625470533265709}
+  - component: {fileID: -8128276986811404791}
   m_Layer: 0
   m_Name: Magic shield 4
   m_TagString: Untagged
@@ -4915,6 +4916,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea70b7edfbec1842a047762d8528c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8128276986811404791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931169518744571072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 7130479821593282156}
+  Speed: 2
 --- !u!1 &6931260116474815952
 GameObject:
   m_ObjectHideFlags: 0

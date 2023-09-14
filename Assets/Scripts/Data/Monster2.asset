@@ -17,5 +17,5 @@ MonoBehaviour:
   Speed: 3.5
   Damage: 20
   AttackDistance: 3
-  ViewRange: 10
+  ViewRange: 12
   Sound: 0

@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
         rightHand.transform.position = bossZone0;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         FadeIn();
     }
 
@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
         leftHand.transform.position = deadZone;
         rightHand.transform.position = deadZone;
         playerTr.rotation = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         isStart = false;
         ShowController();
         FadeIn();
@@ -250,23 +250,27 @@ public class GameManager : MonoBehaviour
     {
         fadeAnim.SetBool("fadein", true);
     }
-    //튜토리얼 끝나고 포탈로 스테이지0로 갈때
+    //튜토리얼 끝나고 포탈로 스테이지0로 감
     public void Stage0Load()
     {
         StartCoroutine(FadeScreen0());
     }
+    //정상적으로 스테이지1로 감
     public void Stage1Load()
     {
         StartCoroutine(FadeScreen1());
     }
+    //스테이지0 보스존으로
     public void Boss0Load()
     {
         StartCoroutine(FadeScreenBoss0());
     }
+    //스테이지0 보스 죽이고 다시 맵으로 감
     public void Boss0Kill()
     {
         StartCoroutine(ReturnToStage0());
     }
+    //가고일 방으로 감
     public void CenterHallStage1()
     {
         StartCoroutine(MoveToCenterHall());
@@ -335,10 +339,12 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameQuit());
     }
+    //임시 스테이지1 보스로 감
     public void Stage1Boss()
     {
         StartCoroutine(FadeBoss1());
     }
+    //임시 스테이지1 보스
     private IEnumerator FadeBoss1()
     {
         if (!secondScene.Equals(""))
