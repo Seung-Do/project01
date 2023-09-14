@@ -107,36 +107,37 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             AttackLook();
     }
 
-    //������ ���¸� ���ϴ� �ڷ�ƾ
+
+    //몬스터의 상태를 정하는 코루틴
     IEnumerator CheckState()
     {
         yield return wait;
         while (!isDead)
         {
-            //hp�� 0���ϰ� �Ǿ��� ��
+            //hp가 0이하가 되었을 때
             if (hp <= 0)
             {
                 state = State.DEAD;
-                print("����");
+                print("죽음");
                 yield break;
             }
 
             float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
-            //�þ߿� �÷��̾ ������ �ʾҰų�
-            //�ֺ��� �÷��̾ �����ϴ� ���Ͱ� ���� ��
+            //시야에 플레이어가 들어오지 않았거나
+            //주변에 플레이어를 공격하는 몬스터가 없을 때
             if (viewRange >= dist)
             {
-                // print("�ֺ��� �÷��̾ ����");
-                //�þ߿� �÷��̾ ������ ��
+                // print("주변에 플레이어가 있음");
+                //시야에 플레이어가 들어왔을 때
                 if (isTracePlayer())
                 {
-                    //print("�þ߿� �÷��̾ ����");
-                    //�÷��̾ ���̸�
+                    //print("시야에 플레이어가 있음");
+                    //플레이어가 보이면
                     if (ViewPlayer() && !isAction)
                     {
-                        // print("�÷��̾ ����");
-                        //�÷��̾ ���ݰŸ� �ȿ� ������ ��
+                        // print("플레이어가 보임");
+                        //플레이어가 공격거리 안에 들어왔을 때
                         if (attackDist >= dist)
                         {
                             state = State.ATTACK;
@@ -144,7 +145,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                         else
                             state = State.TRACE;
                     }
-                    //�÷��̾ �Ⱥ��̸�
+                    //플레이어가 안보이면
                     else
                         state = State.IDLE;
 
@@ -152,7 +153,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
                 else
                     state = State.IDLE;
             }
-            //�ֺ� ���Ͱ� �÷��̾ �߰����� ��
+            //주변 몬스터가 플레이어를 발견했을 때
             else if (isFindPlayer && !isAction)
             {
                 state = State.TRACE;
@@ -165,7 +166,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //���¿� ���� �ൿ�� �����ϴ� �ڷ�ƾ
+    //상태에 따른 행동을 실행하는 코루틴
     IEnumerator Action()
     {
         while (!isDead)
@@ -207,18 +208,18 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //�þ߰��� �÷��̾ �ֳ� ���� üũ�ϴ� �޼���
+    //시야각에 플레이어가 있나 없는 체크하는 메서드
     bool isTracePlayer()
     {
         bool FindPlayer = false;
-        //������ �ݰ游ŭ OverlapSphere �޼ҵ带 Ȱ���Ͽ� �÷��̾� Ž��
+        //설정된 반경만큼 OverlapSphere 메소드를 활용하여 플레이어 탐지
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange, 1 << playerLayer);
 
-        //������ �ݰ�ȿ� �÷��̾ Ž���ȴٸ�
+        //설정된 반경안에 플레이어가 탐지된다면
         if (colls.Length >= 1)
         {
             Vector3 dir = (GameManager.Instance.playerTr.position - transform.position).normalized;
-            //���� �þ߰��� �÷��̾ �����ϴ��� �Ǵ�
+            //적의 시야각에 플레이어가 존재하는지 판단
             if (Vector3.Angle(transform.forward, dir) < viewAngle * 0.5)
             {
                 FindPlayer = true;
@@ -227,16 +228,16 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         return FindPlayer;
     }
 
-    //Ŀ���ҿ����Ϳ� ���� �������
+    //커스텀에디터에 사용될 기즈모설정
     public Vector3 CirclePoint(float angle)
     {
-        //angle�� Ʈ��Ʈ���� y�� �°� ��������
+        //angle을 트랜트폼의 y에 맞게 설정해줌
         angle += transform.eulerAngles.y;
 
-        //�׳� �ޱ۸� ���ϸ� ���� ������ �Ͼ�Ƿ� pi/2(Radion)�� ������
+        //그냥 앵글만 곱하면 수의 오류가 일어나므로 pi/2(Radion)을 곱해줌
         return new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
     }
-    //�÷��̾ �������� üũ�ϴ� �޼���
+    //플레이어가 숨었는지 체크하는 메서드
     public bool ViewPlayer()
     {
         bool Find = false;
@@ -244,23 +245,23 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
 
         Vector3 player = new Vector3(GameManager.Instance.playerTr.position.x, GameManager.Instance.playerTr.position.y + 0.5f, GameManager.Instance.playerTr.position.z);
         Vector3 dir = (player - transform.position).normalized;
-        //�÷��̾ ���� ����ĳ��Ʈ
+        //플레이어를 향해 레이캐스트
         if (Physics.Raycast(transform.position, dir, out hit, viewRange, 1 << playerLayer))
         {
             // print(hit.collider.gameObject.name);
-            //ã���� true ��ã���� false��ȯ
+            //찾으면 true 못찾으면 false반환
             Find = hit.collider.CompareTag("PLAYER");
         }
         return Find;
     }
-    //���°� TRACE�϶� �÷��̾�������� �̵��ϴ� �޼���
+    //상태가 TRACE일때 플레이어방향으로 이동하는 메서드
     IEnumerator TracePlayer()
     {
-        //���°� TRACE�϶��� �ݺ�
+        //상태가 TRACE일때만 반복
         while (state == State.TRACE && !isFreeze)
         {
             Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-            moveDirection.Normalize(); // ������ ����ȭ
+            moveDirection.Normalize();// 방향을 정규화
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
             //rb.velocity = moveDirection * moveSpeed;
@@ -268,27 +269,27 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             yield return Time.deltaTime;
         }
     }
-    //�������� �����ȿ� �÷��̾ �ִ��� �Ǵ�
-    //�ִϸ��̼� �̺�Ʈ���� ȣ��
+    //근접공격 범위안에 플레이어가 있는지 판단
+    //애니메이션 이벤트에서 호출
     public void attack()
     {
         float dist = Vector3.Distance(GameManager.Instance.playerTr.position, transform.position);
 
         if (dist < attackDist + 0.5f)
         {
-            //�÷��̾ ������ �޴� �޼���
+            //플레이어가 데미지 받는 메서드
             print("�÷��̾� ������" + damage);
             PlayerDamage player = GameManager.Instance.playerTr.GetComponent<PlayerDamage>();
             player.getDamage(damage);
         }
     }
-    //�÷��̾ �߰��ϰ� �߰��� �� �ֺ��� �ִ� ���Ϳ��� �˸��� �޼���
+    //플레이어를 발견하고 추격할 때 주변에 있는 몬스터에게 알리는 메서드
     void FindPlayer()
     {
-        //�߰߹ݰ� * 1.5��ŭ �������� ���͵� ã��
+        //발견반경 * 1.5만큼 범위내의 몬스터들 찾기
         Collider[] colls = Physics.OverlapSphere(transform.position, viewRange * 0.7f, 1 << enemyLayer);
 
-        //���� ��� inFindPlayer�� true�� ����
+        //있을 경우 inFindPlayer를 true로 변경
         if (colls.Length >= 1)
         {
             foreach (var coll in colls)
@@ -309,8 +310,8 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             }
         }
     }
-    //���ڱ� �þ߰����� �÷��̾ ������� idle�� ����Ǵ� ������ �ذ��ϱ����� �޼���
-    //�ѹ��̶� ���ݽ����ϸ� chaseMaxTime��ŭ �þ߰����� ����� �߰���
+    //갑자기 시야각에서 플레이어가 사라지면 idle로 변경되던 문제를 해결하기위한 메서드
+    //한번이라도 공격시작하면 chaseMaxTime만큼 시야각에서 벗어나도 추격함
     void chase()
     {
         if (isChase && state != State.ATTACK && !isFreeze)
@@ -318,7 +319,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
             if (chaseTime <= chaseMaxTime)
             {
                 Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-                moveDirection.Normalize(); // ������ ����ȭ
+                moveDirection.Normalize(); // 방향을 정규화
                 Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
                 //rb.velocity = moveDirection * moveSpeed;
@@ -330,13 +331,13 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
     void AttackLook()
     {
         Vector3 moveDirection = GameManager.Instance.playerTr.position - transform.position;
-        moveDirection.Normalize(); // ������ ����ȭ
+        moveDirection.Normalize();  // 방향을 정규화
         Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
 
     }
 
-    //�Ÿ��� �־����� ���������� �߰��ϴ� ���� �ذ� �޼���
+    //거리가 멀어져도 지속적으로 추격하는 문제 해결 메서드
     void StopTrace()
     {
         if (isFindPlayer)
@@ -366,7 +367,7 @@ public class Monster : MonoBehaviour, IDamage, IFreeze
         }
     }
 
-    //IDamage�������̽� ��� �޼���
+    //IDamage인터페이스 상속 메서드
     public void getDamage(int damage)
     {
         if (hp <= 0)
