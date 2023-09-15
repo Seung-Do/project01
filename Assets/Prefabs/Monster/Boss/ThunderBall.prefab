@@ -72,13 +72,14 @@ GameObject:
   - component: {fileID: 2504972163630706722}
   - component: {fileID: 2310832006930320844}
   - component: {fileID: 2311994567740802924}
+  - component: {fileID: 8287644519526924540}
   m_Layer: 7
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2504972163630706722
 Transform:
   m_ObjectHideFlags: 0
@@ -4943,6 +4944,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8287644519526924540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508517060191347288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2310832006930320844}
+  Speed: 2
 --- !u!1 &2508584796154147896
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,6 +4978,7 @@ GameObject:
   - component: {fileID: 2512421263891503802}
   - component: {fileID: 2311467466921791136}
   - component: {fileID: 2312511398834009204}
+  - component: {fileID: 1013696033495548171}
   m_Layer: 7
   m_Name: CoreEffect
   m_TagString: Untagged
@@ -9722,6 +9747,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1013696033495548171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508584796154147896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2311467466921791136}
+  Speed: 2
 --- !u!1 &2510021146321835016
 GameObject:
   m_ObjectHideFlags: 0
@@ -9733,13 +9781,14 @@ GameObject:
   - component: {fileID: 2504990558845435494}
   - component: {fileID: 2311291361715150212}
   - component: {fileID: 2312333536146808388}
+  - component: {fileID: 1031920043057554401}
   m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2504990558845435494
 Transform:
   m_ObjectHideFlags: 0
@@ -14492,6 +14541,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1031920043057554401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510021146321835016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2311291361715150212}
+  Speed: 2
 --- !u!1 &2510105064349535724
 GameObject:
   m_ObjectHideFlags: 0
@@ -19376,6 +19448,7 @@ GameObject:
   - component: {fileID: 2504975154201285522}
   - component: {fileID: 2310722731133943118}
   - component: {fileID: 2310610831521044286}
+  - component: {fileID: 577843779735591367}
   m_Layer: 7
   m_Name: Ball 1
   m_TagString: Untagged
@@ -24144,6 +24217,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &577843779735591367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510329319556623610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2310722731133943118}
+  Speed: 2
 --- !u!1 &2510333038079026466
 GameObject:
   m_ObjectHideFlags: 0
@@ -24155,13 +24251,14 @@ GameObject:
   - component: {fileID: 2512418673650773122}
   - component: {fileID: 2310727880826710694}
   - component: {fileID: 2311915828709315848}
+  - component: {fileID: 6362599276523634633}
   m_Layer: 7
   m_Name: Ball 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2512418673650773122
 Transform:
   m_ObjectHideFlags: 0
@@ -24170,7 +24267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510333038079026466}
   m_LocalRotation: {x: -0, y: 0.7245622, z: -0, w: 0.68920934}
-  m_LocalPosition: {x: 0, y: 0, z: -0.02400015}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9999992, y: 0.9999995, z: 0.99999857}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28932,6 +29029,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6362599276523634633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510333038079026466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2310727880826710694}
+  Speed: 2
 --- !u!1 &2510360531098404750
 GameObject:
   m_ObjectHideFlags: 0
@@ -28943,6 +29063,7 @@ GameObject:
   - component: {fileID: 2505108824901973428}
   - component: {fileID: 2310629190761394094}
   - component: {fileID: 2310518342168941982}
+  - component: {fileID: 8459590397035794379}
   m_Layer: 7
   m_Name: Ball 1 (2)
   m_TagString: Untagged
@@ -33729,6 +33850,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8459590397035794379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510360531098404750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2310629190761394094}
+  Speed: 2
 --- !u!1 &2510401869928107528
 GameObject:
   m_ObjectHideFlags: 0
@@ -33740,6 +33884,7 @@ GameObject:
   - component: {fileID: 2504608674703344892}
   - component: {fileID: 2311297410431416430}
   - component: {fileID: 2312492999541339678}
+  - component: {fileID: 8720177077773215892}
   m_Layer: 7
   m_Name: Thunder Ball 1
   m_TagString: Untagged
@@ -38565,3 +38710,26 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8720177077773215892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510401869928107528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 2311297410431416430}
+  Speed: 2

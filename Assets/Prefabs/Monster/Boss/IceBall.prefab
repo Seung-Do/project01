@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3207016699796118603}
   - component: {fileID: 3336698707505357259}
   - component: {fileID: 3335914897500635471}
+  - component: {fileID: 7195216045759475500}
   m_Layer: 7
   m_Name: Ice (1)
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3208904726124737505}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.06713362, z: 0.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4756,6 +4757,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7195216045759475500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208904726124737505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336698707505357259}
+  Speed: 2
 --- !u!1 &3208961416864514493
 GameObject:
   m_ObjectHideFlags: 0
@@ -9515,7 +9539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3215145242004758283
 Transform:
   m_ObjectHideFlags: 0
@@ -23710,7 +23734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3215190831285944343
 Transform:
   m_ObjectHideFlags: 0
@@ -28587,13 +28611,14 @@ GameObject:
   - component: {fileID: 3206815298117047739}
   - component: {fileID: 3336837395596510403}
   - component: {fileID: 3335496055433419611}
+  - component: {fileID: 6970739258568991008}
   m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3206815298117047739
 Transform:
   m_ObjectHideFlags: 0
@@ -33332,6 +33357,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6970739258568991008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209587623946884071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336837395596510403}
+  Speed: 2
 --- !u!1 &3209677937398847517
 GameObject:
   m_ObjectHideFlags: 0
@@ -38051,13 +38099,14 @@ GameObject:
   - component: {fileID: 3207012705445340137}
   - component: {fileID: 3336050473541308221}
   - component: {fileID: 3335501225900793307}
+  - component: {fileID: 233456677859379231}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3207012705445340137
 Transform:
   m_ObjectHideFlags: 0
@@ -38066,7 +38115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3209747751818077883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07000005, y: -0.06713362, z: 0.17000002}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42805,6 +42854,29 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &233456677859379231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209747751818077883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14275460eb1f53d41b0293b4211ef347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBezier: 0
+  BezierSmoothSens: 20
+  CameraWaitTime: 0
+  IsCameraFollow: 0
+  CameraSpeed: 10
+  IsApprove: 1
+  IsPath: 0
+  Waypoints: []
+  IsHideInInspector: 0
+  PS: {fileID: 3336050473541308221}
+  Speed: 2
 --- !u!1 &3209901891915275745
 GameObject:
   m_ObjectHideFlags: 0
@@ -47667,7 +47739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3207081692595308805
 Transform:
   m_ObjectHideFlags: 0
