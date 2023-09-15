@@ -22,7 +22,7 @@ public class ControllManager : MonoBehaviour
     public Transform leftControllerTr;
     public PlayerDamage playerDamage;
     public GameObject sheild;
-    public GameObject selectedSpell;
+    public GameObject[] selectedSpell;
     public GameObject[] magicPrefabs;
     public GameObject[] bookSpell;
     public int index;
@@ -45,7 +45,7 @@ public class ControllManager : MonoBehaviour
         index = 0;
         spellBook.SetActive(false);
         bookSpell[0].SetActive(true);
-        //SelectSpell(0);
+        SelectSpell(0);
         GestureRecognition gr = new GestureRecognition();
         lightningCollider.enabled = false;
     }
@@ -81,20 +81,20 @@ public class ControllManager : MonoBehaviour
         if (rec == "0")
         {
             index = 0;
-            ShowSpell();
-            //SelectSpell(0);
+            //ShowSpell();
+            SelectSpell(0);
         }
         else if (rec == "1" && lightningPosible)
         {
             index = 1;
-            ShowSpell();
-            //SelectSpell(1);
+            //ShowSpell();
+            SelectSpell(1);
         }
         else if (rec == "2" & icePosible)
         {
             index = 2;
-            ShowSpell();
-            //SelectSpell(2);
+            //ShowSpell();
+            SelectSpell(2);
         }
 
 
@@ -239,10 +239,7 @@ public class ControllManager : MonoBehaviour
 
     private void SelectSpell(int index)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            bookSpell[i].SetActive(i == index);
-        }
+        StartCoroutine(ShowMagicSpell(index));
     }
     //3D 제스쳐 인식
     public void OnGestureCompleted(GestureCompletionData data)
@@ -261,9 +258,19 @@ public class ControllManager : MonoBehaviour
         }
 
     }
-    private void ShowSpell()
+    /*private void ShowSpell()
     {
         Vector3 newPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f + Vector3.down * 0.3f;
         GameObject spell = Instantiate(selectedSpell, newPosition, Camera.main.transform.rotation);
+    }*/
+
+    IEnumerator ShowMagicSpell(int index)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            selectedSpell[i].SetActive(i == index);
+        }
+        yield return new WaitForSeconds(1.5f);
+        selectedSpell[index].SetActive(false);
     }
 }
