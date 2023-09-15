@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceDamage : MonoBehaviour
 {
-    private float interactRadius = 0.6f;
+    private float interactRadius = 0.3f;
     private WaitForSeconds waitTime = new WaitForSeconds(5f);
     void Start()
     {
