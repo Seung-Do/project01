@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1000
   Damage: 20
-  CassTime: 20
+  CassTime: 30
   AttackDistance: 2
   AttackTime: 2
   SpecialAttackDistance: 4
