@@ -190,7 +190,7 @@ public class Boss_Elemental : MonoBehaviour, IDamage
                 playerDamage.isSuper = false;
             }
             //원거리 공격
-            else if (dist > 5 && canMage)
+            else if (dist > 5 && canMage && dist <= 15)
             {
                 state = State.MAGE;
                 yield return new WaitForSeconds(5);
