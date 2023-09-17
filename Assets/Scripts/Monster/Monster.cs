@@ -435,7 +435,8 @@ public class Monster : FreezableMonster, IDamage
     }
     IEnumerator Death()
     {
-        nav.speed = 0; 
+        nav.speed = 0;
+        rb.velocity = Vector3.zero;
         isFindPlayer = false;
         isChase = false;
         yield return new WaitForSeconds(0.5f);

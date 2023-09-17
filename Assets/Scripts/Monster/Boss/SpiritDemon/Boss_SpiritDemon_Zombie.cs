@@ -268,6 +268,7 @@ public class Boss_SpiritDemon_Zombie : FreezableMonster, IDamage
         isDead = true;
         state = State.DEAD;
         anim.SetBool("Dead", true);
+        rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(1);
         summon.RemoveList(gameObject);
         rb.isKinematic = true;
