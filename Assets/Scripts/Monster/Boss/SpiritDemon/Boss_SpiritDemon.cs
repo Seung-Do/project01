@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Boss_SpiritDemon : MonoBehaviour, IDamage
 {
@@ -218,11 +218,11 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             {
                 state = State.TRACE;
             }
-          /*  //대쉬 공격
-            else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack && !isAction)
-            {
-                state = State.DASHATTACK;
-            }*/
+            /*  //대쉬 공격
+              else if (dist <= DashAttackDist && dist > specialAttackDist && canDashAttack && !isAction)
+              {
+                  state = State.DASHATTACK;
+              }*/
             //특수 공격
             else if (dist <= specialAttackDist && dist > attackDist && canSpecialAttack && !isAction)
             {
@@ -604,6 +604,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             DebuffFX.SetActive(true);
             hp -= 200;
         }
+        StartCoroutine(HideHp());
     }
     public void HandFxOn()
     {
@@ -620,6 +621,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
         SmokeFX.SetActive(false);
         nav.speed = 0;
         isDead = true;
+        SummonDead();
         yield return new WaitForSeconds(1);
         rb.isKinematic = true;
         coll.enabled = false;
@@ -630,7 +632,7 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     IEnumerator setHpBar()
     {
         yield return new WaitForSeconds(0.5f);
-       //체력바 프리팹의 자식으로 있는 image를 말함
+        //체력바 프리팹의 자식으로 있는 image를 말함
         hpBarImage = hpBarPrefab.GetComponentsInChildren<Image>()[1];
         //hpBar = hpBarPrefab.GetComponent<Image>();
         /*color1 = hpBarImage.color;
@@ -639,11 +641,11 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
     IEnumerator HideHp()
     {
         hpBarPrefab.SetActive(true);
-       /* color1.a = 1f;
-        color2.a = 1f;
-        hpBarImage.color = color1;
-        hpBar.color = color2;*/
-        yield return new WaitForSeconds(1); 
+        /* color1.a = 1f;
+         color2.a = 1f;
+         hpBarImage.color = color1;
+         hpBar.color = color2;*/
+        yield return new WaitForSeconds(1);
         hpBarPrefab.SetActive(false);
         /*while (color1.a > 0)
         {
@@ -653,5 +655,27 @@ public class Boss_SpiritDemon : MonoBehaviour, IDamage
             hpBar.color = color2;
             yield return Time.deltaTime;
         }*/
+    }
+
+    void SummonDead()
+    {
+        foreach (GameObject obj in summon.summonList)
+        {
+            Boss_SpiritDemon_Golem golem = obj.GetComponent<Boss_SpiritDemon_Golem>();
+            Boss_SpiritDemon_Zombie zombie = obj.GetComponent<Boss_SpiritDemon_Zombie>();
+            Boss_SpiritDemon_Zombie_Mage mage = obj.GetComponent<Boss_SpiritDemon_Zombie_Mage>();
+            if (golem != null)
+            {
+                golem.getDamage(1000);
+            }
+            if (zombie != null)
+            {
+                zombie.getDamage(1000);
+            }
+            if (mage != null)
+            {
+                mage.getDamage(1000);
+            }
+        }
     }
 }
